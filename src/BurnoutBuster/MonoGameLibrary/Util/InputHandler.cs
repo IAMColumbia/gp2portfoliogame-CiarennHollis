@@ -41,9 +41,9 @@ namespace MonoGameLibrary.Util
         public enum ButtonType { A, B, Back, LeftShoulder, LeftStick, RightShoulder, RightStick, Start, X, Y }
 
         //Wrapper for keyboard
-        private KeyboardHandler keyboard;
+        public KeyboardHandler keyboardHandler;
         //Wrapper for GamePads Monogame similar to XNA default to 4 gamepads
-        private GamePadHandler gamePadHandler = new GamePadHandler();
+        public GamePadHandler gamePadHandler = new GamePadHandler();
         private GamePadState[] gamePads = new GamePadState[4];          //Array of gamecontrollers
 
 #if !XBOX360
@@ -75,7 +75,7 @@ namespace MonoGameLibrary.Util
             game.Services.AddService(typeof(IInputHandler), this);
             
             //initialize our local member fields
-            keyboard = new KeyboardHandler();
+            keyboardHandler = new KeyboardHandler();
 
 #if !XBOX360
             Game.IsMouseVisible = true;
@@ -95,12 +95,12 @@ namespace MonoGameLibrary.Util
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            keyboard.Update();
+            keyboardHandler.Update();
             gamePadHandler.Update();
 
             if (allowsExiting)
             {
-                if (keyboard.IsKeyDown(Keys.Escape))
+                if (keyboardHandler.IsKeyDown(Keys.Escape))
                     //Monogame does't allow this anymore
                     //Game.Exit();
 
@@ -140,7 +140,7 @@ namespace MonoGameLibrary.Util
         #region IInputHandler Members
         public bool WasPressed(int playerIndex, ButtonType button, Keys keys)
         {
-            if (keyboard.WasKeyPressed(keys) || gamePadHandler.WasButtonPressed(playerIndex, button))
+            if (keyboardHandler.WasKeyPressed(keys) || gamePadHandler.WasButtonPressed(playerIndex, button))
                 return (true);
             else
                 return (false);
@@ -153,17 +153,17 @@ namespace MonoGameLibrary.Util
 
         public bool WasKeyPressed(Keys keys)
         {
-            return keyboard.WasKeyPressed(keys);
+            return keyboardHandler.WasKeyPressed(keys);
         }
 
         public bool HasReleasedKey(Keys key)
         {
-            return keyboard.HasReleasedKey(key);
+            return keyboardHandler.HasReleasedKey(key);
         }
 
         public KeyboardHandler KeyboardState
         {
-            get { return (keyboard); }
+            get { return (keyboardHandler); }
         }
 
         public GamePadHandler ButtonHandler
