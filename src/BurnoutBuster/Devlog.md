@@ -1,5 +1,21 @@
 # Devlog
   
+## 27 February 2024 | 17:56
+### Check In
+ * Finished implementing the command pattern bits. Some of it will probably have to be refactored once I add in the player bits.
+ * I am currently very much leaning towards having the movement stuff not be ran though the command system, just the actions (attack, heavy attack, etc.) this might make things weird with implementing the dash mechanic but we will see.
+  
+## Next Steps
+ * Implement the player bits 
+  
+## 27 February 2024 | 16:25
+### Check In
+ * Going to finish up some stuff from yesterday, mainly implementing the command pattern stuff.
+  
+## Goals
+ * Implement the command pattern stuff based on jeff's examples.
+  
+
 ## 26 February 2024 | 17:13
 ### Check In
  * I didn't finish everything I wanted to today, but I did make some good progress.

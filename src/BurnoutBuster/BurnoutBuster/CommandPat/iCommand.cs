@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BurnoutBuster.CommandPat
 {
-    internal interface iCommand
+    public interface ICommand
     {
-
+        // executes on a game component
+        void Execute(GameComponent gc);
     }
 }
