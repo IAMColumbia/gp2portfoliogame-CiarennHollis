@@ -1,13 +1,26 @@
 # Devlog
   
+## 2 March 2024 | 16:05
+## Check In
+ * Basic player movement is implemented. 
+	* I tried to have the MonogameCreature inherit from the DrawableAnimatableSprite, but I'm not entirely sure how this class works so I wanna ask Jeff about it. It would be nice to have that so I can implement animations. But the animations aren't imperative at this time so I just used the DrawableSprite.
+ * I did end up having the movement and combat system both be ran through the command processor. I had thought about having them just be separate since I was going to us Jeff's PlayerController. I didn't know hard it would be to implement the command pattern for the movement and actions together, but once I had implemented the movement, the actions/attacks/combat move commands were basically the same set up. Plus, it does make sense the two would be together since they both are dependent on input.
+ * Set up the structure for the combat, the command types need to be made and the command methods on the CommandCreature need to be built out.
+
+## Next Steps
+ * Ask Jeff about the DrawableAnimatableSprite
+ * Implement the combat actions
+ * Think about and implement the combat combos
+  
+
 ## 2 March 2024 | 13:31
 ### Check In
  * Going to start implementing the player bits: player class, movement, and set up the structure for the combat
   
 ## Goals
- * Write the player script
- * Implement player movement
- * Implement initial structure for combat (doesn't have to work yet)
+ * Write the player script [DONE]
+ * Implement player movement [DONE]
+ * Implement initial structure for combat (doesn't have to work yet) [DONE]
 
   
 ## 27 February 2024 | 17:56
