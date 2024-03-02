@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BurnoutBuster.Character;
+using BurnoutBuster.CommandPat;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,19 +8,31 @@ namespace BurnoutBuster
 {
     public class Game1 : Game
     {
+        // P R O P E R T I E S 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        //player
+        MonogameCreature creature;
+        CommandProcessor commandProcessor;
+
+        // C O N S T R U C T O R
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            creature = new CommandCreature(this);
+            this.Components.Add(creature);
+
+            commandProcessor = new CommandProcessor(this, creature);
+            this.Components.Add(commandProcessor);
         }
 
+        // I N I T 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
             base.Initialize();
         }
@@ -27,24 +41,23 @@ namespace BurnoutBuster
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
         }
 
+        // U P D A T E 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
 
+        // D R A W
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

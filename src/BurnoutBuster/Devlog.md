@@ -1,5 +1,15 @@
 # Devlog
   
+## 2 March 2024 | 13:31
+### Check In
+ * Going to start implementing the player bits: player class, movement, and set up the structure for the combat
+  
+## Goals
+ * Write the player script
+ * Implement player movement
+ * Implement initial structure for combat (doesn't have to work yet)
+
+  
 ## 27 February 2024 | 17:56
 ### Check In
  * Finished implementing the command pattern bits. Some of it will probably have to be refactored once I add in the player bits.

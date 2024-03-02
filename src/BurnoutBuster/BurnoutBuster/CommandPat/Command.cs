@@ -13,9 +13,9 @@ namespace BurnoutBuster.CommandPat
         public string CommandName;
 
         // M E T H O D S
-        public void Execute(GameComponent gc)
+        public virtual void Execute(ICommandComponent cc)
         {
-            throw new NotImplementedException();
+            
         }
 
         protected virtual string Log()

@@ -1,4 +1,6 @@
-﻿using BurnoutBuster.Utility;
+﻿using BurnoutBuster.Character;
+using BurnoutBuster.CommandPat.Commands;
+using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary.Util;
 using System;
@@ -16,7 +18,7 @@ namespace BurnoutBuster.CommandPat
         //references
         TimedInputHandler input;
         GameConsole console;
-        // ref to the player
+        CommandCreature creatureReceiver;
 
 
         //class vars
@@ -25,7 +27,7 @@ namespace BurnoutBuster.CommandPat
         ButtonMap buttonMap;
 
         // C O N S T R U C T O R 
-        public CommandProcessor(Game game) : base(game)
+        public CommandProcessor(Game game, GameComponent creature) : base(game)
         {
             Commands = new Stack<ICommand>();
             keyMap = new KeyMap();
@@ -44,6 +46,8 @@ namespace BurnoutBuster.CommandPat
                 console = new GameConsole(game);
                 game.Components.Add(console);
             }
+
+            this.creatureReceiver = (CommandCreature)creature;  
             #endregion
 
             // set the player references
@@ -53,7 +57,7 @@ namespace BurnoutBuster.CommandPat
         public override void Update(GameTime gameTime)
         {
             HandleKeyBoard();
-            HandleGamePad();
+            //HandleGamePad();
             
             base.Update(gameTime);
         }
@@ -83,6 +87,21 @@ namespace BurnoutBuster.CommandPat
 
                     switch (item.Value)
                     {
+                        //movement
+                        case "Up":
+                            command = new MoveUpCommand(this.Game);
+                            break;
+                        case "Down":
+                            command = new MoveDownCommand(this.Game);
+                            break;
+                        case "Left":
+                            command = new MoveLeftCommand(this.Game);
+                            break;
+                        case "Right":
+                            command = new MoveRightCommand(this.Game);
+                            break;
+
+                        //actions
                         case "Action 1":
                             //trigger action 1 command
                             break;
@@ -97,8 +116,8 @@ namespace BurnoutBuster.CommandPat
                             break;
                     }
 
-                    //if (command != null)
-                    //command.Execute([PLAYER REF]);
+                    if (command != null)
+                        command.Execute(creatureReceiver);
                 }
 
                 if (input.KeyboardState.HasReleasedKey(item.Key))
@@ -138,6 +157,21 @@ namespace BurnoutBuster.CommandPat
 
                     switch (item.Value)
                     {
+                        //movement
+                        case "Up":
+                            // trigger move up
+                            break;
+                        case "Down":
+                            // trigger move down
+                            break;
+                        case "Left":
+                            // trigger move left
+                            break;
+                        case "Right":
+                            // trigger move right
+                            break;
+
+                        // actions
                         case "Action 1":
                             //trigger action 1 command
                             break;

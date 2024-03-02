@@ -16,6 +16,13 @@ namespace BurnoutBuster.Utility
 
         public virtual void Initialize()
         {
+            //movement
+            OnKeyDownMap.Add(Keys.A, "Left");
+            OnKeyDownMap.Add(Keys.D, "Right");
+            OnKeyDownMap.Add(Keys.W, "Up");
+            OnKeyDownMap.Add(Keys.S, "Down");
+
+            //actions
             OnKeyDownMap.Add(Keys.Up, "Action 1");
             OnKeyDownMap.Add(Keys.Down, "Action 2");
             OnKeyDownMap.Add(Keys.Left, "Action 3");
@@ -36,6 +43,20 @@ namespace BurnoutBuster.Utility
 
         public virtual void Initialize()
         {
+            // look at how the game pad handles input 
+            /// DPAD
+            //OnButtonDownMap.Add(GamePadButtons.B, "Left");
+            //OnButtonDownMap.Add(GamePadButtons.X, "Right");
+            //OnButtonDownMap.Add(GamePadButtons.Y, "Up");
+            //OnButtonDownMap.Add(GamePadButtons.Y, "Down");
+
+            /// Left thumbstick
+            //OnButtonDownMap.Add(GamePadButtons.B, "Left");
+            //OnButtonDownMap.Add(GamePadButtons.X, "Right");
+            //OnButtonDownMap.Add(GamePadButtons.Y, "Up");
+            //OnButtonDownMap.Add(GamePadButtons.Y, "Down");
+
+            //actions
             OnButtonDownMap.Add(GamePadButtons.A, "Action 1");
             OnButtonDownMap.Add(GamePadButtons.B, "Action 2");
             OnButtonDownMap.Add(GamePadButtons.X, "Action 3");
