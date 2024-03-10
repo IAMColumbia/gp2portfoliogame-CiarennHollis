@@ -31,7 +31,7 @@ namespace BurnoutBuster.Character
                 if (this.creatureState != value)
                 {
                     this.creatureState = this.creature.State = value; // also updates the state of the encapsulated creature
-                    CreatureStateChanged();
+                    OnCreatureStateChanged();
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace BurnoutBuster.Character
         }
 
         // M I S C   M E T H O D S
-        protected virtual void CreatureStateChanged()
+        protected virtual void OnCreatureStateChanged()
         {
             // logic for what happens when the creature state changes
         }

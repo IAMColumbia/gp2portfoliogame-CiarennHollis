@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
-    public class GameConsoleCreature : Creature
+    public class GameConsoleEnemy : Enemy
     {
         // P R O P E R T I E S
         public GameConsole Console;
-
         // C O N S T R U C T O R S
-        public GameConsoleCreature()
+        public GameConsoleEnemy()
         {
             this.Console = null;
         }
-        public GameConsoleCreature(GameConsole console)
+        public GameConsoleEnemy(GameConsole console)
         {
             this.Console = console;
         }
