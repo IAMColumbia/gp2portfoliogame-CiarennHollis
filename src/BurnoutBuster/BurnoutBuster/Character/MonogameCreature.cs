@@ -1,4 +1,5 @@
-﻿using BurnoutBuster.Utility;
+﻿using BurnoutBuster.Items;
+using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
@@ -34,6 +35,11 @@ namespace BurnoutBuster.Character
                     OnCreatureStateChanged();
                 }
             }
+        }
+        
+        public IWeapon Weapon
+        {
+            get { return this.creature.MyWeapon; }
         }
 
         // C O N S T R U C T O R
@@ -102,6 +108,10 @@ namespace BurnoutBuster.Character
         }
 
         // M I S C   M E T H O D S
+        public void Attack(IDamageable target)
+        {
+            creature.Attack(target);
+        }
         protected virtual void OnCreatureStateChanged()
         {
             // logic for what happens when the creature state changes

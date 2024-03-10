@@ -1,5 +1,20 @@
 # Devlog
   
+## 10 March 2024 | 15:55
+### Check In
+ * Implemented the weapon bits. I also used the strategy pattern for this for the same reason as the enemies.
+  
+### Next Steps
+ * Implement the combat/action commmands
+  
+## 10 March 2024 | 15:19
+### Check In
+ * Implemented the enemy bits. I used the strategy pattern for it so that it would be easier to have several different variations of enemies.
+ * But for now, there is only one type of enemy since the focus for this milestone is getting the combat system up and running.
+  
+### Next Steps
+ * Built out the weapons system a bit so that the combat system can be tested. My intention is to have the player's attack be dependent on the weapon they have.
+  
 ## 10 March 2024 | 14:21
 ### Check In
  * Going to implement the combat system bits: Setting the commands for those actions and getting them to work with the player and command processor system
@@ -7,8 +22,8 @@
   
 ### Goals
  * Implement combat commands
- * Implement simple weapon system that can be built on
- * Implement simple enemy to be built out further later
+ * Implement simple weapon system that can be built on [DONE]
+ * Implement simple enemy to be built out further later [DONE]
   
 
 ## 2 March 2024 | 16:05

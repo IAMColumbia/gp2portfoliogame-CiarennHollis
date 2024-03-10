@@ -48,10 +48,50 @@ namespace BurnoutBuster.Character
             }
             enemy = new GameConsoleEnemy(console);
         }
-        // M E T H O D S
+
+        // I N I T
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+        // U P D A T E
+        public override void Update(GameTime gameTime)
+        {
+            
+            KeepEnemyOnScreen();
+            base.Update(gameTime);
+        }
+        // D R A W 
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+        }
+
+        // M I S C  M E T H O D S
+        private void KeepEnemyOnScreen()
+        {
+            if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2))
+            {
+                this.Location.X = Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2);
+            }
+            if (this.Location.X < (this.spriteTexture.Width / 2))
+                this.Location.X = (this.spriteTexture.Width / 2);
+
+            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2))
+                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2);
+
+            if (this.Location.Y < (this.spriteTexture.Height / 2))
+                this.Location.Y = (this.spriteTexture.Height / 2);
+        }
         void OnEnemyStateChanged ()
         {
             // logic for what happens when the enemy state changes
+        }
+        public virtual void Move()
+        {
+            // implement move behavior [TD]
+            enemy.Move();
+            //this.Location = Move amount;
         }
     }
 }

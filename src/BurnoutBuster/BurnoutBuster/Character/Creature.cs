@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BurnoutBuster.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,11 +32,14 @@ namespace BurnoutBuster.Character
             }
         }
 
+        public IWeapon MyWeapon;
+
         // C O N S T R U C T O R
         public Creature()
         {
             Name = "Yippee";
             HitPoints = 10;
+            MyWeapon = new SimpleSword();
         }
 
         // M E T H O D S 
@@ -50,7 +54,10 @@ namespace BurnoutBuster.Character
         {
             HitPoints -= damageAmount;
         }
-
+        public void Attack(IDamageable target)
+        {
+            MyWeapon.Use(target);
+        }
         public virtual void Log(string message)
         {
             Console.WriteLine(message);

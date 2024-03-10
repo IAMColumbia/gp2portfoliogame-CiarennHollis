@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
-    interface IDamageable
+    public interface IDamageable
     {
         void Hit(int damageAmount);
     }

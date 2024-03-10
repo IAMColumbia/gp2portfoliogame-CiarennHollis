@@ -33,6 +33,10 @@ namespace BurnoutBuster.Character
         }
 
         // M E T H O D S
+        public virtual void Move()
+        {
+            // implement movement behavior [TD]
+        }
         public virtual void Attack()
         {
             // attack logic [TD]

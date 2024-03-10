@@ -16,6 +16,7 @@ namespace BurnoutBuster.Character
         public EnemyState State { get; }
 
         // M E T H O D S
+        void Move();
         void Attack();
         void Die();
         
