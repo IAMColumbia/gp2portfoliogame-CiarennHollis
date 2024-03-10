@@ -19,6 +19,9 @@ namespace BurnoutBuster.CommandPat
         void Dash();
         void Attack();
         void HeavyAttack();
+        void DashAttack();
+        void ComboAttack();
+        void FinisherAttack();
         
     }
 }

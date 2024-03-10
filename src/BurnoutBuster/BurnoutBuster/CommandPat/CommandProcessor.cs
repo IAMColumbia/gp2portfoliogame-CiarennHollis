@@ -104,15 +104,18 @@ namespace BurnoutBuster.CommandPat
                         //actions
                         case "Action 1":
                             //trigger action 1 command
+                            command = new HeavyAttackCommand(this.Game);
                             break;
                         case "Action 2":
                             // trigger action 2 command
                             break;
                         case "Action 3":
                             // trigger action 3 command
+                            command = new AttackCommand(this.Game);
                             break;
                         case "Action 4":
                             // trigger action 4 command
+                            command = new DashCommand(this.Game);
                             break;
                     }
 

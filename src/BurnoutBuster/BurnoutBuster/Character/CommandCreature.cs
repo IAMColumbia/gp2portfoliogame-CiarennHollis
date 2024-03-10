@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace BurnoutBuster.Character
 {
@@ -91,10 +90,24 @@ namespace BurnoutBuster.Character
         public void Attack()
         {
             // logic for attack
+            
         }
         public void HeavyAttack()
         {
             // logic for heavy attack
+        }
+
+        public void DashAttack()
+        {
+            // logic for dash attack (dash + 2x attack)
+        }
+        public void ComboAttack()
+        {
+            // logic for combo attack (attack + heavy attack)
+        }
+        public void FinisherAttack()
+        {
+            // logic for combo attack (attack + heavy + __)
         }
         #endregion
     }

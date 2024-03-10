@@ -1,8 +1,27 @@
 # Devlog
   
+## 10 March 2024 | 16: 20
+### Check In
+ * Created the command class for all the actions and set things up for those actions to be implemented in game
+ * [ISSUE #4 CLOSED]
+ * I've looked at this too long today and need to take a break. Will continue working on this tomorrow.
+  
+### Implementing the timed input stuff
+ * So, the EmojiJoy project I originally wrote the TimedInputHandler class for handled movement combos by having different states and listening for different thing based off of those states. It's states would change based on the times that were attached to the PressedKey that would be instantiated whenever arrow key input was detected.
+ * In EmojiJoy, the EmojiController handled those listing states but for this project, the CommandProcessor will do that. Instead of what input it's listening for being hard coded, it gets read in from a KeyMap and there is a switch the CommandProcessor uses to handle that. 
+ * I'm thinking that I could have methods for the action buttons and those methods will create and execute the new command rather than that switch itself so that I can implement the listening states and have the processor create and execute the commands based on what particular action it's listening for. 
+ * Having the creation of the action commands be separated out into different methods (rather than in the switch) would in theory also let me use the timers on the pressedKey vars that would be created and stop those timers if the game sees that a player wouldn't be using a combo and can thus adjust its state accordingly.
+  
+### Next Steps 
+ * Implement the timed input bits in the command processor
+ * Implement listening states for the combat combos
+ * Implement com bat combos
+  
+  
 ## 10 March 2024 | 15:55
 ### Check In
  * Implemented the weapon bits. I also used the strategy pattern for this for the same reason as the enemies.
+ * [ISSUE #7 CLOSED]
   
 ### Next Steps
  * Implement the combat/action commmands

@@ -18,5 +18,7 @@ namespace BurnoutBuster.Items
 
         // M E T H O D S
         void Use(IDamageable target);
+        void PerformAttack(IDamageable target);
+        void PerformHeavyAttack(IDamageable target);
     }
 }
