@@ -34,7 +34,7 @@ namespace BurnoutBuster.CommandPat
             Commands = new Stack<ICommand>();
             keyMap = new KeyMap();
             buttonMap = new ButtonMap();
-            listenTime = 750;
+            listenTime = 650;
             #region 'Setting Refs'
             input = (TimedInputHandler)game.Services.GetService<IInputHandler>();
             if (input == null)
