@@ -1,11 +1,11 @@
 # GameProgramming2 Final
  Game Programming 2 Final Template
 
-Game Name:  
+Game Name:  Burnout Buster 
 Description Short:  
 Description Long:
 
-Genre:
+Genre: Rogue-like
 
 Platform:
 
