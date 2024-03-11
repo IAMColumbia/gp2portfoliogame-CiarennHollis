@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using System;
@@ -53,6 +54,13 @@ namespace BurnoutBuster.Character
         public override void Initialize()
         {
             base.Initialize();
+        }
+        protected override void LoadContent()
+        {
+            this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
+            this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
+            this.Location = new Vector2(200, 200);
+            base.LoadContent();
         }
         // U P D A T E
         public override void Update(GameTime gameTime)

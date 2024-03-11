@@ -49,6 +49,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.HeavyAttack();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 

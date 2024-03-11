@@ -25,6 +25,7 @@ namespace BurnoutBuster.CommandPat
         Stack<ICommand> Commands;
         KeyMap keyMap;
         ButtonMap buttonMap;
+        float listenTime; //in milliseconds
 
         //enum
         enum ListeningMode { ForAnything, ForDashAttack, ForComboAttack, ForFinisherAttack }
@@ -35,7 +36,8 @@ namespace BurnoutBuster.CommandPat
         {
             Commands = new Stack<ICommand>();
             keyMap = new KeyMap();
-            buttonMap = new ButtonMap();   
+            buttonMap = new ButtonMap();
+            listenTime = 500;
             #region 'Setting Refs'
             input = (TimedInputHandler)game.Services.GetService<IInputHandler>();
             if (input == null)
@@ -69,6 +71,8 @@ namespace BurnoutBuster.CommandPat
         // K E Y B O A R D   M E T H O D S
         void HandleKeyBoard(float _time)
         {
+            Command command = null;
+
             foreach (var item in keyMap.OnReleasedKeyMap)
             {
                 if (input.KeyboardState.HasReleasedKey(item.Key))
@@ -76,6 +80,7 @@ namespace BurnoutBuster.CommandPat
                     switch (item.Value)
                     {
                         // stuff on released key
+                        
                     }
                 }
             }
@@ -85,9 +90,6 @@ namespace BurnoutBuster.CommandPat
                 if (input.KeyboardState.IsHoldingKey(item.Key))
                 {
                     //console.GameConsoleWrite($"onKeyDownMap key held {item.Value.ToString()}");
-
-
-                    Command command = null;
 
                     switch (item.Value)
                     {
@@ -105,22 +107,7 @@ namespace BurnoutBuster.CommandPat
                             command = new MoveRightCommand(this.Game);
                             break;
 
-                        //actions
-                        case "Heavy":
-                            //trigger heavy attack
-                            command = new HeavyAttackCommand(this.Game);
-                            break;
-                        case "Action 2":
-                            // trigger action 2 command
-                            break;
-                        case "Attack":
-                            // trigger attack
-                            command = new AttackCommand(this.Game);
-                            break;
-                        case "Dash":
-                            // trigger dash
-                            command = new DashCommand(this.Game);
-                            break;
+                        
                     }
 
                     if (command != null)
@@ -130,12 +117,38 @@ namespace BurnoutBuster.CommandPat
                 if (input.KeyboardState.HasReleasedKey(item.Key))
                 {
                     //console.GameConsoleWrite(string.Format("onKeyDownMap Key released {0}", item.Value.ToString())); //Log key to console
-                    /*switch (item.Value)
+                    switch (item.Value)
                     {
-                       //nothing 
-                    }*/
+                        //actions
+                        //case "Heavy":
+                        //    //trigger heavy attack
+                        //    command = new HeavyAttackCommand(this.Game);
+                        //    break;
+                        //case "Action 2":
+                        //    // trigger action 2 command
+                        //    break;
+                        //case "Attack":
+                        //    // trigger attack
+                        //    command = new AttackCommand(this.Game);
+                        //    break;
+                        //case "Dash":
+                        //    // trigger dash
+                        //    command = new DashCommand(this.Game);
+                        //    break;
+
+                        case "Heavy":
+                        case "Action 2":
+                        case "Attack":
+                        case "Dash":
+                            command = CreateActionCommandBasedOnListeningMode(item.Value, _time);
+                            break;
+                    }
+                    if (command != null)
+                        command.Execute(creatureReceiver);
                 }
             }
+
+            
         }
 
         private Command CreateActionCommandBasedOnListeningMode(string buttonRef, float time)
@@ -152,11 +165,11 @@ namespace BurnoutBuster.CommandPat
                     break;
 
                 case ListeningMode.ForComboAttack:
-
+                    command = ForAttackComboBehavior(buttonRef, time);
                     break;
 
                 case ListeningMode.ForFinisherAttack:
-
+                    command = ForFinisherBehavior(buttonRef, time);
                     break;
             }
             return command;
@@ -182,12 +195,13 @@ namespace BurnoutBuster.CommandPat
             }
 
 
-            this.input.timer.StartTimer(time, 350); // starting input timer
+            this.input.timer.StartTimer(time, listenTime); // starting input timer
             return command;
         }
         private Command ForDashAttackBehavior(string buttonRef, float time)
         {
             this.input.timer.UpdateTimer(time); 
+            //TD implement timer function
             Command command = null;
             switch (buttonRef) // instatiating command
             {
@@ -195,10 +209,78 @@ namespace BurnoutBuster.CommandPat
                     command = new Commands.HeavyAttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
                     break;
+
                 case "Attack":
-                    command = new Commands.DashAttackCommand(this.Game);
+                    if (this.input.timer.IsRunning())
+                    {
+                        command = new Commands.DashAttackCommand(this.Game);
+                        this.input.timer.StartTimer(time, listenTime);
+                    }
+                    else { command = new Commands.DashCommand(this.Game); }
                     listeningMode = ListeningMode.ForAnything;
                     break;
+
+                case "Dash":
+                    command = new Commands.DashCommand(this.Game);
+                    listeningMode = ListeningMode.ForAnything;
+                    break;
+            }
+            return command;
+        }
+        private Command ForAttackComboBehavior(string buttonRef, float time)
+        {
+            this.input.timer.UpdateTimer(time);
+            //TD implement timer function
+            Command command = null;
+
+            switch (buttonRef) // instatiating command
+            {
+                case "Heavy":
+                    if (this.input.timer.IsRunning())
+                    { 
+                        command = new Commands.ComboAttackCommand(this.Game);
+                        this.input.timer.StartTimer(time, listenTime);
+                        listeningMode = ListeningMode.ForFinisherAttack; 
+                    }
+                    else 
+                    { 
+                        command = new Commands.HeavyAttackCommand(this.Game);
+                        listeningMode = ListeningMode.ForAnything; 
+                    }
+                    break;
+                case "Attack":
+                    command = new Commands.AttackCommand(this.Game);
+                    listeningMode = ListeningMode.ForAnything;
+                    break;
+                case "Dash":
+                    command = new Commands.DashCommand(this.Game);
+                    listeningMode = ListeningMode.ForAnything;
+                    break;
+            }
+            return command;
+        }
+        private Command ForFinisherBehavior(string buttonRef, float time)
+        {
+            this.input.timer.UpdateTimer(time);
+            //TD implement timer function
+            Command command = null;
+
+            switch (buttonRef) // instatiating command
+            {
+                case "Heavy":
+                    command = new Commands.HeavyAttackCommand(this.Game);
+                    listeningMode = ListeningMode.ForAnything;
+                    break;
+
+                case "Attack":
+                    if (this.input.timer.IsRunning())
+                    {
+                        command = new Commands.FinisherAttackCommand(this.Game);
+                    }
+                    else { command = new Commands.AttackCommand(this.Game); }
+                    listeningMode = ListeningMode.ForAnything;
+                    break;
+
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;

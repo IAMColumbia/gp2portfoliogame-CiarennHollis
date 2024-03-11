@@ -50,6 +50,15 @@ namespace BurnoutBuster.Utility
             State = TimerState.Off;
         }
 
+        public bool IsRunning()
+        {
+            if (State == TimerState.Running)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+
         private float SecondsToMilliseconds(float seconds)
         {
             return (seconds * 1000);

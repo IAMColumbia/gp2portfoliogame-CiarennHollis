@@ -12,8 +12,11 @@ namespace BurnoutBuster
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        //player
+        //characters
         MonogameCreature creature;
+        MonogameEnemy enemy;
+
+        // command pattern
         CommandProcessor commandProcessor;
 
         // C O N S T R U C T O R
@@ -25,6 +28,9 @@ namespace BurnoutBuster
 
             creature = new CommandCreature(this);
             this.Components.Add(creature);
+
+            enemy = new BasicEnemy(this);
+            this.Components.Add(enemy);
 
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
