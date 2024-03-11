@@ -5,7 +5,7 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace BurnoutBuster.Utility
 {
-    internal class TimedInputHandler : InputHandler
+    public class TimedInputHandler : InputHandler
     {
         // P R O P E R T I E S
         public Timer timer;

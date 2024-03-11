@@ -4,19 +4,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
-    class MonogameCreature : DrawableSprite
+    public class MonogameCreature : DrawableSprite
     {
         // P R O P E R T I E S
+
+        //DEPENDENCY FOR POC
+        public MonogameEnemy enemy;
+
         protected GameConsole console;
-        protected TimedPlayerController controller { get; private set; }
+        TimedPlayerController controller { get; set; }
 
         internal GameConsoleCreature creature
         {
@@ -43,7 +42,8 @@ namespace BurnoutBuster.Character
         }
 
         // C O N S T R U C T O R
-        public MonogameCreature(Game game) : base(game)
+        //DEPENDENCY FOR POC: enemy
+        public MonogameCreature(Game game, MonogameEnemy enemy) : base(game)
         {
             this.controller = new TimedPlayerController(game);
             this.console = (GameConsole)game.Services.GetService<IGameConsole>();
@@ -53,6 +53,7 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             creature = new GameConsoleCreature((GameConsole)game.Services.GetService<IGameConsole>());
+            this.enemy = enemy;
         }
 
         // I N I T
@@ -63,7 +64,7 @@ namespace BurnoutBuster.Character
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
-            this.Speed = 100;
+            this.Speed = 150;
         }
 
         // U P D A T E
@@ -115,6 +116,15 @@ namespace BurnoutBuster.Character
         protected virtual void OnCreatureStateChanged()
         {
             // logic for what happens when the creature state changes
+        }
+
+        protected bool CollisionCheck()
+        {
+            if (Intersects(enemy)) // DEPENDENCY FOR POC: enemy -> need to do collision a better way
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

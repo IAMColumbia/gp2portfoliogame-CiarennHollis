@@ -1,10 +1,5 @@
 ﻿using BurnoutBuster.CommandPat;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
@@ -14,7 +9,8 @@ namespace BurnoutBuster.Character
         Vector2 moveOnNextUpdate;
 
         // C O N S T R U C T O R
-        public CommandCreature(Game game) : base(game)
+        //DEPENDENCY FOR POC: enemy ref
+        public CommandCreature(Game game, MonogameEnemy enemy) : base(game, enemy)
         {
             moveOnNextUpdate = Vector2.Zero;
         }
@@ -86,28 +82,48 @@ namespace BurnoutBuster.Character
         public void Dash()
         {
             // logic for dash action
+            moveOnNextUpdate *= 25;
         }
         public void Attack()
         {
             // logic for attack
-            
+            if (CollisionCheck())
+            {
+                Weapon.PerformAttack(enemy);
+            }
         }
         public void HeavyAttack()
         {
             // logic for heavy attack
+            if (CollisionCheck())
+            {
+                Weapon.PerformHeavyAttack(enemy);
+            }
         }
 
         public void DashAttack()
         {
             // logic for dash attack (dash + 2x attack)
+            if (CollisionCheck())
+            {
+                Weapon.PerformDashAttack(enemy);
+            }
         }
         public void ComboAttack()
         {
             // logic for combo attack (attack + heavy attack)
+            if (CollisionCheck())
+            {
+                Weapon.PerformComboAttack(enemy);
+            }
         }
         public void FinisherAttack()
         {
-            // logic for combo attack (attack + heavy + __)
+            // logic for combo attack (attack + heavy + attack)
+            if (CollisionCheck())
+            {
+                Weapon.PerformFinisherAttack(enemy);
+            }
         }
         #endregion
     }

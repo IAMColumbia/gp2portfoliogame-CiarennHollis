@@ -5,9 +5,6 @@ using Microsoft.Xna.Framework;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.CommandPat
 {
@@ -37,7 +34,7 @@ namespace BurnoutBuster.CommandPat
             Commands = new Stack<ICommand>();
             keyMap = new KeyMap();
             buttonMap = new ButtonMap();
-            listenTime = 500;
+            listenTime = 750;
             #region 'Setting Refs'
             input = (TimedInputHandler)game.Services.GetService<IInputHandler>();
             if (input == null)

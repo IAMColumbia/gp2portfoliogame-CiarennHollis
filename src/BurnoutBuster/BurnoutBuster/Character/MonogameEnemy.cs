@@ -2,17 +2,16 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
-    public abstract class MonogameEnemy : DrawableSprite
+    public abstract class MonogameEnemy : DrawableSprite, IDamageable
     {
         // P R O P E R T I E S
+
+        //DEPENDENCY FOR POC
+        MonogameCreature creature;
+
         protected GameConsole console;
         internal GameConsoleEnemy enemy;
         protected EnemyState enemyState;
@@ -37,9 +36,15 @@ namespace BurnoutBuster.Character
                 this.enemyType = this.enemy.Type = value;
             }
         }
+        public int HitPoints
+        {
+            get { return this.enemy.HitPoints; }
+            set { this.enemy.HitPoints = value;  }
+        }
 
         // C O N S T R U C T O R 
-        public MonogameEnemy (Game game) : base (game)
+        //DEPENDENCY FOR POC: creature ref
+        public MonogameEnemy (Game game, MonogameCreature creature) : base (game)
         {
             this.console = (GameConsole) game.Services.GetService<IGameConsole>();
             if (this.console == null)
@@ -48,6 +53,7 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             enemy = new GameConsoleEnemy(console);
+            this.creature = creature;
         }
 
         // I N I T
@@ -57,6 +63,8 @@ namespace BurnoutBuster.Character
         }
         protected override void LoadContent()
         {
+            this.HitPoints = 1000;
+
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Vector2(200, 200);
@@ -65,7 +73,6 @@ namespace BurnoutBuster.Character
         // U P D A T E
         public override void Update(GameTime gameTime)
         {
-            
             KeepEnemyOnScreen();
             base.Update(gameTime);
         }
@@ -91,7 +98,7 @@ namespace BurnoutBuster.Character
             if (this.Location.Y < (this.spriteTexture.Height / 2))
                 this.Location.Y = (this.spriteTexture.Height / 2);
         }
-        void OnEnemyStateChanged ()
+        void OnEnemyStateChanged()
         {
             // logic for what happens when the enemy state changes
         }
@@ -101,5 +108,11 @@ namespace BurnoutBuster.Character
             enemy.Move();
             //this.Location = Move amount;
         }
+
+        public void Hit(int damageAmount)
+        {
+            this.enemy.Hit(damageAmount);
+        }
+        
     }
 }

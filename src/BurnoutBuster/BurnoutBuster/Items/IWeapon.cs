@@ -1,10 +1,4 @@
 ﻿using BurnoutBuster.Character;
-using SharpDX.Direct3D11;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Items
 {
@@ -20,5 +14,8 @@ namespace BurnoutBuster.Items
         void Use(IDamageable target);
         void PerformAttack(IDamageable target);
         void PerformHeavyAttack(IDamageable target);
+        void PerformDashAttack(IDamageable target);
+        void PerformComboAttack(IDamageable target);
+        void PerformFinisherAttack(IDamageable target);
     }
 }

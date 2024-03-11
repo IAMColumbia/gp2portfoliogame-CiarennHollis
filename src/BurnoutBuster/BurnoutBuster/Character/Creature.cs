@@ -1,13 +1,9 @@
 ﻿using BurnoutBuster.Items;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
-    public enum CreatureState { Normal, Overwhelmed, Shutdown }
+    public enum CreatureState { Normal, Overwhelmed, Shutdown } // state for later use
     public class Creature : IDamageable
     {
         // P R O P E R T I E S

@@ -1,9 +1,4 @@
 ﻿using BurnoutBuster.Character;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Items
 {
@@ -29,6 +24,19 @@ namespace BurnoutBuster.Items
         public virtual void PerformHeavyAttack(IDamageable target)
         {
             target.Hit(Damage * 2);
+        }
+        public virtual void PerformDashAttack(IDamageable target)
+        {
+            target.Hit(Damage + 3);
+
+        }
+        public virtual void PerformComboAttack(IDamageable target)
+        {
+            target.Hit(Damage * 3);
+        }
+        public virtual void PerformFinisherAttack(IDamageable target)
+        {
+            target.Hit(Damage + 5);
         }
     }
 }

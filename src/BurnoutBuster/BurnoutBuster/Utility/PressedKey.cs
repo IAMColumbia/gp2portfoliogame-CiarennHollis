@@ -2,7 +2,7 @@
 
 namespace BurnoutBuster.Utility
 {
-    class PressedKey
+    public class PressedKey
     {
         public Keys Key;
         public Timer KeyTimer;

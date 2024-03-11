@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace BurnoutBuster.Utility
 {
-    class PressedButton
+    public class PressedButton
     {
         public GamePadButtons Button;
         public Timer BtnTimer;

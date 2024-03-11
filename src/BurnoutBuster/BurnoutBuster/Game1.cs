@@ -3,6 +3,8 @@ using BurnoutBuster.CommandPat;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGameLibrary.Util;
+using System;
 
 namespace BurnoutBuster
 {
@@ -11,6 +13,9 @@ namespace BurnoutBuster
         // P R O P E R T I E S 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        //console
+        GameConsole console;
 
         //characters
         MonogameCreature creature;
@@ -26,10 +31,11 @@ namespace BurnoutBuster
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            creature = new CommandCreature(this);
-            this.Components.Add(creature);
 
-            enemy = new BasicEnemy(this);
+            creature = new CommandCreature(this, enemy); //DEPENDENCY FOR POC
+            this.Components.Add(creature); 
+
+            enemy = new BasicEnemy(this, creature); //DEPENDENCY FOR POC
             this.Components.Add(enemy);
 
             commandProcessor = new CommandProcessor(this, creature);
@@ -39,12 +45,14 @@ namespace BurnoutBuster
         // I N I T 
         protected override void Initialize()
         {
-
+            creature.enemy = this.enemy;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            console = (GameConsole)this.Services.GetService<IGameConsole>();
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         }
@@ -55,6 +63,7 @@ namespace BurnoutBuster
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            WriteConsoleInfo();
 
             base.Update(gameTime);
         }
@@ -67,5 +76,23 @@ namespace BurnoutBuster
 
             base.Draw(gameTime);
         }
+
+        // M I S C 
+        void WriteConsoleInfo()
+        {
+                
+
+            console.Log("Movement controls", "WASD");
+            console.Log("Attack:", "Left Arrow");
+            console.Log("Heavy Attack:", "Up Arrow");
+            console.Log("Dash:", "Right Arrow");
+
+            console.Log("Dash Attack:", "Right + Left");
+            console.Log("Combo Attack:", "Right + Up");
+            console.Log("Finisher Attack:", "Left + Up + Left");
+
+            console.Log("Enemy", enemy.HitPoints.ToString());
+        }
+
     }
 }
