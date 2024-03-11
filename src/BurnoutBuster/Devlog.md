@@ -1,6 +1,17 @@
 # Devlog
   
-## 10 March 2024 | 16: 20
+## 11 March 2024 | 10:37
+### Check In
+ * Slept on it. Will continue where I left off yesterday
+  
+### Goals
+ * Implement the timed input bits in the command processor
+ * Implement listening states for the combat combos
+ * Implement combat combos
+ * Make place holder sprite for the enemy
+  
+  
+## 10 March 2024 | 16:20
 ### Check In
  * Created the command class for all the actions and set things up for those actions to be implemented in game
  * [ISSUE #4 CLOSED]
@@ -15,7 +26,7 @@
 ### Next Steps 
  * Implement the timed input bits in the command processor
  * Implement listening states for the combat combos
- * Implement com bat combos
+ * Implement combat combos
   
   
 ## 10 March 2024 | 15:55
