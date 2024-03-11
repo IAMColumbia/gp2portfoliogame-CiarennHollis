@@ -1,5 +1,14 @@
 # Devlog
   
+## 11 March 2024 | 14:16
+### Check In
+ * So, the combat system and combat combos is successfully implemented!! 
+ * The original design I drew up for them also had "cool down" timers on them. I'm not exactly sure how I want to implement this gameplay-wise. I have those there because I don't want players to be able to spam the heavy attack button and just deal out heavy attacks. But there could be a better way of implementing this limitation with. I want to look at how other games (like Hades) handle this in their gameplay. Because of this this particular aspect will be something for the next milestone (the vertical slice).
+ * The working combat-combo-system I think meets the POC requirement. I would like to make it possible for the play to hit the enemy that is currently in the scene. But I haven't decided how I want the enemy behavior to be structured. I have written the enemy manager yet.
+  
+### Next Steps
+ * Think about how implement the enemies taking damage and the manager.
+  
 ## 11 March 2024 | 12:02
 ### Check In
  * Started implementing using listening states in the command processor.
@@ -9,17 +18,17 @@
   
 ### Next Steps
  * Continue implementing the combat combos
- * Start with continuing to build out the methods in the command processor for the listening modes
+ * Start with continuing to build out the methods in the command processor for the listening modes [DONE]
   
 ## 11 March 2024 | 10:37
 ### Check In
  * Slept on it. Will continue where I left off yesterday
   
 ### Goals
- * Implement the timed input bits in the command processor
- * Implement listening states for the combat combos
- * Implement combat combos
- * Make place holder sprite for the enemy
+ * Implement the timed input bits in the command processor [DONE]
+ * Implement listening states for the combat combos [DONE]
+ * Implement combat combos 
+ * Make place holder sprite for the enemy [DONE]
   
   
 ## 10 March 2024 | 16:20
