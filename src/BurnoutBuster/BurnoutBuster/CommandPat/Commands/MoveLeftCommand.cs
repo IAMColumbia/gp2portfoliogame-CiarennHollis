@@ -18,6 +18,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.MoveLeft();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -32,6 +35,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.MoveRight();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -46,6 +52,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.MoveUp();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -60,6 +69,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.MoveDown();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 }

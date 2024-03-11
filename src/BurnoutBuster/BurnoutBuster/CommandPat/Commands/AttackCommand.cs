@@ -17,6 +17,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.Attack();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -30,6 +33,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.Dash();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -56,6 +62,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.DashAttack();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -69,6 +78,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.ComboAttack();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 
@@ -82,6 +94,9 @@ namespace BurnoutBuster.CommandPat.Commands
         {
             cc.FinisherAttack();
             base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
         }
     }
 }

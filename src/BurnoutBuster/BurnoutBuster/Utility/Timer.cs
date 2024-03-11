@@ -47,7 +47,6 @@ namespace BurnoutBuster.Utility
 
         public void ResetTimer()
         {
-
             State = TimerState.Off;
         }
 

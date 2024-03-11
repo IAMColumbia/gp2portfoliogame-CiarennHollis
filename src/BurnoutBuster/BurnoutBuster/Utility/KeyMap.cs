@@ -23,10 +23,10 @@ namespace BurnoutBuster.Utility
             OnKeyDownMap.Add(Keys.S, "Down");
 
             //actions
-            OnKeyDownMap.Add(Keys.Up, "Action 1");
+            OnKeyDownMap.Add(Keys.Up, "Heavy");
             OnKeyDownMap.Add(Keys.Down, "Action 2");
-            OnKeyDownMap.Add(Keys.Left, "Action 3");
-            OnKeyDownMap.Add(Keys.Right, "Action 4");
+            OnKeyDownMap.Add(Keys.Left, "Attack");
+            OnKeyDownMap.Add(Keys.Right, "Dash");
         }
     }
 
@@ -57,10 +57,10 @@ namespace BurnoutBuster.Utility
             //OnButtonDownMap.Add(GamePadButtons.Y, "Down");
 
             //actions
-            OnButtonDownMap.Add(GamePadButtons.A, "Action 1");
+            OnButtonDownMap.Add(GamePadButtons.A, "Heavy");
             OnButtonDownMap.Add(GamePadButtons.B, "Action 2");
-            OnButtonDownMap.Add(GamePadButtons.X, "Action 3");
-            OnButtonDownMap.Add(GamePadButtons.Y, "Action 4");
+            OnButtonDownMap.Add(GamePadButtons.X, "Attack");
+            OnButtonDownMap.Add(GamePadButtons.Y, "Dash");
         }
     }
 }

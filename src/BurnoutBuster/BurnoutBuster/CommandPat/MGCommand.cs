@@ -20,9 +20,9 @@ namespace BurnoutBuster.CommandPat
         protected override string Log()
         {
             string LogString = base.Log();
-#if DEBUG
+
             console.GameConsoleWrite(LogString);
-#endif
+
             return LogString;
         }
     }

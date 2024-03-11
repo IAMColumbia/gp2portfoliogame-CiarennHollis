@@ -1,5 +1,16 @@
 # Devlog
   
+## 11 March 2024 | 12:02
+### Check In
+ * Started implementing using listening states in the command processor.
+ * I found that the timed input bits I had in the TimeInputManager I probably won't use (the PressedKey var) since I realized that those were only really being used for seeing if a key was double pressed. I might still use that for the Dash Attack since that combo was meant to be: Dash + attack + attack. But I think, to make my life a little easier, I might just have the dash attack be: Dash + Attack.	
+ * Started implementing the combos. I abstracted out how the processor will respond based on the listening state to their own methods and have those methods return commands so things fit nicely back into the way the command processor functions.
+ * Taking a break for lunch :P
+  
+### Next Steps
+ * Continue implementing the combat combos
+ * Start with continuing to build out the methods in the command processor for the listening modes
+  
 ## 11 March 2024 | 10:37
 ### Check In
  * Slept on it. Will continue where I left off yesterday
