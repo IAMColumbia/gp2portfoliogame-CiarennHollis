@@ -12,3 +12,4 @@
   
 ###  Questions/Concerns
  * Ask Jeff about the animatable sprite -> how to implement
+ * Ask about gamepad directions -> handling the thumbstick and also the directional buttons
