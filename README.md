@@ -13,16 +13,22 @@ Folder Sturcture
 
 \src
 
-\src\packages
+\src\BurnoutBuster
+
+\src\BurnoutBuster\BurnoutBuster
+  
+\src\BurnoutBuster\MonoGameLibrary
 
 \assets
 
 \docs
+  
+\docs\Proposal
 
-\build
+\artifactReleases
 
-\build\0.1POC
+\artifactReleases\1POC
 
-\build\0.2VS
+\artifactReleases\2VS
 
-\build\0.3Final
+\artifactReleases\3Final
