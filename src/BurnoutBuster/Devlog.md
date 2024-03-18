@@ -6,7 +6,7 @@
  * Today I'm hoping to build out the functionality of the enemies
   
 ### Goals
- * Enemy movement
+ * Enemy movement 
  * Enemy collision 
  * Enemy attack
  * Enemy state

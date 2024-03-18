@@ -10,7 +10,7 @@ namespace BurnoutBuster.Character
         // P R O P E R T I E S
 
         //DEPENDENCY FOR POC
-        MonogameCreature creature;
+        protected MonogameCreature creature;
 
         protected GameConsole console;
         internal GameConsoleEnemy enemy;
@@ -102,7 +102,7 @@ namespace BurnoutBuster.Character
         {
             // logic for what happens when the enemy state changes
         }
-        public virtual void Move()
+        public virtual void Move(GameTime gameTime)
         {
             // implement move behavior [TD]
             enemy.Move();
@@ -111,7 +111,13 @@ namespace BurnoutBuster.Character
 
         public void Hit(int damageAmount)
         {
+            // play hit animation 
             this.enemy.Hit(damageAmount);
+        }
+
+        public void Attack(IDamageable target)
+        {
+            enemy.Attack(target);
         }
         
     }

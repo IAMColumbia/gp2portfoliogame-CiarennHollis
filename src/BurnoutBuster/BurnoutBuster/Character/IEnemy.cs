@@ -9,10 +9,11 @@ namespace BurnoutBuster.Character
         // P R O P E R T I E S
         public int HitPoints { get; }
         public EnemyState State { get; }
+        public int Damage { get; }
 
         // M E T H O D S
         void Move();
-        void Attack();
+        void Attack(IDamageable target);
         void Die();
         
     }
