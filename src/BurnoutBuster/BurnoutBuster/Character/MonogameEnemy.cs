@@ -42,6 +42,8 @@ namespace BurnoutBuster.Character
             set { this.enemy.HitPoints = value;  }
         }
 
+        protected Vector2 moveVector;
+
         // C O N S T R U C T O R 
         //DEPENDENCY FOR POC: creature ref
         public MonogameEnemy (Game game, MonogameCreature creature) : base (game)
@@ -68,6 +70,7 @@ namespace BurnoutBuster.Character
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Vector2(200, 200);
+
             base.LoadContent();
         }
         // U P D A T E
@@ -109,7 +112,7 @@ namespace BurnoutBuster.Character
             //this.Location = Move amount;
         }
 
-        public void Hit(int damageAmount)
+        public virtual void Hit(int damageAmount)
         {
             // play hit animation 
             this.enemy.Hit(damageAmount);

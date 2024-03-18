@@ -1,12 +1,21 @@
 # Devlog
   
+## 18 March 2024 | 16:29
+### Check In
+ * Didn't get as much done today as I wanted to :P
+ * Really only get some simple enemmy movement in
+  
+### Next Steps
+ * Continue implementing the enemy bits
+ * Implement the enemy manager
+  
 ## 18 March 2024 | 11:53
 ### Check In
  * I've gone in and made new issues for the tasks for this sprint
  * Today I'm hoping to build out the functionality of the enemies
   
 ### Goals
- * Enemy movement 
+ * Enemy movement
  * Enemy collision 
  * Enemy attack
  * Enemy state
