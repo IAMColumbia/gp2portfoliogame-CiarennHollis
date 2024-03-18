@@ -1,5 +1,18 @@
 # Devlog
   
+## 18 March 2024 | 11:53
+### Check In
+ * I've gone in and made new issues for the tasks for this sprint
+ * Today I'm hoping to build out the functionality of the enemies
+  
+### Goals
+ * Enemy movement
+ * Enemy collision 
+ * Enemy attack
+ * Enemy state
+ * Start Enemy manager
+  
+  
 ## 11 March 2024 | 16:47
 ### Check In
  * I added in a janky little collision thing so that the combat system can be demoed in a more substantial manner. Collision for the enemies probably should be handled through an enemy manager but that was outside the scope of the POC milestone for me.
