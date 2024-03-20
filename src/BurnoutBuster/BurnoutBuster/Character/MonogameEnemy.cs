@@ -1,17 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BurnoutBuster.Utility;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 
 namespace BurnoutBuster.Character
 {
-    public abstract class MonogameEnemy : DrawableSprite, IDamageable
+    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ITaggedCollidable
     {
         // P R O P E R T I E S
 
         //DEPENDENCY FOR POC
         protected MonogameCreature creature;
-
+        
         protected GameConsole console;
         internal GameConsoleEnemy enemy;
         protected EnemyState enemyState;
@@ -41,6 +44,11 @@ namespace BurnoutBuster.Character
             get { return this.enemy.HitPoints; }
             set { this.enemy.HitPoints = value;  }
         }
+
+        // collision and tag bits
+        public IShapeF Bounds { get; set; }
+
+        public Tags Tag { get; }
 
         protected Vector2 moveVector;
 
@@ -84,8 +92,6 @@ namespace BurnoutBuster.Character
         {
             base.Draw(gameTime);
         }
-
-        // M I S C  M E T H O D S
         private void KeepEnemyOnScreen()
         {
             if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2))
@@ -101,6 +107,15 @@ namespace BurnoutBuster.Character
             if (this.Location.Y < (this.spriteTexture.Height / 2))
                 this.Location.Y = (this.spriteTexture.Height / 2);
         }
+
+        // C O L L I S I O N
+        public void OnCollision(CollisionEventArgs collisionInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        // M I S C  M E T H O D S
+
         void OnEnemyStateChanged()
         {
             // logic for what happens when the enemy state changes
@@ -122,6 +137,6 @@ namespace BurnoutBuster.Character
         {
             enemy.Attack(target);
         }
-        
+
     }
 }

@@ -3,6 +3,8 @@ using BurnoutBuster.CommandPat;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Util;
 using System;
 
@@ -13,6 +15,11 @@ namespace BurnoutBuster
         // P R O P E R T I E S 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private readonly CollisionComponent _collision;
+
+        // screen
+        const int mapWidth = 900;
+        const int mapHeight = 500;
 
         //console
         GameConsole console;
@@ -32,6 +39,9 @@ namespace BurnoutBuster
             IsMouseVisible = true;
 
 
+            _collision = new CollisionComponent(new RectangleF(0, 0, mapWidth, mapHeight));
+            this.Components.Add(_collision);
+
             creature = new CommandCreature(this, enemy); //DEPENDENCY FOR POC
             this.Components.Add(creature); 
 
@@ -47,6 +57,7 @@ namespace BurnoutBuster
         {
             creature.enemy = this.enemy;
             base.Initialize();
+            SetScreenDimensions();
         }
 
         protected override void LoadContent()
@@ -56,7 +67,12 @@ namespace BurnoutBuster
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         }
-
+        private void SetScreenDimensions()
+        {
+            _graphics.PreferredBackBufferHeight = mapHeight;
+            _graphics.PreferredBackBufferWidth = mapWidth;
+            _graphics.ApplyChanges();
+        }
         // U P D A T E 
         protected override void Update(GameTime gameTime)
         {

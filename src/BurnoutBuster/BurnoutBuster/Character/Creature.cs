@@ -11,7 +11,7 @@ namespace BurnoutBuster.Character
         public int HitPoints
         {
             get;
-            private set;
+            set;
         }
 
         private CreatureState state;

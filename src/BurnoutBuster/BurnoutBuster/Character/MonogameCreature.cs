@@ -2,12 +2,14 @@
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite
+    public class MonogameCreature : DrawableSprite, IDamageable, ITaggedCollidable
     {
         // P R O P E R T I E S
 
@@ -35,11 +37,23 @@ namespace BurnoutBuster.Character
                 }
             }
         }
-        
+        public int HitPoints
+        {
+            get { return this.creature.HitPoints; }
+            set { this.creature.HitPoints = value; }
+        }
+
         public IWeapon Weapon
         {
             get { return this.creature.MyWeapon; }
         }
+
+        // collision and tag bits
+        public IShapeF Bounds { get; set; }
+
+        public Tags Tag { get; }
+
+        protected Vector2 moveVector;
 
         // C O N S T R U C T O R
         //DEPENDENCY FOR POC: enemy
@@ -90,8 +104,6 @@ namespace BurnoutBuster.Character
         {
             base.Draw(gameTime);
         }
-
-        // C O N T R O L L E R S   A N D   M O V E M E N T
         private void KeepCreatureOnScreen()
         {
             if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2))
@@ -108,6 +120,20 @@ namespace BurnoutBuster.Character
                 this.Location.Y = (this.spriteTexture.Height / 2);
         }
 
+        // C O L L I S I O N
+        public void OnCollision(CollisionEventArgs collisionInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+        protected bool CollisionCheck()
+        {
+            if (Intersects(enemy)) // DEPENDENCY FOR POC: enemy -> need to do collision a better way
+            {
+                return true;
+            }
+            return false;
+        }
+
         // M I S C   M E T H O D S
         public void Attack(IDamageable target)
         {
@@ -118,13 +144,9 @@ namespace BurnoutBuster.Character
             // logic for what happens when the creature state changes
         }
 
-        protected bool CollisionCheck()
+        public void Hit(int damageAmount)
         {
-            if (Intersects(enemy)) // DEPENDENCY FOR POC: enemy -> need to do collision a better way
-            {
-                return true;
-            }
-            return false;
+            this.creature.Hit(damageAmount);
         }
     }
 }

@@ -1,5 +1,15 @@
 # Devlog
   
+## 20 March 2024 | 14:02
+### Check In
+ * So, I hit this question of how do I handle collision for this game. I wanted to have a system that was relatively similar to how Unity implements it's collisions so that I could have a method similar to Unity's OnCollisionEnter().
+ * I don't really have the time to sit down and write a custom physics/collision system for this project, while that probably would be neat to do (and I may do so at some point in the future just to do it). Because I don't have that time, I looked around at other ways to bring in a collision system into this project.
+ * I eventually found the MonoGame.Extended.Collision library and was able to install it into the project. 
+ * To go along with the collision system, I also wrote a simple tag manager so that I could give tags to things and have check to if things are tagged rather than checking their type. Instead of using strings for tags though, I am using an enum.
+ * These two things together in theory should let me implement this collision sysem in a way that's relatively similar to doing so in Unity. I just wrapped the ICollisionActor from MonoGame Extended and my ITaggable into it's own interface ITaggedCollidable so it would look a little cleaner and be simpler to implement.
+ * I kind of forgot to check in with this doc before implementing the things listed above since I didn't intend to do work on this project when I sat down. I kind of just ended up working on it a bit since I got bored :P
+
+
 ## 18 March 2024 | 16:29
 ### Check In
  * Didn't get as much done today as I wanted to :P
