@@ -10,7 +10,7 @@ namespace BurnoutBuster.Character
 
         // C O N S T R U C T O R
         //DEPENDENCY FOR POC: enemy ref
-        public CommandCreature(Game game, MonogameEnemy enemy) : base(game, enemy)
+        public CommandCreature(Game game) : base(game)
         {
             moveOnNextUpdate = Vector2.Zero;
         }
@@ -24,7 +24,7 @@ namespace BurnoutBuster.Character
 
         protected override void UpdateCreatureWithController(GameTime gameTime, float time)
         {
-            //Don't update pacman this one uses a controller
+            //Don't update creature this one uses a controller
             //  - essentially disables the controller on the monogame creature
             //base.UpdateCreatureWithController(gameTime, time);
 
@@ -39,6 +39,7 @@ namespace BurnoutBuster.Character
 
             //move 
             this.Location += (moveOnNextUpdate * this.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+            this.Bounds.Position = this.Location;
 
             //update texture facing direction
             UpdateFacingDirBasedOnDirection(moveOnNextUpdate);
@@ -87,43 +88,43 @@ namespace BurnoutBuster.Character
         public void Attack()
         {
             // logic for attack
-            if (CollisionCheck())
-            {
-                Weapon.PerformAttack(enemy);
-            }
+            //if (CollisionCheck())
+            //{
+            //    Weapon.PerformAttack(enemy);
+            //}
         }
         public void HeavyAttack()
         {
             // logic for heavy attack
-            if (CollisionCheck())
-            {
-                Weapon.PerformHeavyAttack(enemy);
-            }
+            //if (CollisionCheck())
+            //{
+            //    Weapon.PerformHeavyAttack(enemy);
+            //}
         }
 
         public void DashAttack()
         {
             // logic for dash attack (dash + 2x attack)
-            if (CollisionCheck())
-            {
-                Weapon.PerformDashAttack(enemy);
-            }
+            //if (CollisionCheck())
+            //{
+            //    Weapon.PerformDashAttack(enemy);
+            //}
         }
         public void ComboAttack()
         {
             // logic for combo attack (attack + heavy attack)
-            if (CollisionCheck())
-            {
-                Weapon.PerformComboAttack(enemy);
-            }
+            //if (CollisionCheck())
+            //{
+            //    Weapon.PerformComboAttack(enemy);
+            //}
         }
         public void FinisherAttack()
         {
             // logic for combo attack (attack + heavy + attack)
-            if (CollisionCheck())
-            {
-                Weapon.PerformFinisherAttack(enemy);
-            }
+            //if (CollisionCheck())
+            //{
+            //    Weapon.PerformFinisherAttack(enemy);
+            //}
         }
         #endregion
     }

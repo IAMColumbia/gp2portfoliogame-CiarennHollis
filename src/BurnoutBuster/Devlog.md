@@ -1,5 +1,14 @@
 # Devlog
   
+## 29 March 2024 | 12:41
+### Check In
+ * So, I had implemented the collision system from the Monogame Extended library, but I can't get the system to work for some reason. I'm unsure what I'm doing wrong with it
+	* So, since I've spent the last hour trying to get that system to respond to me, I'm going to work on something else for now :P
+  
+### Goals
+ * Enemy manager
+ * Enemy attacks
+  
 ## 29 March 2024 | 11:31
 ### Check In
  * Sitting down to work on this project

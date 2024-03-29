@@ -8,6 +8,8 @@ using MonoGameLibrary.Util;
 
 namespace BurnoutBuster.Character
 {
+
+    public enum EnemyMovementMode { FollowPlayer }
     public abstract class MonogameEnemy : DrawableSprite, IDamageable, ITaggedCollidable
     {
         // P R O P E R T I E S
@@ -45,6 +47,8 @@ namespace BurnoutBuster.Character
             set { this.enemy.HitPoints = value;  }
         }
 
+        protected EnemyMovementMode movementMode;
+
         // collision and tag bits
         public IShapeF Bounds { get; set; }
 
@@ -64,6 +68,8 @@ namespace BurnoutBuster.Character
             }
             enemy = new GameConsoleEnemy(console);
             this.creature = creature;
+
+            this.Tag = Tags.Enemy;
         }
 
         // I N I T
@@ -73,11 +79,13 @@ namespace BurnoutBuster.Character
         }
         protected override void LoadContent()
         {
-            this.HitPoints = 1000;
+            this.HitPoints = 100;
 
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Vector2(200, 200);
+
+            this.Bounds = (RectangleF)this.Rectangle;
 
             base.LoadContent();
         }
@@ -111,7 +119,7 @@ namespace BurnoutBuster.Character
         // C O L L I S I O N
         public void OnCollision(CollisionEventArgs collisionInfo)
         {
-            throw new System.NotImplementedException();
+            console.GameConsoleWrite("Collided!");
         }
 
         // M I S C  M E T H O D S
@@ -123,7 +131,18 @@ namespace BurnoutBuster.Character
         public virtual void Move(GameTime gameTime)
         {
             // implement move behavior [TD]
+            switch(movementMode)
+            {
+                case EnemyMovementMode.FollowPlayer:
+                    // follows the player
+                    this.moveVector = this.creature.Location - this.Location;
+                    moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    this.Location += moveVector;
+                    break;
+            }
             enemy.Move();
+            this.Bounds.Position = this.Location;
             //this.Location = Move amount;
         }
 

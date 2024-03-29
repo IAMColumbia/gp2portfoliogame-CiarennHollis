@@ -11,6 +11,7 @@ namespace BurnoutBuster.Character
         public BasicEnemy(Game game, MonogameCreature creature) : base(game, creature)
         {
             this.EnemyType = EnemyType.Minor;
+            this.movementMode = EnemyMovementMode.FollowPlayer;
         }
 
         public override void Update(GameTime gameTime)
@@ -22,12 +23,6 @@ namespace BurnoutBuster.Character
         // M E T H O D S
         public override void Move(GameTime gameTime)
         {
-            // follows the player
-            this.moveVector = this.creature.Location - this.Location;
-            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            this.Location += moveVector;
-
             base.Move(gameTime);
         }
 

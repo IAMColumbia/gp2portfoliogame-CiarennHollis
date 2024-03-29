@@ -7,6 +7,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Util;
 using System;
+using System.Collections.Generic;
 
 namespace BurnoutBuster
 {
@@ -15,7 +16,7 @@ namespace BurnoutBuster
         // P R O P E R T I E S 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private readonly CollisionComponent _collision;
+        private CollisionComponent _collision;
 
         // screen
         const int mapWidth = 900;
@@ -23,6 +24,9 @@ namespace BurnoutBuster
 
         //console
         GameConsole console;
+
+        //collision
+        private List<ITaggedCollidable> _collidableObjects;
 
         //characters
         MonogameCreature creature;
@@ -41,12 +45,15 @@ namespace BurnoutBuster
 
             _collision = new CollisionComponent(new RectangleF(0, 0, mapWidth, mapHeight));
             this.Components.Add(_collision);
+            _collidableObjects = new List<ITaggedCollidable>();
 
-            creature = new CommandCreature(this, enemy); //DEPENDENCY FOR POC
+            creature = new CommandCreature(this); //DEPENDENCY FOR POC
             this.Components.Add(creature); 
+            this._collidableObjects.Add(creature);
 
             enemy = new BasicEnemy(this, creature); //DEPENDENCY FOR POC
             this.Components.Add(enemy);
+            this._collidableObjects.Add(enemy);
 
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
@@ -55,7 +62,7 @@ namespace BurnoutBuster
         // I N I T 
         protected override void Initialize()
         {
-            creature.enemy = this.enemy;
+            _collision.Initialize();
             base.Initialize();
             SetScreenDimensions();
         }
@@ -63,15 +70,23 @@ namespace BurnoutBuster
         protected override void LoadContent()
         {
             console = (GameConsole)this.Services.GetService<IGameConsole>();
-
+            
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            SetUpCollisionActors();
         }
         private void SetScreenDimensions()
         {
             _graphics.PreferredBackBufferHeight = mapHeight;
             _graphics.PreferredBackBufferWidth = mapWidth;
             _graphics.ApplyChanges();
+        }
+        void SetUpCollisionActors()
+        {
+            foreach (ITaggedCollidable taggedCollidable in _collidableObjects)
+            {
+                _collision.Insert(taggedCollidable);
+            }
         }
         // U P D A T E 
         protected override void Update(GameTime gameTime)
@@ -81,6 +96,7 @@ namespace BurnoutBuster
 
             WriteConsoleInfo();
 
+            _collision.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -109,6 +125,7 @@ namespace BurnoutBuster
 
             console.Log("Enemy", enemy.HitPoints.ToString());
         }
+
 
     }
 }

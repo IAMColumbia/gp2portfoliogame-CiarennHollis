@@ -6,6 +6,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
+using System;
 
 namespace BurnoutBuster.Character
 {
@@ -13,8 +14,6 @@ namespace BurnoutBuster.Character
     {
         // P R O P E R T I E S
 
-        //DEPENDENCY FOR POC
-        public MonogameEnemy enemy;
 
         protected GameConsole console;
         TimedPlayerController controller { get; set; }
@@ -57,7 +56,7 @@ namespace BurnoutBuster.Character
 
         // C O N S T R U C T O R
         //DEPENDENCY FOR POC: enemy
-        public MonogameCreature(Game game, MonogameEnemy enemy) : base(game)
+        public MonogameCreature(Game game) : base(game)
         {
             this.controller = new TimedPlayerController(game);
             this.console = (GameConsole)game.Services.GetService<IGameConsole>();
@@ -67,7 +66,9 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             creature = new GameConsoleCreature((GameConsole)game.Services.GetService<IGameConsole>());
-            this.enemy = enemy;
+
+            this.Bounds = (RectangleF)this.Rectangle;
+            this.Tag = Tags.Player;
         }
 
         // I N I T
@@ -78,6 +79,8 @@ namespace BurnoutBuster.Character
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
+
+            this.Bounds.Position = this.Location;
             this.Speed = 150;
         }
 
@@ -121,17 +124,26 @@ namespace BurnoutBuster.Character
         }
 
         // C O L L I S I O N
+        internal ITaggedCollidable otherObject;
         public void OnCollision(CollisionEventArgs collisionInfo)
         {
-            throw new System.NotImplementedException();
-        }
-        protected bool CollisionCheck()
-        {
-            if (Intersects(enemy)) // DEPENDENCY FOR POC: enemy -> need to do collision a better way
+            console.GameConsoleWrite("Collided!");
+            if (collisionInfo != null)
             {
-                return true;
+                console.GameConsoleWrite("Collided!");
+                try
+                {
+                    otherObject = (ITaggedCollidable)collisionInfo.Other;
+                    if (TagManager.CompareTag(otherObject, Tags.Enemy))
+                    {
+                        console.GameConsoleWrite("Collided with an Enemy");
+                    }
+                }
+                catch (Exception e)
+                {
+                    console.GameConsoleWrite("Failed to cast otherObject to ITaggedCollidable");
+                }
             }
-            return false;
         }
 
         // M I S C   M E T H O D S
