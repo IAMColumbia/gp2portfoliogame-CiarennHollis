@@ -1,5 +1,17 @@
 # Devlog
   
+## 29 March 2024 | 11:31
+### Check In
+ * Sitting down to work on this project
+  
+### Goals
+ * Get the enemy class built out
+ * Build out the enemy manager 
+ * Decide how levels/rooms will work in this game
+ * Implement a HUD
+ * Implement an analzer for the input combos
+  
+  
 ## 20 March 2024 | 14:02
 ### Check In
  * So, I hit this question of how do I handle collision for this game. I wanted to have a system that was relatively similar to how Unity implements it's collisions so that I could have a method similar to Unity's OnCollisionEnter().
