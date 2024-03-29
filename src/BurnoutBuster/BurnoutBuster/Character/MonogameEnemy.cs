@@ -41,6 +41,7 @@ namespace BurnoutBuster.Character
                 this.enemyType = this.enemy.Type = value;
             }
         }
+        private int originalHitPoints;
         public int HitPoints
         {
             get { return this.enemy.HitPoints; }
@@ -80,6 +81,7 @@ namespace BurnoutBuster.Character
         protected override void LoadContent()
         {
             this.HitPoints = 100;
+            this.originalHitPoints = HitPoints;
 
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
@@ -155,6 +157,19 @@ namespace BurnoutBuster.Character
         public void Attack(IDamageable target)
         {
             enemy.Attack(target);
+        }
+
+        public void Reset()
+        {
+            this.HitPoints = originalHitPoints;
+            this.enemyState = EnemyState.InActive;
+            this.Enabled = false;
+        }
+        public void Activate(Vector2 spawnLocation)
+        {
+            this.enemyState = EnemyState.Normal;
+            this.Location = spawnLocation;
+            this.Enabled = true;
         }
 
     }

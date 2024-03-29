@@ -1,5 +1,17 @@
 # Devlog
   
+## 29 March 2024 | 13:25
+### Check In
+ * Started buidling out the enemy manager -> I made it a drawable game componenet so that it could call draw on the enemies. It will be the thing initializing, updating, and drawing the enemies. It will also have a pool of enemies to pull and "spawn" enemies from*
+	* I need to test this out to see if to see if it works
+  
+### Next Steps
+ * Finish building out the enemy manager
+ * Implement levels and rooms
+ * Implement HUD
+ * Implement buffer and analyzer for input combos
+ * Look into Monogame Extended collision and maybe ask Jeff for help with it :P
+  
 ## 29 March 2024 | 12:41
 ### Check In
  * So, I had implemented the collision system from the Monogame Extended library, but I can't get the system to work for some reason. I'm unsure what I'm doing wrong with it
@@ -7,7 +19,6 @@
   
 ### Goals
  * Enemy manager
- * Enemy attacks
   
 ## 29 March 2024 | 11:31
 ### Check In

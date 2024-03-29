@@ -17,6 +17,7 @@ namespace BurnoutBuster
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private CollisionComponent _collision;
+        public Random rand;
 
         // screen
         const int mapWidth = 900;
@@ -42,6 +43,7 @@ namespace BurnoutBuster
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            rand = new Random();
 
             _collision = new CollisionComponent(new RectangleF(0, 0, mapWidth, mapHeight));
             this.Components.Add(_collision);
