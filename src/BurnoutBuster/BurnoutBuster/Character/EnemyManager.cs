@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BurnoutBuster.Collision;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace BurnoutBuster.Character
 
             this.rand = rand;
             spawnLocation = new Vector2(400, 400);
-            NumberOfEnemiesToSpawn = 10;
+            NumberOfEnemiesToSpawn = 2;
         }
 
         // I N I T
@@ -94,6 +95,11 @@ namespace BurnoutBuster.Character
         }
 
         // M I S C   M E T H O D S
+        public void AddEnemiesToCollisionManager(CollisionManager collisionManager)
+        {
+            foreach (MonogameEnemy enemy in AllEnemies)
+                collisionManager.AddObject(enemy);
+        }
         void CheckEnemies()
         {
             foreach(MonogameEnemy enemy in ActiveEnemies)
@@ -119,7 +125,7 @@ namespace BurnoutBuster.Character
             AllEnemies[i].Activate(spawnLocation);
             ActiveEnemies.Add(AllEnemies[i]);
         }
-        void SpawnLevelEnemies()
+        public void SpawnLevelEnemies()
         {
             for (int i = 0; i < NumberOfEnemiesToSpawn; i++)
                 SpawnAnEnemy();

@@ -127,13 +127,10 @@ namespace BurnoutBuster.Character
         }
 
         // C O L L I S I O N
-        internal ICollidable otherObject;
         public void OnCollisionEnter(Collision.Collision collision)
         {
-            console.GameConsoleWrite("Collided!");
             if (collision != null)
             {
-                console.GameConsoleWrite("Collided!");
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
                 {
                     console.GameConsoleWrite("Collided with an Enemy");

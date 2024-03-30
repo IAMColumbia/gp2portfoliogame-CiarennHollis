@@ -33,7 +33,7 @@ namespace BurnoutBuster
         //characters
         MonogameCreature creature;
         EnemyManager enemyManager;
-        MonogameEnemy enemy;
+        //MonogameEnemy enemy;
 
         // command pattern
         CommandProcessor commandProcessor;
@@ -56,11 +56,11 @@ namespace BurnoutBuster
             creature = new CommandCreature(this); //DEPENDENCY FOR POC
             this.Components.Add(creature); 
 
-            enemy = new BasicEnemy(this, creature); //DEPENDENCY FOR POC
-            this.Components.Add(enemy);
+            //enemy = new BasicEnemy(this, creature); //DEPENDENCY FOR POC
+            //this.Components.Add(enemy);
 
-            //enemyManager = new EnemyManager(this, rand, creature);
-            //this.Components.Add(enemyManager);
+            enemyManager = new EnemyManager(this, rand, creature);
+            this.Components.Add(enemyManager);
 
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
@@ -81,6 +81,8 @@ namespace BurnoutBuster
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             SetUpCollisionActors();
+
+            enemyManager.SpawnLevelEnemies();
         }
         private void SetScreenDimensions()
         {
@@ -96,7 +98,8 @@ namespace BurnoutBuster
             //}
 
             this._collisionManager.AddObject(creature);
-            this._collisionManager.AddObject(enemy);
+            this.enemyManager.AddEnemiesToCollisionManager(_collisionManager);
+            //this._collisionManager.AddObject(enemy);
         }
         // U P D A T E 
         protected override void Update(GameTime gameTime)
@@ -133,7 +136,7 @@ namespace BurnoutBuster
             console.Log("Combo Attack:", "Right + Up");
             console.Log("Finisher Attack:", "Left + Up + Left");
 
-            console.Log("Enemy", enemy.HitPoints.ToString());
+            //console.Log("Enemy", enemy.HitPoints.ToString());
         }
 
 

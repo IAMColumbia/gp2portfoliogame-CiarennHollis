@@ -8,7 +8,7 @@
   
 ### Next Steps 
  * Finish implementing the enemy manager
-    
+  
 ## 30 March 2014 | 10:32
 ### Check In
  * Had to stop and move locations since I got kicked out of the first coffee shop I went too :|

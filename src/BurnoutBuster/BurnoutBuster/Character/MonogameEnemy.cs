@@ -130,7 +130,12 @@ namespace BurnoutBuster.Character
         // C O L L I S I O N
         public void OnCollisionEnter(Collision.Collision collision)
         {
-            console.GameConsoleWrite("Enemy collided! with something");
+            if (collision != null)
+            {
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Player))
+                    console.GameConsoleWrite("Enemy collided! with something");
+            }
+            
         }
         private void UpdateBounds()
         {
