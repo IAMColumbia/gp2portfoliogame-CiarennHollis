@@ -1,5 +1,25 @@
 # Devlog
   
+## 30 March 2014 | 10:32
+### Check In
+ * Had to stop and move locations since I got kicked out of the first coffee shop I went too :|
+	* I couldn't really find anything about having issues with the Monogame Extended collision system so I will be write a custom one based off of it :P
+  
+### On MonoGame.Extended.Collision
+ * So, there's two main objects that constitutes this collision system
+	1. ICollisionActor -> An interface that has a Bounds property and an OnCollision(CollisionEventArgs collisionInfo) method. The bounds is what gets used to calculate a collision and the method is for the behavior that thing does when it collides. That method seems to functionally be the same as Unity's OnCollisionEnter(Collision other), which is what I was looking for.
+    2. CollisionComponent -> A class that holds collection of all the things that have collision calculated for them and has methods for performing those calculations. It's collection of collision objects looks to be a node tree: each collision object gets a quadtree saved with them in the dictionary and then there's a larger quadtree that all those smaller trees stem from. I read on the forums that MonoGame uses this node system for performance reasons so that the game only calculates the collision on objects that are in a specific area rather than calculating collision on all the objects that are housed in the collection. 
+ * There is another piece, the CollisionEventArgs class, but it is used to relay the object attached to the collision and the vector of the collision (the penetration vector)
+ * Those first two things are what I would need my own versions of, the third thing is less important since I could in theory just have the my version of OnCollisoin(...) return the collision object itself. But I think I will indeed have my own verion of this piece since having the collision vector would be handy for keeping characters from overlapping on each other
+  
+### On the input buffer/analyzer
+ * So, to implement this, I was thinking of having a Stack<ICommand> with a capacity of three. As new commands get called, the command at the top gets popped off to make room for the next one 
+	* To implement the timers for each command, tho, I may need a custom datatype to hold the command and the timer -> whenever a command is performed, a new "note" type is created and added to the stack (which would make the stack a Stack<"Note"> or something of the like) 
+	* The command processor would then constantly check that buffer stack to see if the "notes" in it make a "chord". It would also update the timers on the commands/notes currently in the buffer stack
+  
+### Goals 
+ * Still pretty much the same as the previous entry :P
+  
 ## 30 March 2024 | 9:16
 ### Check In 
  * Need to make some headway on this project today
