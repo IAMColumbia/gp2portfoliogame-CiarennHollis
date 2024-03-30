@@ -2,7 +2,7 @@
 using MonoGameLibrary.GameComponents.Player;
 using MonoGameLibrary.Util;
 
-namespace BurnoutBuster.Utility
+namespace BurnoutBuster.Input
 {
     class TimedPlayerController : PlayerController
     {
@@ -17,11 +17,11 @@ namespace BurnoutBuster.Utility
         // I N I T 
         protected override void SetupIInputHander(Game game)
         {
-            this.input = (TimedInputHandler)game.Services.GetService(typeof(IInputHandler));
+            input = (TimedInputHandler)game.Services.GetService(typeof(IInputHandler));
             if (input == null)
             {
                 input = new TimedInputHandler(game);
-                this.Game.Components.Add((TimedInputHandler)input);
+                Game.Components.Add((TimedInputHandler)input);
             }
             base.SetupIInputHander(game);
         }

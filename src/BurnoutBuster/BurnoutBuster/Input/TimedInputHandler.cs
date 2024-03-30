@@ -1,9 +1,9 @@
-﻿
+﻿using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary.Util;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace BurnoutBuster.Utility
+namespace BurnoutBuster.Input
 {
     public class TimedInputHandler : InputHandler
     {
@@ -18,7 +18,7 @@ namespace BurnoutBuster.Utility
         public PressedButton PressedButton;
 
         bool listeningForSecondPress;
-            
+
         // C O N S T R U C T O R 
         public TimedInputHandler(Game game) : base(game)
         {
@@ -52,7 +52,7 @@ namespace BurnoutBuster.Utility
         {
             currentTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
 
-            timer.UpdateTimer(currentTime); 
+            timer.UpdateTimer(currentTime);
             PressedKey.KeyTimer.UpdateTimer(currentTime);
             PressedButton.BtnTimer.UpdateTimer(currentTime);
 
@@ -121,7 +121,7 @@ namespace BurnoutBuster.Utility
         // G A M E P A D   M E T H O D S 
         public bool WasAnActionButtonPressed()
         {
-            foreach(GamePadButtons button in ActionButtons)
+            foreach (GamePadButtons button in ActionButtons)
             {
                 if (gamePadHandler.WasButtonPressed(0, (ButtonType)button))
                 {

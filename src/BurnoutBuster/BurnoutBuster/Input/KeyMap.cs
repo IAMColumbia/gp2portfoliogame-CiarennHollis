@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
-namespace BurnoutBuster.Utility
+namespace BurnoutBuster.Input
 {
     class KeyMap
     {
@@ -11,7 +11,7 @@ namespace BurnoutBuster.Utility
         {
             OnReleasedKeyMap = new Dictionary<Keys, string>();
             OnKeyDownMap = new Dictionary<Keys, string>();
-            this.Initialize();
+            Initialize();
         }
 
         public virtual void Initialize()
@@ -38,7 +38,7 @@ namespace BurnoutBuster.Utility
         {
             OnReleasedButtonMap = new Dictionary<GamePadButtons, string>();
             OnButtonDownMap = new Dictionary<GamePadButtons, string>();
-            this.Initialize();
+            Initialize();
         }
 
         public virtual void Initialize()

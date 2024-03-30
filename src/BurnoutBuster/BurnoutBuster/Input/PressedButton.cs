@@ -1,6 +1,6 @@
-﻿
+﻿using BurnoutBuster.Utility;
 
-namespace BurnoutBuster.Utility
+namespace BurnoutBuster.Input
 {
     public class PressedButton
     {
@@ -9,7 +9,7 @@ namespace BurnoutBuster.Utility
 
         public PressedButton(GamePadButtons button)
         {
-            this.Button = button;
+            Button = button;
             BtnTimer = new Timer();
         }
     }

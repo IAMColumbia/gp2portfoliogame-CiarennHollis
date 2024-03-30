@@ -1,6 +1,6 @@
 ﻿using BurnoutBuster.Character;
 using BurnoutBuster.CommandPat.Commands;
-using BurnoutBuster.Utility;
+using BurnoutBuster.Input;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary.Util;
 using System;

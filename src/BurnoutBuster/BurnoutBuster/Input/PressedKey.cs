@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using BurnoutBuster.Utility;
+using Microsoft.Xna.Framework.Input;
 
-namespace BurnoutBuster.Utility
+namespace BurnoutBuster.Input
 {
     public class PressedKey
     {
