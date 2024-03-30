@@ -51,7 +51,7 @@ namespace BurnoutBuster.Character
         protected EnemyMovementMode movementMode;
 
         // collision and tag bits
-        public IShapeF Bounds { get; set; }
+        public IShapeF Bounds { get; }
 
         public Tags Tag { get; }
 
@@ -70,6 +70,7 @@ namespace BurnoutBuster.Character
             enemy = new GameConsoleEnemy(console);
             this.creature = creature;
 
+            this.Bounds = (RectangleF)this.Rectangle;
             this.Tag = Tags.Enemy;
         }
 
@@ -87,7 +88,7 @@ namespace BurnoutBuster.Character
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Vector2(200, 200);
 
-            this.Bounds = (RectangleF)this.Rectangle;
+            this.Bounds.Position = this.Location;
 
             base.LoadContent();
         }
@@ -121,7 +122,7 @@ namespace BurnoutBuster.Character
         // C O L L I S I O N
         public void OnCollision(CollisionEventArgs collisionInfo)
         {
-            console.GameConsoleWrite("Collided!");
+            console.GameConsoleWrite("Enemy collided! with something");
         }
 
         // M I S C  M E T H O D S

@@ -48,7 +48,7 @@ namespace BurnoutBuster.Character
         }
 
         // collision and tag bits
-        public IShapeF Bounds { get; set; }
+        public IShapeF Bounds { get; }
 
         public Tags Tag { get; }
 

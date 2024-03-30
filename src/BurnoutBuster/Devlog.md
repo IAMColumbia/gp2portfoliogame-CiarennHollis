@@ -1,5 +1,16 @@
 # Devlog
   
+## 30 March 2024 | 9:16
+### Check In 
+ * Need to make some headway on this project today
+	* I was still unable to get the collision thing from Monogame Extended to work :P I'm not really sure what the issue is. 
+	* So, I just might write my own collision component :P
+  
+### Goals
+ * Finish enemy manager
+ * Collision
+ * analyzer and buffer :P
+  
 ## 29 March 2024 | 13:25
 ### Check In
  * Started buidling out the enemy manager -> I made it a drawable game componenet so that it could call draw on the enemies. It will be the thing initializing, updating, and drawing the enemies. It will also have a pool of enemies to pull and "spawn" enemies from*
