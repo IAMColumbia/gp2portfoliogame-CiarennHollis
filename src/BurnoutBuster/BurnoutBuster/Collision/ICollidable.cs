@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BurnoutBuster.Utility;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BurnoutBuster.Collision
 {
-    public interface ICollidable
+    public interface ICollidable : ITaggable
     {
         Rectangle Bounds { get; }
-        IGameComponent gameObject { get; } // dependency, in order to collided, thing must be a game componenet
-        void OnCollisionEnter(ICollidable other);
+        GameComponent gameObject { get; } // dependency, in order to collided, thing must be a game componenet
+        void OnCollisionEnter(Collision collision);
     }
 }
