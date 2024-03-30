@@ -7,6 +7,22 @@ using System.Threading.Tasks;
 
 namespace BurnoutBuster.CommandPat.Commands
 {
+    public enum ActionCommands { Null, Attack, Dash, HeavyAttack, DashAttack, ComboAttack, FinisherAttack }
+    public class NullCommand : MGCommand
+    {
+        public NullCommand(Game game) : base(game)
+        {
+            this.CommandName = "Null";
+        }
+        public override void Execute(ICommandComponent cc)
+        {
+            //base.Execute(cc);
+#if DEBUG
+            this.Log();
+#endif
+        }
+    }
+
     public class AttackCommand : MGCommand
     {
         public AttackCommand(Game game) : base(game)

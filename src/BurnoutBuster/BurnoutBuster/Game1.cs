@@ -82,7 +82,7 @@ namespace BurnoutBuster
 
             SetUpCollisionActors();
 
-            enemyManager.SpawnLevelEnemies();
+            //enemyManager.SpawnLevelEnemies();
         }
         private void SetScreenDimensions()
         {
