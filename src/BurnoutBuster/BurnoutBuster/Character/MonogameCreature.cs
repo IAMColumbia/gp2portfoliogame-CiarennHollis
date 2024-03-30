@@ -8,10 +8,11 @@ using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using System;
+using ICollidable = BurnoutBuster.Collision.ICollidable;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite, IDamageable, ITaggedCollidable
+    public class MonogameCreature : DrawableSprite, IDamageable, ICollidable
     {
         // P R O P E R T I E S
 
@@ -49,10 +50,9 @@ namespace BurnoutBuster.Character
         }
 
         // collision and tag bits
-        public IShapeF Bounds { get; }
-
+        public Rectangle Bounds { get; set; }
         public Tags Tag { get; }
-
+        public GameComponent GameObject { get; private set; }
         protected Vector2 moveVector;
 
         // C O N S T R U C T O R
@@ -67,8 +67,8 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             creature = new GameConsoleCreature((GameConsole)game.Services.GetService<IGameConsole>());
-
-            this.Bounds = (RectangleF)this.Rectangle;
+            
+            GameObject = this;
             this.Tag = Tags.Player;
         }
 
@@ -81,7 +81,7 @@ namespace BurnoutBuster.Character
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
 
-            this.Bounds.Position = this.Location;
+
             this.Speed = 150;
         }
 
@@ -89,6 +89,8 @@ namespace BurnoutBuster.Character
         public override void Update(GameTime gameTime)
         {
             float time = (float) gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            UpdateBounds();
 
             KeepCreatureOnScreen();
 
@@ -125,28 +127,23 @@ namespace BurnoutBuster.Character
         }
 
         // C O L L I S I O N
-        internal ITaggedCollidable otherObject;
-        public void OnCollision(CollisionEventArgs collisionInfo)
+        internal ICollidable otherObject;
+        public void OnCollisionEnter(Collision.Collision collision)
         {
             console.GameConsoleWrite("Collided!");
-            if (collisionInfo != null)
+            if (collision != null)
             {
                 console.GameConsoleWrite("Collided!");
-                try
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
                 {
-                    otherObject = (ITaggedCollidable)collisionInfo.Other;
-                    if (TagManager.CompareTag(otherObject, Tags.Enemy))
-                    {
-                        console.GameConsoleWrite("Collided with an Enemy");
-                    }
-                }
-                catch (Exception e)
-                {
-                    console.GameConsoleWrite("Failed to cast otherObject to ITaggedCollidable");
+                    console.GameConsoleWrite("Collided with an Enemy");
                 }
             }
         }
-
+        private void UpdateBounds()
+        {
+            Bounds = this.Rectangle;
+        }
         // M I S C   M E T H O D S
         public void Attack(IDamageable target)
         {
@@ -161,5 +158,7 @@ namespace BurnoutBuster.Character
         {
             this.creature.Hit(damageAmount);
         }
+
+        
     }
 }

@@ -6,12 +6,13 @@ using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
+using ICollidable = BurnoutBuster.Collision.ICollidable;
 
 namespace BurnoutBuster.Character
 {
 
     public enum EnemyMovementMode { FollowPlayer }
-    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ITaggedCollidable
+    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable
     {
         // P R O P E R T I E S
 
@@ -52,9 +53,11 @@ namespace BurnoutBuster.Character
         protected EnemyMovementMode movementMode;
 
         // collision and tag bits
-        public IShapeF Bounds { get; }
+        public Rectangle Bounds { get; set; }
 
         public Tags Tag { get; }
+
+        public GameComponent GameObject { get; private set; }
 
         protected Vector2 moveVector;
 
@@ -71,7 +74,7 @@ namespace BurnoutBuster.Character
             enemy = new GameConsoleEnemy(console);
             this.creature = creature;
 
-            this.Bounds = (RectangleF)this.Rectangle;
+            GameObject = this;
             this.Tag = Tags.Enemy;
         }
 
@@ -89,7 +92,9 @@ namespace BurnoutBuster.Character
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Vector2(200, 200);
 
-            this.Bounds.Position = this.Location;
+            //this.Bounds.Position = this.Location;
+
+            
 
             base.LoadContent();
         }
@@ -97,6 +102,8 @@ namespace BurnoutBuster.Character
         public override void Update(GameTime gameTime)
         {
             KeepEnemyOnScreen();
+
+            UpdateBounds();
             base.Update(gameTime);
         }
         // D R A W 
@@ -121,9 +128,13 @@ namespace BurnoutBuster.Character
         }
 
         // C O L L I S I O N
-        public void OnCollision(CollisionEventArgs collisionInfo)
+        public void OnCollisionEnter(Collision.Collision collision)
         {
             console.GameConsoleWrite("Enemy collided! with something");
+        }
+        private void UpdateBounds()
+        {
+            this.Bounds = this.Rectangle;
         }
 
         // M I S C  M E T H O D S
@@ -146,7 +157,7 @@ namespace BurnoutBuster.Character
                     break;
             }
             enemy.Move();
-            this.Bounds.Position = this.Location;
+            //this.Bounds.Position = this.Location;
             //this.Location = Move amount;
         }
 
@@ -174,5 +185,6 @@ namespace BurnoutBuster.Character
             this.Enabled = true;
         }
 
+        
     }
 }

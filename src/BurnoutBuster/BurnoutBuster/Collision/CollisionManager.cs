@@ -104,7 +104,7 @@ namespace BurnoutBuster.Collision
             List<ICollidable> queryList = new List<ICollidable>();
             foreach (ICollidable obj in collisionObjects)
             {
-                if (obj != target && obj.gameObject.Enabled) // making sure we don't check collision on ourselves nor on diasble objects
+                if (obj != target && obj.GameObject.Enabled) // making sure we don't check collision on ourselves nor on diasble objects
                 {
                     if (obj.Bounds.Intersects(target.Bounds))
                         queryList.Add(obj);

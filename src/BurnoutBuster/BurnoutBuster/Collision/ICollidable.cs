@@ -11,8 +11,8 @@ namespace BurnoutBuster.Collision
 {
     public interface ICollidable : ITaggable
     {
-        Rectangle Bounds { get; }
-        GameComponent gameObject { get; } // dependency, in order to collided, thing must be a game componenet
+        Rectangle Bounds { get; set; }
+        GameComponent GameObject { get; } // dependency, in order to collided, thing must be a game componenet
         void OnCollisionEnter(Collision collision);
     }
 }

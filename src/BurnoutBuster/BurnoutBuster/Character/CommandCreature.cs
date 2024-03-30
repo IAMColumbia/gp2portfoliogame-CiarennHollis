@@ -41,7 +41,7 @@ namespace BurnoutBuster.Character
 
             //move 
             this.Location += (moveOnNextUpdate * this.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            this.Bounds.Position = this.Location;
+            //this.Bounds.Position = this.Location;
 
             //update texture facing direction
             UpdateFacingDirBasedOnDirection(moveOnNextUpdate);

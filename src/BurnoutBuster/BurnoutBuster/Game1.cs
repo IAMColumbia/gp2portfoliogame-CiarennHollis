@@ -17,7 +17,6 @@ namespace BurnoutBuster
         // P R O P E R T I E S 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private CollisionComponent _collision;
         public Random rand;
 
         // screen
@@ -28,10 +27,12 @@ namespace BurnoutBuster
         GameConsole console;
 
         //collision
-        private List<ITaggedCollidable> _collidableObjects;
+        private CollisionComponent _collision;
+        private CollisionManager _collisionManager;
 
         //characters
         MonogameCreature creature;
+        EnemyManager enemyManager;
         MonogameEnemy enemy;
 
         // command pattern
@@ -48,15 +49,18 @@ namespace BurnoutBuster
 
             _collision = new CollisionComponent(new RectangleF(0, 0, mapWidth, mapHeight));
             this.Components.Add(_collision);
-            _collidableObjects = new List<ITaggedCollidable>();
+
+            _collisionManager = new CollisionManager(this);
+            this.Components.Add(_collisionManager);
 
             creature = new CommandCreature(this); //DEPENDENCY FOR POC
             this.Components.Add(creature); 
-            this._collidableObjects.Add(creature);
 
             enemy = new BasicEnemy(this, creature); //DEPENDENCY FOR POC
             this.Components.Add(enemy);
-            this._collidableObjects.Add(enemy);
+
+            //enemyManager = new EnemyManager(this, rand, creature);
+            //this.Components.Add(enemyManager);
 
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
@@ -86,10 +90,13 @@ namespace BurnoutBuster
         }
         void SetUpCollisionActors()
         {
-            foreach (ITaggedCollidable taggedCollidable in _collidableObjects)
-            {
-                _collision.Insert(taggedCollidable);
-            }
+            //foreach (ITaggedCollidable taggedCollidable in _collidableObjects)
+            //{
+            //    _collision.Insert(taggedCollidable);
+            //}
+
+            this._collisionManager.AddObject(creature);
+            this._collisionManager.AddObject(enemy);
         }
         // U P D A T E 
         protected override void Update(GameTime gameTime)
