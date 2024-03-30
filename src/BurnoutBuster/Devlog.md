@@ -1,5 +1,14 @@
 # Devlog
   
+## 30 March 2024 | 13:12
+### Check In
+ * The collision pretty much works the way I want it to work. 
+	* The Bounds rectangle ends up being a bit too big so the collision isn't the most precise, but that can be a TD for a later milestone. I need to move on with building out the other features I intend to have at least mostly done for the Vertical Slice milestone
+	* The enemy manager is implemented. Meaning, the enemy the game currently has on screen is being managed by the enemy manage rather than the game.
+  
+### Next Steps
+ * The input buffer/analyzer
+  
 ## 30 March 2024 | 12:42
 ### Check In
  * So, I wrote my own collision manager, it's heavily based off of MonoGame Extended's CollisionComponent though. Mine collision manager is just a little more targeted for my project (notably: it doesn't handle circle collision) and doesn't use a node based collection.
@@ -7,7 +16,7 @@
  * I also have my ICollidable inherit from ITaggable so that my collision objects have a tag on them by default.
   
 ### Next Steps 
- * Finish implementing the enemy manager
+ * Finish implementing the enemy manager [DONE]
   
 ## 30 March 2014 | 10:32
 ### Check In
@@ -36,8 +45,8 @@
  * So, I just might write my own collision component :P
   
 ### Goals
- * Finish enemy manager
- * Collision
+ * Finish enemy manager [DONE]
+ * Collision [DONE]
  * analyzer and buffer :P
   
 ## 29 March 2024 | 13:25
