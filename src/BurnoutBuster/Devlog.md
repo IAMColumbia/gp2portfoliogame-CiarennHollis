@@ -3,8 +3,8 @@
 ## 30 March 2024 | 13:12
 ### Check In
  * The collision pretty much works the way I want it to work. 
-	* The Bounds rectangle ends up being a bit too big so the collision isn't the most precise, but that can be a TD for a later milestone. I need to move on with building out the other features I intend to have at least mostly done for the Vertical Slice milestone
-	* The enemy manager is implemented. Meaning, the enemy the game currently has on screen is being managed by the enemy manage rather than the game.
+ * The Bounds rectangle ends up being a bit too big so the collision isn't the most precise, but that can be a TD for a later milestone. I need to move on with building out the other features I intend to have at least mostly done for the Vertical Slice milestone
+ * The enemy manager is implemented. Meaning, the enemy the game currently has on screen is being managed by the enemy manage rather than the game.
   
 ### Next Steps
  * The input buffer/analyzer
@@ -21,7 +21,7 @@
 ## 30 March 2014 | 10:32
 ### Check In
  * Had to stop and move locations since I got kicked out of the first coffee shop I went too :|
-	* I couldn't really find anything about having issues with the Monogame Extended collision system so I will be write a custom one based off of it :P
+ * I couldn't really find anything about having issues with the Monogame Extended collision system so I will be write a custom one based off of it :P
   
 ### On MonoGame.Extended.Collision
  * So, there's two main objects that constitutes this collision system
@@ -32,8 +32,8 @@
   
 ### On the input buffer/analyzer
  * So, to implement this, I was thinking of having a Stack<ICommand> with a capacity of three. As new commands get called, the command at the top gets popped off to make room for the next one 
-	* To implement the timers for each command, tho, I may need a custom datatype to hold the command and the timer -> whenever a command is performed, a new "note" type is created and added to the stack (which would make the stack a Stack<"Note"> or something of the like) 
-	* The command processor would then constantly check that buffer stack to see if the "notes" in it make a "chord". It would also update the timers on the commands/notes currently in the buffer stack
+ * To implement the timers for each command, tho, I may need a custom datatype to hold the command and the timer -> whenever a command is performed, a new "note" type is created and added to the stack (which would make the stack a Stack<"Note"> or something of the like) 
+ * The command processor would then constantly check that buffer stack to see if the "notes" in it make a "chord". It would also update the timers on the commands/notes currently in the buffer stack
   
 ### Goals 
  * Still pretty much the same as the previous entry :P
@@ -52,7 +52,7 @@
 ## 29 March 2024 | 13:25
 ### Check In
  * Started buidling out the enemy manager -> I made it a drawable game componenet so that it could call draw on the enemies. It will be the thing initializing, updating, and drawing the enemies. It will also have a pool of enemies to pull and "spawn" enemies from*
-	* I need to test this out to see if to see if it works
+ * I need to test this out to see if to see if it works
   
 ### Next Steps
  * Finish building out the enemy manager
@@ -64,7 +64,7 @@
 ## 29 March 2024 | 12:41
 ### Check In
  * So, I had implemented the collision system from the Monogame Extended library, but I can't get the system to work for some reason. I'm unsure what I'm doing wrong with it
-	* So, since I've spent the last hour trying to get that system to respond to me, I'm going to work on something else for now :P
+ * So, since I've spent the last hour trying to get that system to respond to me, I'm going to work on something else for now :P
   
 ### Goals
  * Enemy manager
