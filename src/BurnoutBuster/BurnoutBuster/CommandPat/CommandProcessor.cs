@@ -264,6 +264,7 @@ namespace BurnoutBuster.CommandPat
                 case "Heavy":
                     command = new Commands.HeavyAttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
 
                 case "Attack":
@@ -272,13 +273,14 @@ namespace BurnoutBuster.CommandPat
                         command = new Commands.DashAttackCommand(this.Game);
                         this.input.timer.StartTimer(time, listenTime);
                     }
-                    else { command = new Commands.DashCommand(this.Game); }
+                    else { command = new Commands.DashCommand(this.Game); this.input.timer.ResetTimer(); }
                     listeningMode = ListeningMode.ForAnything;
                     break;
 
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
             }
             return command;
@@ -301,16 +303,19 @@ namespace BurnoutBuster.CommandPat
                     else 
                     { 
                         command = new Commands.HeavyAttackCommand(this.Game);
-                        listeningMode = ListeningMode.ForAnything; 
+                        listeningMode = ListeningMode.ForAnything;
+                        this.input.timer.ResetTimer();
                     }
                     break;
                 case "Attack":
                     command = new Commands.AttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
             }
             return command;
@@ -326,6 +331,7 @@ namespace BurnoutBuster.CommandPat
                 case "Heavy":
                     command = new Commands.HeavyAttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
 
                 case "Attack":
@@ -333,13 +339,14 @@ namespace BurnoutBuster.CommandPat
                     {
                         command = new Commands.FinisherAttackCommand(this.Game);
                     }
-                    else { command = new Commands.AttackCommand(this.Game); }
+                    else { command = new Commands.AttackCommand(this.Game); this.input.timer.ResetTimer(); }
                     listeningMode = ListeningMode.ForAnything;
                     break;
 
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
             }
             return command;

@@ -1,5 +1,29 @@
 # Devlog
   
+## 30 March 2024 | 15:41
+### Check In
+ * Implemented the input buffer for input combos [omfg, %-(  (;U;) , brain is mush] 
+  
+### THE CHORD ANALYZER
+ * So, there's five main pieces to this buffer/analyzer system
+	1. enum ActionCommands = serves as a reference to the commands being passed into and out of the chord analyzer without actually having to pass a command object through the system; this makes it easier to compare the current chord in the buffer with the collection of possible chords
+	2. ChordMap.cs = collection of all the possible chords -> it defines what the possible chords are and what the command associated with those chords are 
+	3. Note.cs = defines a note (a command and a timer) 
+	4. Chord.cs = defines a chord (a set of 1-3 notes)
+	5. ChordAnalyzer.cs = this takes the input/notes passed to it and adds them to the buffer; it then checks that buffer to see if there are valid chords, in then passes out a "reference" to a command so that the command processor can execute it if there is a valid chord in the buffer; If one of the notes in the buffer times out, it will clear the buffer.
+ * The big mental hurdle with this was figuring out how I wanted to pass commands (or at least references to commands) through the analyzer since the combos are based on commands. I decided to use an enum (the ActionCommands enum) to relay the reference to the commands and than have the command processor create the command based off the enum value.
+ * What does it do? 
+    1. input gets passed in as a string along with the current time and a note is created and added to the buffer
+	2. The analyzer updates the notes in the buffer and then checks the buffer. If any of the notes has times out, the buffer is cleared.
+	3. If there is a valid chord in the buffer, the analyzer returns a command for the command processor to execute
+   
+### Next Steps
+ * The levels/rooms system -> in needs to at least exist
+ * Enemy attack -> basic attack
+ * Enemy death -> reset and disable while it waits to be used again -> have the enemy manager just spawn another one it when one is killed :P
+ * UI -> HUD for player health
+ * Player damage and state based off that damage
+  
 ## 30 March 2024 | 13:12
 ### Check In
  * The collision pretty much works the way I want it to work. 
@@ -20,7 +44,7 @@
   
 ## 30 March 2014 | 10:32
 ### Check In
- * Had to stop and move locations since I got kicked out of the first coffee shop I went too :|
+ * Had to stop and move locations since I got kicked out of the first coffee shop I went too :| (they don't let people sit at a table for longer than an hour and I didn't know that until someone informed me)
  * I couldn't really find anything about having issues with the Monogame Extended collision system so I will be write a custom one based off of it :P
   
 ### On MonoGame.Extended.Collision
@@ -47,7 +71,7 @@
 ### Goals
  * Finish enemy manager [DONE]
  * Collision [DONE]
- * analyzer and buffer :P
+ * analyzer and buffer :P [DONE]
   
 ## 29 March 2024 | 13:25
 ### Check In
