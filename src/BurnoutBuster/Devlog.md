@@ -1,5 +1,14 @@
 # Devlog
   
+## 30 March 2024 | 12:42
+### Check In
+ * So, I wrote my own collision manager, it's heavily based off of MonoGame Extended's CollisionComponent though. Mine collision manager is just a little more targeted for my project (notably: it doesn't handle circle collision) and doesn't use a node based collection.
+ * I decided to not use the node based collection and instead have the manager only check collisions on the active objects in the game. I am using what's basically an object pool for managing the enemies and I don't want the game to calculate collision on inactive enemies in that pool.
+ * I also have my ICollidable inherit from ITaggable so that my collision objects have a tag on them by default.
+  
+### Next Steps 
+ * Finish implementing the enemy manager
+    
 ## 30 March 2014 | 10:32
 ### Check In
  * Had to stop and move locations since I got kicked out of the first coffee shop I went too :|
