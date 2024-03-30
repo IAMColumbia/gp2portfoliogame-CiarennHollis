@@ -1,4 +1,5 @@
-﻿using BurnoutBuster.Items;
+﻿using BurnoutBuster.Collision;
+using BurnoutBuster.Items;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

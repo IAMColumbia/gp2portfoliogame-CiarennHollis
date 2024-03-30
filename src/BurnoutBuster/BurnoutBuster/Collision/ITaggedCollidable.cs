@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BurnoutBuster.Character
+namespace BurnoutBuster.Collision
 {
-    public interface ITaggedCollidable : ICollisionActor , ITaggable
+    public interface ITaggedCollidable : ICollisionActor, ITaggable
     {
         // combines the two interfaces together :P
     }

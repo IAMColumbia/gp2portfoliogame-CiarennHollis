@@ -1,4 +1,5 @@
-﻿using BurnoutBuster.Utility;
+﻿using BurnoutBuster.Collision;
+using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;

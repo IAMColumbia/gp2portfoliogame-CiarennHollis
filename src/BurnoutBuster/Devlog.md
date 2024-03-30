@@ -3,8 +3,8 @@
 ## 30 March 2024 | 9:16
 ### Check In 
  * Need to make some headway on this project today
-	* I was still unable to get the collision thing from Monogame Extended to work :P I'm not really sure what the issue is. 
-	* So, I just might write my own collision component :P
+ * I was still unable to get the collision thing from Monogame Extended to work :P I'm not really sure what the issue is. 
+ * So, I just might write my own collision component :P
   
 ### Goals
  * Finish enemy manager

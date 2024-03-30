@@ -1,4 +1,5 @@
 ﻿using BurnoutBuster.Character;
+using BurnoutBuster.Collision;
 using BurnoutBuster.CommandPat;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
