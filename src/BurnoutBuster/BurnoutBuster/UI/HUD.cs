@@ -1,36 +1,44 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGameLibrary.Sprite;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.UI
 {
-    public class HUD : DrawableSprite
+    public class HUD : DrawableGameComponent
     {
         // P R O P E R T I E S
-        private HUD instance;
-        public HUD Instance
-        {
-            get
-            {
-               return instance; //TD -> doesn't check to make sure this isn't null
-            }
-        }
-        List<HudSlot> slots;
+
+        //slot management
+        Dictionary<string, object> itemsToDisplay;
+
+        //drawing
+        SpriteBatch spriteBatch;
+        SpriteFont fontRegular;
+        SpriteFont fontBold;
+        Color uiColor;
 
         // C O N S T R U C T O R S 
         public HUD(Game game) : base(game)
         {
-            slots = new List<HudSlot>();
+            itemsToDisplay = new Dictionary<string, object>();
         }
+
 
         // I N I T
         public override void Initialize()
         {
             base.Initialize();
+        }
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+
+            spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
+            fontBold = this.Game.Content.Load<SpriteFont>("Fonts/ImpactBold");
+            fontRegular = this.Game.Content.Load<SpriteFont>("Fonts/Impact");
+            uiColor = Color.Beige;
+
         }
 
         // U P D A T E 
@@ -43,20 +51,31 @@ namespace BurnoutBuster.UI
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            this.Draw(spriteBatch);
+            DisplayItems();
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
         // UI MANAGEMENT
-        public void AddItem(string label, Object itemReference)
+        public void AddItem(string label, object itemReference)
         {
-            HudSlot slot = new HudSlot(this.Game)
+           itemsToDisplay.Add(label, itemReference);
+        }
+        public void UpdateHUDSlot(string labelOfSlot, object itemReference)
+        {
+            itemsToDisplay[labelOfSlot] = itemReference;
+        }
+        private void DisplayItems()
+        {
+            Vector2 position = new Vector2(5, 5);
+            string slotContents;
+            foreach (var item in itemsToDisplay.Keys)
             {
-                Label = label,
-                Item = itemReference
-            };
-            slots.Add(slot);
+                slotContents = $"{item}: {itemsToDisplay[item]}";
+                spriteBatch.DrawString(fontRegular, slotContents, position, uiColor);
+                position += new Vector2(100, 100);
+            }
         }
     }
 }

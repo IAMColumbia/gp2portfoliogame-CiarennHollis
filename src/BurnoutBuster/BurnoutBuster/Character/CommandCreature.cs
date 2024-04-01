@@ -2,9 +2,6 @@
 using BurnoutBuster.CommandPat.Commands;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
-using SharpDX.Direct2D1;
 
 namespace BurnoutBuster.Character
 {
@@ -24,6 +21,7 @@ namespace BurnoutBuster.Character
         public CommandCreature(Game game) : base(game)
         {
             moveOnNextUpdate = Vector2.Zero;
+            lerpAdjustment = 5f;
             actionToPerform = ActionCommands.Null; 
         }
 
@@ -143,7 +141,7 @@ namespace BurnoutBuster.Character
         public void Dash()
         {
             // logic for dash action
-            moveOnNextUpdate *= 25; //TD hard coded :P
+            moveOnNextUpdate *= 50; //TD hard coded :P
         }
         public void Attack()
         {

@@ -1,6 +1,7 @@
 ﻿using BurnoutBuster.Character;
 using BurnoutBuster.Collision;
 using BurnoutBuster.CommandPat;
+using BurnoutBuster.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,7 +9,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Util;
 using System;
-using System.Collections.Generic;
+using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 
 namespace BurnoutBuster
 {
@@ -22,6 +23,7 @@ namespace BurnoutBuster
         // screen
         const int mapWidth = 900;
         const int mapHeight = 500;
+        public HUD HUD;
 
         //console
         GameConsole console;
@@ -53,11 +55,11 @@ namespace BurnoutBuster
             _collisionManager = new CollisionManager(this);
             this.Components.Add(_collisionManager);
 
-            creature = new CommandCreature(this); //DEPENDENCY FOR POC
-            this.Components.Add(creature); 
+            this.HUD = new HUD(this);
+            this.Components.Add(HUD);
 
-            //enemy = new BasicEnemy(this, creature); //DEPENDENCY FOR POC
-            //this.Components.Add(enemy);
+            creature = new CommandCreature(this); //player ref
+            this.Components.Add(creature); 
 
             enemyManager = new EnemyManager(this, rand, creature);
             this.Components.Add(enemyManager);
@@ -81,6 +83,7 @@ namespace BurnoutBuster
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             SetUpCollisionActors();
+            SetUpHUDvalues();
 
             enemyManager.SpawnLevelEnemies();
         }
@@ -101,6 +104,15 @@ namespace BurnoutBuster
             this.enemyManager.AddEnemiesToCollisionManager(_collisionManager);
             //this._collisionManager.AddObject(enemy);
         }
+
+        /// <summary>
+        /// Initializes the values for the HUD
+        /// </summary>
+        void SetUpHUDvalues()
+        {
+            this.HUD.AddItem("Creature HP", creature.HitPoints);
+        }
+
         // U P D A T E 
         protected override void Update(GameTime gameTime)
         {
@@ -110,7 +122,16 @@ namespace BurnoutBuster
             WriteConsoleInfo();
 
             _collision.Update(gameTime);
+            UpdateHUDvalues();
             base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// updates the values for the HUD
+        /// </summary>
+        void UpdateHUDvalues()
+        {
+            this.HUD.UpdateHUDSlot("Creature HP", creature.HitPoints);
         }
 
         // D R A W

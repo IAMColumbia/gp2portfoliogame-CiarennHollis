@@ -1,5 +1,14 @@
 # Devlog
   
+## 1 April 2024 | 17:25
+### Check In
+ * Got the HUD working to display the player's hit points 
+ * The level.cs and LevelManager.cs exist in the project, I didn't ahve time this even to build these out today like I thought I would
+  
+### Next Steps
+ * Will see if I can build out the level stuff tomorrow
+ * Will do the documentation and sprint reflection (and gather the submission materials) tomorrow.
+  
 ## 1 April 2024 | 13:07
 ### Check In
  * Got the player's attacks and the enemy's attack back working. I need to implement the HUD so I can see the player's health update :P
@@ -7,9 +16,9 @@
 	* Started working on HUD. I wanted there to be slots for it so it'd be easy to have things write to it and have the HUD class handle the formatting of it itself
   
 ### Next Steps
- * Finish HUD stuff
-	* Level class and manager
-	* Vertical slice documentation
+ * Finish HUD stuff [DONE]
+ * Level class and manager [EXISTS BUT ISN"T BUILT OUT]
+ * Vertical slice documentation
 
 ## 1 April 2024 | 9:10
 ### Check In
@@ -20,10 +29,10 @@
  * Enemy attacks dealing damage to the player [DONE]
  * Player attacks dealing damage to the enemy [DONE]
  * Enemy death (and state) [DONE]
- * Player death (and state)
- * Level class and manager
- * HUD for player health
- * Simple level art if possible
+ * Player death (and state) [LATER]
+ * Level class and manager [EXISTS]
+ * HUD for player health [DONE]
+ * Simple level art if possible [LATER]
   
   
 ## 30 March 2024 | 15:41

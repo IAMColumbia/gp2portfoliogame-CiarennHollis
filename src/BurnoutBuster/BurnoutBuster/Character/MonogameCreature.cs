@@ -1,8 +1,12 @@
-﻿using BurnoutBuster.Input;
+﻿using BurnoutBuster.Collision;
+using BurnoutBuster.Input;
 using BurnoutBuster.Items;
+using BurnoutBuster.UI;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using ICollidable = BurnoutBuster.Collision.ICollidable;
@@ -12,8 +16,6 @@ namespace BurnoutBuster.Character
     public class MonogameCreature : DrawableSprite, IDamageable, ICollidable
     {
         // P R O P E R T I E S
-
-
         protected GameConsole console;
         TimedPlayerController controller { get; set; }
 
@@ -38,7 +40,10 @@ namespace BurnoutBuster.Character
         public int HitPoints
         {
             get { return this.creature.HitPoints; }
-            set { this.creature.HitPoints = value; }
+            set 
+            {
+                this.creature.HitPoints = value; 
+            }
         }
 
         public IWeapon Weapon
@@ -72,8 +77,6 @@ namespace BurnoutBuster.Character
         // I N I T
         protected override void LoadContent()
         {
-            base.LoadContent();
-
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
@@ -81,6 +84,8 @@ namespace BurnoutBuster.Character
             this.ShowMarkers = true;
 
             this.Speed = 150;
+
+            base.LoadContent();
         }
 
         // U P D A T E
@@ -156,6 +161,7 @@ namespace BurnoutBuster.Character
         public void Hit(int damageAmount)
         {
             this.creature.Hit(damageAmount);
+            console.GameConsoleWrite($"PL HP = {HitPoints}");
             //this.KnockBack();
             //this.creature.KnockBack();
         }

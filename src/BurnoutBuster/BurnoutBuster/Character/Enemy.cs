@@ -7,7 +7,7 @@ namespace BurnoutBuster.Character
     {
         // P R O P E R T I E S
         public int HitPoints { get; set; }
-        public int Damage { get; }
+        public int Damage { get; set; }
         public EnemyType Type;
         private EnemyState state;
         public EnemyState State

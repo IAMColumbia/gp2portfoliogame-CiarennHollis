@@ -1,9 +1,6 @@
-﻿using BurnoutBuster.Collision;
-using BurnoutBuster.Utility;
+﻿using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using ICollidable = BurnoutBuster.Collision.ICollidable;
@@ -20,6 +17,9 @@ namespace BurnoutBuster.Character
         protected MonogameCreature creature;
         
         protected GameConsole console;
+        /// <summary>
+        /// Encapsulated enemy
+        /// </summary>
         internal GameConsoleEnemy enemy;
         protected EnemyState enemyState;
         public EnemyState EnemyState
@@ -50,6 +50,14 @@ namespace BurnoutBuster.Character
             set 
             { this.enemy.HitPoints = value;  }
         }
+        public int Damage
+        {
+            get { return this.enemy.Damage; }
+            set
+            {
+                this.enemy.Damage = value;
+            }
+        }
 
         protected EnemyMovementMode movementMode;
 
@@ -62,7 +70,11 @@ namespace BurnoutBuster.Character
 
         // movement
         protected Vector2 moveVector;
-        protected float speed;
+        protected float movementSpeed;
+
+        //attacking
+        Timer attackDelayTimer;
+        float attackDelayAmount;
 
         // C O N S T R U C T O R 
         //DEPENDENCY FOR POC: creature ref
@@ -79,6 +91,10 @@ namespace BurnoutBuster.Character
 
             GameObject = this;
             this.Tag = Tags.Enemy;
+
+            attackDelayTimer = new Timer();
+            attackDelayTimer.State = TimerState.Off;
+            attackDelayAmount = 1500;
         }
 
         // I N I T
@@ -90,12 +106,13 @@ namespace BurnoutBuster.Character
         {
             this.HitPoints = 100;
             this.originalHitPoints = HitPoints;
+            this.Damage = 1;
 
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             
             this.Location = new Vector2(200, 200);
-            this.speed = 1;
+            this.movementSpeed = 1;
 
             //this.Bounds.Position = this.Location;
             
@@ -112,6 +129,8 @@ namespace BurnoutBuster.Character
 
             UpdateBounds();
             ManageState();
+
+            this.movementSpeed = 1;
 
             base.Update(gameTime);
         }
@@ -143,17 +162,13 @@ namespace BurnoutBuster.Character
             {
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Player))
                 {
-                    //this.Location -= collision.PenetrationVector;
-                    speed = 0;
+                    this.Location -= collision.PenetrationVector * 7;
+                    //console.GameConsoleWrite("touching player");
+                    movementSpeed = 0;
                     this.Attack((IDamageable)collision.OtherObject);
-                }
-                else
-                {
-                    speed = 1;
                 }
                     
             }
-            
         }
         private void UpdateBounds()
         {
@@ -181,9 +196,9 @@ namespace BurnoutBuster.Character
                     case EnemyMovementMode.FollowPlayer:
                         // follows the player
                         this.moveVector = this.creature.Location - this.Location;
-                        moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
+                        moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
 
-                        this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.1f);
+                        this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f);
                         break;
                 }
                 enemy.Move();
@@ -204,7 +219,11 @@ namespace BurnoutBuster.Character
 
         public virtual void Attack(IDamageable target)
         {
-            enemy.Attack(target);
+            if (attackDelayTimer.State != TimerState.Running)
+            {
+                enemy.Attack(target);
+                attackDelayTimer.StartTimer((float)this.Game.TargetElapsedTime.TotalMilliseconds, attackDelayAmount);
+            }
         }
         public virtual void KnockBack(Vector2 knockbackVector)
         {
