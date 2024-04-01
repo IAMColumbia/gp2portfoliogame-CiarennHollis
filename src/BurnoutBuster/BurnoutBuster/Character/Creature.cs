@@ -1,4 +1,5 @@
 ﻿using BurnoutBuster.Items;
+using Microsoft.Xna.Framework;
 using System;
 
 namespace BurnoutBuster.Character
@@ -53,6 +54,10 @@ namespace BurnoutBuster.Character
         public void Attack(IDamageable target)
         {
             MyWeapon.Use(target);
+        }
+        public void KnockBack(Vector2 knockbackVector)
+        {
+
         }
         public virtual void Log(string message)
         {

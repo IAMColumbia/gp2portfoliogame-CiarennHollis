@@ -12,7 +12,7 @@ namespace BurnoutBuster.Character
 {
 
     public enum EnemyMovementMode { FollowPlayer }
-    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable
+    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable, IPoolable
     {
         // P R O P E R T I E S
 
@@ -47,7 +47,8 @@ namespace BurnoutBuster.Character
         public int HitPoints
         {
             get { return this.enemy.HitPoints; }
-            set { this.enemy.HitPoints = value;  }
+            set 
+            { this.enemy.HitPoints = value;  }
         }
 
         protected EnemyMovementMode movementMode;
@@ -59,7 +60,9 @@ namespace BurnoutBuster.Character
 
         public GameComponent GameObject { get; private set; }
 
+        // movement
         protected Vector2 moveVector;
+        protected float speed;
 
         // C O N S T R U C T O R 
         //DEPENDENCY FOR POC: creature ref
@@ -90,20 +93,26 @@ namespace BurnoutBuster.Character
 
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
+            
             this.Location = new Vector2(200, 200);
+            this.speed = 1;
 
             //this.Bounds.Position = this.Location;
-
             
+            
+            this.ShowMarkers = true;
 
             base.LoadContent();
         }
         // U P D A T E
         public override void Update(GameTime gameTime)
         {
+            CorrectColor();
             KeepEnemyOnScreen();
 
             UpdateBounds();
+            ManageState();
+
             base.Update(gameTime);
         }
         // D R A W 
@@ -133,7 +142,16 @@ namespace BurnoutBuster.Character
             if (collision != null)
             {
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Player))
-                    console.GameConsoleWrite("Enemy collided! with something");
+                {
+                    //this.Location -= collision.PenetrationVector;
+                    speed = 0;
+                    this.Attack((IDamageable)collision.OtherObject);
+                }
+                else
+                {
+                    speed = 1;
+                }
+                    
             }
             
         }
@@ -142,41 +160,64 @@ namespace BurnoutBuster.Character
             this.Bounds = this.Rectangle;
         }
 
-        // M I S C  M E T H O D S
-
+        // S T A T E    M A N A G E M E N T 
         void OnEnemyStateChanged()
         {
             // logic for what happens when the enemy state changes
         }
+        private void ManageState()
+        {
+            if (HitPoints <= 0)
+                this.Die();
+        }
+
+        // M O V E M E N T
         public virtual void Move(GameTime gameTime)
         {
-            // implement move behavior [TD]
-            switch(movementMode)
+            if (EnemyState == EnemyState.Normal)
             {
-                case EnemyMovementMode.FollowPlayer:
-                    // follows the player
-                    this.moveVector = this.creature.Location - this.Location;
-                    moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                switch (movementMode)
+                {
+                    case EnemyMovementMode.FollowPlayer:
+                        // follows the player
+                        this.moveVector = this.creature.Location - this.Location;
+                        moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
 
-                    this.Location += moveVector;
-                    break;
+                        this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.1f);
+                        break;
+                }
+                enemy.Move();
             }
-            enemy.Move();
+            
             //this.Bounds.Position = this.Location;
             //this.Location = Move amount;
         }
 
+        // IDAMAGABLE
         public virtual void Hit(int damageAmount)
         {
             // play hit animation 
             this.enemy.Hit(damageAmount);
+            this.console.GameConsoleWrite($"Enemy Health: {HitPoints}");
+            FlashColor(Color.Red);
         }
 
-        public void Attack(IDamageable target)
+        public virtual void Attack(IDamageable target)
         {
             enemy.Attack(target);
         }
+        public virtual void KnockBack(Vector2 knockbackVector)
+        {
+            // knock back logic
+            this.Location -= knockbackVector;
+            this.enemy.KnockBack(knockbackVector);
+        }
+        public virtual void Die()
+        {
+            this.enemy.Die();
+        }
 
+        // IPOOLABLE
         public void Reset()
         {
             this.HitPoints = originalHitPoints;
@@ -190,6 +231,15 @@ namespace BurnoutBuster.Character
             this.Enabled = true;
         }
 
-        
+        // TEXTURE EFFECTS
+        private void FlashColor(Color color)
+        {
+            this.DrawColor = color;
+        }
+        private void CorrectColor()
+        {
+            this.DrawColor = Color.White;
+        }
+
     }
 }

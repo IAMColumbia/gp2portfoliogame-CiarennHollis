@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace BurnoutBuster.Character
 {
@@ -45,6 +46,10 @@ namespace BurnoutBuster.Character
             HitPoints -= damageAmount;
         }
 
+        public void KnockBack(Vector2 knockbackVector)
+        {
+            // knock back logic
+        }
         public void Die()
         {
             if (this.State != EnemyState.Dead)

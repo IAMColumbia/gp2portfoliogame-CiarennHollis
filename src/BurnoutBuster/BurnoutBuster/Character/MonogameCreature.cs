@@ -1,14 +1,10 @@
-﻿using BurnoutBuster.Collision;
-using BurnoutBuster.Input;
+﻿using BurnoutBuster.Input;
 using BurnoutBuster.Items;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using System;
 using ICollidable = BurnoutBuster.Collision.ICollidable;
 
 namespace BurnoutBuster.Character
@@ -82,6 +78,7 @@ namespace BurnoutBuster.Character
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
 
+            this.ShowMarkers = true;
 
             this.Speed = 150;
         }
@@ -128,13 +125,13 @@ namespace BurnoutBuster.Character
         }
 
         // C O L L I S I O N
-        public void OnCollisionEnter(Collision.Collision collision)
+        public virtual void OnCollisionEnter(Collision.Collision collision)
         {
             if (collision != null)
             {
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
                 {
-                    console.GameConsoleWrite("Collided with an Enemy");
+                    //console.GameConsoleWrite("Collided with an Enemy");
                 }
             }
         }
@@ -151,10 +148,16 @@ namespace BurnoutBuster.Character
         {
             // logic for what happens when the creature state changes
         }
+        public virtual void KnockBack(Vector2 knockbackVector)
+        {
+            this.Location -= knockbackVector;
+        }
 
         public void Hit(int damageAmount)
         {
             this.creature.Hit(damageAmount);
+            //this.KnockBack();
+            //this.creature.KnockBack();
         }
 
         

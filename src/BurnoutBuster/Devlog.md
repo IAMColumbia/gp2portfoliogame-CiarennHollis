@@ -1,14 +1,25 @@
 # Devlog
   
+## 1 April 2024 | 13:07
+### Check In
+ * Got the player's attacks and the enemy's attack back working. I need to implement the HUD so I can see the player's health update :P
+	* Player death (and state) won't be hard to implement, for this milestone I think I'll just have it do something simple like quit the application (While I know that is annoying, I don't really have time right now to handle that more gracefully). I also need to decide how that mechanic will work (really more so for the state).
+	* Started working on HUD. I wanted there to be slots for it so it'd be easy to have things write to it and have the HUD class handle the formatting of it itself
+  
+### Next Steps
+ * Finish HUD stuff
+	* Level class and manager
+	* Vertical slice documentation
+
 ## 1 April 2024 | 9:10
 ### Check In
  * Post spring break. Back in the lab. 
-	* Today, I need to finish up the stuff for the vertical slice since that's due tomorrow.
+ * Today, I need to finish up the stuff for the vertical slice since that's due tomorrow.
   
 ### Goals
- * Enemy attacks dealing dammage to the player
- * Player attacks dealing damage to the enemy
- * Enemy death (and state)
+ * Enemy attacks dealing damage to the player [DONE]
+ * Player attacks dealing damage to the enemy [DONE]
+ * Enemy death (and state) [DONE]
  * Player death (and state)
  * Level class and manager
  * HUD for player health
