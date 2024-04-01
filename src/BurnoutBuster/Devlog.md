@@ -1,5 +1,20 @@
 # Devlog
   
+## 1 April 2024 | 9:10
+### Check In
+ * Post spring break. Back in the lab. 
+	* Today, I need to finish up the stuff for the vertical slice since that's due tomorrow.
+  
+### Goals
+ * Enemy attacks dealing dammage to the player
+ * Player attacks dealing damage to the enemy
+ * Enemy death (and state)
+ * Player death (and state)
+ * Level class and manager
+ * HUD for player health
+ * Simple level art if possible
+  
+  
 ## 30 March 2024 | 15:41
 ### Check In
  * Implemented the input buffer for input combos [omfg, %-(  (;U;) , brain is mush] 
