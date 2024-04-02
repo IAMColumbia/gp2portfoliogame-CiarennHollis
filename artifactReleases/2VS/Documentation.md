@@ -11,6 +11,9 @@
 ## Sprint/Story Review
 I didn't get all that I wanted done this sprint since I didn't take into account how much time implementing collision would take. That throw off my plan for this project and so there are a few mechanics that aren't as fleshed out as I'd like them to be for this submission. I did what I could to get the basic game loop up and going, it will be refined for the next submission.
   
+## Structure
+[WHY IS THE GAME STRUCTURED LIKE IT IS??]
+  
 ## Dependencies
  I tried my best to have things been relatively clean and only giving them dependencies when needed. Some are obvious (like the enemies depend on the enemy manager) but most of the other are rather deliberate.
 ### Dependency list 
