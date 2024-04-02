@@ -1,5 +1,7 @@
 # Vertical Slice Documentation
   
+Find the devlog log here: [src/BurnoutBuster/Devlog.md](https://github.com/IAMColumbia/gp2portfoliogame-CiarennHollis/blob/master/src/BurnoutBuster/Devlog.md)
+  
 ## Progress Made
  * Collision
  * Enemy functionality - attack and death
