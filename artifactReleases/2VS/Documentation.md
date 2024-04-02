@@ -15,6 +15,7 @@ I didn't get all that I wanted done this sprint since I didn't take into account
   
 ## Structure
 [WHY IS THE GAME STRUCTURED LIKE IT IS??]
+I like thinking of the pieces of this project as building blocks and I tried my best to have the structure of the game/project be like that. Several things can be plugged and uplugged from each other be it ovjects (like MonogameEnemy.cs) Some things, of course, depend on other things so there are some things thag
   
 ## Dependencies
  I tried my best to have things been relatively clean and only giving them dependencies when needed. Some are obvious (like the enemies depend on the enemy manager) but most of the other are rather deliberate.
