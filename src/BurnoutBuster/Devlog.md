@@ -1,10 +1,22 @@
 # Devlog
   
-  ## 2 April 2024 | 11:40
+## 2 April 2024 | 14:55
+### Check In
+ * Going to get some of the level functionality built out :P
+ * Want to try and get the basic game loop working :P
+ * Need to do the documentation
+  
+### Goals
+ * finish implementing level manager
+ * kill able enemies and respawning enemies
+ * player death
+ * Documentation for VS submission
+
+## 2 April 2024 | 12:50
 ### Check In
  * Built out level class
-	* Started building out level manager
-	* Made some quick place holder art
+ * Started building out level manager
+ * Made some quick place holder art
   
 ### Next Steps
  * finish implementing level manager
