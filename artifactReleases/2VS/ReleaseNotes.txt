@@ -1,1 +1,15 @@
 Release Notes version 2 Vertical Slice
+  
+Find the devlog log here: [src/BurnoutBuster/Devlog.md](https://github.com/IAMColumbia/gp2portfoliogame-CiarennHollis/blob/master/src/BurnoutBuster/Devlog.md)
+  
+## Progress Made
+ * Collision
+ * Enemy functionality - attack and death
+ * Enemy manager
+ * Input buffer and analyzer
+ * HUD
+ * Player taking damage and death
+  
+## Sprint/Story Review
+I didn't get all that I wanted done this sprint since I didn't take into account how much time implementing collision would take. That throw off my dev plan for this project and so there are a few mechanics that aren't as fleshed out as I'd like them to be for this submission. I did what I could to get the basic game loop up and going, it will be refined for the next submission.
+  
