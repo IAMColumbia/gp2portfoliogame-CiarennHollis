@@ -36,7 +36,7 @@ namespace BurnoutBuster.Character
             this.creature = creature;
 
             this.rand = rand;
-            spawnLocation = new Vector2(400, 400);
+            spawnLocation = new Vector2(100, 200);
             NumberOfEnemiesToSpawn = 2;
 
         }
@@ -71,6 +71,7 @@ namespace BurnoutBuster.Character
         {
             CheckEnemies();
             UpdateEnemies(gameTime);
+            SpawnMoreIfNoneActive();
             base.Update(gameTime);
         }
         void UpdateEnemies(GameTime gameTime)
@@ -105,7 +106,8 @@ namespace BurnoutBuster.Character
         {
             foreach(MonogameEnemy enemy in ActiveEnemies)
             {
-                if (enemy.EnemyState == EnemyState.Dead)
+                if (enemy.EnemyState == EnemyState.Dead
+                    || enemy.EnemyState == EnemyState.Inactive)
                     this.tempEnemies.Add(enemy);
             }
 
@@ -121,15 +123,21 @@ namespace BurnoutBuster.Character
         {
             int i;
             i = rand.Next(0, AllEnemies.Count);
-            if (AllEnemies[i].EnemyState != EnemyState.InActive)
+            if (AllEnemies[i].EnemyState != EnemyState.Inactive)
                 SpawnAnEnemy();
-            AllEnemies[i].Activate(spawnLocation);
+            AllEnemies[i].Activate(spawnLocation * i);
             ActiveEnemies.Add(AllEnemies[i]);
         }
         public void SpawnLevelEnemies(int numOfEnemiesToSpawn)
         {
             for (int i = 0; i < numOfEnemiesToSpawn; i++)
                 SpawnAnEnemy();
+        }
+
+        void SpawnMoreIfNoneActive()
+        {
+            if (ActiveEnemies.Count == 0)
+                SpawnLevelEnemies(NumberOfEnemiesToSpawn);
         }
     }
 }

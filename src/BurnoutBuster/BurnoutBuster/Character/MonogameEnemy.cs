@@ -13,7 +13,7 @@ namespace BurnoutBuster.Character
     {
         // P R O P E R T I E S
 
-        //DEPENDENCY FOR POC
+        //DEPENDENCY 
         protected MonogameCreature creature;
         
         protected GameConsole console;
@@ -75,6 +75,7 @@ namespace BurnoutBuster.Character
         //attacking
         Timer attackDelayTimer;
         float attackDelayAmount;
+        bool canRestartTimer;
 
         // C O N S T R U C T O R 
         //DEPENDENCY FOR POC: creature ref
@@ -94,7 +95,8 @@ namespace BurnoutBuster.Character
 
             attackDelayTimer = new Timer();
             attackDelayTimer.State = TimerState.Off;
-            attackDelayAmount = 1500;
+            attackDelayAmount = 1500; // in milliseconds
+            canRestartTimer = false;
         }
 
         // I N I T
@@ -104,14 +106,14 @@ namespace BurnoutBuster.Character
         }
         protected override void LoadContent()
         {
-            this.HitPoints = 100;
+            this.HitPoints = 10;
             this.originalHitPoints = HitPoints;
             this.Damage = 1;
 
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             
-            this.Location = new Vector2(200, 200);
+            //this.Location = new Vector2(200, 200);
             this.movementSpeed = 1;
 
             //this.Bounds.Position = this.Location;
@@ -124,15 +126,28 @@ namespace BurnoutBuster.Character
         // U P D A T E
         public override void Update(GameTime gameTime)
         {
-            CorrectColor();
+
+            float time = (float)gameTime.TotalGameTime.TotalMilliseconds;
+            //CorrectColor();
             KeepEnemyOnScreen();
 
             UpdateBounds();
             ManageState();
 
+            HandleAttackDelayTimer(time);
             this.movementSpeed = 1;
 
             base.Update(gameTime);
+        }
+        void HandleAttackDelayTimer(float time)
+        {
+            if (canRestartTimer)
+            {
+                attackDelayTimer.StartTimer(time, attackDelayAmount);
+                canRestartTimer= false;
+            }
+
+            attackDelayTimer.UpdateTimer(time);
         }
         // D R A W 
         public override void Draw(GameTime gameTime)
@@ -160,15 +175,19 @@ namespace BurnoutBuster.Character
         {
             if (collision != null)
             {
-                this.Location -= collision.PenetrationVector * 5;
+                
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Player))
                 {
-                    
+                    this.Location -= collision.PenetrationVector * 3.5f; //TD hard coded var
                     //console.GameConsoleWrite("touching player");
                     movementSpeed = 0;
                     this.Attack((IDamageable)collision.OtherObject);
                 }
-                    
+                 
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
+                {
+                    //this.Location -= collision.PenetrationVector;
+                }
             }
         }
         private void UpdateBounds()
@@ -215,15 +234,17 @@ namespace BurnoutBuster.Character
             // play hit animation 
             this.enemy.Hit(damageAmount);
             this.console.GameConsoleWrite($"Enemy Health: {HitPoints}");
-            FlashColor(Color.Red);
+            //FlashColor(Color.Red);
         }
 
         public virtual void Attack(IDamageable target)
         {
-            if (attackDelayTimer.State != TimerState.Running)
+            //console.GameConsoleWrite($"attack delay timer state: {attackDelayTimer.State.ToString()}");
+            if (attackDelayTimer.State == TimerState.Off 
+                || attackDelayTimer.State == TimerState.Ended)
             {
                 enemy.Attack(target);
-                attackDelayTimer.StartTimer((float)this.Game.TargetElapsedTime.TotalMilliseconds, attackDelayAmount);
+                canRestartTimer = true;
             }
         }
         public virtual void KnockBack(Vector2 knockbackVector)
@@ -235,13 +256,14 @@ namespace BurnoutBuster.Character
         public virtual void Die()
         {
             this.enemy.Die();
+            this.Reset();
         }
 
         // IPOOLABLE
         public void Reset()
         {
             this.HitPoints = originalHitPoints;
-            this.enemyState = EnemyState.InActive;
+            this.enemyState = EnemyState.Inactive;
             this.Enabled = false;
         }
         public void Activate(Vector2 spawnLocation)

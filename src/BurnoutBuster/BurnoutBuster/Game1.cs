@@ -1,6 +1,7 @@
 ﻿using BurnoutBuster.Character;
 using BurnoutBuster.Collision;
 using BurnoutBuster.CommandPat;
+using BurnoutBuster.Levels;
 using BurnoutBuster.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -40,6 +41,9 @@ namespace BurnoutBuster
         // command pattern
         CommandProcessor commandProcessor;
 
+        //levels
+        //LevelManager levelManager;
+
         // C O N S T R U C T O R
         public Game1()
         {
@@ -48,6 +52,9 @@ namespace BurnoutBuster
             IsMouseVisible = true;
 
             rand = new Random();
+
+            //levelManager = new LevelManager(this);
+            //this.Components.Add(levelManager);
 
             _collision = new CollisionComponent(new RectangleF(0, 0, mapWidth, mapHeight));
             this.Components.Add(_collision);
@@ -117,6 +124,11 @@ namespace BurnoutBuster
 
             _collision.Update(gameTime);
             UpdateHUDvalues();
+
+            //TD dirty game exit for VS
+            if (creature.CheckCreatureState(CreatureState.Shutdown))
+                Exit();
+
             base.Update(gameTime);
         }
 
@@ -133,6 +145,7 @@ namespace BurnoutBuster
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //levelManager.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }

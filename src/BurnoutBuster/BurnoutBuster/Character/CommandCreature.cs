@@ -2,6 +2,7 @@
 using BurnoutBuster.CommandPat.Commands;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
+using SharpDX.XAudio2;
 
 namespace BurnoutBuster.Character
 {
@@ -88,6 +89,7 @@ namespace BurnoutBuster.Character
 
             base.OnCollisionEnter(collision);
         }
+
 
         // A C T I O N   I M P L E M E N T A T I O N S
         private void PerformAttackAction(IDamageable target, ActionCommands action)

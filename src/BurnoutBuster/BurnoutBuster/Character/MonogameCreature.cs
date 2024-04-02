@@ -97,6 +97,8 @@ namespace BurnoutBuster.Character
 
             KeepCreatureOnScreen();
 
+            UpdateStateBasedOnHP();
+
             base.Update(gameTime);
         }
 
@@ -144,6 +146,22 @@ namespace BurnoutBuster.Character
         {
             Bounds = this.Rectangle;
         }
+
+
+        // S T A T E
+        public bool CheckCreatureState(CreatureState state)
+        {
+            if (CreatureState == state)
+                return true;
+
+            return false;
+        }
+        private void UpdateStateBasedOnHP()
+        {
+            if (HitPoints <= 0)
+                this.CreatureState = CreatureState.Shutdown;
+        }
+
         // M I S C   M E T H O D S
         public void Attack(IDamageable target)
         {

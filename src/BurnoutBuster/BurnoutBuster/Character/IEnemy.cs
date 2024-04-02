@@ -2,7 +2,7 @@
 
 namespace BurnoutBuster.Character
 {
-    public enum EnemyState { InActive, Normal, Stunned, Dead }
+    public enum EnemyState { Inactive, Normal, Stunned, Dead }
     public enum EnemyType {  Minor, Ranged, Melee, Heavy }
     interface IEnemy 
     {

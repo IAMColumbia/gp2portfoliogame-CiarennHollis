@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Sprite;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +19,8 @@ namespace BurnoutBuster.Levels
         // C O N S T R U C T O R
         public LevelManager(Game game) : base(game)
         {
-
+            //for VS
+            CurrentLevel = 0;
         }
 
         // I N I T 
@@ -37,23 +40,35 @@ namespace BurnoutBuster.Levels
         {
             Level level1 =
                 new Level(this.Game, 2, "Environment/PlaceHolderLevelArt");
+            level1.Initialize();
             _levels.Add(level1);
 
             Level level2 =
                 new Level(this.Game, 5, "Environment/PlaceHolderLevelArt");
+            level2.Initialize();
             _levels.Add(level2);
+
+            //TD not the best solution for this but it'l have ot do for now
+            for (int i = 0; i < _levels.Count; i++)
+            {
+                LoadLevel(i);
+            }
         }
 
         // U P D A T E 
         public override void Update(GameTime gameTime)
         {
+            UpdateCurrentLevel(CurrentLevel);
             base.Update(gameTime);
         }
 
         // D R A W 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, SpriteBatch sb)
         {
-            base.Draw(gameTime);
+            sb.Begin();
+            DrawCurrentLevel(CurrentLevel, sb);
+            //base.Draw(gameTime);
+            sb.End();
         }
 
 
@@ -73,9 +88,15 @@ namespace BurnoutBuster.Levels
             this.Game.Content.UnloadAsset(_levels[CurrentLevel].GetFilePath());
         }
 
-        void UpdateCurrentLevel()
+        void UpdateCurrentLevel(int levelIndex)
         {
+            //updates enemies killed
 
+        }
+
+        void DrawCurrentLevel(int levelIndex, SpriteBatch sb)
+        {
+            _levels[levelIndex].Draw(sb);
         }
 
     }

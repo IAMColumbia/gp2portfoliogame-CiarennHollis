@@ -1,5 +1,14 @@
 # Devlog
   
+## 2 April 2024 | 16:35
+### Check In
+ * Finished the things
+ * Did player death a dirty way as in when the play dies the game immediately quits itself
+ * Need to do the documentation
+  
+### Goals
+ * Documentation for VS submission
+
 ## 2 April 2024 | 14:55
 ### Check In
  * Going to get some of the level functionality built out :P
@@ -7,9 +16,9 @@
  * Need to do the documentation
   
 ### Goals
- * finish implementing level manager
- * kill able enemies and respawning enemies
- * player death
+ * finish implementing level manager [FINISH LATER - DOESN"T WORK]
+ * kill able enemies and respawning enemies [DONE]
+ * player death [DONE]
  * Documentation for VS submission
 
 ## 2 April 2024 | 12:50
