@@ -160,9 +160,10 @@ namespace BurnoutBuster.Character
         {
             if (collision != null)
             {
+                this.Location -= collision.PenetrationVector * 5;
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Player))
                 {
-                    this.Location -= collision.PenetrationVector * 7;
+                    
                     //console.GameConsoleWrite("touching player");
                     movementSpeed = 0;
                     this.Attack((IDamageable)collision.OtherObject);

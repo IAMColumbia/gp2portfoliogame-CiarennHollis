@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BurnoutBuster.Character
 {
@@ -15,6 +16,8 @@ namespace BurnoutBuster.Character
 
         //spawn management
         Vector2 spawnLocation;
+        Timer spawnDelayTimer;
+        float delayAmount;
 
         //random
         Random rand;
@@ -35,6 +38,7 @@ namespace BurnoutBuster.Character
             this.rand = rand;
             spawnLocation = new Vector2(400, 400);
             NumberOfEnemiesToSpawn = 2;
+
         }
 
         // I N I T
@@ -113,18 +117,18 @@ namespace BurnoutBuster.Character
             tempEnemies.Clear();
         }
 
-        int i = 0;
         void SpawnAnEnemy()
         {
+            int i;
             i = rand.Next(0, AllEnemies.Count);
             if (AllEnemies[i].EnemyState != EnemyState.InActive)
                 SpawnAnEnemy();
             AllEnemies[i].Activate(spawnLocation);
             ActiveEnemies.Add(AllEnemies[i]);
         }
-        public void SpawnLevelEnemies()
+        public void SpawnLevelEnemies(int numOfEnemiesToSpawn)
         {
-            for (int i = 0; i < NumberOfEnemiesToSpawn; i++)
+            for (int i = 0; i < numOfEnemiesToSpawn; i++)
                 SpawnAnEnemy();
         }
     }

@@ -1,5 +1,32 @@
 # Devlog
   
+  ## 2 April 2024 | 11:40
+### Check In
+ * Built out level class
+	* Started building out level manager
+	* Made some quick place holder art
+  
+### Next Steps
+ * finish implementing level manager
+ * kill able enemies and respawning enemies
+ * player death
+ * Documentation for VS submission
+  
+## 2 April 2024 | 11:40
+### Check In
+ * Going to get some of the level functionality built out :P
+ * Want to try and get the basic game loop working :P
+ * Need to do the documentation
+  
+### Goals
+ * Placeholder level art [DONE]
+ * level class [DONE]
+ * level manager
+ * kill able enemies and respawning enemies
+ * player death
+ * Documentation for VS submission
+  
+    
 ## 1 April 2024 | 17:25
 ### Check In
  * Got the HUD working to display the player's hit points 

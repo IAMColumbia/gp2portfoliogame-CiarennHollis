@@ -22,7 +22,7 @@ namespace BurnoutBuster
 
         // screen
         const int mapWidth = 900;
-        const int mapHeight = 500;
+        const int mapHeight = 600;
         public HUD HUD;
 
         //console
@@ -85,7 +85,7 @@ namespace BurnoutBuster
             SetUpCollisionActors();
             SetUpHUDvalues();
 
-            enemyManager.SpawnLevelEnemies();
+            enemyManager.SpawnLevelEnemies(2);
         }
         private void SetScreenDimensions()
         {
@@ -95,14 +95,8 @@ namespace BurnoutBuster
         }
         void SetUpCollisionActors()
         {
-            //foreach (ITaggedCollidable taggedCollidable in _collidableObjects)
-            //{
-            //    _collision.Insert(taggedCollidable);
-            //}
-
             this._collisionManager.AddObject(creature);
             this.enemyManager.AddEnemiesToCollisionManager(_collisionManager);
-            //this._collisionManager.AddObject(enemy);
         }
 
         /// <summary>
