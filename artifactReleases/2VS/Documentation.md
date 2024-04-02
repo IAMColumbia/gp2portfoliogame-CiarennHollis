@@ -36,7 +36,7 @@ Most of the things/objects in the project are rather stateful. I tend to use sta
  * Command -> input -> player movement and actions 
  * (pseudo) Object pool -> enemies (pseudo because it's not implementing an Object Pool class like previous demos we've looked at)
  * Singleton -> tag manager 
- * (sort of) fly weight -> commands get passed between the chord analyzer and command processor via an enum value rather than actually passing commands through
+ * (sort of) Fly Weight -> commands get passed between the chord analyzer and command processor via an enum value rather than actually passing commands through
   
 ## Not Working
  * Levels system -> level manager doesn't load the levels correctlty
