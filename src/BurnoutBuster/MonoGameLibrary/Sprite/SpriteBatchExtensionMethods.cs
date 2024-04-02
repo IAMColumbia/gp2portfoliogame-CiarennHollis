@@ -15,7 +15,7 @@ namespace MonoGameLibrary.Sprite.Extensions
         public static void DrawSprite(this SpriteBatch sb, Sprite sprite)
         {
             sb.Draw(sprite.SpriteTexture,
-                sprite.Rectagle,
+                sprite.Rectangle,
                 null,
                 Color.White,
                 MathHelper.ToRadians(sprite.Rotate),
@@ -29,7 +29,7 @@ namespace MonoGameLibrary.Sprite.Extensions
         public static void DrawSpriteWithShadow(this SpriteBatch sb, Sprite sprite)
         {
             sb.Draw(sprite.SpriteTexture,
-               new Rectangle(sprite.Rectagle.X + 2, sprite.Rectagle.Y + 2, sprite.Rectagle.Width, sprite.Rectagle.Height),
+               new Rectangle(sprite.Rectangle.X + 2, sprite.Rectangle.Y + 2, sprite.Rectangle.Width, sprite.Rectangle.Height),
                null,
                Color.FromNonPremultiplied(112, 112, 112, 50),
                MathHelper.ToRadians(sprite.Rotate),
@@ -38,7 +38,7 @@ namespace MonoGameLibrary.Sprite.Extensions
                0);
 
             sb.Draw(sprite.SpriteTexture,
-               new Rectangle(sprite.Rectagle.X + 1, sprite.Rectagle.Y + 1, sprite.Rectagle.Width, sprite.Rectagle.Height),
+               new Rectangle(sprite.Rectangle.X + 1, sprite.Rectangle.Y + 1, sprite.Rectangle.Width, sprite.Rectangle.Height),
                null,
                Color.FromNonPremultiplied(35, 35, 35, 75),
                MathHelper.ToRadians(sprite.Rotate),
@@ -47,7 +47,7 @@ namespace MonoGameLibrary.Sprite.Extensions
                0);
 
             sb.Draw(sprite.SpriteTexture,
-                sprite.Rectagle,
+                sprite.Rectangle,
                 null,
                 Color.White,
                 MathHelper.ToRadians(sprite.Rotate),

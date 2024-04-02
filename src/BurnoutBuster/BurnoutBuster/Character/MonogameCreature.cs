@@ -1,19 +1,21 @@
-﻿using BurnoutBuster.Items;
+﻿using BurnoutBuster.Collision;
+using BurnoutBuster.Input;
+using BurnoutBuster.Items;
+using BurnoutBuster.UI;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
+using ICollidable = BurnoutBuster.Collision.ICollidable;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite
+    public class MonogameCreature : DrawableSprite, IDamageable, ICollidable
     {
         // P R O P E R T I E S
-
-        //DEPENDENCY FOR POC
-        public MonogameEnemy enemy;
-
         protected GameConsole console;
         TimedPlayerController controller { get; set; }
 
@@ -35,15 +37,29 @@ namespace BurnoutBuster.Character
                 }
             }
         }
-        
+        public int HitPoints
+        {
+            get { return this.creature.HitPoints; }
+            set 
+            {
+                this.creature.HitPoints = value; 
+            }
+        }
+
         public IWeapon Weapon
         {
             get { return this.creature.MyWeapon; }
         }
 
+        // collision and tag bits
+        public Rectangle Bounds { get; set; }
+        public Tags Tag { get; }
+        public GameComponent GameObject { get; private set; }
+        protected Vector2 moveVector;
+
         // C O N S T R U C T O R
         //DEPENDENCY FOR POC: enemy
-        public MonogameCreature(Game game, MonogameEnemy enemy) : base(game)
+        public MonogameCreature(Game game) : base(game)
         {
             this.controller = new TimedPlayerController(game);
             this.console = (GameConsole)game.Services.GetService<IGameConsole>();
@@ -53,18 +69,23 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             creature = new GameConsoleCreature((GameConsole)game.Services.GetService<IGameConsole>());
-            this.enemy = enemy;
+            
+            GameObject = this;
+            this.Tag = Tags.Player;
         }
 
         // I N I T
         protected override void LoadContent()
         {
-            base.LoadContent();
-
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
+
+            this.ShowMarkers = true;
+
             this.Speed = 150;
+
+            base.LoadContent();
         }
 
         // U P D A T E
@@ -72,7 +93,11 @@ namespace BurnoutBuster.Character
         {
             float time = (float) gameTime.ElapsedGameTime.TotalMilliseconds;
 
+            UpdateBounds();
+
             KeepCreatureOnScreen();
+
+            UpdateStateBasedOnHP();
 
             base.Update(gameTime);
         }
@@ -90,8 +115,6 @@ namespace BurnoutBuster.Character
         {
             base.Draw(gameTime);
         }
-
-        // C O N T R O L L E R S   A N D   M O V E M E N T
         private void KeepCreatureOnScreen()
         {
             if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2))
@@ -108,6 +131,37 @@ namespace BurnoutBuster.Character
                 this.Location.Y = (this.spriteTexture.Height / 2);
         }
 
+        // C O L L I S I O N
+        public virtual void OnCollisionEnter(Collision.Collision collision)
+        {
+            if (collision != null)
+            {
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
+                {
+                    //console.GameConsoleWrite("Collided with an Enemy");
+                }
+            }
+        }
+        private void UpdateBounds()
+        {
+            Bounds = this.Rectangle;
+        }
+
+
+        // S T A T E
+        public bool CheckCreatureState(CreatureState state)
+        {
+            if (CreatureState == state)
+                return true;
+
+            return false;
+        }
+        private void UpdateStateBasedOnHP()
+        {
+            if (HitPoints <= 0)
+                this.CreatureState = CreatureState.Shutdown;
+        }
+
         // M I S C   M E T H O D S
         public void Attack(IDamageable target)
         {
@@ -117,14 +171,19 @@ namespace BurnoutBuster.Character
         {
             // logic for what happens when the creature state changes
         }
-
-        protected bool CollisionCheck()
+        public virtual void KnockBack(Vector2 knockbackVector)
         {
-            if (Intersects(enemy)) // DEPENDENCY FOR POC: enemy -> need to do collision a better way
-            {
-                return true;
-            }
-            return false;
+            this.Location -= knockbackVector;
         }
+
+        public void Hit(int damageAmount)
+        {
+            this.creature.Hit(damageAmount);
+            console.GameConsoleWrite($"PL HP = {HitPoints}");
+            //this.KnockBack();
+            //this.creature.KnockBack();
+        }
+
+        
     }
 }

@@ -1,9 +1,8 @@
 ﻿using BurnoutBuster.Character;
 using BurnoutBuster.CommandPat.Commands;
-using BurnoutBuster.Utility;
+using BurnoutBuster.Input;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary.Util;
-using System;
 using System.Collections.Generic;
 
 namespace BurnoutBuster.CommandPat
@@ -16,13 +15,14 @@ namespace BurnoutBuster.CommandPat
         TimedInputHandler input;
         GameConsole console;
         CommandCreature creatureReceiver;
-
+        ChordAnalyzer chordAnalyzer;
 
         //class vars
         Stack<ICommand> Commands;
         KeyMap keyMap;
         ButtonMap buttonMap;
         float listenTime; //in milliseconds
+
 
         //enum
         enum ListeningMode { ForAnything, ForDashAttack, ForComboAttack, ForFinisherAttack }
@@ -34,7 +34,7 @@ namespace BurnoutBuster.CommandPat
             Commands = new Stack<ICommand>();
             keyMap = new KeyMap();
             buttonMap = new ButtonMap();
-            listenTime = 650;
+            listenTime = 350;
             #region 'Setting Refs'
             input = (TimedInputHandler)game.Services.GetService<IInputHandler>();
             if (input == null)
@@ -42,6 +42,8 @@ namespace BurnoutBuster.CommandPat
                 input = new TimedInputHandler(game);
                 game.Components.Add(input);
             }
+
+            chordAnalyzer = new ChordAnalyzer();
 
             console = (GameConsole)game.Services.GetService<IGameConsole>();
             if (console == null)
@@ -53,16 +55,87 @@ namespace BurnoutBuster.CommandPat
             this.creatureReceiver = (CommandCreature)creature;  
             #endregion
 
+
         }
 
-        // M E T H O D S
+        // I N I T
+        public override void Initialize()
+        {
+            chordAnalyzer.Initialize();
+            base.Initialize();
+        }
+
+        // U P D A T E
         public override void Update(GameTime gameTime)
         {
             float _time = (float)gameTime.TotalGameTime.TotalMilliseconds;
+
+            chordAnalyzer.Update(_time);
+
             HandleKeyBoard(_time);
             //HandleGamePad();
             
             base.Update(gameTime);
+        }
+
+        // B U F F E R   A N D   A N A L Y Z E R
+        private void UseChordAnalyzer(string buttenRef, float _time, out Command command)
+        {
+            chordAnalyzer.AddNote(CreateNoteBasedOnInput(buttenRef, _time));
+            chordAnalyzer.CheckQueue();
+            command = CreateCommandBasedOnOutputFromChordAnalyzer();
+        }
+        private Note CreateNoteBasedOnInput(string actionPerformed, float time) //TD RESPONSIBILITY: creating a note from the input probably should happen in the chord analyzer class, but this is the way it makes the most sense to my brain rn so it's going to stay here :P
+        {
+            ActionCommands actionCommand = ActionCommands.Null;
+            switch (actionPerformed)
+            {
+                case "Heavy":
+                    actionCommand = ActionCommands.HeavyAttack;
+                    break;
+                case "Action 2":
+                    actionCommand = ActionCommands.Null;
+                    break;
+                case "Attack":
+                    actionCommand = ActionCommands.Attack;
+                    break;
+                case "Dash":
+                    actionCommand = ActionCommands.Dash;
+                    break;
+            }
+            return new Note(actionCommand, time, listenTime);
+        }
+        private Command CreateCommandBasedOnOutputFromChordAnalyzer()
+        {
+            Command command = new NullCommand(this.Game);
+
+            switch (chordAnalyzer.GetCurrentCommandOutput())
+            {
+                case ActionCommands.Null:
+                    // do nothing
+                    break;
+
+                case ActionCommands.Attack:
+                    command = new AttackCommand(this.Game);
+                    break;
+                case ActionCommands.HeavyAttack:
+                    command = new HeavyAttackCommand(this.Game);
+                    break;
+                case ActionCommands.ComboAttack:
+                    command = new ComboAttackCommand(this.Game);
+                    break;
+                case ActionCommands.FinisherAttack:
+                    command = new FinisherAttackCommand(this.Game);
+                    break;
+                case ActionCommands.Dash:
+                    command = new DashCommand(this.Game);
+                    break;
+                case ActionCommands.DashAttack:
+                    command = new DashAttackCommand(this.Game);
+                    break;
+            }
+
+            return command;
         }
 
         // K E Y B O A R D   M E T H O D S
@@ -116,28 +189,14 @@ namespace BurnoutBuster.CommandPat
                     //console.GameConsoleWrite(string.Format("onKeyDownMap Key released {0}", item.Value.ToString())); //Log key to console
                     switch (item.Value)
                     {
-                        //actions
-                        //case "Heavy":
-                        //    //trigger heavy attack
-                        //    command = new HeavyAttackCommand(this.Game);
-                        //    break;
-                        //case "Action 2":
-                        //    // trigger action 2 command
-                        //    break;
-                        //case "Attack":
-                        //    // trigger attack
-                        //    command = new AttackCommand(this.Game);
-                        //    break;
-                        //case "Dash":
-                        //    // trigger dash
-                        //    command = new DashCommand(this.Game);
-                        //    break;
+                       
 
                         case "Heavy":
                         case "Action 2":
                         case "Attack":
                         case "Dash":
-                            command = CreateActionCommandBasedOnListeningMode(item.Value, _time);
+                            //command = CreateActionCommandBasedOnListeningMode(item.Value, _time);
+                            UseChordAnalyzer(item.Value, _time, out command);
                             break;
                     }
                     if (command != null)
@@ -147,7 +206,7 @@ namespace BurnoutBuster.CommandPat
 
             
         }
-
+        
         private Command CreateActionCommandBasedOnListeningMode(string buttonRef, float time)
         {
             Command command = null;
@@ -205,6 +264,7 @@ namespace BurnoutBuster.CommandPat
                 case "Heavy":
                     command = new Commands.HeavyAttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
 
                 case "Attack":
@@ -213,13 +273,14 @@ namespace BurnoutBuster.CommandPat
                         command = new Commands.DashAttackCommand(this.Game);
                         this.input.timer.StartTimer(time, listenTime);
                     }
-                    else { command = new Commands.DashCommand(this.Game); }
+                    else { command = new Commands.DashCommand(this.Game); this.input.timer.ResetTimer(); }
                     listeningMode = ListeningMode.ForAnything;
                     break;
 
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
             }
             return command;
@@ -242,16 +303,19 @@ namespace BurnoutBuster.CommandPat
                     else 
                     { 
                         command = new Commands.HeavyAttackCommand(this.Game);
-                        listeningMode = ListeningMode.ForAnything; 
+                        listeningMode = ListeningMode.ForAnything;
+                        this.input.timer.ResetTimer();
                     }
                     break;
                 case "Attack":
                     command = new Commands.AttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
             }
             return command;
@@ -267,6 +331,7 @@ namespace BurnoutBuster.CommandPat
                 case "Heavy":
                     command = new Commands.HeavyAttackCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
 
                 case "Attack":
@@ -274,13 +339,14 @@ namespace BurnoutBuster.CommandPat
                     {
                         command = new Commands.FinisherAttackCommand(this.Game);
                     }
-                    else { command = new Commands.AttackCommand(this.Game); }
+                    else { command = new Commands.AttackCommand(this.Game); this.input.timer.ResetTimer(); }
                     listeningMode = ListeningMode.ForAnything;
                     break;
 
                 case "Dash":
                     command = new Commands.DashCommand(this.Game);
                     listeningMode = ListeningMode.ForAnything;
+                    this.input.timer.ResetTimer();
                     break;
             }
             return command;

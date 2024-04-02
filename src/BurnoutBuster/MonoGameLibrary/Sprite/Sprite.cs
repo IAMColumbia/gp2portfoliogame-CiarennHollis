@@ -42,7 +42,7 @@ namespace MonoGameLibrary.Sprite
         protected float lastUpdateTime;   
         protected Rectangle locationRect; //current location
         private Rectangle rectangle; //used as drawing target
-        public Rectangle Rectagle {  get { return this.rectangle; } }
+        public Rectangle Rectangle {  get { return this.rectangle; } }
         protected float scale;
         public float Scale
         {
