@@ -29,8 +29,8 @@
   
 ### Goals
  * Damage flash for characters [DONE]
- * Have enemy collide with other enemies
- * Adjust the player's collision box to match it's sprite
+ * Have enemy collide with other enemies [DONE] -> issue with this fix is that it glitches out when enemies are spawned ontop of each other
+ * Adjust the player's collision box to match it's sprite [DONE] -> the keepCreatureOnScreen method just needed to be adjusted since the issue really was that the player could move off screen slightly
  * Make dash an actual dash rather than just teleporting around
  * Give the player a hit box that is different from (and bigger than) it's hitbox
   

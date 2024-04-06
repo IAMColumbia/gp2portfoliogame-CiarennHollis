@@ -144,18 +144,21 @@ namespace BurnoutBuster.Character
         }
         private void KeepCreatureOnScreen()
         {
-            if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2))
+            // HORIZONTAL
+            if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width)) 
             {
-                this.Location.X = Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width / 2);
+                this.Location.X = Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width);  // / 2
             }
-            if (this.Location.X < (this.spriteTexture.Width / 2))
-                this.Location.X = (this.spriteTexture.Width / 2);
+            if (this.Location.X < 0) 
+                this.Location.X = 0; //(this.spriteTexture.Width / 2)
 
-            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2))
-                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2);
 
-            if (this.Location.Y < (this.spriteTexture.Height / 2))
-                this.Location.Y = (this.spriteTexture.Height / 2);
+            //VERTICAL
+            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height))
+                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height);  // / dddaaa2
+
+            if (this.Location.Y < 0)
+                this.Location.Y = 0; //(this.spriteTexture.Height / 2)
         }
         #endregion
 

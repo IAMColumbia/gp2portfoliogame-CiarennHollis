@@ -219,9 +219,9 @@ namespace BurnoutBuster.Character
                     this.Attack((IDamageable)collision.OtherObject);
                 }
                  
-                if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy) ) //TD only works if the enemies don't spawn on top of each other :P
                 {
-                    //this.Location -= collision.PenetrationVector;
+                    this.Location -= collision.PenetrationVector;
                 }
             }
         }
