@@ -1,5 +1,13 @@
 # Devlog
   
+## 6 April 2024 | 10:09
+### Check In
+ * Got the damage flash to work. It uses two timers: one for the total duration of the flashing and one for the duration of each individual flash. There's a flashing state that notes which color should be shown or if the flashing effect is off. There's also a boolean being used to send relay the trigger to start the flashing from the Hit() function to the Update() function since the way I've implemented this feature is dependent on the update loop
+ * Also organized the MonogameEnemy and MonogameCreature scripts -> added some comments and regions to make sections more clear 
+  
+### Next Steps
+ * Collision bits 
+  
 ## 6 April 2024 | 13:35
 ### On Damage Flashing Again
  * So, I am going to implement state for the flashing but it'd be it's own state that is separate. Just using the bool IsFlashing didn't allow for noting whether or not the color is being displayed or not.
