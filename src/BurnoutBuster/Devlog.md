@@ -1,5 +1,19 @@
 # Devlog
   
+## 6 April 2024 | 10:09
+### Check In
+ * Writing this before I actually start working on this (which won't be for a few hours) so I can just start working when I do get to start working on this
+ * Starting progress for the MVP milestone. As the previous entry illustrates, I've already sat down and noted out all the things I need to do for the next milestone so I can move forward with a direction
+ * Today/this weekend, I want to tackle the bugs and unfinished functionality in the project so that next week I can focus on building out the game loop more (with progression and implementing aesthetics)
+  
+### Goals
+ * Damage flash for characters 
+ * Have enemy collide with other enemies
+ * Adjust the player's collision box to match it's sprite
+ * Make dash an actual dash rather than just teleporting around
+ * Give the player a hit box that is different from (and bigger than) it's hitbox
+  
+   
 ## 3 April 2024 | 14:02
 ### Vertical Slice Reflection
 I wasn't able to finish all that I wanted to for the vertical slice milestone. I didn't expect to have to handle collision. Part of that came from the fact that the project I used a kind of a jumping off point for this one really didn't implement a proper collision system and I had forgotten that fact. So, a considerable amount of time went into reading throught the scripts and files of the MonoGame.Extended.Collision system so that I could implement my own version of it. There are a couple features I also pulled from Unity's collision system for this (such as having an object attached to the collision information that system returns). The input buffer and chord analyzer also took more time than I thought it would. Thus I really didn't really have time to adequately build out and bug fix the other features I had wanted to have for this milestone like the level manager. I also didn't really have time for asset creation.
@@ -15,19 +29,19 @@ The Minimum Viable Product is the next milestone and it is due two weeks from ye
 Right now, the basic game loop exists in the game (albiet a very rudimentary one, but a game loop nonetheless that can be built on). The structure for the majority of the objects exists. I had wanted to include pick ups in the project, but I don't think I have time to implement that. Maybe later (since the end of the semester doesn't have to mean that I stop working on this project altogether). The main game interactions are there and can be built upon to further flesh out the gameplay. I had originally intended to have the player move between different rooms/levels in the game, but to make my life easier (:P) I am just going to have waves of enemies and have the game be a survive-as-long-as-you-can type of thing rather than something with destinct rooms. This won't be a hard pivot for the level system since as it doesn't work at all in it's current state and that would save me time with asset creation since I would've have to create a bunch of environment art (I'd just need one). 
   
 It seems like there are three main overarchering things that need to be done for the MVP milestone:
- 1. _Bug fixing -> fixing bugs and getting the non-functioning bits to function properly_
+ 1. __Bug fixing -> fixing bugs and getting the non-functioning bits to function properly__
   * Enemy flashing on hit
   * Enemy colliding with each other -> would prevent them from piling on top of each other 
   * Collision box/bounds position on the player being off from the texture 
   * The dash behaves more like a teleport rather than an actual dash
   * Having the player's hit box not be the same as their collision box
   
- 2. _Progression -> having some sense of progression so that the gameplay feels more like gameplay rather than fiddling around with what is essentially a digital toy_
+ 2. __Progression -> having some sense of progression so that the gameplay feels more like gameplay rather than fiddling around with what is essentially a digital toy__
   * More difficult enemies -> more difficult enemies -> stronger, different movement 
   * More effective weapons -> player gets better weapons the longer they survive, the better weapons they get
   * Waves of enemies -> more and more enemies spawn during each subsequent wave -> will pivot the functionality of the level class and manager for to be for this
  
- 3. _Asset Creation -> creating and implementing art and animations for game so that game looks and feels nice (if not at least decent)_
+ 3. __Asset Creation -> creating and implementing art and animations for game so that game looks and feels nice (if not at least decent)__
   * Enemy sprites -> for different enemy types
   * Weapon sprites and animation -> attack anim
   * Environment art
