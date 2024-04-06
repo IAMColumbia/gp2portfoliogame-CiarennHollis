@@ -8,6 +8,8 @@ namespace BurnoutBuster.Character
     public class Creature : IDamageable
     {
         // P R O P E R T I E S
+
+        //stats 
         public string Name;
         public int HitPoints
         {
@@ -15,6 +17,7 @@ namespace BurnoutBuster.Character
             set;
         }
 
+        //state
         private CreatureState state;
         public CreatureState State
         {
@@ -29,6 +32,7 @@ namespace BurnoutBuster.Character
             }
         }
 
+        //attacking
         public IWeapon MyWeapon;
 
         // C O N S T R U C T O R

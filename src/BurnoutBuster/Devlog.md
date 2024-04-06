@@ -1,8 +1,17 @@
 # Devlog
   
+## 6 April 2024 | 13:35
+### On Damage Flashing Again
+ * So, I am going to implement state for the flashing but it'd be it's own state that is separate. Just using the bool IsFlashing didn't allow for noting whether or not the color is being displayed or not.
+  
 ## 6 April 2024 | 12:48
 ### Check In
  * Going to actually start working now.
+  
+### On Damage Flashing
+ * So, for having the enemies flash their sprite texture when they are hit, I had origianlly thought to use state for that. That's what Jeff did when he implemented that during class as an example.
+ * There is a stunned state on the enemies that I thought to use for this purpose. However, I did have an intended use for this state and there currently isn't something similar on the player. Plus, the "flashing" state wouldn't be exclusive to the player's other states.
+ * So, because I don't want the flashing state to be exclusive, I am just going to use a boolean for it, especially since there's only 2 states for that: "flashing" and "not flashing";
   
 ## 6 April 2024 | 10:09
 ### Check In
@@ -11,7 +20,7 @@
  * Today/this weekend, I want to tackle the bugs and unfinished functionality in the project so that next week I can focus on building out the game loop more (with progression and implementing aesthetics)
   
 ### Goals
- * Damage flash for characters 
+ * Damage flash for characters [DONE]
  * Have enemy collide with other enemies
  * Adjust the player's collision box to match it's sprite
  * Make dash an actual dash rather than just teleporting around

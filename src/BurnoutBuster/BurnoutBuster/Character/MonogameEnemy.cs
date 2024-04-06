@@ -9,11 +9,14 @@ namespace BurnoutBuster.Character
 {
 
     public enum EnemyMovementMode { FollowPlayer }
-    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable, IPoolable
+    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable, IPoolable, IFlashableTexture
     {
         // P R O P E R T I E S
-
-        //DEPENDENCY 
+        #region 'Properties
+        //REFERENCES
+        /// <summary>
+        /// Reference to the player
+        /// </summary> 
         protected MonogameCreature creature;
         
         protected GameConsole console;
@@ -21,6 +24,8 @@ namespace BurnoutBuster.Character
         /// Encapsulated enemy
         /// </summary>
         internal GameConsoleEnemy enemy;
+
+        //STATE
         protected EnemyState enemyState;
         public EnemyState EnemyState
         {
@@ -34,6 +39,8 @@ namespace BurnoutBuster.Character
                 }
             }
         }
+
+        //STATS
         protected EnemyType enemyType;
         public EnemyType EnemyType
         {
@@ -59,28 +66,35 @@ namespace BurnoutBuster.Character
             }
         }
 
-        protected EnemyMovementMode movementMode;
 
-        // collision and tag bits
-        public Rectangle Bounds { get; set; }
-
-        public Tags Tag { get; }
-
-        public GameComponent GameObject { get; private set; }
-
-        // movement
+        //MOVEMENT 
         protected Vector2 moveVector;
         protected float movementSpeed;
+        protected EnemyMovementMode movementMode;
 
-        //attacking
+        //COLLISION AND TAG BITS
+        public Rectangle Bounds { get; set; }
+        public Tags Tag { get; }
+        public GameComponent GameObject { get; private set; }
+
+        //ATTACKING
         Timer attackDelayTimer;
         float attackDelayAmount;
-        bool canRestartTimer;
+        bool canRestartDelayTimer;
+
+        //IFLASHABLE
+        public Color flashColor { get => Color.Black; }
+        public bool canStartFlashing { get; set; }
+        public FlashingState flashingState { get; set; }
+        public Timer flashingTimer {  get; set; }  
+        public Timer individualFlashTimer {  get; set; }  
+        #endregion
 
         // C O N S T R U C T O R 
-        //DEPENDENCY FOR POC: creature ref
+        #region 'Constructor'
         public MonogameEnemy (Game game, MonogameCreature creature) : base (game)
         {
+            //setting refs
             this.console = (GameConsole) game.Services.GetService<IGameConsole>();
             if (this.console == null)
             {
@@ -90,66 +104,85 @@ namespace BurnoutBuster.Character
             enemy = new GameConsoleEnemy(console);
             this.creature = creature;
 
+            //collision bits
             GameObject = this;
             this.Tag = Tags.Enemy;
 
+            //attacking
             attackDelayTimer = new Timer();
             attackDelayTimer.State = TimerState.Off;
             attackDelayAmount = 1500; // in milliseconds
-            canRestartTimer = false;
+            canRestartDelayTimer = false;
+
+            //damage flashing
+            canStartFlashing = false;
+            flashingState = FlashingState.NotFlashing;
+            flashingTimer = new Timer();    
+            individualFlashTimer = new Timer(); 
         }
+        #endregion
 
         // I N I T
+        #region 'Init'
         public override void Initialize()
         {
             base.Initialize();
         }
         protected override void LoadContent()
         {
+            //stats
             this.HitPoints = 10;
             this.originalHitPoints = HitPoints;
             this.Damage = 1;
-
-            this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
-            this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
-            
-            //this.Location = new Vector2(200, 200);
             this.movementSpeed = 1;
 
-            //this.Bounds.Position = this.Location;
-            
-            
+            //texture set up
+            this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
+            this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.ShowMarkers = true;
 
             base.LoadContent();
         }
+        #endregion
+
         // U P D A T E
+        #region 'Update'
         public override void Update(GameTime gameTime)
         {
-
             float time = (float)gameTime.TotalGameTime.TotalMilliseconds;
-            //CorrectColor();
             KeepEnemyOnScreen();
 
+            //collision
             UpdateBounds();
+
+            //state
             ManageState();
 
+            //attacking
             HandleAttackDelayTimer(time);
+
+            //reset speed
             this.movementSpeed = 1;
+
+            //flashing
+            HandleFlash(flashColor, time);
 
             base.Update(gameTime);
         }
         void HandleAttackDelayTimer(float time)
         {
-            if (canRestartTimer)
+            if (canRestartDelayTimer)
             {
                 attackDelayTimer.StartTimer(time, attackDelayAmount);
-                canRestartTimer= false;
+                canRestartDelayTimer= false;
             }
 
             attackDelayTimer.UpdateTimer(time);
         }
+        #endregion
+
         // D R A W 
+        #region 'Draw'
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
@@ -169,8 +202,10 @@ namespace BurnoutBuster.Character
             if (this.Location.Y < (this.spriteTexture.Height / 2))
                 this.Location.Y = (this.spriteTexture.Height / 2);
         }
+        #endregion
 
         // C O L L I S I O N
+        #region 'Collision'
         public void OnCollisionEnter(Collision.Collision collision)
         {
             if (collision != null)
@@ -194,8 +229,10 @@ namespace BurnoutBuster.Character
         {
             this.Bounds = this.Rectangle;
         }
+        #endregion
 
         // S T A T E    M A N A G E M E N T 
+        #region 'State management'
         void OnEnemyStateChanged()
         {
             // logic for what happens when the enemy state changes
@@ -205,8 +242,10 @@ namespace BurnoutBuster.Character
             if (HitPoints <= 0)
                 this.Die();
         }
+        #endregion
 
         // M O V E M E N T
+        #region 'Movement'
         public virtual void Move(GameTime gameTime)
         {
             if (EnemyState == EnemyState.Normal)
@@ -227,14 +266,16 @@ namespace BurnoutBuster.Character
             //this.Bounds.Position = this.Location;
             //this.Location = Move amount;
         }
+        #endregion
 
-        // IDAMAGABLE
+        // I D A M A G A B L E
+        #region 'IDamageable implementation'
         public virtual void Hit(int damageAmount)
         {
             // play hit animation 
             this.enemy.Hit(damageAmount);
             this.console.GameConsoleWrite($"Enemy Health: {HitPoints}");
-            //FlashColor(Color.Red);
+            canStartFlashing = true;
         }
 
         public virtual void Attack(IDamageable target)
@@ -244,7 +285,7 @@ namespace BurnoutBuster.Character
                 || attackDelayTimer.State == TimerState.Ended)
             {
                 enemy.Attack(target);
-                canRestartTimer = true;
+                canRestartDelayTimer = true;
             }
         }
         public virtual void KnockBack(Vector2 knockbackVector)
@@ -258,8 +299,10 @@ namespace BurnoutBuster.Character
             this.enemy.Die();
             this.Reset();
         }
+        #endregion
 
-        // IPOOLABLE
+        // I P O O L A B L E
+        #region 'IPoolable implementation'
         public void Reset()
         {
             this.HitPoints = originalHitPoints;
@@ -272,16 +315,69 @@ namespace BurnoutBuster.Character
             this.Location = spawnLocation;
             this.Enabled = true;
         }
+        #endregion
 
-        // TEXTURE EFFECTS
-        private void FlashColor(Color color)
+        // T E X T U R E   E F F E C T S
+        #region 'Texture effects'
+        public void HandleFlash(Color color, float time)
         {
-            this.DrawColor = color;
+            // CAN WE START FLASHING?
+            if (canStartFlashing)
+            {
+                this.flashingState = FlashingState.FlashingColor;
+                this.flashingTimer.StartTimer(time, 1000); // TD hard coded time length
+                canStartFlashing = false;
+            }
+
+            // ARE WE STILL FLASHING?
+            this.flashingTimer.UpdateTimer(time);
+
+            if (flashingTimer.State == TimerState.Off
+                || flashingTimer.State == TimerState.Ended)
+            {
+                flashingState = FlashingState.NotFlashing;
+                this.DrawColor = Color.White;
+            }
+
+
+            // FLASHING BEHAVIOR
+            if (flashingState != FlashingState.NotFlashing)
+            {
+                //what color are we supposed to be if we are flashing?
+                this.individualFlashTimer.UpdateTimer(time);
+
+                if (individualFlashTimer.State == TimerState.Off
+                    || individualFlashTimer.State == TimerState.Ended)
+                {
+                    //update the flashing state 
+                    if (flashingState == FlashingState.NormalColor)
+                    {
+                        flashingState = FlashingState.FlashingColor;
+                    }
+                    else if (flashingState == FlashingState.FlashingColor)
+                    {
+                        flashingState = FlashingState.NormalColor;
+                    }
+
+                    // update the draw color based on the flashing 
+                    switch (flashingState)
+                    {
+                        case FlashingState.NormalColor:
+                            this.DrawColor = Color.White;
+                            break;
+
+                        case FlashingState.FlashingColor:
+                            this.DrawColor = color;
+                            break;
+                    }
+
+                    individualFlashTimer.StartTimer(time, 100); // in ms
+                }
+            
+            }
         }
-        private void CorrectColor()
-        {
-            this.DrawColor = Color.White;
-        }
+        #endregion
+
 
     }
 }

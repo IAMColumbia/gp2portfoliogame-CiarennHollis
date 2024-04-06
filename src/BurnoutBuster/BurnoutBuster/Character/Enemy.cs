@@ -6,9 +6,13 @@ namespace BurnoutBuster.Character
     public abstract class Enemy : IEnemy, IDamageable
     {
         // P R O P E R T I E S
+        
+        //stats
         public int HitPoints { get; set; }
         public int Damage { get; set; }
         public EnemyType Type;
+
+        //state
         private EnemyState state;
         public EnemyState State
         {
@@ -35,12 +39,14 @@ namespace BurnoutBuster.Character
         {
             // implement movement behavior [TD]
         }
+
         public virtual void Attack(IDamageable target)
         {
             // attack logic [TD]
             target.Hit(Damage);
         }
 
+        //IDAMAGEABLE
         public void Hit(int damageAmount)
         {
             HitPoints -= damageAmount;
@@ -56,6 +62,7 @@ namespace BurnoutBuster.Character
                 this.State = EnemyState.Dead;
         }
 
+        //CONSOLE STUFF
         public virtual void Log(string message)
         {
             Console.WriteLine(message);
