@@ -1,7 +1,6 @@
 ﻿using BurnoutBuster.Character;
-using BurnoutBuster.Physics;
 using BurnoutBuster.CommandPat;
-using BurnoutBuster.Levels;
+using BurnoutBuster.Physics;
 using BurnoutBuster.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -126,8 +125,8 @@ namespace BurnoutBuster
             UpdateHUDvalues();
 
             //TD dirty game exit for VS
-            if (creature.CheckCreatureState(CreatureState.Shutdown))
-                Exit();
+            //if (creature.CheckCreatureState(CreatureState.Shutdown))
+            //    Exit();
 
             base.Update(gameTime);
         }

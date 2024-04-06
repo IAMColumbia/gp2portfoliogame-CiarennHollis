@@ -2,6 +2,20 @@
   
 ## 6 April 2024 | 10:09
 ### Check In
+ * Implemented a player hit box so the player can attack the enemy without taking damage 
+	* Uses an interface to do so that inherits from ICollidable. 
+	* The Collision manager also has some extra functionality. 
+	* Learned the hard way that doing a try/catch thing several times an update slows the game down like 300%
+ * I don't know right now if I want to fix the dash since it's effectively a teleport thing right now with the way it works :P It's not something that needs to be fixed right now so I am going to be with this for now.
+ * Close Isues: #20, #21, #22, #24
+  
+### Next Steps
+ * Enemy sprites
+ * Weapon sprites
+ * Weapon/attack animation
+  
+## 6 April 2024 | 10:09
+### Check In
  * Got the damage flash to work. It uses two timers: one for the total duration of the flashing and one for the duration of each individual flash. There's a flashing state that notes which color should be shown or if the flashing effect is off. There's also a boolean being used to send relay the trigger to start the flashing from the Hit() function to the Update() function since the way I've implemented this feature is dependent on the update loop
  * Also organized the MonogameEnemy and MonogameCreature scripts -> added some comments and regions to make sections more clear 
   
@@ -31,8 +45,8 @@
  * Damage flash for characters [DONE]
  * Have enemy collide with other enemies [DONE] -> issue with this fix is that it glitches out when enemies are spawned ontop of each other
  * Adjust the player's collision box to match it's sprite [DONE] -> the keepCreatureOnScreen method just needed to be adjusted since the issue really was that the player could move off screen slightly
- * Make dash an actual dash rather than just teleporting around
- * Give the player a hit box that is different from (and bigger than) it's hitbox
+ * Make dash an actual dash rather than just teleporting around [TBD/LATER]
+ * Give the player a hit box that is different from (and bigger than) it's hitbox [DONE]
   
    
 ## 3 April 2024 | 14:02

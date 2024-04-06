@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace BurnoutBuster.Physics
@@ -82,11 +81,11 @@ namespace BurnoutBuster.Physics
         // adapted from MonoGame.Extended.Collision.CollisionComponent.Update(...);
         private void CheckCollision()
         {
-            foreach (ICollidable obj in collisionObjects)
+            foreach (ICollidable target in collisionObjects)
             {
-                ICollidable target = obj;
+                //ICollidable target = obj;
 
-                foreach (ICollidable otherObj in CollisionQuery(target))
+                foreach (ICollidable otherObj in CollisionQuery(target, target.Bounds))
                 {
                     Collision collision = new Collision
                     {
@@ -95,21 +94,42 @@ namespace BurnoutBuster.Physics
                     };
                     target.OnCollisionEnter(collision);
                 }
+
+                CheckHitBox(target);
             }
         }
-        private List<ICollidable> CollisionQuery(ICollidable target)
+        private void CheckHitBox(ICollidable obj)
+        {
+            IHasHitBox target = obj as IHasHitBox;
+
+            if (target != null)
+            {
+                foreach (ICollidable otherObj in CollisionQuery(target, target.HitBox))
+                {
+                    Collision collision = new Collision
+                    {
+                        OtherObject = otherObj,
+                        PenetrationVector = CalculatePenetrationVector(target.HitBox, otherObj.Bounds)
+                    };
+                    target.OnHitBoxEnter(collision);
+                }
+            }
+            
+        }
+        private List<ICollidable> CollisionQuery(ICollidable target, Rectangle collisionBoxToCheck)
         {
             List<ICollidable> queryList = new List<ICollidable>();
             foreach (ICollidable obj in collisionObjects)
             {
                 if (obj != target && obj.GameObject.Enabled) // making sure we don't check collision on ourselves nor on diasble objects
                 {
-                    if (obj.Bounds.Intersects(target.Bounds))
+                    if (obj.Bounds.Intersects(collisionBoxToCheck))
                         queryList.Add(obj);
                 }
             }
 
             return queryList;
         }
+
     }
 }

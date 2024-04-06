@@ -2,7 +2,6 @@
 using BurnoutBuster.CommandPat.Commands;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
-using SharpDX.XAudio2;
 
 namespace BurnoutBuster.Character
 {
@@ -83,11 +82,22 @@ namespace BurnoutBuster.Character
             {
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
                 {
-                    PerformAttackAction((IDamageable)collision.OtherObject, actionToPerform);
+                    
                 }
             }
 
             base.OnCollisionEnter(collision);
+        }
+        public override void OnHitBoxEnter(Physics.Collision collision)
+        {
+            if (collision != null)
+            {
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
+                {
+                    console.GameConsoleWrite("Hit enemy");
+                    PerformAttackAction((IDamageable)collision.OtherObject, actionToPerform);
+                }
+            }
         }
 
 

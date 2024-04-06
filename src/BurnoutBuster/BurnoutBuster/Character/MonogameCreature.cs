@@ -13,7 +13,7 @@ using ICollidable = BurnoutBuster.Physics.ICollidable;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite, IDamageable, ICollidable, IFlashableTexture
+    public class MonogameCreature : DrawableSprite, IDamageable, IHasHitBox, IFlashableTexture
     {
         // P R O P E R T I E S
 
@@ -62,6 +62,9 @@ namespace BurnoutBuster.Character
         public Tags Tag { get; }
         public GameComponent GameObject { get; private set; }
         protected Vector2 moveVector;
+
+        //HIT BOX
+        public Rectangle HitBox {  get; set; }
 
         //IFLASHABLE
         public Color flashColor { get => Color.Black; }
@@ -167,17 +170,28 @@ namespace BurnoutBuster.Character
         {
             if (collision != null)
             {
+                
+            }
+        }
+        private void UpdateBounds()
+        {
+            Bounds = this.Rectangle;
+
+            int increaseAmount = this.Weapon.AttackRadius;
+            HitBox = new Rectangle(Bounds.X - increaseAmount, Bounds.Y - increaseAmount, 
+                Bounds.Width + increaseAmount, Bounds.Height + increaseAmount);
+        }
+
+        public virtual void OnHitBoxEnter(Collision collision)
+        {
+            if (collision != null)
+            {
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
                 {
                     //console.GameConsoleWrite("Collided with an Enemy");
                 }
             }
         }
-        private void UpdateBounds()
-        {
-            Bounds = this.Rectangle;
-        }
-
 
         // S T A T E
         public bool CheckCreatureState(CreatureState state)
