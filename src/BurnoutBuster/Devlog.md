@@ -1,5 +1,9 @@
 # Devlog
   
+## 6 April 2024 | 12:48
+### Check In
+ * Going to actually start working now.
+  
 ## 6 April 2024 | 10:09
 ### Check In
  * Writing this before I actually start working on this (which won't be for a few hours) so I can just start working when I do get to start working on this
