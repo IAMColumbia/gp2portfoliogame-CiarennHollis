@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BurnoutBuster.Collision
+namespace BurnoutBuster.Physics
 {
     public class CollisionManager : GameComponent
     {

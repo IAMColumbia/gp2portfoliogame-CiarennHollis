@@ -1,5 +1,5 @@
 ﻿using BurnoutBuster.Character;
-using BurnoutBuster.Collision;
+using BurnoutBuster.Physics;
 using BurnoutBuster.CommandPat;
 using BurnoutBuster.Levels;
 using BurnoutBuster.UI;

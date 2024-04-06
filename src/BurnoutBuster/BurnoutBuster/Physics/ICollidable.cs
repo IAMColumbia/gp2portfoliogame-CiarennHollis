@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BurnoutBuster.Collision
+namespace BurnoutBuster.Physics
 {
     public interface ICollidable : ITaggable
     {

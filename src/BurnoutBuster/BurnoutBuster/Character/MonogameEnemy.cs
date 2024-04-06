@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using ICollidable = BurnoutBuster.Collision.ICollidable;
+using ICollidable = BurnoutBuster.Physics.ICollidable;
 
 namespace BurnoutBuster.Character
 {
@@ -206,7 +206,7 @@ namespace BurnoutBuster.Character
 
         // C O L L I S I O N
         #region 'Collision'
-        public void OnCollisionEnter(Collision.Collision collision)
+        public void OnCollisionEnter(Physics.Collision collision)
         {
             if (collision != null)
             {

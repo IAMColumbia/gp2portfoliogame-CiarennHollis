@@ -1,4 +1,4 @@
-﻿using BurnoutBuster.Collision;
+﻿using BurnoutBuster.Physics;
 using BurnoutBuster.Input;
 using BurnoutBuster.Items;
 using BurnoutBuster.UI;
@@ -9,7 +9,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using ICollidable = BurnoutBuster.Collision.ICollidable;
+using ICollidable = BurnoutBuster.Physics.ICollidable;
 
 namespace BurnoutBuster.Character
 {
@@ -163,7 +163,7 @@ namespace BurnoutBuster.Character
         #endregion
 
         // C O L L I S I O N
-        public virtual void OnCollisionEnter(Collision.Collision collision)
+        public virtual void OnCollisionEnter(Physics.Collision collision)
         {
             if (collision != null)
             {
@@ -224,7 +224,7 @@ namespace BurnoutBuster.Character
             if (canStartFlashing)
             {
                 this.flashingState = FlashingState.FlashingColor;
-                this.flashingTimer.StartTimer(time, 1000); // TD hard coded time length
+                this.flashingTimer.StartTimer(time, 1500); // TD hard coded time length
                 canStartFlashing = false;
             }
 

@@ -77,7 +77,7 @@ namespace BurnoutBuster.Character
         #endregion
 
         // C O L L I S I O N
-        public override void OnCollisionEnter(Collision.Collision collision)
+        public override void OnCollisionEnter(Physics.Collision collision)
         {
             if (collision != null)
             {

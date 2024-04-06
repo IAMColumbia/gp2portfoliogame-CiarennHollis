@@ -1,4 +1,4 @@
-﻿using BurnoutBuster.Collision;
+﻿using BurnoutBuster.Physics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
