@@ -3,3 +3,6 @@ Asset Log
 ## Characters
 creature.png
 BasicEnemy.png
+
+## Environment
+Background.png

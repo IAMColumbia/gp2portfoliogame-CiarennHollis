@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using MonoGameLibrary.Sprite;
+using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
 using System;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
@@ -41,7 +43,7 @@ namespace BurnoutBuster
         CommandProcessor commandProcessor;
 
         //levels
-        //LevelManager levelManager;
+        Sprite background;
 
         // C O N S T R U C T O R
         public Game1()
@@ -51,6 +53,12 @@ namespace BurnoutBuster
             IsMouseVisible = true;
 
             rand = new Random();
+
+            background = new Sprite(this)
+            {
+                Location = Vector2.Zero
+            };
+            this.Components.Add(background);
 
             //levelManager = new LevelManager(this);
             //this.Components.Add(levelManager);
@@ -72,11 +80,13 @@ namespace BurnoutBuster
 
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
+
         }
 
         // I N I T 
         protected override void Initialize()
         {
+            //background.Initialize();
             _collision.Initialize();
             base.Initialize();
             SetScreenDimensions();
@@ -87,6 +97,7 @@ namespace BurnoutBuster
             console = (GameConsole)this.Services.GetService<IGameConsole>();
             
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            background.spriteTexture = this.Content.Load<Texture2D>("Environment/Background");
 
             SetUpCollisionActors();
             SetUpHUDvalues();
@@ -145,6 +156,9 @@ namespace BurnoutBuster
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //levelManager.Draw(gameTime, _spriteBatch);
+            _spriteBatch.Begin();   
+            _spriteBatch.DrawSprite(background);
+            _spriteBatch.End(); 
 
             base.Draw(gameTime);
         }

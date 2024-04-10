@@ -101,7 +101,7 @@ namespace BurnoutBuster.Character
         // I N I T
         protected override void LoadContent()
         {
-            this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/creature");
+            this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/Creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
 
