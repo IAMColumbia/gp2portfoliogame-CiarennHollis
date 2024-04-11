@@ -1,4 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGameLibrary.Util;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace BurnoutBuster.Physics
@@ -8,15 +13,38 @@ namespace BurnoutBuster.Physics
         // P R O P E R T I E S
         private List<ICollidable> collisionObjects;
 
+        //DEBUG
+        private enum CM_DebugState { ShowCollisionBoxes, HideCollisionBoxes }  
+        private CM_DebugState debugState;
+        //Key to hide and show debug things
+        public Keys ToggleDebugKey;
+        private InputHandler input;
+
+
         // C O N S T R U C T O R 
         public CollisionManager(Game game) : base(game)
         {
+            debugState = CM_DebugState.ShowCollisionBoxes;
             collisionObjects = new List<ICollidable>();
+        }
+
+        public CollisionManager(Game game, InputHandler input) : base(game)
+        {
+            debugState = CM_DebugState.ShowCollisionBoxes;
+            collisionObjects = new List<ICollidable>();
+            this.input = input;
+
+            
         }
 
         // I N I T
         public override void Initialize()
         {
+            if (input == null)
+            {
+                input = (InputHandler)Game.Services.GetService(typeof(IInputHandler));
+            }
+
             base.Initialize();
         }
 
@@ -26,6 +54,8 @@ namespace BurnoutBuster.Physics
             base.Update(gameTime);
 
             CheckCollision();
+
+            ToggleDebugVisuals();
         }
 
 
@@ -84,18 +114,21 @@ namespace BurnoutBuster.Physics
             foreach (ICollidable target in collisionObjects)
             {
                 //ICollidable target = obj;
-
-                foreach (ICollidable otherObj in CollisionQuery(target, target.Bounds))
+                if (target.IsCollisionOn)
                 {
-                    Collision collision = new Collision
-                    {
-                        OtherObject = otherObj,
-                        PenetrationVector = CalculatePenetrationVector(target.Bounds, otherObj.Bounds)
-                    };
-                    target.OnCollisionEnter(collision);
-                }
 
-                CheckHitBox(target);
+                    foreach (ICollidable otherObj in CollisionQuery(target, target.Bounds))
+                    {
+                        Collision collision = new Collision
+                        {
+                            OtherObject = otherObj,
+                            PenetrationVector = CalculatePenetrationVector(target.Bounds, otherObj.Bounds)
+                        };
+                        target.OnCollisionEnter(collision);
+                    }
+
+                    CheckHitBox(target);
+                }
             }
         }
         private void CheckHitBox(ICollidable obj)
@@ -129,6 +162,42 @@ namespace BurnoutBuster.Physics
             }
 
             return queryList;
+        }
+
+        public void ToggleDebugVisuals()
+        {
+            switch (debugState)
+            {
+                case CM_DebugState.ShowCollisionBoxes:
+                    debugState = CM_DebugState.HideCollisionBoxes;
+                    break;
+                case CM_DebugState.HideCollisionBoxes:
+                    debugState = CM_DebugState.ShowCollisionBoxes;
+                    break;
+            }
+        }
+
+        public void DrawCollisionRectangles(SpriteBatch _spritebatch)
+        {
+            switch(debugState)
+            {
+                case CM_DebugState.ShowCollisionBoxes:
+                    foreach(ICollidable obj in collisionObjects)
+                    {
+                        if (obj.IsCollisionOn)
+                            DrawOneRectangle(_spritebatch, obj);
+                    }
+                    break;
+            }
+        }
+
+        private void DrawOneRectangle(SpriteBatch _spritebatch, ICollidable obj)
+        {
+            _spritebatch.DrawRectangle(obj.Bounds, Color.Red, 1, 0);
+
+            IHasHitBox HBobj = obj as IHasHitBox;
+            if (HBobj != null)
+                _spritebatch.DrawRectangle(HBobj.HitBox, Color.Yellow, 1, 0);
         }
 
     }

@@ -1,8 +1,12 @@
-Asset Log
-
+# Asset Log
+  
 ## Characters
-creature.png
+Creature.png
 BasicEnemy.png
-
+  
 ## Environment
 Background.png
+  
+## Items
+SimpleSword.png
+GoldSword.png

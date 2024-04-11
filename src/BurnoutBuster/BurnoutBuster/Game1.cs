@@ -31,7 +31,6 @@ namespace BurnoutBuster
         GameConsole console;
 
         //collision
-        private CollisionComponent _collision;
         private CollisionManager _collisionManager;
 
         //characters
@@ -63,9 +62,6 @@ namespace BurnoutBuster
             //levelManager = new LevelManager(this);
             //this.Components.Add(levelManager);
 
-            _collision = new CollisionComponent(new RectangleF(0, 0, mapWidth, mapHeight));
-            this.Components.Add(_collision);
-
             _collisionManager = new CollisionManager(this);
             this.Components.Add(_collisionManager);
 
@@ -87,7 +83,6 @@ namespace BurnoutBuster
         protected override void Initialize()
         {
             //background.Initialize();
-            _collision.Initialize();
             base.Initialize();
             SetScreenDimensions();
         }
@@ -132,7 +127,6 @@ namespace BurnoutBuster
 
             WriteConsoleInfo();
 
-            _collision.Update(gameTime);
             UpdateHUDvalues();
 
             //TD dirty game exit for VS
@@ -158,6 +152,9 @@ namespace BurnoutBuster
             //levelManager.Draw(gameTime, _spriteBatch);
             _spriteBatch.Begin();   
             _spriteBatch.DrawSprite(background);
+#if DEBUG
+            _collisionManager.DrawCollisionRectangles(_spriteBatch);
+#endif
             _spriteBatch.End(); 
 
             base.Draw(gameTime);

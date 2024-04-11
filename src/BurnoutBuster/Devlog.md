@@ -1,5 +1,34 @@
 # Devlog
   
+## 11 April 2024 | 13:37
+### Check In
+ * Implemented debugging feature for the collision system
+ * Doing so did uncover a bug that that system has -> collision boxes on the enemies don't get updated or removed when the enemy respawns so that that hitbox ends up getting left behind in the scene and still cause the player damage.
+  
+### Next Steps
+ * Collision/enemy respawn bug [DONE] -> the collision box wasn't being disabled even though the enemy was getting disabled.
+ * Enemy sprites
+ * Weapon/attack animation
+ * Player state
+ * Levels/wave managment
+ * Enemy types 
+  
+## 11 April 2024 | 13:37
+### Check In
+ * Made and imported some new textures for the characters that are bigger
+ * Made textures for some weapons
+ * Made a background texture
+ * I wanted to write a debug feature for the collision system that would allow for the collision boxes (and hit boxes if applicable) to be visible.	
+	* It would allow me to better debug the collision system.
+	* It would also make it easier to showcase that feature of the project.
+	* I'm going to have this debug feature mimic the way the console gets toggled on and off
+  
+### Next Steps
+ * Collision debug feature [DONE]
+ * Enemy sprites
+ * Weapon/attack animation
+  
+  
 ## 6 April 2024 | 10:09
 ### Check In
  * Implemented a player hit box so the player can attack the enemy without taking damage 
@@ -11,7 +40,7 @@
   
 ### Next Steps
  * Enemy sprites
- * Weapon sprites
+ * Weapon sprites [DONE]
  * Weapon/attack animation
   
 ## 6 April 2024 | 10:09
