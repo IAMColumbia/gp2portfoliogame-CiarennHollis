@@ -74,6 +74,7 @@ namespace BurnoutBuster.Character
 
         //COLLISION AND TAG BITS
         public Rectangle Bounds { get; set; }
+        public bool IsCollisionOn { get; set; }
         public Tags Tag { get; }
         public GameComponent GameObject { get; private set; }
 
@@ -308,12 +309,14 @@ namespace BurnoutBuster.Character
             this.HitPoints = originalHitPoints;
             this.enemyState = EnemyState.Inactive;
             this.Enabled = false;
+            this.IsCollisionOn = false;
         }
         public void Activate(Vector2 spawnLocation)
         {
             this.enemyState = EnemyState.Normal;
             this.Location = spawnLocation;
             this.Enabled = true;
+            this.IsCollisionOn = true;
         }
         #endregion
 

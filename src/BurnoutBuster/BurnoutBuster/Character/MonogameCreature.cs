@@ -59,6 +59,7 @@ namespace BurnoutBuster.Character
 
         //COLLISION AND TAG
         public Rectangle Bounds { get; set; }
+        public bool IsCollisionOn { get; set; }
         public Tags Tag { get; }
         public GameComponent GameObject { get; private set; }
         protected Vector2 moveVector;
@@ -86,8 +87,9 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             creature = new GameConsoleCreature((GameConsole)game.Services.GetService<IGameConsole>());
-            
+
             //collision
+            IsCollisionOn = true;
             GameObject = this;
             this.Tag = Tags.Player;
 
