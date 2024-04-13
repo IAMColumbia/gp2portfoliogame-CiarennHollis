@@ -117,6 +117,9 @@ namespace BurnoutBuster
         void SetUpHUDvalues()
         {
             this.HUD.AddItem("Creature HP", creature.HitPoints);
+            this.HUD.AddItem("Enemies Left", enemyManager.EnemiesLeftInWave);
+            this.HUD.AddItem("Wave Number", enemyManager.WaveCounter);
+            this.HUD.AddItem("Wave Status", enemyManager.WaveState);
         }
 
         // U P D A T E 
@@ -142,6 +145,9 @@ namespace BurnoutBuster
         void UpdateHUDvalues()
         {
             this.HUD.UpdateHUDSlot("Creature HP", creature.HitPoints);
+            this.HUD.UpdateHUDSlot("Enemies Left", enemyManager.EnemiesLeftInWave);
+            this.HUD.UpdateHUDSlot("Wave Number", enemyManager.WaveCounter);
+            this.HUD.UpdateHUDSlot("Wave Status", enemyManager.WaveState);
         }
 
         // D R A W

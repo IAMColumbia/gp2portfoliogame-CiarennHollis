@@ -74,7 +74,7 @@ namespace BurnoutBuster.UI
             {
                 slotContents = $"{item}: {itemsToDisplay[item]}";
                 spriteBatch.DrawString(fontRegular, slotContents, position, uiColor);
-                position += new Vector2(100, 100);
+                position += new Vector2(200, 0);
             }
         }
     }

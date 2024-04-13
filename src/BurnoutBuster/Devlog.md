@@ -1,9 +1,40 @@
 # Devlog
-
- ## 13 April 2024 | 13:34
+  
+## 13 April 2024 | 17:23
+### Check In
+ * Implemented the enemy waves system in the enemy manager
+ * Added wave info to the HUD
+  
+### On Game Screens
+ * So, for implementing this, I will definitely implement using games states (ie, title, playing, lose, win) and then update and draw the appropriate thing based off that game state 
+ * I will probably make a class that's a "game screen" for the non-gameplay screen that hold their respective info and draw it.
+	* I'm not going to have this class inherit from the Sprite class though since it doesn't need all the things a sprite has
+  
+### Next Steps
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
+  
+## 13 April 2024 | 16:08
+### Check In
+ * Going to start working on this again.
+  
+### On Levels/EnemyWaves/Game Progression
+ * So, I had originally want this game to have different rooms that the player would fight through. But this is out of scope for me now.
+ * Instead, I'm going to shift to just having waves of enemies that progressively become more.
+	* The enemy manager already has functionality for progressively spawning in new enemies. It wouldn't hard to add some extra functionality to it for managing waves of enemies more explicity (like with a counter keeping track of which wave the player is one and the number of enemies left in the current wave)
+ * Then the game will have the HUD display the enemy kill count and wave counter
+  
+### Goals
+ * Levels/wave managment [DONE] [ISSUE #28 CLOSED]
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
+  
+## 13 April 2024 | 13:34
 ### Check In
  * Just finished refactoring the logic for the way the enemy manager spawns enemies so that there's a delay between spawns.
-	* Need to take a break for now.
+ * Need to take a break for now.
   
 ### Next Steps
  * Levels/wave managment [WORKING ON]
@@ -37,9 +68,9 @@
  * Sitting down to work on this today. I want to try to get the majority of the work for this milestone done today, at least the programming bits
   
 ### Goals
- * Player state [DONE]
+ * Player state [DONE] [ISSUE #17 CLOSED]
  * Levels/wave managment [WORKING ON]
- * Enemy types [DONE]
+ * Enemy types [DONE] [ISSUE #26 CLOSED]
  * Game restart and screens
  * Enemy sprites
  * Weapon/attack animation
