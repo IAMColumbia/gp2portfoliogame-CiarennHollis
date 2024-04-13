@@ -1,23 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.Extended.Collisions;
-using MonoGame.Extended;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BurnoutBuster.Character
 {
-    public class BasicEnemy : MonogameEnemy
+    public class HeavyEnemy : MonogameEnemy
     {
         // P R O P E R T I E S
-
-
-        // C O N S T R U C T O R 
-        public BasicEnemy(Game game, MonogameCreature creature) : base(game, creature)
+        
+        // C O N S T R U C T O R
+        public HeavyEnemy(Game game, MonogameCreature creature) : base(game, creature)
         {
-            this.EnemyType = EnemyType.Minor;
-            this.movementMode = EnemyMovementMode.FollowPlayer;
+            this.EnemyType = EnemyType.Heavy;
+            this.movementMode = EnemyMovementMode.SlowApproach;
 
-
-            this.HitPoints = 10;
-            this.Damage = 1;
+            this.HitPoints = 20;
+            this.Damage = 5;
         }
 
         public override void Update(GameTime gameTime)
@@ -26,6 +28,7 @@ namespace BurnoutBuster.Character
 
             base.Update(gameTime);
         }
+
         // M E T H O D S
         public override void Move(GameTime gameTime)
         {

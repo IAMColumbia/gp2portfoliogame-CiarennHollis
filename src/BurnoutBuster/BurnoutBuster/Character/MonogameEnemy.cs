@@ -8,7 +8,7 @@ using ICollidable = BurnoutBuster.Physics.ICollidable;
 namespace BurnoutBuster.Character
 {
 
-    public enum EnemyMovementMode { FollowPlayer }
+    public enum EnemyMovementMode { FollowPlayer, ChargePlayer, SlowApproach }
     public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable, IPoolable, IFlashableTexture
     {
         // P R O P E R T I E S
@@ -71,6 +71,9 @@ namespace BurnoutBuster.Character
         protected Vector2 moveVector;
         protected float movementSpeed;
         protected EnemyMovementMode movementMode;
+        //for charging movement behavior so it doesn't charge right away
+        private int numOfUpdateCyclesToWaitBeforeMoving;
+        private int numOfUpdateCyclesPassed;
 
         //COLLISION AND TAG BITS
         public Rectangle Bounds { get; set; }
@@ -105,6 +108,13 @@ namespace BurnoutBuster.Character
             enemy = new GameConsoleEnemy(console);
             this.creature = creature;
 
+            //stats 
+            this.originalHitPoints = HitPoints;
+
+            //movement
+            numOfUpdateCyclesToWaitBeforeMoving = 500;
+            numOfUpdateCyclesPassed = 0;
+
             //collision bits
             GameObject = this;
             this.Tag = Tags.Enemy;
@@ -132,9 +142,6 @@ namespace BurnoutBuster.Character
         protected override void LoadContent()
         {
             //stats
-            this.HitPoints = 10;
-            this.originalHitPoints = HitPoints;
-            this.Damage = 1;
             this.movementSpeed = 1;
 
             //texture set up
@@ -207,7 +214,7 @@ namespace BurnoutBuster.Character
 
         // C O L L I S I O N
         #region 'Collision'
-        public void OnCollisionEnter(Physics.Collision collision)
+        public virtual void OnCollisionEnter(Physics.Collision collision)
         {
             if (collision != null)
             {
@@ -249,23 +256,37 @@ namespace BurnoutBuster.Character
         #region 'Movement'
         public virtual void Move(GameTime gameTime)
         {
+            this.moveVector = this.creature.Location - this.Location;
+
             if (EnemyState == EnemyState.Normal)
             {
                 switch (movementMode)
                 {
                     case EnemyMovementMode.FollowPlayer:
-                        // follows the player
-                        this.moveVector = this.creature.Location - this.Location;
-                        moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
 
-                        this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f);
+                        moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * movementSpeed;
+                        this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f); //TD hard coded "amount"
+                        break;
+
+                    case EnemyMovementMode.ChargePlayer:
+                        numOfUpdateCyclesPassed++;
+                        if (numOfUpdateCyclesPassed == numOfUpdateCyclesToWaitBeforeMoving)
+                        {
+                            numOfUpdateCyclesPassed = 0;
+                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 2);
+                            this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f); //TD hard coded "amount"
+                        }
+
+                        break;
+
+                    case EnemyMovementMode.SlowApproach:
+                        moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed / 2.5f); //TD hard coded speed modifier
+                        this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f); //TD hard coded "amount"
                         break;
                 }
                 enemy.Move();
             }
             
-            //this.Bounds.Position = this.Location;
-            //this.Location = Move amount;
         }
         #endregion
 

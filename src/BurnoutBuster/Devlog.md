@@ -1,8 +1,18 @@
 # Devlog
   
-## 13 April 2024 | 13:37
+## 13 April 2024 | 12:24
 ### Check In
- * Sitting down to work on this today. I want to try to get the majority of the work for this milestone done today, at least the programming bits
+ * Making a note about the enemy types 
+  
+### On Enemy types
+ *  So, all the enemies in the game are children of the MonogameEnemy class.
+ * Currently, the variations are handled by the parent class. 
+ * I am aware that in having this this way, it gives a more responsibility to the MonogameEnemy class than it should probably have
+	* But, doing it this way lets me reuse a movement mode for multiple types of enemies (for multipe children) without having to copy and paste the same code
+  
+## 13 April 2024 | 11:20
+### Check In
+ * Making a note about the player state 
   
 ### On Player/Creature State
  * So, there are 3 states for the player: Normal, Overwhelmed, and Shutdown. 
@@ -11,14 +21,14 @@
 	* __Overwhelmed:__ I wanted to implement a feature to go along with this state where if the player lost more than half of their current HP in one hit, they would be handicapped movement and attacking wise
     	* So, to achieve this, I've added a previousHitpoint field to the MonogameCreature so that it could compare previous and current hit points and react if more than half has been lost 
   
-## 13 April 2024 | 13:37
+## 13 April 2024 | 11:00
 ### Check In
  * Sitting down to work on this today. I want to try to get the majority of the work for this milestone done today, at least the programming bits
   
 ### Goals
  * Player state [DONE]
  * Levels/wave managment 
- * Enemy types 
+ * Enemy types [DONE]
  * Game restart and screens
  * Enemy sprites
  * Weapon/attack animation
