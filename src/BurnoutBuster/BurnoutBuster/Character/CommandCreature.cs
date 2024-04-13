@@ -9,15 +9,15 @@ namespace BurnoutBuster.Character
     {
         // P R O P E R T I E S
 
-        //movement
+        //MOVEMENT
         Vector2 moveOnNextUpdate;
         float lerpAdjustment;
+        float reducedLerpAdjustment { get => lerpAdjustment - 2;  }
 
-        //combat
+        //COMBAT
         ActionCommands actionToPerform;
 
         // C O N S T R U C T O R
-        //DEPENDENCY FOR POC: enemy ref
         public CommandCreature(Game game) : base(game)
         {
             moveOnNextUpdate = Vector2.Zero;
@@ -51,9 +51,21 @@ namespace BurnoutBuster.Character
                 return;
 
             //move 
-            //this.Location += (moveOnNextUpdate * this.Speed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-            this.Location = Vector2.Lerp(this.Location, this.Location + moveOnNextUpdate, lerpAdjustment);
-            //this.Bounds.Position = this.Location;
+            switch (this.CreatureState)
+            {
+                case CreatureState.Normal:
+                    this.Location = Vector2.Lerp(this.Location, this.Location + moveOnNextUpdate, lerpAdjustment);
+                    break;
+
+                case CreatureState.Overwhelmed:
+                    this.Location = Vector2.Lerp(this.Location, this.Location + moveOnNextUpdate, reducedLerpAdjustment);
+                    break;
+
+                case CreatureState.Shutdown:
+                    //can't move if shutdown
+                    break;
+            }
+            
 
             //update texture facing direction
             UpdateFacingDirBasedOnDirection(moveOnNextUpdate);
@@ -110,19 +122,25 @@ namespace BurnoutBuster.Character
                     // do nothing
                     break;
                 case ActionCommands.Attack:
-                    Weapon.PerformAttack(target);
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformAttack(target, true); }
+                    else { Weapon.PerformAttack(target, false); }
+                    
                     break;
                 case ActionCommands.HeavyAttack:
-                    Weapon.PerformHeavyAttack(target);
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformHeavyAttack(target, true); }
+                    else { Weapon.PerformHeavyAttack(target, false); }
                     break;
                 case ActionCommands.DashAttack:
-                    Weapon.PerformDashAttack(target);
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformDashAttack(target, true); }
+                    else { Weapon.PerformDashAttack(target, false); }
                     break;
                 case ActionCommands.ComboAttack:
-                    Weapon.PerformComboAttack(target);
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformComboAttack(target, true); }
+                    else { Weapon.PerformComboAttack(target, false); }
                     break;
                 case ActionCommands.FinisherAttack:
-                    Weapon.PerformFinisherAttack(target);
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformFinisherAttack(target, true); }
+                    else { Weapon.PerformFinisherAttack(target, false); }
                     break;
             }
 

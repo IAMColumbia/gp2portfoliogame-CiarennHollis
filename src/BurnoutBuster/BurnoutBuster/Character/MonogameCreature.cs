@@ -47,9 +47,15 @@ namespace BurnoutBuster.Character
             get { return this.creature.HitPoints; }
             set 
             {
+                if (this.HitPoints != value)
+                    this.previousHitPoints = this.HitPoints;
                 this.creature.HitPoints = value; 
             }
         }
+        private int previousHitPoints;
+        private int originalHitPoints;
+        private float originalSpeed;
+        private float reducedSpeed { get => this.Speed * (2 / 3); }
 
         //ATTACKING
         public IWeapon Weapon
@@ -68,14 +74,13 @@ namespace BurnoutBuster.Character
         public Rectangle HitBox {  get; set; }
 
         //IFLASHABLE
-        public Color flashColor { get => Color.Black; }
+        public Color flashColor { get => Color.DarkRed; }
         public bool canStartFlashing { get; set; }
         public FlashingState flashingState { get; set; }
         public Timer flashingTimer { get; set; }
         public Timer individualFlashTimer { get; set; }
 
         // C O N S T R U C T O R
-        //DEPENDENCY FOR POC: enemy
         public MonogameCreature(Game game) : base(game)
         {
             //setting refs
@@ -87,6 +92,9 @@ namespace BurnoutBuster.Character
                 this.Game.Components.Add(this.console);
             }
             creature = new GameConsoleCreature((GameConsole)game.Services.GetService<IGameConsole>());
+
+            //hitpoints
+            previousHitPoints = originalHitPoints = HitPoints;
 
             //collision
             IsCollisionOn = true;
@@ -105,13 +113,28 @@ namespace BurnoutBuster.Character
         {
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/Creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
-            this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
+            this.Location = new Microsoft.Xna.Framework.Vector2(300, 450);
 
             this.ShowMarkers = true;
 
             this.Speed = 150;
 
             base.LoadContent();
+        }
+
+        public void Reset()
+        {
+            //stat & state reset 
+            this.CreatureState = CreatureState.Normal;
+            this.Speed = originalSpeed;
+            this.Location = new Microsoft.Xna.Framework.Vector2(300, 450);
+            this.HitPoints = originalHitPoints;
+
+            //flashing reset
+            this.flashingState = FlashingState.NotFlashing;
+            flashingTimer.ResetTimer();
+            individualFlashTimer.ResetTimer();
+            canStartFlashing = false;
         }
 
         // U P D A T E
@@ -126,6 +149,7 @@ namespace BurnoutBuster.Character
 
             //state
             UpdateStateBasedOnHP();
+            UpdateBasedOnState();
 
             //flashing
             HandleFlash(flashColor, timeTotal);
@@ -172,7 +196,7 @@ namespace BurnoutBuster.Character
         {
             if (collision != null)
             {
-                
+                // basic collision stuff
             }
         }
         private void UpdateBounds()
@@ -181,7 +205,7 @@ namespace BurnoutBuster.Character
 
             int increaseAmount = this.Weapon.AttackRadius;
             HitBox = new Rectangle(Bounds.X - increaseAmount, Bounds.Y - increaseAmount, 
-                Bounds.Width + increaseAmount, Bounds.Height + increaseAmount);
+                Bounds.Width + (increaseAmount * 2), Bounds.Height + (increaseAmount * 2));
         }
 
         public virtual void OnHitBoxEnter(Collision collision)
@@ -190,7 +214,7 @@ namespace BurnoutBuster.Character
             {
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Enemy))
                 {
-                    //console.GameConsoleWrite("Collided with an Enemy");
+                    // hitbox collision stuff
                 }
             }
         }
@@ -203,10 +227,34 @@ namespace BurnoutBuster.Character
 
             return false;
         }
+        private bool DidHitPointsDecreaseByLeastHalf()
+        {
+            if (HitPoints <= previousHitPoints / 2) return true;
+            return false;
+        }
         private void UpdateStateBasedOnHP()
         {
             if (HitPoints <= 0)
                 this.CreatureState = CreatureState.Shutdown;
+
+            if (DidHitPointsDecreaseByLeastHalf())
+                this.CreatureState = CreatureState.Overwhelmed;
+        }
+        private void UpdateBasedOnState()
+        {
+            switch (CreatureState)
+            {
+                case CreatureState.Normal:
+
+                    break;
+                case CreatureState.Overwhelmed:
+
+                    break;
+
+                case CreatureState.Shutdown:
+
+                    break;
+            }
         }
 
         // I D A M A G A B L E

@@ -164,6 +164,7 @@ namespace BurnoutBuster.Physics
             return queryList;
         }
 
+        // DEBUG VISUALS
         public void ToggleDebugVisuals()
         {
             switch (debugState)

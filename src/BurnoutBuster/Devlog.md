@@ -1,5 +1,29 @@
 # Devlog
   
+## 13 April 2024 | 13:37
+### Check In
+ * Sitting down to work on this today. I want to try to get the majority of the work for this milestone done today, at least the programming bits
+  
+### On Player/Creature State
+ * So, there are 3 states for the player: Normal, Overwhelmed, and Shutdown. 
+	* __Normal:__ the normal player state
+	* __Shutdown:__ the dead state 
+	* __Overwhelmed:__ I wanted to implement a feature to go along with this state where if the player lost more than half of their current HP in one hit, they would be handicapped movement and attacking wise
+    	* So, to achieve this, I've added a previousHitpoint field to the MonogameCreature so that it could compare previous and current hit points and react if more than half has been lost 
+  
+## 13 April 2024 | 13:37
+### Check In
+ * Sitting down to work on this today. I want to try to get the majority of the work for this milestone done today, at least the programming bits
+  
+### Goals
+ * Player state [DONE]
+ * Levels/wave managment 
+ * Enemy types 
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
+  
+  
 ## 11 April 2024 | 13:37
 ### Check In
  * Implemented debugging feature for the collision system
