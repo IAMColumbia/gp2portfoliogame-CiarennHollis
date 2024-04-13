@@ -97,7 +97,7 @@ namespace BurnoutBuster
             SetUpCollisionActors();
             SetUpHUDvalues();
 
-            enemyManager.SpawnLevelEnemies(2);
+            //enemyManager.SpawnMultipleEnemies(2);
         }
         private void SetScreenDimensions()
         {

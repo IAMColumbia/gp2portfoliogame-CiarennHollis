@@ -1,8 +1,8 @@
 ﻿using BurnoutBuster.Physics;
+using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace BurnoutBuster.Character
 {
@@ -18,6 +18,7 @@ namespace BurnoutBuster.Character
         Vector2 spawnLocation;
         Timer spawnDelayTimer;
         float delayAmount;
+        bool canRestartSpawnDelayTimer;
 
         //random
         Random rand;
@@ -39,6 +40,8 @@ namespace BurnoutBuster.Character
             spawnLocation = new Vector2(100, 200);
             NumberOfEnemiesToSpawn = 2;
 
+            canRestartSpawnDelayTimer = false;
+            delayAmount = 15000;
         }
 
         // I N I T
@@ -47,6 +50,8 @@ namespace BurnoutBuster.Character
             PopulateAllEnemiesList(NumberOfEnemiesToSpawn);
             InitializeEnemies();
 
+            this.spawnDelayTimer = new Timer();
+
             base.Initialize();
         }
         void PopulateAllEnemiesList(int numberOfEachEnemyToCreate)
@@ -54,6 +59,14 @@ namespace BurnoutBuster.Character
             for (int i = 0; i <= numberOfEachEnemyToCreate; i++)
             {
                 MonogameEnemy enemy = new BasicEnemy(this.Game, creature);
+                enemy.Reset();
+                AllEnemies.Add(enemy);
+                
+                enemy = new HeavyEnemy(this.Game, creature);
+                enemy.Reset();
+                AllEnemies.Add(enemy);
+
+                enemy = new KamikaziEnemy(this.Game, creature);
                 enemy.Reset();
                 AllEnemies.Add(enemy);
             }
@@ -65,13 +78,25 @@ namespace BurnoutBuster.Character
                 enemy.Initialize();
             }
         }
+        public void AddEnemiesToCollisionManager(CollisionManager collisionManager)
+        {
+            foreach (MonogameEnemy enemy in AllEnemies)
+                collisionManager.AddObject(enemy);
+        }
+
 
         // U P D A T E
         public override void Update(GameTime gameTime)
         {
+            float totalTime = (float)gameTime.TotalGameTime.TotalMilliseconds;
+
             CheckEnemies();
             UpdateEnemies(gameTime);
-            SpawnMoreIfNoneActive();
+
+
+            HandleSpawnDelayTimer(totalTime);
+            HandleSpawningEnemies();
+
             base.Update(gameTime);
         }
         void UpdateEnemies(GameTime gameTime)
@@ -96,12 +121,7 @@ namespace BurnoutBuster.Character
             }
         }
 
-        // M I S C   M E T H O D S
-        public void AddEnemiesToCollisionManager(CollisionManager collisionManager)
-        {
-            foreach (MonogameEnemy enemy in AllEnemies)
-                collisionManager.AddObject(enemy);
-        }
+        // S P A W N I N G   L O G I C
         void CheckEnemies()
         {
             foreach(MonogameEnemy enemy in ActiveEnemies)
@@ -128,7 +148,7 @@ namespace BurnoutBuster.Character
             AllEnemies[i].Activate(spawnLocation * i);
             ActiveEnemies.Add(AllEnemies[i]);
         }
-        public void SpawnLevelEnemies(int numOfEnemiesToSpawn)
+        public void SpawnMultipleEnemies(int numOfEnemiesToSpawn)
         {
             for (int i = 0; i < numOfEnemiesToSpawn; i++)
                 SpawnAnEnemy();
@@ -137,7 +157,46 @@ namespace BurnoutBuster.Character
         void SpawnMoreIfNoneActive()
         {
             if (ActiveEnemies.Count == 0)
-                SpawnLevelEnemies(NumberOfEnemiesToSpawn);
+                SpawnMultipleEnemies(NumberOfEnemiesToSpawn);
+        }
+        bool AreThereActiveEnemies()
+        {
+            if (ActiveEnemies.Count == 0)
+                return false;
+
+            return true;
+        }
+
+        // T I M E R   M A N A G E M E N T
+        void HandleSpawningEnemies()
+        {
+            if (spawnDelayTimer.State == TimerState.Off
+                || spawnDelayTimer.State == TimerState.Ended
+                || !AreThereActiveEnemies())
+            {
+                SpawnMultipleEnemies(NumberOfEnemiesToSpawn);
+                canRestartSpawnDelayTimer = true;
+                NumberOfEnemiesToSpawn++;
+            }
+        }
+        void HandleSpawnDelayTimer(float currentTime)
+        {
+            if (canRestartSpawnDelayTimer)
+            {
+                spawnDelayTimer.StartTimer(currentTime, delayAmount);
+                canRestartSpawnDelayTimer = false;
+            }
+
+            spawnDelayTimer.UpdateTimer(currentTime);
+        }
+
+        // R E S E T
+        public void Reset()
+        {
+            this.NumberOfEnemiesToSpawn = 0;
+            this.ActiveEnemies.Clear();
+            this.tempEnemies.Clear();
+            spawnDelayTimer.ResetTimer();
         }
     }
 }

@@ -1,4 +1,15 @@
 # Devlog
+
+ ## 13 April 2024 | 13:34
+### Check In
+ * Just finished refactoring the logic for the way the enemy manager spawns enemies so that there's a delay between spawns.
+	* Need to take a break for now.
+  
+### Next Steps
+ * Levels/wave managment [WORKING ON]
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
   
 ## 13 April 2024 | 12:24
 ### Check In
@@ -27,7 +38,7 @@
   
 ### Goals
  * Player state [DONE]
- * Levels/wave managment 
+ * Levels/wave managment [WORKING ON]
  * Enemy types [DONE]
  * Game restart and screens
  * Enemy sprites
