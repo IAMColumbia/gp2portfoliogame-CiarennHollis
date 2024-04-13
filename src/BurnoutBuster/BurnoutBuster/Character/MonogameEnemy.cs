@@ -112,7 +112,7 @@ namespace BurnoutBuster.Character
             this.originalHitPoints = HitPoints;
 
             //movement
-            numOfUpdateCyclesToWaitBeforeMoving = 500;
+            numOfUpdateCyclesToWaitBeforeMoving = 5;
             numOfUpdateCyclesPassed = 0;
 
             //collision bits
@@ -273,7 +273,7 @@ namespace BurnoutBuster.Character
                         if (numOfUpdateCyclesPassed == numOfUpdateCyclesToWaitBeforeMoving)
                         {
                             numOfUpdateCyclesPassed = 0;
-                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 2);
+                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 5);
                             this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f); //TD hard coded "amount"
                         }
 

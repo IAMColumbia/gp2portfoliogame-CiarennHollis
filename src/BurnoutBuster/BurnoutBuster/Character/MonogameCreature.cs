@@ -74,7 +74,7 @@ namespace BurnoutBuster.Character
         public Rectangle HitBox {  get; set; }
 
         //IFLASHABLE
-        public Color flashColor { get => Color.DarkRed; }
+        public Color flashColor { get; set; }
         public bool canStartFlashing { get; set; }
         public FlashingState flashingState { get; set; }
         public Timer flashingTimer { get; set; }
@@ -245,10 +245,10 @@ namespace BurnoutBuster.Character
             switch (CreatureState)
             {
                 case CreatureState.Normal:
-
+                    flashColor = Color.PaleVioletRed;
                     break;
                 case CreatureState.Overwhelmed:
-
+                    flashColor = Color.Red;
                     break;
 
                 case CreatureState.Shutdown:

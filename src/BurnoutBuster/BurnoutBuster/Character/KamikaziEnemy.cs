@@ -16,11 +16,11 @@ namespace BurnoutBuster.Character
         // C O N S T R U C T O R
         public KamikaziEnemy(Game game, MonogameCreature creature) : base(game, creature)
         {
-            this.EnemyType = EnemyType.Heavy;
-            this.movementMode = EnemyMovementMode.SlowApproach;
+            this.EnemyType = EnemyType.Minor;
+            this.movementMode = EnemyMovementMode.ChargePlayer;
 
-            this.HitPoints = 20;
-            this.Damage = 5;
+            this.HitPoints = 7;
+            this.Damage = 3;
         }
 
         public override void Update(GameTime gameTime)

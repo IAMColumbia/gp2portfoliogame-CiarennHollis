@@ -7,10 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using MonoGame.Extended.Timers;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
 using System;
+using System.Collections.Generic;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 
 namespace BurnoutBuster
@@ -18,6 +20,9 @@ namespace BurnoutBuster
     public class Game1 : Game
     {
         // P R O P E R T I E S 
+        enum GameState { Title, Instructions, Playing, Win, Lose }
+        private GameState gameState;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         public Random rand;
@@ -26,6 +31,7 @@ namespace BurnoutBuster
         const int mapWidth = 900;
         const int mapHeight = 600;
         public HUD HUD;
+        Dictionary<string, Screen> Screens;
 
         //console
         GameConsole console;
@@ -47,6 +53,8 @@ namespace BurnoutBuster
         // C O N S T R U C T O R
         public Game1()
         {
+            gameState = GameState.Title;
+
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -67,6 +75,8 @@ namespace BurnoutBuster
 
             this.HUD = new HUD(this);
             this.Components.Add(HUD);
+
+            this.Screens = new Dictionary<string, Screen>();
 
             creature = new CommandCreature(this); //player ref
             this.Components.Add(creature); 
@@ -96,7 +106,7 @@ namespace BurnoutBuster
 
             SetUpCollisionActors();
             SetUpHUDvalues();
-
+            SetUpScreens();
             //enemyManager.SpawnMultipleEnemies(2);
         }
         private void SetScreenDimensions()
@@ -109,6 +119,20 @@ namespace BurnoutBuster
         {
             this._collisionManager.AddObject(creature);
             this.enemyManager.AddEnemiesToCollisionManager(_collisionManager);
+        }
+
+        void SetUpScreens()
+        {
+            Screens.Add("Title", new Screen()
+            {
+                primaryText = "BURN BUSTER!",
+                secondaryText = "Press [SPACE] to player",
+                tertiaryText = "Press [SHIFT] for Instructions"
+            });
+            Screens["Title"].LoadContent(this);
+
+            // TD add the rest of the screens
+            // - instructions, win, lose
         }
 
         /// <summary>
@@ -130,13 +154,40 @@ namespace BurnoutBuster
 
             WriteConsoleInfo();
 
-            UpdateHUDvalues();
+            UpdateBasedOnState(gameTime);
 
             //TD dirty game exit for VS
-            //if (creature.CheckCreatureState(CreatureState.Shutdown))
-            //    Exit();
+            if (creature.CheckCreatureState(CreatureState.Shutdown))
+                    Exit();
 
-            base.Update(gameTime);
+
+        }
+        void UpdateBasedOnState(GameTime gameTime)
+        {
+            switch(gameState)
+            {
+                
+
+                case GameState.Instructions:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                        this.gameState = GameState.Title;
+                    break;
+
+                case GameState.Playing:
+                    UpdateHUDvalues();
+                    if (creature.CheckCreatureState(CreatureState.Shutdown))
+                        this.gameState = GameState.Lose;
+                    base.Update(gameTime);
+                    break;
+
+            case GameState.Title:
+            case GameState.Win:
+                case GameState.Lose:
+                    ResetGame();
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                        this.gameState = GameState.Playing;
+                    break;
+            }
         }
 
         /// <summary>
@@ -154,16 +205,44 @@ namespace BurnoutBuster
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            string screenToDraw = "";
 
-            //levelManager.Draw(gameTime, _spriteBatch);
+            switch(gameState)
+            {
+                case GameState.Playing:
+                    screenToDraw = "";
+                    break;
+
+                case GameState.Title:
+                    screenToDraw = "Title";
+                    break;
+
+                case GameState.Instructions:
+                    screenToDraw = "Instructions";
+                    break;
+
+                case GameState.Win:
+                    screenToDraw = "Win";
+                    break;
+
+                case GameState.Lose:
+                    screenToDraw = "Lose";
+                    break;
+            }
+
             _spriteBatch.Begin();   
             _spriteBatch.DrawSprite(background);
+
+            if (gameState != GameState.Playing || screenToDraw != string.Empty)
+                Screens[screenToDraw].DrawScreen(_spriteBatch);
 #if DEBUG
             _collisionManager.DrawCollisionRectangles(_spriteBatch);
 #endif
             _spriteBatch.End(); 
 
-            base.Draw(gameTime);
+            //TD idk if base.Draw() can be called before spriteBatch.End() so this if statement is here
+            if (gameState == GameState.Playing || screenToDraw == string.Empty)
+                base.Draw(gameTime);
         }
 
         // M I S C 
@@ -183,6 +262,11 @@ namespace BurnoutBuster
             //console.Log("Enemy", enemy.HitPoints.ToString());
         }
 
+        void ResetGame()
+        {
+            enemyManager.ResetForNewGame();
+            creature.Reset();
+        }
 
     }
 }

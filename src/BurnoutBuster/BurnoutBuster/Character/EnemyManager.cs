@@ -1,6 +1,7 @@
 ﻿using BurnoutBuster.Physics;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
+using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
 
@@ -45,6 +46,7 @@ namespace BurnoutBuster.Character
 
         //references
         MonogameCreature creature;
+        GameConsole console;
 
         // C O N S T R U C T O R
         public EnemyManager(Game game, Random rand, MonogameCreature creature) : base(game)
@@ -55,7 +57,14 @@ namespace BurnoutBuster.Character
             tempEnemies = new List<MonogameEnemy>();
 
             //ref
-            this.creature = creature;
+            this.creature = creature; 
+
+            this.console = (GameConsole)game.Services.GetService<IGameConsole>();
+            if (this.console == null)
+            {
+                this.console = new GameConsole(game);
+                this.Game.Components.Add(this.console);
+            }
 
             //spawning
             this.rand = rand;
@@ -78,7 +87,8 @@ namespace BurnoutBuster.Character
         #region 'Init'
         public override void Initialize()
         {
-            PopulateAllEnemiesList(NumberOfEnemiesToSpawn);
+
+            PopulateAllEnemiesList(20); //TD hard coded number
             InitializeEnemies();
 
             this.spawnDelayTimer = new Timer();
@@ -173,10 +183,22 @@ namespace BurnoutBuster.Character
 
         private void SpawnAnEnemy()
         {
+            int loopRuns = 0;
             int i;
             i = rand.Next(0, AllEnemies.Count);
-            if (AllEnemies[i].EnemyState != EnemyState.Inactive)
+
+
+            if (AllEnemies[i].EnemyState != EnemyState.Inactive
+                || loopRuns >= 10)
+            {
+                loopRuns++;
                 SpawnAnEnemy();
+            }
+            else if (loopRuns >= 10)
+            {
+                console.GameConsoleWrite("Not Enough enemies in the object pool. Please add more.");
+            }
+                
             AllEnemies[i].Activate(spawnLocation * i);
             ActiveEnemies.Add(AllEnemies[i]);
         }
@@ -239,7 +261,9 @@ namespace BurnoutBuster.Character
         {
             if (HasWaveEnded())
             {
-                Reset();
+                ResetForNewWave();
+                WaveCounter++;
+                NumberOfEnemiesPerWave *= 2;
                 waveDelayTimer.StartTimer(totalTime, waveDelayDuration);
                 this.WaveState = WaveState.Cleared; 
             }
@@ -280,7 +304,7 @@ namespace BurnoutBuster.Character
         #endregion
 
         // M I S C
-        public void Reset()
+        void ResetForNewWave()
         {
             this.NumberOfEnemiesToSpawn = 2;
             totalEnemiesSpawnedDuringWave = 0;
@@ -301,6 +325,12 @@ namespace BurnoutBuster.Character
             }
             this.ActiveEnemies.Clear();
             this.tempEnemies.Clear();
+        }
+        public void ResetForNewGame()
+        {
+            ResetForNewWave();
+            WaveCounter = 1;
+            NumberOfEnemiesPerWave = 5;
         }
     }
 }

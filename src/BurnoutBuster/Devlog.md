@@ -1,5 +1,23 @@
 # Devlog
   
+## 13 April 2024 | 18:41
+### Check In
+ * Implemented game screens and state
+	* System mostly works, I just need to populate the game screens
+ * Need to stop for today :P
+  
+### Things that I noticed need tweaking or that should also be done for the MVP
+ * Dash need tweeking, feels slow -> might make player movement not a lerp function
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Enemy spawn locations -> they sometimes spawn off screen
+ * Need to makes sure the restart game behavior goes as expected.
+ * Make pick up for new sword
+  
+### Next Steps
+ * Game restart and screens [WORKING ON -> need to populate screens]
+ * Enemy sprites
+ * Weapon/attack animation
+  
 ## 13 April 2024 | 17:23
 ### Check In
  * Implemented the enemy waves system in the enemy manager
@@ -11,7 +29,7 @@
 	* I'm not going to have this class inherit from the Sprite class though since it doesn't need all the things a sprite has
   
 ### Next Steps
- * Game restart and screens
+ * Game restart and screens [WORKING ON]
  * Enemy sprites
  * Weapon/attack animation
   
