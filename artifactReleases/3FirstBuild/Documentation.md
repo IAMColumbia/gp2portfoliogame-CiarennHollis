@@ -20,7 +20,7 @@ Overall, this was a successful sprint. The game doesn't have the best game feel 
   
 ## Structure
 I like thinking of the pieces of this project as building blocks and I tried my best to have the structure of the game/project be like that. Several things can be plugged and uplugged from each other be it objects (like MonogameEnemy.cs). Some things, of course, depend on other things so there are some things that can't be plugged in, but they aren't many. :P
- * See the for the structure: (artifactReleases\3FirstBuild\BBMVPClassDiagram.png)[https://github.com/IAMColumbia/gp2portfoliogame-CiarennHollis/blob/MVP/artifactReleases/3FirstBuild/BBMVPClassDiagram.png]
+ * See the for the structure: [artifactReleases\3FirstBuild\BBMVPClassDiagram.png](https://github.com/IAMColumbia/gp2portfoliogame-CiarennHollis/blob/MVP/artifactReleases/3FirstBuild/BBMVPClassDiagram.png).
   
 ## Dependencies
  * I tried my best to have things been relatively clean and only giving them dependencies when needed. Some are obvious (like the enemies depend on the enemy manager) but most of the other are rather deliberate.
