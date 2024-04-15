@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace BurnoutBuster.Character
 {
     public enum WaveState { Stopped, Approaching, Besieging, Cleared }
-    public class EnemyManager : DrawableGameComponent
+    public class EnemyManager : DrawableGameComponent, ISubject
     {
         // P R O P E R T I E S
         //object pool management
@@ -36,7 +36,16 @@ namespace BurnoutBuster.Character
                 return NumberOfEnemiesPerWave - totalEnemiesSpawnedDuringWave;
             }
         }
-        public int WaveCounter;
+        private int waveCounter;
+        public int WaveCounter
+        {
+            get { return waveCounter; }
+            set
+            {
+                if ((waveCounter >= 5))
+                    this.Notify();
+            }
+        }
         public WaveState WaveState;
         private Timer waveDelayTimer;
         private float waveDelayDuration;
@@ -47,6 +56,9 @@ namespace BurnoutBuster.Character
         //references
         MonogameCreature creature;
         GameConsole console;
+
+        //isubject
+        public List<IObserver> observers { get; set; }
 
         // C O N S T R U C T O R
         public EnemyManager(Game game, Random rand, MonogameCreature creature) : base(game)
@@ -81,6 +93,9 @@ namespace BurnoutBuster.Character
             WaveState = WaveState.Stopped;
             waveDelayTimer = new Timer();
             waveDelayDuration = 7000;
+
+            //isubject
+            observers = new List<IObserver>();
         }
 
         // I N I T
@@ -304,6 +319,24 @@ namespace BurnoutBuster.Character
                 this.WaveState = WaveState.Approaching;
         }
         #endregion
+
+
+        // I S U B J E C T
+        public void Attach(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+        public void Detach(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+        public void Notify()
+        {
+            foreach(IObserver observer in  observers)
+            {
+                observer.UpdateObserver();
+            }
+        }
 
         // M I S C
         void ResetForNewWave()

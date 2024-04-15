@@ -6,7 +6,7 @@ using MonoGameLibrary.Sprite;
 
 namespace BurnoutBuster.Items
 {
-    public class MonogameWeapon : DrawableSprite, ICollidable, IInteractable
+    public class MonogameWeapon : DrawableSprite, IInteractable, ICreatureObserver 
     {
         // P R O P E R T I E S 
         protected IWeapon Weapon { get; set; }
@@ -14,21 +14,27 @@ namespace BurnoutBuster.Items
         /// The offset for position the weapon on the player
         /// </summary>
         public Vector2 RenderOffset;
-        public Vector2 HolderPosition;
+        public Vector2 HolderPosition { get => creatureSubject.Location; }
+        /// <summary>
+        /// Reference to the creature/player for having it move with the player
+        /// </summary>
+        public MonogameCreature creatureSubject { get; set; }
 
         //COLLISION
         public Rectangle Bounds { get; set; }
         public bool IsCollisionOn { get; set; }
         public GameComponent GameObject { get => this; }
+        public Tags Tag { get => Tags.Weapon; }
 
-        public Tags Tag { get => Tags.Item; }
 
         // C O N S T R U C T O R
         public MonogameWeapon(Game game) : base(game)
         {
             //collision
             IsCollisionOn = true;
-            //RenderOffset = new Vector2(48, 0);
+            
+            //placing on the player
+            RenderOffset = new Vector2(48, 0);
         }
 
         public IWeapon GetWeapon()
@@ -44,24 +50,21 @@ namespace BurnoutBuster.Items
         {
             base.LoadContent();
         }
-        //public virtual void Load()
-        //{
-        //    this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
-        //    base.LoadContent();
-        //}
 
         // U P D A T E 
         public override void Update(GameTime gameTime)
         {
-            if (HolderPosition != Vector2.Zero)
-                this.Location = HolderPosition - RenderOffset;
+            this.Location = HolderPosition - RenderOffset;
             base.Update(gameTime);
         }
-        public void UpdateLocation(Vector2 position)
+        public void UpdateObserver()
         {
-            HolderPosition = position;
-        }
 
+        }
+        public void UpdateObserver(MonogameCreature creature)
+        {
+            creatureSubject = creature;
+        }
         // D R A W
         public override void Draw(GameTime gameTime)
         {
@@ -107,7 +110,7 @@ namespace BurnoutBuster.Items
         public void OnInteraction(IInteract subject)
         {
             IsCollisionOn = false;
-            this.Enabled = false;
+            this.Enabled = true;
         }
     }
 }

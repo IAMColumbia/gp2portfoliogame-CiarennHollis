@@ -6,10 +6,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
+using SharpDX.XAudio2;
+using System.Collections.Generic;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite, IDamageable, IHasHitBox, IFlashableTexture
+    public class MonogameCreature : DrawableSprite, IDamageable, IInteract, IHasHitBox, ICreatureSubject, IFlashableTexture
     {
         // P R O P E R T I E S
 
@@ -67,6 +69,9 @@ namespace BurnoutBuster.Character
         public GameComponent GameObject { get; private set; }
         protected Vector2 moveVector;
 
+        //OBSERVER
+        public List<ICreatureObserver> observers { get; set; }
+
         //HIT BOX
         public Rectangle HitBox {  get; set; }
 
@@ -93,8 +98,12 @@ namespace BurnoutBuster.Character
             //hitpoints
             previousHitPoints = originalHitPoints = HitPoints;
 
+            //observers 
+            observers = new List<ICreatureObserver>();
+
             //attacking
             MGWeapon = new MonogameSimpleSword(game);
+            this.Attach(MGWeapon);
             this.creature.MyWeapon = MGWeapon.GetWeapon();
 
             //collision
@@ -121,6 +130,7 @@ namespace BurnoutBuster.Character
             this.Speed = originalSpeed = 150;
 
             //this.MGWeapon.Load();
+            this.Notify();
             this.Game.Components.Add(MGWeapon);
 
             base.LoadContent();
@@ -136,6 +146,8 @@ namespace BurnoutBuster.Character
 
             //weapon reset
             MGWeapon = new MonogameSimpleSword(this.Game);
+            this.Attach(MGWeapon);
+            this.Notify();
             this.creature.MyWeapon = MGWeapon.GetWeapon();
 
             //flashing reset
@@ -159,10 +171,6 @@ namespace BurnoutBuster.Character
             UpdateStateBasedOnHP();
             UpdateBasedOnState();
 
-            //weapon
-            //MGWeapon.Update(gameTime);
-            if (this.Location != Vector2.Zero)
-                MGWeapon.UpdateLocation(this.Location);
 
             //flashing
             HandleFlash(flashColor, timeTotal);
@@ -210,9 +218,35 @@ namespace BurnoutBuster.Character
         // C O L L I S I O N
         public virtual void OnCollisionEnter(Physics.Collision collision)
         {
+            // check to make sure the collision info isn't null
             if (collision != null)
             {
                 // basic collision stuff
+
+                if (TagManager.CompareTag(collision.OtherObject, Tags.Weapon))
+                {
+                    IInteractable item = collision.OtherObject as IInteractable;
+                    if (item != null)
+                    {
+                        this.Interact(item);
+                        item.OnInteraction(this);
+                    }
+                }
+            }
+        }
+        public void Interact(IInteractable item)
+        {
+            //another check to be safe
+            if (TagManager.CompareTag(item, Tags.Weapon))
+            {
+                MonogameWeapon tempWeapon = item as MonogameWeapon;
+                if (tempWeapon != null)
+                {
+                    this.Detach(MGWeapon); // detaching old weapon
+                    tempWeapon.OnInteraction(this);
+                    this.MGWeapon = tempWeapon; //assigning the new weapon
+                    this.Attach(MGWeapon); //reattaching with the new weapon instance
+                }
             }
         }
         private void UpdateBounds()
@@ -232,6 +266,23 @@ namespace BurnoutBuster.Character
                 {
                     // hitbox collision stuff
                 }
+            }
+        }
+
+        // O B S E R V E R
+        public void Attach(IObserver observer)
+        {
+            observers.Add((ICreatureObserver)observer);
+        }
+        public void Detach(IObserver observer)
+        {
+            observers.Remove((ICreatureObserver)observer); //idk if this will work good :P
+        }
+        public void Notify()
+        {
+            foreach (ICreatureObserver observer in observers)
+            {
+                observer.UpdateObserver(this);
             }
         }
 

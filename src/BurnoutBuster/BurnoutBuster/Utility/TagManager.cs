@@ -37,5 +37,5 @@ namespace BurnoutBuster.Utility
         }
     }
 
-    public enum Tags { None, Player, Enemy, Item }
+    public enum Tags { None, Player, Enemy, Weapon, Health }
 }

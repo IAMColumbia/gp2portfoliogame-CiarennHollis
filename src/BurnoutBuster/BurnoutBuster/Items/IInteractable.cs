@@ -1,13 +1,8 @@
-﻿using BurnoutBuster.Physics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ICollidable = BurnoutBuster.Physics.ICollidable;
 
 namespace BurnoutBuster.Items
 {
-    public interface IInteractable 
+    public interface IInteractable : ICollidable
     {
         void OnInteraction(IInteract subject);
     }

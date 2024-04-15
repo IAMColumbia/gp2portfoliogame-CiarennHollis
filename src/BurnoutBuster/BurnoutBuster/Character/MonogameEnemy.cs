@@ -329,6 +329,10 @@ namespace BurnoutBuster.Character
         {
             this.HitPoints = originalHitPoints;
             this.enemyState = EnemyState.Inactive;
+            this.flashingState = FlashingState.NotFlashing;
+            this.flashingTimer.ResetTimer();
+            this.individualFlashTimer.ResetTimer();
+            this.canStartFlashing = false;
             this.Enabled = false;
             this.IsCollisionOn = false;
         }

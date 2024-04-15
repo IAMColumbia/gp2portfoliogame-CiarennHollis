@@ -2,11 +2,31 @@
   
 ## 15 April 2024 | 10:11
 ### Check In
+ * Taking a break
+  
+### Next Steps
+ * Make pick up for new sword
+ * Enemy sprites
+ * Weapon/attack animation
+ * Music?
+  
+## 15 April 2024 | 10:11
+### Check In
+ * Got the weapon to move with the player
+ * Currently looking at how I want to have a weapon that can be picked up
+  
+### On Items in the Game Space
+ * So, I wanted to have a weapon that appears later after the player has fought through x amount of wave and was trying to decide how I want to implement that
+ * I'll need an item manager for managing the items on screen. I was thinking about implementing observer pattern for that so that the reference to the enemy manager for spawning the item does have to be hard coded
+ * My thought is that if  I implement observer pattern for the item manager, I might as well also implement it for moving the weapon with the player.
+  
+## 15 April 2024 | 10:11
+### Check In
  * Going to start working on this again. I need to finish this today so I can do documentation tomorrow :P
-	* Grace is in the lab today so I can ask her about carrying items 
+ * Grace is in the lab today so I can ask her about carrying items 
   
 ### Goals
- * Sword texture on the creature (animation doesn't have to be implemented)
+ * Sword texture on the creature (animation doesn't have to be implemented) [DONE -> kind of breaks SoC a bit since the sword needs a reference to the player]
  * Make pick up for new sword
  * Enemy sprites
  * Weapon/attack animation
@@ -16,7 +36,7 @@
 ## 14 April 2024 | 23:11
 ### Check In
  * So, I tried to implement the weapons having textures that can be drawn to the screen
- * I encapsulated the weapos like how the enemies and creature/player objects are encaslated so that the can interact in monogame
+ * I encapsulated the weapons like how the enemies and creature/player objects are encaslated so that the can interact in monogame
  * The weapons matches the way the enemies are structured. Everything funtionality-wise works the same way as it did before. 
  * The issue I hit though is that I'm struggling to get the weapon to move with the player. The weapon draws to screen, but it won't follow the player
  * I tried having the player pass the weapon it's location for the weapon to use to set it's own position with, but the variable I use to pass the player's location with always ended up being 0 by the time the weapon's update runs.
