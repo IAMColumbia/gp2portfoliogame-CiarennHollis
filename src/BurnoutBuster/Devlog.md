@@ -1,5 +1,20 @@
 # Devlog
   
+## 14 April 2024 | 19:31
+### Check In
+ * Going to start working on this again. I want to try to get the majority of things for this project done so I don't have to worry about this too much tomorrow and can work on another project I'm heading.
+  
+### Goals
+ * Game restart and screens [WORKING ON -> need to populate screens]
+ * Dash need tweeking, feels slow -> might make player movement not a lerp function
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Enemy spawn locations -> they sometimes spawn off screen
+ * Need to makes sure the restart game behavior goes as expected.
+ * Make pick up for new sword
+ * Enemy sprites
+ * Weapon/attack animation
+  
+
 ## 13 April 2024 | 18:41
 ### Check In
  * Implemented game screens and state
