@@ -1,8 +1,8 @@
 # Devlog
   
-## 15 April 2024 | 10:11
+## 15 April 2024 | 12:15
 ### Check In
- * Taking a break
+ * Taking a break for lunch
   
 ### Next Steps
  * Make pick up for new sword
