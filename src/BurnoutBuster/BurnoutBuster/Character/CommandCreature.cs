@@ -43,6 +43,8 @@ namespace BurnoutBuster.Character
 
             if (moveOnNextUpdate != Vector2.Zero) 
                 return;
+
+
         }
 
         private void UpdateCreatureLocation(GameTime gameTime)

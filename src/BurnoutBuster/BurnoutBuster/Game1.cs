@@ -194,7 +194,8 @@ Finisher Attack: Attack + Heavy Attack + Attack
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            if (Keyboard.GetState().IsKeyDown(Keys.OemTilde))
+                _collisionManager.ToggleDebugVisuals();
             WriteConsoleInfo();
 
             UpdateBasedOnState(gameTime);

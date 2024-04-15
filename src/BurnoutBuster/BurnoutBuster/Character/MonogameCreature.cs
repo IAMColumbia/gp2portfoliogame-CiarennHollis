@@ -1,15 +1,11 @@
-﻿using BurnoutBuster.Physics;
-using BurnoutBuster.Input;
+﻿using BurnoutBuster.Input;
 using BurnoutBuster.Items;
-using BurnoutBuster.UI;
+using BurnoutBuster.Physics;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using ICollidable = BurnoutBuster.Physics.ICollidable;
 
 namespace BurnoutBuster.Character
 {
@@ -62,6 +58,7 @@ namespace BurnoutBuster.Character
         {
             get { return this.creature.MyWeapon; }
         }
+        protected MonogameWeapon MGWeapon;
 
         //COLLISION AND TAG
         public Rectangle Bounds { get; set; }
@@ -96,6 +93,10 @@ namespace BurnoutBuster.Character
             //hitpoints
             previousHitPoints = originalHitPoints = HitPoints;
 
+            //attacking
+            MGWeapon = new MonogameSimpleSword(game);
+            this.creature.MyWeapon = MGWeapon.GetWeapon();
+
             //collision
             IsCollisionOn = true;
             GameObject = this;
@@ -119,6 +120,9 @@ namespace BurnoutBuster.Character
 
             this.Speed = originalSpeed = 150;
 
+            //this.MGWeapon.Load();
+            this.Game.Components.Add(MGWeapon);
+
             base.LoadContent();
         }
 
@@ -129,6 +133,10 @@ namespace BurnoutBuster.Character
             this.Speed = originalSpeed; 
             this.Location = new Microsoft.Xna.Framework.Vector2(450, 300);
             this.HitPoints = previousHitPoints = originalHitPoints;
+
+            //weapon reset
+            MGWeapon = new MonogameSimpleSword(this.Game);
+            this.creature.MyWeapon = MGWeapon.GetWeapon();
 
             //flashing reset
             this.flashingState = FlashingState.NotFlashing;
@@ -151,10 +159,17 @@ namespace BurnoutBuster.Character
             UpdateStateBasedOnHP();
             UpdateBasedOnState();
 
+            //weapon
+            //MGWeapon.Update(gameTime);
+            if (this.Location != Vector2.Zero)
+                MGWeapon.UpdateLocation(this.Location);
+
             //flashing
             HandleFlash(flashColor, timeTotal);
 
             base.Update(gameTime);
+
+
         }
 
         protected virtual void UpdateCreatureWithController(GameTime gameTime, float time)
@@ -169,6 +184,7 @@ namespace BurnoutBuster.Character
         #region 'Draw'
         public override void Draw(GameTime gameTime)
         {
+            //MGWeapon.Draw(gameTime);
             base.Draw(gameTime);
         }
         private void KeepCreatureOnScreen()

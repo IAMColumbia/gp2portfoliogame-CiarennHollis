@@ -54,8 +54,7 @@ namespace BurnoutBuster.Physics
             base.Update(gameTime);
 
             CheckCollision();
-
-            ToggleDebugVisuals();
+            
         }
 
 

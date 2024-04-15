@@ -1,5 +1,22 @@
 # Devlog
   
+## 14 April 2024 | 23:11
+### Check In
+ * So, I tried to implement the weapons having textures that can be drawn to the screen
+ * I encapsulated the weapos like how the enemies and creature/player objects are encaslated so that the can interact in monogame
+ * The weapons matches the way the enemies are structured. Everything funtionality-wise works the same way as it did before. 
+ * The issue I hit though is that I'm struggling to get the weapon to move with the player. The weapon draws to screen, but it won't follow the player
+ * I tried having the player pass the weapon it's location for the weapon to use to set it's own position with, but the variable I use to pass the player's location with always ended up being 0 by the time the weapon's update runs.
+ * I don't know what else to try to get this to work. I know Grace will be in the lab tomorrow so I can ask her about this then since I think she did a similar thing in her game for this class (having the player carry an item)
+ * I also added the structure I intend to use to make a weapon that the player can pick up.
+  
+### Next Steps
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Make pick up for new sword
+ * Enemy sprites
+ * Screens visuals
+ * Weapon/attack animation
+
 ## 14 April 2024 | 19:31
 ### Check In
  * Going to start working on this again. I want to try to get the majority of things for this project done so I don't have to worry about this too much tomorrow and can work on another project I'm heading.
@@ -8,8 +25,8 @@
  * Game restart and screens [DONE]
  * Dash need tweeking, feels slow -> might make player movement not a lerp function [DONE -> just adjusted the lerp rather than replacing it]
  * Sword texture on the creature (animation doesn't have to be implemented)
- * Enemy spawn locations -> they sometimes spawn off screen
- * Need to makes sure the restart game behavior goes as expected.
+ * Enemy spawn locations -> they sometimes spawn off screen [DONE -> fixed it so they aren't all coming from one corner]
+ * Need to makes sure the restart game behavior goes as expected. [DONE]
  * Make pick up for new sword
  * Enemy sprites
  * Weapon/attack animation

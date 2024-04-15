@@ -68,7 +68,7 @@ namespace BurnoutBuster.Character
 
             //spawning
             this.rand = rand;
-            spawnLocation = new Vector2(100, 200);
+            spawnLocation = new Vector2(5, 12);
             NumberOfEnemiesToSpawn = 2;
 
             canRestartSpawnDelayTimer = false;
@@ -198,7 +198,9 @@ namespace BurnoutBuster.Character
             {
                 console.GameConsoleWrite("Not Enough enemies in the object pool. Please add more.");
             }
-                
+
+            if (i >= 75)
+                i = rand.Next(1, 75);
             AllEnemies[i].Activate(spawnLocation * i);
             ActiveEnemies.Add(AllEnemies[i]);
         }
@@ -310,6 +312,8 @@ namespace BurnoutBuster.Character
             totalEnemiesSpawnedDuringWave = 0;
 
             ResetAllEnemies();
+
+            spawnLocation = new Vector2(5, 12);
 
             spawnDelayTimer.ResetTimer();
         }

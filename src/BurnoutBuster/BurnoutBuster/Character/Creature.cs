@@ -39,7 +39,7 @@ namespace BurnoutBuster.Character
         public Creature()
         {
             Name = "Yippee";
-            HitPoints = 2;
+            HitPoints = 25;
             MyWeapon = new SimpleSword();
         }
 
