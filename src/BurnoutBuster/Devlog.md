@@ -5,7 +5,7 @@
  * Going to start working on this again. I want to try to get the majority of things for this project done so I don't have to worry about this too much tomorrow and can work on another project I'm heading.
   
 ### Goals
- * Game restart and screens [WORKING ON -> need to populate screens]
+ * Game restart and screens [DONE]
  * Dash need tweeking, feels slow -> might make player movement not a lerp function
  * Sword texture on the creature (animation doesn't have to be implemented)
  * Enemy spawn locations -> they sometimes spawn off screen

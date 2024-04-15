@@ -133,6 +133,45 @@ namespace BurnoutBuster
 
             // TD add the rest of the screens
             // - instructions, win, lose
+
+            Screens.Add("Instructions", new Screen()
+            {
+                primaryText = "Instructions",
+                secondaryText = @"
+Movement controls: WASD
+Attack: Left Arrow
+Heavy Attack: Up Arrow
+Dash: Right Arrow
+
+Dash Attack: Dash + Attack 
+    -> (Right Arrow + Left Arrow)
+Combo Attack: Attack + Heavy Attack 
+    -> (Right Arrow + Up Arrow)
+Finisher Attack: Attack + Heavy Attack + Attack
+    -> (Right Arrow + Up Arrow + Right Arrow)
+",
+                tertiaryText = "Press [SHIFT] for to go back",
+                
+            });
+            Screens["Instructions"].LoadContent(this);
+
+            Screens.Add("Win", new Screen()
+            {
+                primaryText = "You Win!",
+                secondaryText = "Press [SPACE] to play again",
+                tertiaryText = "Press [ESC] to quit",
+
+            });
+            Screens["Win"].LoadContent(this);
+
+            Screens.Add("Lose", new Screen()
+            {
+                primaryText = "You Lost!",
+                secondaryText = "Press [SPACE] to play again",
+                tertiaryText = "Press [ESC] to quit",
+
+            });
+            Screens["Win"].LoadContent(this);
         }
 
         /// <summary>
@@ -169,7 +208,8 @@ namespace BurnoutBuster
                 
 
                 case GameState.Instructions:
-                    if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                    if (Keyboard.GetState().IsKeyDown(Keys.LeftShift)
+                        || Keyboard.GetState().IsKeyDown(Keys.RightShift))
                         this.gameState = GameState.Title;
                     break;
 
@@ -186,6 +226,9 @@ namespace BurnoutBuster
                     ResetGame();
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                         this.gameState = GameState.Playing;
+                    if (Keyboard.GetState().IsKeyDown(Keys.LeftShift)
+                        || Keyboard.GetState().IsKeyDown(Keys.RightShift))
+                        this.gameState = GameState.Instructions;
                     break;
             }
         }
@@ -260,6 +303,20 @@ namespace BurnoutBuster
             console.Log("Finisher Attack:", "Left + Up + Left");
 
             //console.Log("Enemy", enemy.HitPoints.ToString());
+
+            string temp = @"
+Movement controls: WASD
+Attack: Left Arrow
+Heavy Attack: Up Arrow
+Dash: Right Arrow
+
+Dash Attack: Dash + Attack 
+    -> (Right Arrow + Left Arrow)
+Combo Attack: Attack + Heavy Attack 
+    -> (Right Arrow + Up Arrow)
+Finisher Attack: Attack + Heavy Attack + Attack
+    -> (Right Arrow + Up Arrow + Right Arrow)
+";
         }
 
         void ResetGame()

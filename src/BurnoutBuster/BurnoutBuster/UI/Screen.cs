@@ -30,9 +30,9 @@ namespace BurnoutBuster.UI
         {
             //TD hard coded positions
             visualPosition = Vector2.Zero;
-            primaryTextPosition = new Vector2(250, 350);
-            secondaryTextPosition = new Vector2(250, 400);
-            tertiaryTextPosition = new Vector2(250, 450);
+            primaryTextPosition = new Vector2(250, 250);
+            secondaryTextPosition = new Vector2(250, 300);
+            tertiaryTextPosition = new Vector2(250, 350);
         }
 
         // M E T H O D S
@@ -58,7 +58,10 @@ namespace BurnoutBuster.UI
                 spriteBatch.DrawSprite(visual);
 
             spriteBatch.DrawString(fontBold, primaryText, primaryTextPosition, Color.BlanchedAlmond);
-            spriteBatch.DrawString(fontBold, secondaryText, secondaryTextPosition, Color.BlanchedAlmond);
+            spriteBatch.DrawString(fontRegular, secondaryText, secondaryTextPosition, Color.BlanchedAlmond);
+
+            if (tertiaryText != string.Empty)
+                spriteBatch.DrawString(fontRegular, tertiaryText, tertiaryTextPosition, Color.BlanchedAlmond);
         }
     }
 }
