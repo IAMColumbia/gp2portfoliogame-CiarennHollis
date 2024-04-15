@@ -1,1 +1,20 @@
 Release Notes version 3 Final
+  
+Find the devlog log here: [src/BurnoutBuster/Devlog.md](https://github.com/IAMColumbia/gp2portfoliogame-CiarennHollis/blob/master/src/BurnoutBuster/Devlog.md)
+  
+## Progress Made
+ * Bug Fixing from Vertical Slice
+	* Character texture flash on hit
+ 	* Enemies colliding with each other
+ 	* Collision box/bounds not being positioned right on the player
+	* Player hitbox being different from its collider for taking damage
+ * Implemented multiple enemy types
+ * Implemented another weapon type
+	* Implemented weapons that can be picked up
+ * Implemented game screens for the different screens of the games
+ * Implemented having the enemies come in waves
+
+  
+## Sprint/Story Review
+I got the majority of the work for this milestone done. The game is playable and there is a lose and a win. (Most) All of the GitHub Issues for this milestone have been close. The biggest hurdle for this milestone was getting the sword to move with the player. I tried to do so without giving the MonogameWeapon class a reference to the player but I couldn't get that to work no matter what I tried. Since I implemented the observer pattern for the ItemManager, I also implemented it for the weapon as well. So, the weapon does depend on the player for it's location when the player is moving. Plus it also allows for the game to have weapons in its scene who locations aren't dependent on the player. I had wanted to also implement health pick ups, but that ended up being out of scop for this project. Though, the structure is there for implementing it later through the item manager.
+Overall, this was a successful sprint. The game doesn't have the best game feel to it, but I think that is mainly because I don't have animations implemented. I left animations for last since I wanted to make sure all the main functionality worked before making it look and feel nice. The next sprint will focus on bugfixing and animations. 

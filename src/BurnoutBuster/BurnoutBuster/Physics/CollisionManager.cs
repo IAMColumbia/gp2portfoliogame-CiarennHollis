@@ -13,7 +13,7 @@ namespace BurnoutBuster.Physics
         private List<ICollidable> collisionObjects;
 
         //DEBUG
-        private enum CM_DebugState { ShowCollisionBoxes, HideCollisionBoxes }  
+        private enum CM_DebugState { HideCollisionBoxes, ShowCollisionBoxes }  
         private CM_DebugState debugState;
         //Key to hide and show debug things
         public Keys ToggleDebugKey;
@@ -23,13 +23,17 @@ namespace BurnoutBuster.Physics
         // C O N S T R U C T O R 
         public CollisionManager(Game game) : base(game)
         {
+#if DEBUG
             debugState = CM_DebugState.ShowCollisionBoxes;
+#endif
             collisionObjects = new List<ICollidable>();
         }
 
         public CollisionManager(Game game, InputHandler input) : base(game)
         {
+#if DEBUG
             debugState = CM_DebugState.ShowCollisionBoxes;
+#endif
             collisionObjects = new List<ICollidable>();
             this.input = input;
 

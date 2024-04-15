@@ -2,7 +2,7 @@
 
 namespace BurnoutBuster.Utility
 {
-    interface ICreatureSubject
+    interface ICreatureSubject 
     {
         List<ICreatureObserver> observers { get; set; }
     }

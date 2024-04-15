@@ -59,7 +59,7 @@ namespace BurnoutBuster.Character
         GameConsole console;
 
         //isubject
-        public List<IObserver> observers { get; set; }
+        public List<IObserver> creatureObservers { get; set; }
 
         // C O N S T R U C T O R
         public EnemyManager(Game game, Random rand, MonogameCreature creature) : base(game)
@@ -93,10 +93,10 @@ namespace BurnoutBuster.Character
             totalEnemiesSpawnedDuringWave = 0;
             WaveState = WaveState.Stopped;
             waveDelayTimer = new Timer();
-            waveDelayDuration = 7000;
+            waveDelayDuration = 5000;
 
             //isubject
-            observers = new List<IObserver>();
+            creatureObservers = new List<IObserver>();
         }
 
         // I N I T
@@ -325,15 +325,15 @@ namespace BurnoutBuster.Character
         // I S U B J E C T
         public void Attach(IObserver observer)
         {
-            observers.Add(observer);
+            creatureObservers.Add(observer);
         }
         public void Detach(IObserver observer)
         {
-            observers.Remove(observer);
+            creatureObservers.Remove(observer);
         }
         public void Notify()
         {
-            foreach(IObserver observer in  observers)
+            foreach(IObserver observer in  creatureObservers)
             {
                 observer.UpdateObserver();
             }

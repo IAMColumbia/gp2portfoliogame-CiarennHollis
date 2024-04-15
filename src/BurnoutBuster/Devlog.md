@@ -2,6 +2,15 @@
   
 ## 15 April 2024 | 12:15
 ### Check In
+ * Successfully implemented pickup-able sword/weapon.
+  
+### Next Steps
+ * Enemy sprites
+ * Weapon/attack animation?
+ * Music?
+  
+## 15 April 2024 | 12:15
+### Check In
  * Taking a break for lunch
   
 ### Next Steps

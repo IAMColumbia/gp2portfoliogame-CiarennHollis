@@ -4,7 +4,7 @@ namespace BurnoutBuster.Utility
 {
     public interface ISubject
     {
-        List<IObserver> observers { get; set; }
+        List<IObserver> creatureObservers { get; set; }
         void Attach(IObserver observer);
         void Detach(IObserver observer);
         void Notify();

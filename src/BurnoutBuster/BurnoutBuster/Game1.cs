@@ -229,8 +229,13 @@ Finisher Attack: Attack + Heavy Attack + Attack
 
                 case GameState.Playing:
                     UpdateHUDvalues();
+                    
+                    // WIN/LOSE CONDITION !!
                     if (creature.CheckCreatureState(CreatureState.Shutdown))
                         this.gameState = GameState.Lose;
+                    if (enemyManager.WaveCounter > 9)
+                        this.gameState = GameState.Win;
+
                     base.Update(gameTime);
                     break;
 
