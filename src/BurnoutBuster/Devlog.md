@@ -1,5 +1,18 @@
 # Devlog
   
+## 15 April 2024 | 10:11
+### Check In
+ * Going to start working on this again. I need to finish this today so I can do documentation tomorrow :P
+	* Grace is in the lab today so I can ask her about carrying items 
+  
+### Goals
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Make pick up for new sword
+ * Enemy sprites
+ * Weapon/attack animation
+ * Music?
+  
+
 ## 14 April 2024 | 23:11
 ### Check In
  * So, I tried to implement the weapons having textures that can be drawn to the screen
