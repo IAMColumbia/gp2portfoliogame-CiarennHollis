@@ -273,7 +273,7 @@ namespace BurnoutBuster.Character
                         if (numOfUpdateCyclesPassed == numOfUpdateCyclesToWaitBeforeMoving)
                         {
                             numOfUpdateCyclesPassed = 0;
-                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 5);
+                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 7); //TD hard coded speed modifier
                             this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f); //TD hard coded "amount"
                         }
 

@@ -113,11 +113,11 @@ namespace BurnoutBuster.Character
         {
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/Creature");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
-            this.Location = new Microsoft.Xna.Framework.Vector2(300, 450);
+            this.Location = new Microsoft.Xna.Framework.Vector2(450, 300);
 
             this.ShowMarkers = true;
 
-            this.Speed = 150;
+            this.Speed = originalSpeed = 150;
 
             base.LoadContent();
         }
@@ -126,9 +126,9 @@ namespace BurnoutBuster.Character
         {
             //stat & state reset 
             this.CreatureState = CreatureState.Normal;
-            this.Speed = originalSpeed;
-            this.Location = new Microsoft.Xna.Framework.Vector2(300, 450);
-            this.HitPoints = originalHitPoints;
+            this.Speed = originalSpeed; 
+            this.Location = new Microsoft.Xna.Framework.Vector2(450, 300);
+            this.HitPoints = previousHitPoints = originalHitPoints;
 
             //flashing reset
             this.flashingState = FlashingState.NotFlashing;
@@ -234,11 +234,11 @@ namespace BurnoutBuster.Character
         }
         private void UpdateStateBasedOnHP()
         {
-            if (HitPoints <= 0)
-                this.CreatureState = CreatureState.Shutdown;
-
             if (DidHitPointsDecreaseByLeastHalf())
                 this.CreatureState = CreatureState.Overwhelmed;
+
+            if (HitPoints <= 0)
+                this.CreatureState = CreatureState.Shutdown;
         }
         private void UpdateBasedOnState()
         {

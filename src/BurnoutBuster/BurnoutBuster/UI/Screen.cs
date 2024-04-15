@@ -21,9 +21,9 @@ namespace BurnoutBuster.UI
         public string tertiaryText;
 
         Vector2 visualPosition;
-        Vector2 primaryTextPosition;
-        Vector2 secondaryTextPosition;
-        Vector2 tertiaryTextPosition;
+        public Vector2 primaryTextPosition;
+        public Vector2 secondaryTextPosition;
+        public Vector2 tertiaryTextPosition;
 
         // C O N S T R U C T O R
         public Screen()

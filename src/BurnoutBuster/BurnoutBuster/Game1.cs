@@ -151,6 +151,10 @@ Finisher Attack: Attack + Heavy Attack + Attack
     -> (Right Arrow + Up Arrow + Right Arrow)
 ",
                 tertiaryText = "Press [SHIFT] for to go back",
+
+                primaryTextPosition = new Vector2(250, 50),
+                secondaryTextPosition = new Vector2(250, 100),
+                tertiaryTextPosition = new Vector2(250, 450)
                 
             });
             Screens["Instructions"].LoadContent(this);
@@ -171,7 +175,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                 tertiaryText = "Press [ESC] to quit",
 
             });
-            Screens["Win"].LoadContent(this);
+            Screens["Lose"].LoadContent(this);
         }
 
         /// <summary>
@@ -196,8 +200,8 @@ Finisher Attack: Attack + Heavy Attack + Attack
             UpdateBasedOnState(gameTime);
 
             //TD dirty game exit for VS
-            if (creature.CheckCreatureState(CreatureState.Shutdown))
-                    Exit();
+            //if (creature.CheckCreatureState(CreatureState.Shutdown))
+            //        Exit();
 
 
         }
@@ -291,30 +295,18 @@ Finisher Attack: Attack + Heavy Attack + Attack
         {
                 
 
-            console.Log("Movement controls", "WASD");
-            console.Log("Attack:", "Left Arrow");
-            console.Log("Heavy Attack:", "Up Arrow");
-            console.Log("Dash:", "Right Arrow");
+            //console.Log("Movement controls", "WASD");
+            //console.Log("Attack:", "Left Arrow");
+            //console.Log("Heavy Attack:", "Up Arrow");
+            //console.Log("Dash:", "Right Arrow");
 
-            console.Log("Dash Attack:", "Right + Left");
-            console.Log("Combo Attack:", "Right + Up");
-            console.Log("Finisher Attack:", "Left + Up + Left");
+            //console.Log("Dash Attack:", "Right + Left");
+            //console.Log("Combo Attack:", "Right + Up");
+            //console.Log("Finisher Attack:", "Left + Up + Left");
+            console.Log("Game State", gameState.ToString());
 
             //console.Log("Enemy", enemy.HitPoints.ToString());
 
-            string temp = @"
-Movement controls: WASD
-Attack: Left Arrow
-Heavy Attack: Up Arrow
-Dash: Right Arrow
-
-Dash Attack: Dash + Attack 
-    -> (Right Arrow + Left Arrow)
-Combo Attack: Attack + Heavy Attack 
-    -> (Right Arrow + Up Arrow)
-Finisher Attack: Attack + Heavy Attack + Attack
-    -> (Right Arrow + Up Arrow + Right Arrow)
-";
         }
 
         void ResetGame()

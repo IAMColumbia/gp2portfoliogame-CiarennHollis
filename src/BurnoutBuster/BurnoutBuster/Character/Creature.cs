@@ -26,7 +26,7 @@ namespace BurnoutBuster.Character
             {
                 if (state != value)
                 {
-                    this.Log($"{this.ToString()} was: {state} now {value}");
+                    //this.Log($"{this.ToString()} was: {state} now {value}");
                     state = value;
                 }
             }
@@ -39,7 +39,7 @@ namespace BurnoutBuster.Character
         public Creature()
         {
             Name = "Yippee";
-            HitPoints = 25;
+            HitPoints = 2;
             MyWeapon = new SimpleSword();
         }
 
