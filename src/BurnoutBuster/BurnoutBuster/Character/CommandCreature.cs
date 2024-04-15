@@ -21,7 +21,7 @@ namespace BurnoutBuster.Character
         public CommandCreature(Game game) : base(game)
         {
             moveOnNextUpdate = Vector2.Zero;
-            lerpAdjustment = 5f;
+            lerpAdjustment = 7f;
             actionToPerform = ActionCommands.Null; 
         }
 

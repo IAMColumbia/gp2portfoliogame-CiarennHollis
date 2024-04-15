@@ -6,7 +6,7 @@
   
 ### Goals
  * Game restart and screens [DONE]
- * Dash need tweeking, feels slow -> might make player movement not a lerp function
+ * Dash need tweeking, feels slow -> might make player movement not a lerp function [DONE -> just adjusted the lerp rather than replacing it]
  * Sword texture on the creature (animation doesn't have to be implemented)
  * Enemy spawn locations -> they sometimes spawn off screen
  * Need to makes sure the restart game behavior goes as expected.

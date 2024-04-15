@@ -205,8 +205,6 @@ Finisher Attack: Attack + Heavy Attack + Attack
         {
             switch(gameState)
             {
-                
-
                 case GameState.Instructions:
                     if (Keyboard.GetState().IsKeyDown(Keys.LeftShift)
                         || Keyboard.GetState().IsKeyDown(Keys.RightShift))
