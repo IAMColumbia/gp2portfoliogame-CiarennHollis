@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.Extended.Collisions;
-using MonoGame.Extended;
 
 namespace BurnoutBuster.Character
 {

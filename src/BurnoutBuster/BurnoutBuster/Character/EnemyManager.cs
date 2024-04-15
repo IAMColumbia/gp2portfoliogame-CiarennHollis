@@ -44,6 +44,7 @@ namespace BurnoutBuster.Character
             {
                 if ((waveCounter >= 5))
                     this.Notify();
+                waveCounter = value;
             }
         }
         public WaveState WaveState;

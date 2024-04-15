@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using BurnoutBuster.CommandPat.Commands;
+﻿using BurnoutBuster.CommandPat.Commands;
 using BurnoutBuster.Utility;
 
 namespace BurnoutBuster.Input

@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
-using SharpDX.XAudio2;
 using System.Collections.Generic;
 
 namespace BurnoutBuster.Character
@@ -225,6 +224,7 @@ namespace BurnoutBuster.Character
 
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Weapon))
                 {
+                    console.GameConsoleWrite("Touched sword");
                     IInteractable item = collision.OtherObject as IInteractable;
                     if (item != null)
                     {
@@ -243,9 +243,16 @@ namespace BurnoutBuster.Character
                 if (tempWeapon != null)
                 {
                     this.Detach(MGWeapon); // detaching old weapon
+                    MGWeapon.isHeld = false;
+                    MGWeapon.Enabled = false;
+
                     tempWeapon.OnInteraction(this);
                     this.MGWeapon = tempWeapon; //assigning the new weapon
+                    UpdateWeapon();
+                    MGWeapon.isHeld = true;
+                    MGWeapon.Enabled = true;
                     this.Attach(MGWeapon); //reattaching with the new weapon instance
+                    Notify();
                 }
             }
         }
@@ -267,6 +274,11 @@ namespace BurnoutBuster.Character
                     // hitbox collision stuff
                 }
             }
+        }
+
+        private void UpdateWeapon()
+        {
+            this.creature.MyWeapon = MGWeapon.GetWeapon();
         }
 
         // O B S E R V E R

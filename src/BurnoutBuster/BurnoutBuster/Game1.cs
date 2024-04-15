@@ -1,13 +1,11 @@
 ﻿using BurnoutBuster.Character;
 using BurnoutBuster.CommandPat;
+using BurnoutBuster.Items;
 using BurnoutBuster.Physics;
 using BurnoutBuster.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
-using MonoGame.Extended.Timers;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
@@ -50,6 +48,9 @@ namespace BurnoutBuster
         //levels
         Sprite background;
 
+        //items
+        ItemManager itemManager;
+
         // C O N S T R U C T O R
         public Game1()
         {
@@ -84,6 +85,9 @@ namespace BurnoutBuster
             enemyManager = new EnemyManager(this, rand, creature);
             this.Components.Add(enemyManager);
 
+            itemManager = new ItemManager(this);
+            this.Components.Add(itemManager);
+
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
 
@@ -93,8 +97,15 @@ namespace BurnoutBuster
         protected override void Initialize()
         {
             //background.Initialize();
+
             base.Initialize();
             SetScreenDimensions();
+
+            enemyManager.Attach(itemManager);
+            foreach(MonogameWeapon weapon in itemManager.GetAllWeapons())
+            {
+                _collisionManager.AddObject(weapon);
+            }
         }
 
         protected override void LoadContent()

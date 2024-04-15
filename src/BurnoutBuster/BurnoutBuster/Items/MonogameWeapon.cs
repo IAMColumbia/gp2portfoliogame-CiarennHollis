@@ -19,6 +19,7 @@ namespace BurnoutBuster.Items
         /// Reference to the creature/player for having it move with the player
         /// </summary>
         public MonogameCreature creatureSubject { get; set; }
+        public bool isHeld { get; set; }
 
         //COLLISION
         public Rectangle Bounds { get; set; }
@@ -35,6 +36,7 @@ namespace BurnoutBuster.Items
             
             //placing on the player
             RenderOffset = new Vector2(48, 0);
+            isHeld = false;
         }
 
         public IWeapon GetWeapon()
@@ -54,7 +56,10 @@ namespace BurnoutBuster.Items
         // U P D A T E 
         public override void Update(GameTime gameTime)
         {
-            this.Location = HolderPosition - RenderOffset;
+            UpdateBounds();
+            if (isHeld)
+                this.Location = HolderPosition - RenderOffset;
+
             base.Update(gameTime);
         }
         public void UpdateObserver()
@@ -63,6 +68,7 @@ namespace BurnoutBuster.Items
         }
         public void UpdateObserver(MonogameCreature creature)
         {
+            isHeld = true;
             creatureSubject = creature;
         }
         // D R A W
@@ -111,6 +117,13 @@ namespace BurnoutBuster.Items
         {
             IsCollisionOn = false;
             this.Enabled = true;
+        }
+
+        private void UpdateBounds()
+        {
+            Bounds = this.Rectangle;
+
+            int increaseAmount = this.Weapon.AttackRadius;
         }
     }
 }

@@ -5,7 +5,7 @@
  * Taking a break for lunch
   
 ### Next Steps
- * Make pick up for new sword
+ * Make pick up for new sword [DONE -> the old sword doesn't go away tho] [CLOSED ISSUES #27 ]
  * Enemy sprites
  * Weapon/attack animation
  * Music?

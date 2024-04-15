@@ -1,11 +1,5 @@
-﻿using BurnoutBuster.CommandPat;
-using BurnoutBuster.CommandPat.Commands;
-using Microsoft.Xna.Framework;
-using System;
+﻿using BurnoutBuster.CommandPat.Commands;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Input
 {
