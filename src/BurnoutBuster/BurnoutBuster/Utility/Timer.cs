@@ -8,6 +8,7 @@ namespace BurnoutBuster.Utility
         // P R O P E R T I E S
         public float CurrentTime;
         public float EndTime;
+        public float Duration;
 
         public TimerState State;
 
@@ -21,8 +22,10 @@ namespace BurnoutBuster.Utility
         // M E T H O D S
         public void StartTimer(float _currentTime, float _durationInMiliseconds)
         {
+            Duration = _durationInMiliseconds;
+
             CurrentTime = _currentTime;
-            EndTime = _durationInMiliseconds + _currentTime;
+            EndTime = _currentTime + Duration;
 
             State = TimerState.Started;
         }

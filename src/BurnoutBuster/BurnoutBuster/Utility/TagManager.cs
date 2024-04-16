@@ -1,11 +1,4 @@
-﻿using BurnoutBuster.Character;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BurnoutBuster.Utility
+﻿namespace BurnoutBuster.Utility
 {
     public class TagManager
     {
@@ -37,5 +30,5 @@ namespace BurnoutBuster.Utility
         }
     }
 
-    public enum Tags { None, Player, Enemy }
+    public enum Tags { None, Player, Enemy, Weapon, Health }
 }

@@ -79,6 +79,7 @@ namespace BurnoutBuster.CommandPat
         }
 
         // B U F F E R   A N D   A N A L Y Z E R
+        #region 'Chord Buffer and Analyzer'
         private void UseChordAnalyzer(string buttenRef, float _time, out Command command)
         {
             chordAnalyzer.AddNote(CreateNoteBasedOnInput(buttenRef, _time));
@@ -137,8 +138,10 @@ namespace BurnoutBuster.CommandPat
 
             return command;
         }
+        #endregion
 
         // K E Y B O A R D   M E T H O D S
+        #region 'Keyboard Methods'
         void HandleKeyBoard(float _time)
         {
             Command command = null;
@@ -351,7 +354,10 @@ namespace BurnoutBuster.CommandPat
             }
             return command;
         }
+        #endregion
 
+        // G A M E P A D   M E T H O D S  -> [TD] don't work
+        #region 'Gamepad stuff'
         void HandleGamePad()
         {
             
@@ -412,5 +418,6 @@ namespace BurnoutBuster.CommandPat
 
             }
         }
+        #endregion
     }
 }

@@ -11,7 +11,20 @@ namespace BurnoutBuster.Items
             this.Name = "Simple Sword";
             this.Type = WeaponType.Melee;
             this.Damage = 1;
-            this.AttackRadius = 40; // in pixels
+            this.AttackRadius = 50; // in pixels
+        }
+    }
+
+    class GoldSword : Weapon
+    {
+
+        // C O N S T R U C T O R
+        public GoldSword()
+        {
+            this.Name = "Gold Sword";
+            this.Type = WeaponType.Melee;
+            this.Damage = 7;
+            this.AttackRadius = 90; // in pixels
         }
     }
 }

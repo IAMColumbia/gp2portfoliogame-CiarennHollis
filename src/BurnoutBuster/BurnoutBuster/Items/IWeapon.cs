@@ -12,10 +12,12 @@ namespace BurnoutBuster.Items
 
         // M E T H O D S
         void Use(IDamageable target);
-        void PerformAttack(IDamageable target);
-        void PerformHeavyAttack(IDamageable target);
-        void PerformDashAttack(IDamageable target);
-        void PerformComboAttack(IDamageable target);
-        void PerformFinisherAttack(IDamageable target);
+
+        //for command pattern bits with the player
+        void PerformAttack(IDamageable target, bool isReduced);
+        void PerformHeavyAttack(IDamageable target, bool isReduced);
+        void PerformDashAttack(IDamageable target, bool isReduced);
+        void PerformComboAttack(IDamageable target, bool isReduced);
+        void PerformFinisherAttack(IDamageable target, bool isReduced);
     }
 }

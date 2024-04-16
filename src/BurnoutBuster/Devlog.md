@@ -1,5 +1,267 @@
 # Devlog
   
+## 16 April 2024 | 14:47
+### Check In
+ * Fixed some things here and there
+ * Adds new enemy textures
+ * Adds new screen textures
+ * For some reason the screens don't draw their visual to the screen. Idk why rn, I even tried stepping through the method. It will be fixed next sprint as there is no time to rn.
+ * Adds release build to the folder.
+  
+### Next Steps
+ * Bugging fixing 
+ * Parsing critique and feedback
+ * Generating new git issues for the final sprint
+ * Weapon/attack animation
+ * Music
+  
+  
+## 15 April 2024 | 12:15
+### Check In
+ * Successfully implemented pickup-able sword/weapon.
+  
+### Next Steps
+ * Enemy sprites [DONE]
+ * Weapon/attack animation?
+ * Music?
+  
+## 15 April 2024 | 12:15
+### Check In
+ * Taking a break for lunch
+  
+### Next Steps
+ * Make pick up for new sword [DONE -> the old sword doesn't go away tho] [CLOSED ISSUES #27 ]
+ * Enemy sprites
+ * Weapon/attack animation
+ * Music?
+  
+## 15 April 2024 | 10:11
+### Check In
+ * Got the weapon to move with the player
+ * Currently looking at how I want to have a weapon that can be picked up
+  
+### On Items in the Game Space
+ * So, I wanted to have a weapon that appears later after the player has fought through x amount of wave and was trying to decide how I want to implement that
+ * I'll need an item manager for managing the items on screen. I was thinking about implementing observer pattern for that so that the reference to the enemy manager for spawning the item does have to be hard coded
+ * My thought is that if  I implement observer pattern for the item manager, I might as well also implement it for moving the weapon with the player.
+  
+## 15 April 2024 | 10:11
+### Check In
+ * Going to start working on this again. I need to finish this today so I can do documentation tomorrow :P
+ * Grace is in the lab today so I can ask her about carrying items 
+  
+### Goals
+ * Sword texture on the creature (animation doesn't have to be implemented) [DONE -> kind of breaks SoC a bit since the sword needs a reference to the player]
+ * Make pick up for new sword
+ * Enemy sprites
+ * Weapon/attack animation
+ * Music?
+  
+
+## 14 April 2024 | 23:11
+### Check In
+ * So, I tried to implement the weapons having textures that can be drawn to the screen
+ * I encapsulated the weapons like how the enemies and creature/player objects are encaslated so that the can interact in monogame
+ * The weapons matches the way the enemies are structured. Everything funtionality-wise works the same way as it did before. 
+ * The issue I hit though is that I'm struggling to get the weapon to move with the player. The weapon draws to screen, but it won't follow the player
+ * I tried having the player pass the weapon it's location for the weapon to use to set it's own position with, but the variable I use to pass the player's location with always ended up being 0 by the time the weapon's update runs.
+ * I don't know what else to try to get this to work. I know Grace will be in the lab tomorrow so I can ask her about this then since I think she did a similar thing in her game for this class (having the player carry an item)
+ * I also added the structure I intend to use to make a weapon that the player can pick up.
+  
+### Next Steps
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Make pick up for new sword
+ * Enemy sprites
+ * Screens visuals
+ * Weapon/attack animation
+
+## 14 April 2024 | 19:31
+### Check In
+ * Going to start working on this again. I want to try to get the majority of things for this project done so I don't have to worry about this too much tomorrow and can work on another project I'm heading.
+  
+### Goals
+ * Game restart and screens [DONE]
+ * Dash need tweeking, feels slow -> might make player movement not a lerp function [DONE -> just adjusted the lerp rather than replacing it]
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Enemy spawn locations -> they sometimes spawn off screen [DONE -> fixed it so they aren't all coming from one corner]
+ * Need to makes sure the restart game behavior goes as expected. [DONE]
+ * Make pick up for new sword
+ * Enemy sprites
+ * Weapon/attack animation
+  
+
+## 13 April 2024 | 18:41
+### Check In
+ * Implemented game screens and state
+	* System mostly works, I just need to populate the game screens
+ * Need to stop for today :P
+  
+### Things that I noticed need tweaking or that should also be done for the MVP
+ * Dash need tweeking, feels slow -> might make player movement not a lerp function
+ * Sword texture on the creature (animation doesn't have to be implemented)
+ * Enemy spawn locations -> they sometimes spawn off screen
+ * Need to makes sure the restart game behavior goes as expected.
+ * Make pick up for new sword
+  
+### Next Steps
+ * Game restart and screens [WORKING ON -> need to populate screens]
+ * Enemy sprites
+ * Weapon/attack animation
+  
+## 13 April 2024 | 17:23
+### Check In
+ * Implemented the enemy waves system in the enemy manager
+ * Added wave info to the HUD
+  
+### On Game Screens
+ * So, for implementing this, I will definitely implement using games states (ie, title, playing, lose, win) and then update and draw the appropriate thing based off that game state 
+ * I will probably make a class that's a "game screen" for the non-gameplay screen that hold their respective info and draw it.
+	* I'm not going to have this class inherit from the Sprite class though since it doesn't need all the things a sprite has
+  
+### Next Steps
+ * Game restart and screens [WORKING ON]
+ * Enemy sprites
+ * Weapon/attack animation
+  
+## 13 April 2024 | 16:08
+### Check In
+ * Going to start working on this again.
+  
+### On Levels/EnemyWaves/Game Progression
+ * So, I had originally want this game to have different rooms that the player would fight through. But this is out of scope for me now.
+ * Instead, I'm going to shift to just having waves of enemies that progressively become more.
+	* The enemy manager already has functionality for progressively spawning in new enemies. It wouldn't hard to add some extra functionality to it for managing waves of enemies more explicity (like with a counter keeping track of which wave the player is one and the number of enemies left in the current wave)
+ * Then the game will have the HUD display the enemy kill count and wave counter
+  
+### Goals
+ * Levels/wave managment [DONE] [ISSUE #28 CLOSED]
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
+  
+## 13 April 2024 | 13:34
+### Check In
+ * Just finished refactoring the logic for the way the enemy manager spawns enemies so that there's a delay between spawns.
+ * Need to take a break for now.
+  
+### Next Steps
+ * Levels/wave managment [WORKING ON]
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
+  
+## 13 April 2024 | 12:24
+### Check In
+ * Making a note about the enemy types 
+  
+### On Enemy types
+ *  So, all the enemies in the game are children of the MonogameEnemy class.
+ * Currently, the variations are handled by the parent class. 
+ * I am aware that in having this this way, it gives a more responsibility to the MonogameEnemy class than it should probably have
+	* But, doing it this way lets me reuse a movement mode for multiple types of enemies (for multipe children) without having to copy and paste the same code
+  
+## 13 April 2024 | 11:20
+### Check In
+ * Making a note about the player state 
+  
+### On Player/Creature State
+ * So, there are 3 states for the player: Normal, Overwhelmed, and Shutdown. 
+	* __Normal:__ the normal player state
+	* __Shutdown:__ the dead state 
+	* __Overwhelmed:__ I wanted to implement a feature to go along with this state where if the player lost more than half of their current HP in one hit, they would be handicapped movement and attacking wise
+    	* So, to achieve this, I've added a previousHitpoint field to the MonogameCreature so that it could compare previous and current hit points and react if more than half has been lost 
+  
+## 13 April 2024 | 11:00
+### Check In
+ * Sitting down to work on this today. I want to try to get the majority of the work for this milestone done today, at least the programming bits
+  
+### Goals
+ * Player state [DONE] [ISSUE #17 CLOSED]
+ * Levels/wave managment [WORKING ON]
+ * Enemy types [DONE] [ISSUE #26 CLOSED]
+ * Game restart and screens
+ * Enemy sprites
+ * Weapon/attack animation
+  
+  
+## 11 April 2024 | 13:37
+### Check In
+ * Implemented debugging feature for the collision system
+ * Doing so did uncover a bug that that system has -> collision boxes on the enemies don't get updated or removed when the enemy respawns so that that hitbox ends up getting left behind in the scene and still cause the player damage.
+  
+### Next Steps
+ * Collision/enemy respawn bug [DONE] -> the collision box wasn't being disabled even though the enemy was getting disabled.
+ * Enemy sprites
+ * Weapon/attack animation
+ * Player state
+ * Levels/wave managment
+ * Enemy types 
+  
+## 11 April 2024 | 13:37
+### Check In
+ * Made and imported some new textures for the characters that are bigger
+ * Made textures for some weapons
+ * Made a background texture
+ * I wanted to write a debug feature for the collision system that would allow for the collision boxes (and hit boxes if applicable) to be visible.	
+	* It would allow me to better debug the collision system.
+	* It would also make it easier to showcase that feature of the project.
+	* I'm going to have this debug feature mimic the way the console gets toggled on and off
+  
+### Next Steps
+ * Collision debug feature [DONE]
+ * Enemy sprites
+ * Weapon/attack animation
+  
+  
+## 6 April 2024 | 10:09
+### Check In
+ * Implemented a player hit box so the player can attack the enemy without taking damage 
+	* Uses an interface to do so that inherits from ICollidable. 
+	* The Collision manager also has some extra functionality. 
+	* Learned the hard way that doing a try/catch thing several times an update slows the game down like 300%
+ * I don't know right now if I want to fix the dash since it's effectively a teleport thing right now with the way it works :P It's not something that needs to be fixed right now so I am going to be with this for now.
+ * Close Isues: #20, #21, #22, #24
+  
+### Next Steps
+ * Enemy sprites
+ * Weapon sprites [DONE]
+ * Weapon/attack animation
+  
+## 6 April 2024 | 10:09
+### Check In
+ * Got the damage flash to work. It uses two timers: one for the total duration of the flashing and one for the duration of each individual flash. There's a flashing state that notes which color should be shown or if the flashing effect is off. There's also a boolean being used to send relay the trigger to start the flashing from the Hit() function to the Update() function since the way I've implemented this feature is dependent on the update loop
+ * Also organized the MonogameEnemy and MonogameCreature scripts -> added some comments and regions to make sections more clear 
+  
+### Next Steps
+ * Collision bits 
+  
+## 6 April 2024 | 13:35
+### On Damage Flashing Again
+ * So, I am going to implement state for the flashing but it'd be it's own state that is separate. Just using the bool IsFlashing didn't allow for noting whether or not the color is being displayed or not.
+  
+## 6 April 2024 | 12:48
+### Check In
+ * Going to actually start working now.
+  
+### On Damage Flashing
+ * So, for having the enemies flash their sprite texture when they are hit, I had origianlly thought to use state for that. That's what Jeff did when he implemented that during class as an example.
+ * There is a stunned state on the enemies that I thought to use for this purpose. However, I did have an intended use for this state and there currently isn't something similar on the player. Plus, the "flashing" state wouldn't be exclusive to the player's other states.
+ * So, because I don't want the flashing state to be exclusive, I am just going to use a boolean for it, especially since there's only 2 states for that: "flashing" and "not flashing";
+  
+## 6 April 2024 | 10:09
+### Check In
+ * Writing this before I actually start working on this (which won't be for a few hours) so I can just start working when I do get to start working on this
+ * Starting progress for the MVP milestone. As the previous entry illustrates, I've already sat down and noted out all the things I need to do for the next milestone so I can move forward with a direction
+ * Today/this weekend, I want to tackle the bugs and unfinished functionality in the project so that next week I can focus on building out the game loop more (with progression and implementing aesthetics)
+  
+### Goals
+ * Damage flash for characters [DONE]
+ * Have enemy collide with other enemies [DONE] -> issue with this fix is that it glitches out when enemies are spawned ontop of each other
+ * Adjust the player's collision box to match it's sprite [DONE] -> the keepCreatureOnScreen method just needed to be adjusted since the issue really was that the player could move off screen slightly
+ * Make dash an actual dash rather than just teleporting around [TBD/LATER]
+ * Give the player a hit box that is different from (and bigger than) it's hitbox [DONE]
+  
+   
 ## 3 April 2024 | 14:02
 ### Vertical Slice Reflection
 I wasn't able to finish all that I wanted to for the vertical slice milestone. I didn't expect to have to handle collision. Part of that came from the fact that the project I used a kind of a jumping off point for this one really didn't implement a proper collision system and I had forgotten that fact. So, a considerable amount of time went into reading throught the scripts and files of the MonoGame.Extended.Collision system so that I could implement my own version of it. There are a couple features I also pulled from Unity's collision system for this (such as having an object attached to the collision information that system returns). The input buffer and chord analyzer also took more time than I thought it would. Thus I really didn't really have time to adequately build out and bug fix the other features I had wanted to have for this milestone like the level manager. I also didn't really have time for asset creation.
@@ -15,19 +277,19 @@ The Minimum Viable Product is the next milestone and it is due two weeks from ye
 Right now, the basic game loop exists in the game (albiet a very rudimentary one, but a game loop nonetheless that can be built on). The structure for the majority of the objects exists. I had wanted to include pick ups in the project, but I don't think I have time to implement that. Maybe later (since the end of the semester doesn't have to mean that I stop working on this project altogether). The main game interactions are there and can be built upon to further flesh out the gameplay. I had originally intended to have the player move between different rooms/levels in the game, but to make my life easier (:P) I am just going to have waves of enemies and have the game be a survive-as-long-as-you-can type of thing rather than something with destinct rooms. This won't be a hard pivot for the level system since as it doesn't work at all in it's current state and that would save me time with asset creation since I would've have to create a bunch of environment art (I'd just need one). 
   
 It seems like there are three main overarchering things that need to be done for the MVP milestone:
- 1. _Bug fixing -> fixing bugs and getting the non-functioning bits to function properly_
+ 1. __Bug fixing -> fixing bugs and getting the non-functioning bits to function properly__
   * Enemy flashing on hit
   * Enemy colliding with each other -> would prevent them from piling on top of each other 
   * Collision box/bounds position on the player being off from the texture 
   * The dash behaves more like a teleport rather than an actual dash
   * Having the player's hit box not be the same as their collision box
   
- 2. _Progression -> having some sense of progression so that the gameplay feels more like gameplay rather than fiddling around with what is essentially a digital toy_
+ 2. __Progression -> having some sense of progression so that the gameplay feels more like gameplay rather than fiddling around with what is essentially a digital toy__
   * More difficult enemies -> more difficult enemies -> stronger, different movement 
   * More effective weapons -> player gets better weapons the longer they survive, the better weapons they get
   * Waves of enemies -> more and more enemies spawn during each subsequent wave -> will pivot the functionality of the level class and manager for to be for this
  
- 3. _Asset Creation -> creating and implementing art and animations for game so that game looks and feels nice (if not at least decent)_
+ 3. __Asset Creation -> creating and implementing art and animations for game so that game looks and feels nice (if not at least decent)__
   * Enemy sprites -> for different enemy types
   * Weapon sprites and animation -> attack anim
   * Environment art

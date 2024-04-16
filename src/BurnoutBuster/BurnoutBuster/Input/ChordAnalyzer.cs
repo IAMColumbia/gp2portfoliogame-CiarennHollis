@@ -1,11 +1,5 @@
-﻿using BurnoutBuster.CommandPat;
-using BurnoutBuster.CommandPat.Commands;
-using Microsoft.Xna.Framework;
-using System;
+﻿using BurnoutBuster.CommandPat.Commands;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnoutBuster.Input
 {
@@ -55,16 +49,8 @@ namespace BurnoutBuster.Input
             }
             ClearBufferIfAble();
         }
-        void ClearBufferIfAble()
-        {
-            if (canClearBuffer)
-            {
-                inputBuffer.Clear();
-                canClearBuffer = false;
-            }
-        }
 
-        // M I S C   M E T H O D S
+        // N O T E   M A N A G E M E N T
         public void AddNote(Note note)
         {
             if (inputBuffer.Count == queueCapacity) // checks to see if the queue is full and makes room for the next item if it is
@@ -75,7 +61,16 @@ namespace BurnoutBuster.Input
         {
             inputBuffer.Clear();
         }
+        void ClearBufferIfAble()
+        {
+            if (canClearBuffer)
+            {
+                inputBuffer.Clear();
+                canClearBuffer = false;
+            }
+        }
 
+        // A N A L Y Z I N G 
         public void CheckQueue()
         {
             Chord currentChord = new Chord(0, 0, 0);

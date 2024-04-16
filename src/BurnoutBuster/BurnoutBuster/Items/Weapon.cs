@@ -7,6 +7,7 @@ namespace BurnoutBuster.Items
         // P R O P E R T I E S 
         public string Name { get; set; }
         public int Damage { get; set; }
+        public int ReducedDamage { get => Damage * (2 / 3); }
         public int AttackRadius { get; set; }
 
         public WeaponType Type;
@@ -16,27 +17,32 @@ namespace BurnoutBuster.Items
         {
             target.Hit(Damage);
         }
-        public virtual void PerformAttack(IDamageable target)
+        public virtual void PerformAttack(IDamageable target, bool isReduced)
         {
-            target.Hit(Damage);
+            if (isReduced) { target.Hit(ReducedDamage); }
+            else { target.Hit(Damage); }
         }
 
-        public virtual void PerformHeavyAttack(IDamageable target)
+        public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
         {
-            target.Hit(Damage * 2);
+            if (isReduced) { target.Hit(ReducedDamage); }
+            else { target.Hit(Damage * 2); }
         }
-        public virtual void PerformDashAttack(IDamageable target)
+        public virtual void PerformDashAttack(IDamageable target, bool isReduced)
         {
-            target.Hit(Damage + 3);
+            if (isReduced) { target.Hit(ReducedDamage); }
+            else { target.Hit(Damage + 3); }
 
         }
-        public virtual void PerformComboAttack(IDamageable target)
+        public virtual void PerformComboAttack(IDamageable target, bool isReduced)
         {
-            target.Hit(Damage * 3);
+            if (isReduced) { target.Hit(ReducedDamage); }
+            else { target.Hit(Damage * 3); }
         }
-        public virtual void PerformFinisherAttack(IDamageable target)
+        public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
         {
-            target.Hit(Damage + 5);
+            if (isReduced) { target.Hit(ReducedDamage); }
+            else { target.Hit(Damage + 5); }
         }
     }
 }

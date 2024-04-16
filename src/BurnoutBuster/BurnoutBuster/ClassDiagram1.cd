@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BurnoutBuster.Game1">
+    <Position X="1" Y="1.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BurnoutBuster.Game1.GameState">
+        <TypeIdentifier>
+          <NewMemberFileName>Game1.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAQQAIAGwAAAAwMBAAAAAAAAACAAIAADAIAgEAIAIIQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Character.BasicEnemy">
+    <Position X="6" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\BasicEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Character.CommandCreature">
+    <Position X="12.5" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AK0AAAAAAAAAgAAAAAAAFAAAQNAAAEAoQIAAAABAAAA=</HashCode>
+      <FileName>Character\CommandCreature.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.Character.Creature">
+    <Position X="12.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgCAAAAAAAAAgAAIABAQAAIgAAAAEAAAABAAAAAA=</HashCode>
+      <FileName>Character\Creature.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.Character.Enemy">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCAAIAAAAAgAAIABAAAAIgAAAAEAQAABAAAAAA=</HashCode>
+      <FileName>Character\Enemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.Character.EnemyManager" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>sAaIAoBggBAgQ4IBMECQAQBAGIEwMABAAQAAAIAFAgA=</HashCode>
+      <FileName>Character\EnemyManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BurnoutBuster.Character.GameConsoleCreature" Collapsed="true">
+    <Position X="12.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\GameConsoleCreature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Character.GameConsoleEnemy">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\GameConsoleEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Character.HeavyEnemy">
+    <Position X="6" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\HeavyEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Character.KamikaziEnemy">
+    <Position X="6" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Character\KamikaziEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Character.MonogameCreature">
+    <Position X="10" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAQIECFQgAEgJ0MCBEIAFAAAIIABoAxYgIgAIIIAAiQ=</HashCode>
+      <FileName>Character\MonogameCreature.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.Character.MonogameEnemy">
+    <Position X="3.75" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>KAQAFSHQgIEgB0BgAGIARQAAAIACIAQYAAAAACIQAoY=</HashCode>
+      <FileName>Character\MonogameEnemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.CommandPat.Command">
+    <Position X="17.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAQAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandPat\Command.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.CommandPat.CommandProcessor">
+    <Position X="15.25" Y="3.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BurnoutBuster.CommandPat.CommandProcessor.ListeningMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CommandPat\CommandProcessor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAwIAgAQgAAAESAAAAQAAAASAiAAAhABAAABQBAAAAA=</HashCode>
+      <FileName>CommandPat\CommandProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.CommandPat.MGCommand">
+    <Position X="17.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandPat\MGCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.ChordAnalyzer">
+    <Position X="20.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAQABAAUBAAAAQAAAAACAAACCAAEAEAAEAAAAAEIIAA=</HashCode>
+      <FileName>Input\ChordAnalyzer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.ChordMap">
+    <Position X="22.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Input\ChordMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.KeyMap" Collapsed="true">
+    <Position X="22.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAKA=</HashCode>
+      <FileName>Input\KeyMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.ButtonMap" Collapsed="true">
+    <Position X="22.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Input\KeyMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.Note">
+    <Position X="21" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAQAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Input\Note.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.PressedButton" Collapsed="true">
+    <Position X="22.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Input\PressedButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.PressedKey" Collapsed="true">
+    <Position X="22.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Input\PressedKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.TimedInputHandler">
+    <Position X="24.5" Y="5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwIAwEQCAAAIAAAAAACAAIAKAAAAAAI=</HashCode>
+      <FileName>Input\TimedInputHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Input.TimedPlayerController">
+    <Position X="24.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Input\TimedPlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Items.GoldSword" Collapsed="true">
+    <Position X="15.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\SimpleSword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Items.ItemManager" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACwAAAAAAAAAAQAAAACAAAAAIAEAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Items\ItemManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BurnoutBuster.Items.MonogameGoldSword" Collapsed="true">
+    <Position X="13.75" Y="18.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Items\MonogameGoldSword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Items.MonogameSimpleSword" Collapsed="true">
+    <Position X="13.75" Y="18" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Items\MonogameSimpleSword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Items.MonogameWeapon">
+    <Position X="11.5" Y="17.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACYQgAAAAAAgQwAAAEAAAQAACQAEAAgICAgAAEIAAgQ=</HashCode>
+      <FileName>Items\MonogameWeapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.Items.SimpleSword" Collapsed="true">
+    <Position X="15.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\SimpleSword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Items.Weapon">
+    <Position X="13.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAACAAAAAQAAAAAAQAAQAAQAEAAAACQAAAEAAAAA=</HashCode>
+      <FileName>Items\Weapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BurnoutBuster.Physics.Collision">
+    <Position X="20" Y="18.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAAAAAAAAAAAA=</HashCode>
+      <FileName>Physics\Collision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Physics.CollisionManager">
+    <Position X="22.25" Y="14.25" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BurnoutBuster.Physics.CollisionManager.CM_DebugState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Physics\CollisionManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAGAAASAAAAEAAAAEBAAhgBCAAAAIAAAQAQA=</HashCode>
+      <FileName>Physics\CollisionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.UI.HUD">
+    <Position X="27.75" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAwAAAAAIAAIQgAAAAIAAgAAAAAAAAAQ=</HashCode>
+      <FileName>UI\HUD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.UI.Screen">
+    <Position X="30.25" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gIAgAAAAAAQAAAAAAAAAAgAQAAAAAKABAAAIAQAAAAQ=</HashCode>
+      <FileName>UI\Screen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Utility.Radio">
+    <Position X="27" Y="15.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAEAQAAAAAAEARAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Utility\Radio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Utility.TagManager">
+    <Position X="21.5" Y="11.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAACAAAA=</HashCode>
+      <FileName>Utility\TagManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BurnoutBuster.Utility.Timer">
+    <Position X="27" Y="12" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACgAAAAAAAQAAAAABgAAAABAAAhgAAAAA=</HashCode>
+      <FileName>Utility\Timer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="BurnoutBuster.Input.Chord">
+    <Position X="22.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Input\Chord.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="BurnoutBuster.Character.IDamageable">
+    <Position X="7.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\IDamageable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Character.IEnemy">
+    <Position X="6" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAIAAAAAgAAAABAAAAIAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Character\IEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.CommandPat.ICommand">
+    <Position X="17.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandPat\iCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.CommandPat.ICommandComponent">
+    <Position X="15.25" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAkAAAAAAAAAAAAAAAAAAAAAQIAAAEAoQAAAAABAAAA=</HashCode>
+      <FileName>CommandPat\ICommandComponent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Items.IInteract">
+    <Position X="17.5" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\IInteract.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Items.IInteractable">
+    <Position X="17.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\IInteractable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Items.IWeapon">
+    <Position X="12" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAACAAAAAQAAAAAAAAAQAAQAEAAAACAAAAEAAAAA=</HashCode>
+      <FileName>Items\IWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Physics.ICollidable">
+    <Position X="19" Y="14.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAIAAAAAAIAAgA=</HashCode>
+      <FileName>Physics\ICollidable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Physics.IHasHitBox">
+    <Position X="20" Y="16.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Physics\IHasHitBox.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.ICreatureObserver">
+    <Position X="31" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Utility\ICreatureObserver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.ICreatureSubject">
+    <Position X="29.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\ICreatureSubject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.IFlashableTexture">
+    <Position X="31" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAFAAAEAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\IFlashableTexture.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.IObserver">
+    <Position X="31" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\IObserver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.IPoolable">
+    <Position X="32.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\IPoolable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.ISubject">
+    <Position X="29.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAIAAAAAAAAAAIAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\ISubject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BurnoutBuster.Utility.ITaggable">
+    <Position X="19" Y="12.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\ITaggable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="BurnoutBuster.Character.CreatureState">
+    <Position X="14.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAIAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Character\Creature.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Character.EnemyMovementMode">
+    <Position X="6" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAABAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character\MonogameEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Character.EnemyState">
+    <Position X="6" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAACAAAIAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Character\IEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Character.EnemyType" Collapsed="true">
+    <Position X="6" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Character\IEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Character.WaveState">
+    <Position X="7.75" Y="17.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAEA=</HashCode>
+      <FileName>Character\EnemyManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Input.GamePadButtons" Collapsed="true">
+    <Position X="24.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAQAAAIAAAAAAAAAAAAAAAAAAAAIQEIYAA=</HashCode>
+      <FileName>Input\PressedButton.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Items.WeaponType" Collapsed="true">
+    <Position X="15.5" Y="16.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\IWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Utility.FlashingState">
+    <Position X="32.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Utility\IFlashableTexture.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Utility.Tags">
+    <Position X="24.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACgAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQEAAAA=</HashCode>
+      <FileName>Utility\TagManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BurnoutBuster.Utility.TimerState">
+    <Position X="29.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAEAAAAAAAAAAAIAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Utility\Timer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

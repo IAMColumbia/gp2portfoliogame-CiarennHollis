@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 
 namespace BurnoutBuster.UI
@@ -57,7 +56,7 @@ namespace BurnoutBuster.UI
             base.Draw(gameTime);
         }
 
-        // UI MANAGEMENT
+        // U I   M A N A G E M E N T
         public void AddItem(string label, object itemReference)
         {
            itemsToDisplay.Add(label, itemReference);
@@ -74,7 +73,7 @@ namespace BurnoutBuster.UI
             {
                 slotContents = $"{item}: {itemsToDisplay[item]}";
                 spriteBatch.DrawString(fontRegular, slotContents, position, uiColor);
-                position += new Vector2(100, 100);
+                position += new Vector2(200, 0);
             }
         }
     }
