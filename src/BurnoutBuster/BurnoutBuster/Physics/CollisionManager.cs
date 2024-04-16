@@ -20,7 +20,7 @@ namespace BurnoutBuster.Physics
         private InputHandler input;
 
 
-        // C O N S T R U C T O R 
+        // C O N S T R U C T O R S
         public CollisionManager(Game game) : base(game)
         {
 #if DEBUG
@@ -167,6 +167,7 @@ namespace BurnoutBuster.Physics
         }
 
         // DEBUG VISUALS
+        #region 'Debug visuals'
         public void ToggleDebugVisuals()
         {
             switch (debugState)
@@ -202,6 +203,7 @@ namespace BurnoutBuster.Physics
             if (HBobj != null)
                 _spritebatch.DrawRectangle(HBobj.HitBox, Color.Yellow, 1, 0);
         }
+        #endregion
 
     }
 }

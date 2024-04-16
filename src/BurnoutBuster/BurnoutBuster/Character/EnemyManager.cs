@@ -11,6 +11,7 @@ namespace BurnoutBuster.Character
     public class EnemyManager : DrawableGameComponent, ISubject
     {
         // P R O P E R T I E S
+        #region 'Properties'
         //object pool management
         public List<MonogameEnemy> AllEnemies;
         public List<MonogameEnemy> ActiveEnemies;
@@ -60,6 +61,7 @@ namespace BurnoutBuster.Character
 
         //isubject
         public List<IObserver> creatureObservers { get; set; }
+        #endregion
 
         // C O N S T R U C T O R
         public EnemyManager(Game game, Random rand, MonogameCreature creature) : base(game)
@@ -323,6 +325,7 @@ namespace BurnoutBuster.Character
 
 
         // I S U B J E C T
+        #region 'ISubject'
         public void Attach(IObserver observer)
         {
             creatureObservers.Add(observer);
@@ -338,8 +341,10 @@ namespace BurnoutBuster.Character
                 observer.UpdateObserver();
             }
         }
+        #endregion
 
-        // M I S C
+        // R E S E T I N G
+        #region 'Resets'
         void ResetForNewWave()
         {
             this.NumberOfEnemiesToSpawn = 2;
@@ -370,5 +375,6 @@ namespace BurnoutBuster.Character
             WaveCounter = 1;
             NumberOfEnemiesPerWave = 5;
         }
+        #endregion
     }
 }

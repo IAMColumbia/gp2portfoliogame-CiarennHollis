@@ -23,7 +23,7 @@ namespace BurnoutBuster.Items
         {
             this.Name = "Gold Sword";
             this.Type = WeaponType.Melee;
-            this.Damage = 5;
+            this.Damage = 7;
             this.AttackRadius = 90; // in pixels
         }
     }

@@ -8,7 +8,7 @@ namespace BurnoutBuster.UI
     public class Screen
     {
         // P R O P E R T I E S
-        Sprite visual;
+        public Sprite visual;
         SpriteFont fontBold;
         SpriteFont fontRegular;
         public string primaryText;
@@ -49,8 +49,8 @@ namespace BurnoutBuster.UI
         }
         public void DrawScreen(SpriteBatch spriteBatch)
         {
-            if (visual != null) 
-                spriteBatch.DrawSprite(visual);
+            //if (visual != null) 
+            //    spriteBatch.DrawSprite(visual);
 
             spriteBatch.DrawString(fontBold, primaryText, primaryTextPosition, Color.BlanchedAlmond);
             spriteBatch.DrawString(fontRegular, secondaryText, secondaryTextPosition, Color.BlanchedAlmond);

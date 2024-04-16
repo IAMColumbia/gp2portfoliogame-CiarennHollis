@@ -116,6 +116,7 @@ namespace BurnoutBuster.Character
 
 
         // A C T I O N   I M P L E M E N T A T I O N S
+        #region 'Actions'
         private void PerformAttackAction(IDamageable target, ActionCommands action)
         {
             switch (action)
@@ -148,6 +149,7 @@ namespace BurnoutBuster.Character
 
             actionToPerform = ActionCommands.Null;
         }
+        #endregion
 
         // C O M M A N D S
         #region 'Commands'

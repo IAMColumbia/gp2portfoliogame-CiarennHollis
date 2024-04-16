@@ -102,10 +102,6 @@ namespace BurnoutBuster
             SetScreenDimensions();
 
             enemyManager.Attach(itemManager);
-            foreach(MonogameWeapon weapon in itemManager.GetAllWeapons())
-            {
-                _collisionManager.AddObject(weapon);
-            }
         }
 
         protected override void LoadContent()
@@ -126,12 +122,22 @@ namespace BurnoutBuster
             _graphics.PreferredBackBufferWidth = mapWidth;
             _graphics.ApplyChanges();
         }
+        /// <summary>
+        /// Feeds collidable objects to the collision manager
+        /// </summary>
         void SetUpCollisionActors()
         {
             this._collisionManager.AddObject(creature);
             this.enemyManager.AddEnemiesToCollisionManager(_collisionManager);
-        }
 
+            foreach (MonogameWeapon weapon in itemManager.GetAllWeapons())
+            {
+                _collisionManager.AddObject(weapon);
+            }
+        }
+        /// <summary>
+        /// Initializes game screens
+        /// </summary>
         void SetUpScreens()
         {
             Screens.Add("Title", new Screen()
@@ -140,10 +146,8 @@ namespace BurnoutBuster
                 secondaryText = "Press [SPACE] to player",
                 tertiaryText = "Press [SHIFT] for Instructions"
             });
-            Screens["Title"].LoadContent(this);
+            Screens["Title"].LoadContent(this, "Environment/TitleScreen");
 
-            // TD add the rest of the screens
-            // - instructions, win, lose
 
             Screens.Add("Instructions", new Screen()
             {
@@ -168,7 +172,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                 tertiaryTextPosition = new Vector2(250, 450)
                 
             });
-            Screens["Instructions"].LoadContent(this);
+            Screens["Instructions"].LoadContent(this, "Environment/InstructionsScreen");
 
             Screens.Add("Win", new Screen()
             {
@@ -211,12 +215,10 @@ Finisher Attack: Attack + Heavy Attack + Attack
 
             UpdateBasedOnState(gameTime);
 
-            //TD dirty game exit for VS
-            //if (creature.CheckCreatureState(CreatureState.Shutdown))
-            //        Exit();
-
-
         }
+        /// <summary>
+        /// Manages the game state -> showing the different screens
+        /// </summary>
         void UpdateBasedOnState(GameTime gameTime)
         {
             switch(gameState)
@@ -266,7 +268,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
         // D R A W
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkBlue);
             string screenToDraw = "";
 
             switch(gameState)
@@ -295,8 +297,14 @@ Finisher Attack: Attack + Heavy Attack + Attack
             _spriteBatch.Begin();   
             _spriteBatch.DrawSprite(background);
 
+            //if (gameState != GameState.Playing || screenToDraw != string.Empty)
+            //    Screens[screenToDraw].DrawScreen(_spriteBatch);
             if (gameState != GameState.Playing || screenToDraw != string.Empty)
+            {
+                _spriteBatch.DrawSprite(Screens[screenToDraw].visual);
                 Screens[screenToDraw].DrawScreen(_spriteBatch);
+            }
+
 #if DEBUG
             _collisionManager.DrawCollisionRectangles(_spriteBatch);
 #endif
@@ -310,20 +318,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
         // M I S C 
         void WriteConsoleInfo()
         {
-                
-
-            //console.Log("Movement controls", "WASD");
-            //console.Log("Attack:", "Left Arrow");
-            //console.Log("Heavy Attack:", "Up Arrow");
-            //console.Log("Dash:", "Right Arrow");
-
-            //console.Log("Dash Attack:", "Right + Left");
-            //console.Log("Combo Attack:", "Right + Up");
-            //console.Log("Finisher Attack:", "Left + Up + Left");
-            console.Log("Game State", gameState.ToString());
-
-            //console.Log("Enemy", enemy.HitPoints.ToString());
-
+            //console.Log("Game State", gameState.ToString());
         }
 
         void ResetGame()

@@ -13,7 +13,7 @@ namespace BurnoutBuster.Character
     public class MonogameCreature : DrawableSprite, IDamageable, IInteract, IHasHitBox, ICreatureSubject, IFlashableTexture
     {
         // P R O P E R T I E S
-
+        #region 'Properties'
         //REFERENCES
         protected GameConsole console;
         TimedPlayerController controller { get; set; }
@@ -80,6 +80,7 @@ namespace BurnoutBuster.Character
         public FlashingState flashingState { get; set; }
         public Timer flashingTimer { get; set; }
         public Timer individualFlashTimer { get; set; }
+        #endregion
 
         // C O N S T R U C T O R
         public MonogameCreature(Game game) : base(game)
@@ -118,6 +119,7 @@ namespace BurnoutBuster.Character
         }
 
         // I N I T
+        #region 'Init'
         protected override void LoadContent()
         {
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/Creature");
@@ -155,8 +157,10 @@ namespace BurnoutBuster.Character
             individualFlashTimer.ResetTimer();
             canStartFlashing = false;
         }
+        #endregion
 
         // U P D A T E
+        #region 'Update
         public override void Update(GameTime gameTime)
         {
             float timeElapsed = (float) gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -186,6 +190,12 @@ namespace BurnoutBuster.Character
             this.Location += ((this.controller.Direction * (time / 1000)) * Speed); // Simple move
 
         }
+        private void UpdateWeapon()
+        {
+            this.creature.MyWeapon = MGWeapon.GetWeapon();
+        }
+        #endregion
+
 
         // D R A W 
         #region 'Draw'
@@ -215,6 +225,7 @@ namespace BurnoutBuster.Character
         #endregion
 
         // C O L L I S I O N
+        #region 'Collision & Interaction'
         public virtual void OnCollisionEnter(Physics.Collision collision)
         {
             // check to make sure the collision info isn't null
@@ -275,13 +286,10 @@ namespace BurnoutBuster.Character
                 }
             }
         }
-
-        private void UpdateWeapon()
-        {
-            this.creature.MyWeapon = MGWeapon.GetWeapon();
-        }
+        #endregion
 
         // O B S E R V E R
+        #region 'Observer pattern stuff'
         public void Attach(IObserver observer)
         {
             observers.Add((ICreatureObserver)observer);
@@ -297,8 +305,10 @@ namespace BurnoutBuster.Character
                 observer.UpdateObserver(this);
             }
         }
+        #endregion
 
         // S T A T E
+        #region 'State management'
         public bool CheckCreatureState(CreatureState state)
         {
             if (CreatureState == state)
@@ -335,8 +345,10 @@ namespace BurnoutBuster.Character
                     break;
             }
         }
+        #endregion
 
         // I D A M A G A B L E
+        #region 'IDamageable'
         public void Attack(IDamageable target)
         {
             creature.Attack(target);
@@ -358,6 +370,7 @@ namespace BurnoutBuster.Character
             //this.KnockBack();
             //this.creature.KnockBack();
         }
+        #endregion
 
         // T E X T U R E   E F F E C T S
         #region 'Texture effects'

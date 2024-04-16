@@ -3,9 +3,13 @@
 ## Characters
 Creature.png
 BasicEnemy.png
+KamikaziEnemy.png
+HeavyEnemy.png
   
 ## Environment
 Background.png
+TitleScreen.png
+Instructions.png
   
 ## Items
 SimpleSword.png

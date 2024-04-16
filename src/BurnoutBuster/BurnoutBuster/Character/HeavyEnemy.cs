@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BurnoutBuster.Character
 {
     public class HeavyEnemy : MonogameEnemy
     {
-        // P R O P E R T I E S
         
         // C O N S T R U C T O R
         public HeavyEnemy(Game game, MonogameCreature creature) : base(game, creature)
@@ -15,7 +15,16 @@ namespace BurnoutBuster.Character
             this.HitPoints = 20;
             this.Damage = 5;
         }
+        
+        // I N I T
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+            //texture set up
+            this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/HeavyEnemy");
+        }
 
+        // U P D A T E
         public override void Update(GameTime gameTime)
         {
             this.Move(gameTime);

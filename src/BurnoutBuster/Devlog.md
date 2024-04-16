@@ -1,11 +1,27 @@
 # Devlog
   
+## 16 April 2024 | 14:47
+### Check In
+ * Fixed some things here and there
+ * Adds new enemy textures
+ * Adds new screen textures
+ * For some reason the screens don't draw their visual to the screen. Idk why rn, I even tried stepping through the method. It will be fixed next sprint as there is no time to rn.
+ * Adds release build to the folder.
+  
+### Next Steps
+ * Bugging fixing 
+ * Parsing critique and feedback
+ * Generating new git issues for the final sprint
+ * Weapon/attack animation
+ * Music
+  
+  
 ## 15 April 2024 | 12:15
 ### Check In
  * Successfully implemented pickup-able sword/weapon.
   
 ### Next Steps
- * Enemy sprites
+ * Enemy sprites [DONE]
  * Weapon/attack animation?
  * Music?
   

@@ -56,7 +56,7 @@ namespace BurnoutBuster.UI
             base.Draw(gameTime);
         }
 
-        // UI MANAGEMENT
+        // U I   M A N A G E M E N T
         public void AddItem(string label, object itemReference)
         {
            itemsToDisplay.Add(label, itemReference);

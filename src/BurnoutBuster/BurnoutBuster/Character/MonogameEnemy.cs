@@ -144,7 +144,7 @@ namespace BurnoutBuster.Character
             //stats
             this.movementSpeed = 1;
 
-            //texture set up
+            ////texture set up
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.ShowMarkers = true;

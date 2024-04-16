@@ -9,14 +9,32 @@ Genre: Rogue-like
   
 Platform:  
   
-Folder Sturcture  
+Folder Structure  
   
 \src  
   
 \src\BurnoutBuster   
   
 \src\BurnoutBuster\BurnoutBuster  
-  
+
+\src\BurnoutBuster\BurnoutBuster\Character
+
+\src\BurnoutBuster\BurnoutBuster\CommandPat
+
+\src\BurnoutBuster\BurnoutBuster\CommandPat\Commands
+
+\src\BurnoutBuster\BurnoutBuster\Input
+
+\src\BurnoutBuster\BurnoutBuster\Items
+
+\src\BurnoutBuster\BurnoutBuster\Levels
+
+\src\BurnoutBuster\BurnoutBuster\Physics
+
+\src\BurnoutBuster\BurnoutBuster\UI
+
+\src\BurnoutBuster\BurnoutBuster\Utility
+
 \src\BurnoutBuster\MonoGameLibrary  
   
 \assets  

@@ -41,7 +41,7 @@ I like thinking of the pieces of this project as building blocks and I tried my 
  * MonogameCreature has a creature encapsulated in it
   
 ## State
-Most of the things/objects in the project are rather stateful. I tend to use states for toggles as well as for noting the status of the moving pieces in the game. For example, both the player and enemies have state to note their status and the game uses and reacts to that status.There are a few odd places where a boolean is used for state, but that is only if there are 2 states (ie. the MonogameWeapon has a isHeld var and updates itself based off the value of that boolean. With this, these is only two states ever (being held, not being held) so I used boolean for it) There are other places in the project where there are enums for state that only have one or two values since I made those with the intention of expanding them.
+Most of the things/objects in the project are rather stateful. I tend to use states for toggles as well as for noting the status of the moving pieces in the game. For example, both the player and enemies have state to note their status and the game uses and reacts to that status.There are a few odd places where a boolean is used for state, but that is only if there are 2 states (ie. the MonogameWeapon has a isHeld var and updates itself based off the value of that boolean. With this, these are only two states ever (being held, not being held) so I used boolean for it) There are other places in the project where there are enums for state that only have one or two values since I made those with the intention of expanding them.
   
 ## Systems
  * Collision System -> handles collision
@@ -58,11 +58,12 @@ Most of the things/objects in the project are rather stateful. I tend to use sta
  * (pseudo) Object pool -> enemies (pseudo because it's not implementing an Object Pool class like previous demos we've looked at)
  * Singleton -> tag manager 
  * (sort of) Fly Weight -> commands get passed between the chord analyzer and command processor via an enum value rather than actually passing commands through
- * Observer -> allows some gameComponents to listens and react to when the properties they're interested in change which out them having to have a hard coded reference to that thing
+ * Observer -> allows some gameComponents to listen and react to when the properties they're interested in change without them having to have a hard-coded reference to that thing
   
 ## Not Working
  * Enemy manager gets rid of the enemies that are still active in the game when it spawns in new ones
- * The original sword the player starts with doesn't go away after it's been replaced by the new one when the player picks it up (it's visbile behind the new sword)
+ * The original sword the player starts with doesn't go away after it's been replaced by the new one when the player picks it up (it's visible behind the new sword)
+ * Screen textures aren't being drawn to the screen (most noticeably the Title and Instructions)
   
 ## Didn't Get to Implement
  * Game Animations
