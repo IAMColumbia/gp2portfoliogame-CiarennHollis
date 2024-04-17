@@ -8,14 +8,13 @@ namespace BurnoutBuster.UI
     public class Screen
     {
         // P R O P E R T I E S
-        public Sprite visual;
+        public Texture2D visual;
         SpriteFont fontBold;
         SpriteFont fontRegular;
         public string primaryText;
         public string secondaryText;
         public string tertiaryText;
 
-        Vector2 visualPosition;
         public Vector2 primaryTextPosition;
         public Vector2 secondaryTextPosition;
         public Vector2 tertiaryTextPosition;
@@ -24,7 +23,6 @@ namespace BurnoutBuster.UI
         public Screen()
         {
             //TD hard coded positions
-            visualPosition = Vector2.Zero;
             primaryTextPosition = new Vector2(250, 250);
             secondaryTextPosition = new Vector2(250, 300);
             tertiaryTextPosition = new Vector2(250, 350);
@@ -33,9 +31,7 @@ namespace BurnoutBuster.UI
         // M E T H O D S
         public void LoadContent(Game game, string visualFilePath)
         {
-            visual = new Sprite(game);
-            visual.SpriteTexture = game.Content.Load<Texture2D>(visualFilePath);
-            visual.Location = visualPosition;
+            visual = game.Content.Load<Texture2D>(visualFilePath);
 
             fontBold = game.Content.Load<SpriteFont>("Fonts/ImpactBold");
             fontRegular = game.Content.Load<SpriteFont>("Fonts/Impact");
@@ -49,14 +45,14 @@ namespace BurnoutBuster.UI
         }
         public void DrawScreen(SpriteBatch spriteBatch)
         {
-            //if (visual != null) 
-            //    spriteBatch.DrawSprite(visual);
+            if (visual != null)
+                spriteBatch.Draw(visual, Vector2.Zero, Color.White);
 
-            spriteBatch.DrawString(fontBold, primaryText, primaryTextPosition, Color.BlanchedAlmond);
-            spriteBatch.DrawString(fontRegular, secondaryText, secondaryTextPosition, Color.BlanchedAlmond);
+            spriteBatch.DrawString(fontBold, primaryText, primaryTextPosition, Color.MistyRose);
+            spriteBatch.DrawString(fontRegular, secondaryText, secondaryTextPosition, Color.MistyRose);
 
             if (tertiaryText != string.Empty)
-                spriteBatch.DrawString(fontRegular, tertiaryText, tertiaryTextPosition, Color.BlanchedAlmond);
+                spriteBatch.DrawString(fontRegular, tertiaryText, tertiaryTextPosition, Color.MistyRose);
         }
     }
 }

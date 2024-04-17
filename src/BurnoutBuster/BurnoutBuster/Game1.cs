@@ -142,7 +142,7 @@ namespace BurnoutBuster
         {
             Screens.Add("Title", new Screen()
             {
-                primaryText = "BURN BUSTER!",
+                primaryText = "",
                 secondaryText = "Press [SPACE] to player",
                 tertiaryText = "Press [SHIFT] for Instructions"
             });
@@ -209,9 +209,12 @@ Finisher Attack: Attack + Heavy Attack + Attack
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+#if DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.OemTilde))
                 _collisionManager.ToggleDebugVisuals();
             WriteConsoleInfo();
+#endif
 
             UpdateBasedOnState(gameTime);
 
@@ -297,13 +300,8 @@ Finisher Attack: Attack + Heavy Attack + Attack
             _spriteBatch.Begin();   
             _spriteBatch.DrawSprite(background);
 
-            //if (gameState != GameState.Playing || screenToDraw != string.Empty)
-            //    Screens[screenToDraw].DrawScreen(_spriteBatch);
             if (gameState != GameState.Playing || screenToDraw != string.Empty)
-            {
-                _spriteBatch.DrawSprite(Screens[screenToDraw].visual);
                 Screens[screenToDraw].DrawScreen(_spriteBatch);
-            }
 
 #if DEBUG
             _collisionManager.DrawCollisionRectangles(_spriteBatch);

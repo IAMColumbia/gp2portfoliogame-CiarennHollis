@@ -126,7 +126,7 @@ namespace BurnoutBuster.Character
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(450, 300);
 
-            this.ShowMarkers = true;
+            this.ShowMarkers = false;
 
             this.Speed = originalSpeed = 150;
 
@@ -152,6 +152,7 @@ namespace BurnoutBuster.Character
             this.creature.MyWeapon = MGWeapon.GetWeapon();
 
             //flashing reset
+            this.DrawColor = Color.White;
             this.flashingState = FlashingState.NotFlashing;
             flashingTimer.ResetTimer();
             individualFlashTimer.ResetTimer();
@@ -235,7 +236,6 @@ namespace BurnoutBuster.Character
 
                 if (TagManager.CompareTag(collision.OtherObject, Tags.Weapon))
                 {
-                    console.GameConsoleWrite("Touched sword");
                     IInteractable item = collision.OtherObject as IInteractable;
                     if (item != null)
                     {

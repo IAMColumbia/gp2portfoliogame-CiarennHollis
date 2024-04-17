@@ -1,5 +1,22 @@
 # Devlog
   
+## 17 April 2024 | 10:31
+### Check In
+ * Fixed some things that were pointed out in the critique in class yesterday:
+	* Fixed the issue with the screens not drawing to screen like they should
+	* Refactored the weapons reduced damage thing -> instead of using a boolean applying the reduction, the weapon gets passed a modifier int when its attack method gets called
+	* Disabled some of the debugging features.
+	* Changes some of the values to modify the difficulty of the game (enemy speed, when the gold sword gets spawned in)
+ * Modifies the enemy count to display enemies left based on the number of enemies the player has killed rather than the number of enemies the manager has spawned
+  
+### Next Steps
+ * Bugging fixing 
+ * Parsing critique and feedback
+ * Generating new git issues for the final sprint
+ * Weapon/attack animation
+ * Music
+  
+  
 ## 16 April 2024 | 14:47
 ### Check In
  * Fixed some things here and there

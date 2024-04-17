@@ -17,32 +17,27 @@ namespace BurnoutBuster.Items
         {
             target.Hit(Damage);
         }
-        public virtual void PerformAttack(IDamageable target, bool isReduced)
+        public virtual void PerformAttack(IDamageable target, int damageModifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage); }
+            target.Hit(Damage + damageModifier);
         }
 
-        public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
+        public virtual void PerformHeavyAttack(IDamageable target, int damageModifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage * 2); }
+            target.Hit((Damage * 2) + damageModifier);
         }
-        public virtual void PerformDashAttack(IDamageable target, bool isReduced)
+        public virtual void PerformDashAttack(IDamageable target, int damageModifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage + 3); }
+            target.Hit((Damage + 3) + damageModifier);
 
         }
-        public virtual void PerformComboAttack(IDamageable target, bool isReduced)
+        public virtual void PerformComboAttack(IDamageable target, int damageModifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage * 3); }
+            target.Hit((Damage * 3) + damageModifier);
         }
-        public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
+        public virtual void PerformFinisherAttack(IDamageable target, int damageModifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage + 5); }
+            target.Hit((Damage + 5) + damageModifier);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace BurnoutBuster.Items
             IsCollisionOn = true;
             
             //placing on the player
-            RenderOffset = new Vector2(48, 0);
+            RenderOffset = new Vector2(40, 0);
             isHeld = false;
         }
 
@@ -83,27 +83,27 @@ namespace BurnoutBuster.Items
         {
             this.Weapon.Use(target);
         }
-        public virtual void PerformAttack(IDamageable target, bool isReduced)
+        public virtual void PerformAttack(IDamageable target, int damageModifier)
         {
-            this.Weapon.PerformAttack(target, isReduced);
+            this.Weapon.PerformAttack(target, damageModifier);
         }
 
-        public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
+        public virtual void PerformHeavyAttack(IDamageable target, int damageModifier)
         {
-            this.Weapon.PerformHeavyAttack(target, isReduced);  
+            this.Weapon.PerformHeavyAttack(target, damageModifier);  
         }
-        public virtual void PerformDashAttack(IDamageable target, bool isReduced)
+        public virtual void PerformDashAttack(IDamageable target, int damageModifier)
         {
-            this.Weapon.PerformDashAttack(target, isReduced);   
+            this.Weapon.PerformDashAttack(target, damageModifier);   
 
         }
-        public virtual void PerformComboAttack(IDamageable target, bool isReduced)
+        public virtual void PerformComboAttack(IDamageable target, int damageModifier)
         {
-            this.Weapon.PerformComboAttack(target, isReduced);
+            this.Weapon.PerformComboAttack(target, damageModifier);
         }
-        public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
+        public virtual void PerformFinisherAttack(IDamageable target, int damageModifier)
         {
-            this.Weapon.PerformFinisherAttack(target, isReduced);
+            this.Weapon.PerformFinisherAttack(target, damageModifier);
         }
         #endregion
 

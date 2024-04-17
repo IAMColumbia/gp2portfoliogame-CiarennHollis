@@ -26,15 +26,16 @@ namespace BurnoutBuster.Character
 
         //wave management
         private int totalEnemiesSpawnedDuringWave;
+        private int totalEnemiesKilledDuringWave;
         public int NumberOfEnemiesPerWave;
         public int EnemiesLeftInWave 
         { 
             get
             {
-                if (NumberOfEnemiesPerWave - totalEnemiesSpawnedDuringWave < 0)
+                if (NumberOfEnemiesPerWave - totalEnemiesKilledDuringWave < 0)
                     return 0;
 
-                return NumberOfEnemiesPerWave - totalEnemiesSpawnedDuringWave;
+                return NumberOfEnemiesPerWave - totalEnemiesKilledDuringWave;
             }
         }
         private int waveCounter;
@@ -43,7 +44,7 @@ namespace BurnoutBuster.Character
             get { return waveCounter; }
             set
             {
-                if ((waveCounter >= 5))
+                if (waveCounter >= 3) // [TD] magic number
                     this.Notify();
                 waveCounter = value;
             }
@@ -194,6 +195,7 @@ namespace BurnoutBuster.Character
             foreach(MonogameEnemy enemy in tempEnemies)
             {
                 this.ActiveEnemies.Remove(enemy);
+                totalEnemiesKilledDuringWave++;
                 enemy.Reset();
             }
             tempEnemies.Clear();
@@ -349,6 +351,7 @@ namespace BurnoutBuster.Character
         {
             this.NumberOfEnemiesToSpawn = 2;
             totalEnemiesSpawnedDuringWave = 0;
+            totalEnemiesKilledDuringWave = 0;
 
             ResetAllEnemies();
 

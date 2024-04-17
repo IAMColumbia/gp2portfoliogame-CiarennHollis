@@ -14,10 +14,10 @@ namespace BurnoutBuster.Items
         void Use(IDamageable target);
 
         //for command pattern bits with the player
-        void PerformAttack(IDamageable target, bool isReduced);
-        void PerformHeavyAttack(IDamageable target, bool isReduced);
-        void PerformDashAttack(IDamageable target, bool isReduced);
-        void PerformComboAttack(IDamageable target, bool isReduced);
-        void PerformFinisherAttack(IDamageable target, bool isReduced);
+        void PerformAttack(IDamageable target, int damageModifier);
+        void PerformHeavyAttack(IDamageable target, int damageModifier);
+        void PerformDashAttack(IDamageable target, int damageModifier);
+        void PerformComboAttack(IDamageable target, int damageModifier);
+        void PerformFinisherAttack(IDamageable target, int damageModifier);
     }
 }

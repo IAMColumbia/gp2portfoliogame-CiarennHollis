@@ -147,7 +147,7 @@ namespace BurnoutBuster.Character
             ////texture set up
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
-            this.ShowMarkers = true;
+            this.ShowMarkers = false;
 
             base.LoadContent();
         }
@@ -170,7 +170,7 @@ namespace BurnoutBuster.Character
             HandleAttackDelayTimer(time);
 
             //reset speed
-            this.movementSpeed = 1;
+            this.movementSpeed = 2;
 
             //flashing
             HandleFlash(flashColor, time);
@@ -273,7 +273,7 @@ namespace BurnoutBuster.Character
                         if (numOfUpdateCyclesPassed == numOfUpdateCyclesToWaitBeforeMoving)
                         {
                             numOfUpdateCyclesPassed = 0;
-                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 7); //TD hard coded speed modifier
+                            moveVector *= (float)gameTime.ElapsedGameTime.TotalSeconds * (movementSpeed * 9); //TD hard coded speed modifier
                             this.Location = Vector2.Lerp(this.Location, this.Location + moveVector, 0.3f); //TD hard coded "amount"
                         }
 
@@ -327,6 +327,8 @@ namespace BurnoutBuster.Character
         #region 'IPoolable implementation'
         public void Reset()
         {
+            this.IsCollisionOn = false;
+            this.Location = new Vector2(-100, -100); // moving the enemy out of the player space
             this.HitPoints = originalHitPoints;
             this.enemyState = EnemyState.Inactive;
             this.flashingState = FlashingState.NotFlashing;
@@ -334,14 +336,13 @@ namespace BurnoutBuster.Character
             this.individualFlashTimer.ResetTimer();
             this.canStartFlashing = false;
             this.Enabled = false;
-            this.IsCollisionOn = false;
         }
         public void Activate(Vector2 spawnLocation)
         {
-            this.enemyState = EnemyState.Normal;
             this.Location = spawnLocation;
-            this.Enabled = true;
+            this.enemyState = EnemyState.Normal;
             this.IsCollisionOn = true;
+            this.Enabled = true;
         }
         #endregion
 

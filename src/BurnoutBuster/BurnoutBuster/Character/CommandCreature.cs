@@ -117,33 +117,35 @@ namespace BurnoutBuster.Character
 
         // A C T I O N   I M P L E M E N T A T I O N S
         #region 'Actions'
+        int reducedDamage;
         private void PerformAttackAction(IDamageable target, ActionCommands action)
         {
+            this.reducedDamage = this.Weapon.Damage * (2 / 3);
             switch (action)
             {
                 case ActionCommands.Null:
                     // do nothing
                     break;
                 case ActionCommands.Attack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformAttack(target, true); }
-                    else { Weapon.PerformAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformAttack(target, reducedDamage); } 
+                    else { Weapon.PerformAttack(target, 0); }
                     
                     break;
                 case ActionCommands.HeavyAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformHeavyAttack(target, true); }
-                    else { Weapon.PerformHeavyAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformHeavyAttack(target, reducedDamage); }
+                    else { Weapon.PerformHeavyAttack(target, 0); }
                     break;
                 case ActionCommands.DashAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformDashAttack(target, true); }
-                    else { Weapon.PerformDashAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformDashAttack(target, reducedDamage); }
+                    else { Weapon.PerformDashAttack(target, 0); }
                     break;
                 case ActionCommands.ComboAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformComboAttack(target, true); }
-                    else { Weapon.PerformComboAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformComboAttack(target, reducedDamage); }
+                    else { Weapon.PerformComboAttack(target, 0); }
                     break;
                 case ActionCommands.FinisherAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformFinisherAttack(target, true); }
-                    else { Weapon.PerformFinisherAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformFinisherAttack(target, reducedDamage); }
+                    else { Weapon.PerformFinisherAttack(target, 0); }
                     break;
             }
 
