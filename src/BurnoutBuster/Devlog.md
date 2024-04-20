@@ -1,5 +1,17 @@
 # Devlog
   
+## 20 April 2024 | 15:30
+### Check In
+ * I am going to look into implementing animations into the game
+  
+### Goals
+ * Game Animations (at least the player ones)
+ * Check enemy manager spawning
+ * Check collision manager debug tool
+ * Check for typos 
+ * Set up structure for health pickup
+  
+  
 ## 16 April 2024 | 14:47
 ### Check In
  * Fixed some things here and there
