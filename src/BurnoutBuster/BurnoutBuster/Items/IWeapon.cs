@@ -3,10 +3,9 @@
 namespace BurnoutBuster.Items
 {
     public enum WeaponType { Melee, Ranged }
-    public interface IWeapon
+    public interface IWeapon : IItem
     {
         // P R O P E R T I E S
-        public string Name { get; }
         public int Damage { get; }
         public int AttackRadius { get; }
 

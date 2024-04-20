@@ -299,7 +299,10 @@ namespace BurnoutBuster.Character
             this.console.GameConsoleWrite($"Enemy Health: {HitPoints}");
             canStartFlashing = true;
         }
-
+        public virtual void Heal(int healAmount)
+        {
+            this.HitPoints += healAmount;
+        }
         public virtual void Attack(IDamageable target)
         {
             //console.GameConsoleWrite($"attack delay timer state: {attackDelayTimer.State.ToString()}");

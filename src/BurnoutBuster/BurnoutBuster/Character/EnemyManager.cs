@@ -207,12 +207,14 @@ namespace BurnoutBuster.Character
 
 
             if (AllEnemies[i].EnemyState != EnemyState.Inactive
-                || loopRuns >= 10)
+                || loopRuns >= 10) 
+                // if the enemy is not inactive (ie, if it's active)
+                //spawn another enemy
             {
                 loopRuns++;
                 SpawnAnEnemy();
             }
-            else if (loopRuns >= 10)
+            else if (loopRuns >= 10) //breaks the loop if we've been through it several times
             {
                 console.GameConsoleWrite("Not Enough enemies in the object pool. Please add more.");
             }

@@ -142,8 +142,8 @@ namespace BurnoutBuster
         {
             Screens.Add("Title", new Screen()
             {
-                primaryText = "BURN BUSTER!",
-                secondaryText = "Press [SPACE] to player",
+                primaryText = "BURNOUT BUSTER!",
+                secondaryText = "Press [SPACE] to play",
                 tertiaryText = "Press [SHIFT] for Instructions"
             });
             Screens["Title"].LoadContent(this, "Environment/TitleScreen");
@@ -209,8 +209,11 @@ Finisher Attack: Attack + Heavy Attack + Attack
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+#if DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.OemTilde))
                 _collisionManager.ToggleDebugVisuals();
+#endif
             WriteConsoleInfo();
 
             UpdateBasedOnState(gameTime);

@@ -135,7 +135,7 @@ namespace BurnoutBuster.Physics
         }
         private void CheckHitBox(ICollidable obj)
         {
-            IHasHitBox target = obj as IHasHitBox;
+            IHitBox target = obj as IHitBox;
 
             if (target != null)
             {
@@ -183,6 +183,7 @@ namespace BurnoutBuster.Physics
 
         public void DrawCollisionRectangles(SpriteBatch _spritebatch)
         {
+#if DEBUG
             switch(debugState)
             {
                 case CM_DebugState.ShowCollisionBoxes:
@@ -193,13 +194,14 @@ namespace BurnoutBuster.Physics
                     }
                     break;
             }
+#endif
         }
 
         private void DrawOneRectangle(SpriteBatch _spritebatch, ICollidable obj)
         {
             _spritebatch.DrawRectangle(obj.Bounds, Color.Red, 1, 0);
 
-            IHasHitBox HBobj = obj as IHasHitBox;
+            IHitBox HBobj = obj as IHitBox;
             if (HBobj != null)
                 _spritebatch.DrawRectangle(HBobj.HitBox, Color.Yellow, 1, 0);
         }

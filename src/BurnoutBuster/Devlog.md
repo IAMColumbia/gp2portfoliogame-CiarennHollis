@@ -1,15 +1,30 @@
 # Devlog
   
+## 20 April 2024 | 16:23
+### Check In
+ * Did the small tasks I intended to do
+ * Read through the DrawableAnimatableSprite some
+  
+### On DrawableAnimatableSprite
+ * It seems like this class builds off of the drawable sprite and gives it funcitionality for animating itself
+	* The animator (so to say) or as Jeff called it "spriteAnimationAdapter" seems to be an object that has a list of animations and that uses a "celAnimationManager" for flipping through the frames of the animation
+	* the DrawableAnimatable sprite has a spriteAnimationAdapter and references it to see what texture it should be displaying
+	* What I'll probably do is try to implement this on a dummy class type so that I don't mess up the logic and structure of the classes I've written for this project.
+  
+### Next Steps
+ * Create animations
+ * Implement Animations
+  
 ## 20 April 2024 | 15:30
 ### Check In
  * I am going to look into implementing animations into the game
   
 ### Goals
- * Game Animations (at least the player ones)
- * Check enemy manager spawning
- * Check collision manager debug tool
- * Check for typos 
- * Set up structure for health pickup
+ * Look at and read Jeff's animatable sprite script 
+ * Check enemy manager spawning [DONE]
+ * Check collision manager debug tool [DONE]
+ * Check for typos [DONE]
+ * Set up structure for health pickup [DONE -> will fill it out later]
   
   
 ## 16 April 2024 | 14:47

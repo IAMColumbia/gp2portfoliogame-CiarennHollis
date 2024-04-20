@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite, IDamageable, IInteract, IHasHitBox, ICreatureSubject, IFlashableTexture
+    public class MonogameCreature : DrawableSprite, IDamageable, IInteract, IHitBox, ICreatureSubject, IFlashableTexture
     {
         // P R O P E R T I E S
         #region 'Properties'
@@ -369,6 +369,10 @@ namespace BurnoutBuster.Character
             canStartFlashing = true;
             //this.KnockBack();
             //this.creature.KnockBack();
+        }
+        public void Heal(int healAmount)
+        {
+            this.HitPoints += healAmount;
         }
         #endregion
 
