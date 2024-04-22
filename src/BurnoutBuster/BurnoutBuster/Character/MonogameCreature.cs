@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableAnimatableSprite, IDamageable, IInteract, IHitBox, ICreatureSubject, IFlashableTexture
+    public class MonogameCreature : DrawableAnimatableSprite, IDamageable, IInteract, IHitBox, ICreatureSubject, IAnimatable, IFlashableTexture
     {
         // P R O P E R T I E S
         #region 'Properties'
@@ -74,6 +74,9 @@ namespace BurnoutBuster.Character
         //HIT BOX
         public Rectangle HitBox {  get; set; }
 
+        //IANIMATABLE
+        public Dictionary<string, SpriteAnimation> Animations { get; set; }
+
         //IFLASHABLE
         public Color flashColor { get; set; }
         public bool canStartFlashing { get; set; }
@@ -126,7 +129,7 @@ namespace BurnoutBuster.Character
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(450, 300);
 
-            this.ShowMarkers = true;
+            this.ShowMarkers = false;
 
             this.Speed = originalSpeed = 150;
 
@@ -134,17 +137,12 @@ namespace BurnoutBuster.Character
             this.Notify();
             this.Game.Components.Add(MGWeapon);
 
+            Animations = new Dictionary<string, SpriteAnimation>();
             SetUpAnimations();
 
             base.LoadContent();
         }
-        private void SetUpAnimations()
-        {
-            SpriteAnimation testAnim = new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1);
-            this.spriteAnimationAdapter.AddAnimation(testAnim);
-
-            //this.spriteAnimationAdapter.CurrentAnimation = testAnim;
-        }
+        
 
         public void Reset()
         {
@@ -216,9 +214,9 @@ namespace BurnoutBuster.Character
         private void KeepCreatureOnScreen()
         {
             // HORIZONTAL
-            if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width)) 
+            if (this.Location.X > Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Height)) 
             {
-                this.Location.X = Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Width);  // / 2
+                this.Location.X = Game.GraphicsDevice.Viewport.Width - (this.spriteTexture.Height);  // / 2
             }
             if (this.Location.X < 0) 
                 this.Location.X = 0; //(this.spriteTexture.Width / 2)
@@ -230,6 +228,28 @@ namespace BurnoutBuster.Character
 
             if (this.Location.Y < 0)
                 this.Location.Y = 0; //(this.spriteTexture.Height / 2)
+        }
+        #endregion
+
+        // I A N I M A T A B L E
+        #region 'Animation Handling'
+        public void SetUpAnimations()
+        {
+            Animations.Add("Test", 
+                new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
+            Animations.Add("Idle", 
+                new SpriteAnimation("Idle", "SpriteSheetTest", 2, 5, 1, true));
+
+            foreach (SpriteAnimation anim in Animations.Values)
+            {
+                this.spriteAnimationAdapter.AddAnimation(anim);
+            }
+            
+        }
+
+        public void PlayAnimation(SpriteAnimation animation)
+        {
+            this.spriteAnimationAdapter.ResetAnimation(animation);
         }
         #endregion
 

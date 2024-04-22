@@ -1,12 +1,33 @@
 # Devlog
   
+## 22 April 2024 | 11:37
+### Check In
+ * So, I added some extra functionality to Jeff's animation 'engine'. Before it could only play animations on a loop and I wanted to be able to play an animation once
+ * So, I added a bool field to both the spriteAnimation and the celAnimations (since I saw that the spriteAnimationAdapter creates celAnimations from SpriteAnimations) that notes whether or not the animaiton is looped. 
+ * By default, animations are looped, but I overloaded the constructors to allow for noting if the animation isn't looped. Doing that also let me keep the original functionality intact. The only other change was updating the celAnimationManager's methods to account for the extra property
+ * Added the code bits to the classes that need animations for playing animations.
+ * I was thinking that I could just create different animations for the weapon for each type of action rather than doing so for the player. Would cut down on the animations I have to make and it might be easier to implement since there kind of is no way to tell whether or not an animation has ended. Thus playing an different animation once one has ended isn't currently possible. I could probably implement playing an new animation once once has ended via state and giving the animations a state, but it's not the most necessary thing at the moment and so I won't :P
+ * The damage flashes kind of broke when I implemented animations so I went into the DrawableAnimatableSprite class to fix it, was just a matter of switching the color call to Colors.White to this.DrawColor.
+  
+### Goals
+ * Create animations
+ * Github Issues tasks
+  
+## 22 April 2024 | 10:14
+### Check In
+ * I am waiting for unity to open so I figured I'd implement the animation bits to the rest of the animated things in this in this project
+  
+### Goals
+ * Animation code bits for animated things
+  
+  
 ## 20 April 2024 | 16:23
 ### Check In
  * Figured out how to implement the drawable animatable sprite
   
 ### On DrawableAnimatableSprite Implementation
  * I implemented this through the MonogameCreature -> made it inherit from DrawableAnimatableSprite and had it play a test animation
-	* I made an interface with the methods and properties I used (or will use) to implement animations. This will make it easier to implement this even if the notion of a DrawableAnimatableSprite also being IAnimateable is kind of weird and redundent-seeming.
+ * I made an interface with the methods and properties I used (or will use) to implement animations. This will make it easier to implement this even if the notion of a DrawableAnimatableSprite also being IAnimateable is kind of weird and redundent-seeming.
   
 ### Next Steps
  * Create animations
