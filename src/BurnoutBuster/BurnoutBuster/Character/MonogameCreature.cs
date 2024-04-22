@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace BurnoutBuster.Character
 {
-    public class MonogameCreature : DrawableSprite, IDamageable, IInteract, IHitBox, ICreatureSubject, IFlashableTexture
+    public class MonogameCreature : DrawableAnimatableSprite, IDamageable, IInteract, IHitBox, ICreatureSubject, IFlashableTexture
     {
         // P R O P E R T I E S
         #region 'Properties'
@@ -134,7 +134,16 @@ namespace BurnoutBuster.Character
             this.Notify();
             this.Game.Components.Add(MGWeapon);
 
+            SetUpAnimations();
+
             base.LoadContent();
+        }
+        private void SetUpAnimations()
+        {
+            SpriteAnimation testAnim = new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1);
+            this.spriteAnimationAdapter.AddAnimation(testAnim);
+
+            //this.spriteAnimationAdapter.CurrentAnimation = testAnim;
         }
 
         public void Reset()
@@ -269,7 +278,8 @@ namespace BurnoutBuster.Character
         }
         private void UpdateBounds()
         {
-            Bounds = this.Rectangle;
+            Bounds = new Rectangle(this.Rectangle.X, this.Rectangle.Y, 
+                this.Rectangle.Height, this.Rectangle.Height);
 
             int increaseAmount = this.Weapon.AttackRadius;
             HitBox = new Rectangle(Bounds.X - increaseAmount, Bounds.Y - increaseAmount, 

@@ -2,6 +2,27 @@
   
 ## 20 April 2024 | 16:23
 ### Check In
+ * Figured out how to implement the drawable animatable sprite
+  
+### On DrawableAnimatableSprite Implementation
+ * I implemented this through the MonogameCreature -> made it inherit from DrawableAnimatableSprite and had it play a test animation
+	* I made an interface with the methods and properties I used (or will use) to implement animations. This will make it easier to implement this even if the notion of a DrawableAnimatableSprite also being IAnimateable is kind of weird and redundent-seeming.
+  
+### Next Steps
+ * Create animations
+ * Implement Animations
+ * Github Issues tasks
+  
+## 21 April 2024 | 19:18
+### Check In
+ * I am going to try to implement animations, am doing so on a separate branch so as to not mess up the other progress
+  
+### Goals
+ * Animations for a character
+  
+  
+## 20 April 2024 | 16:23
+### Check In
  * Did the small tasks I intended to do
  * Read through the DrawableAnimatableSprite some
   
@@ -9,7 +30,7 @@
  * It seems like this class builds off of the drawable sprite and gives it funcitionality for animating itself
 	* The animator (so to say) or as Jeff called it "spriteAnimationAdapter" seems to be an object that has a list of animations and that uses a "celAnimationManager" for flipping through the frames of the animation
 	* the DrawableAnimatable sprite has a spriteAnimationAdapter and references it to see what texture it should be displaying
-	* What I'll probably do is try to implement this on a dummy class type so that I don't mess up the logic and structure of the classes I've written for this project.
+ * What I'll probably do is try to implement this on a dummy class type so that I don't mess up the logic and structure of the classes I've written for this project.
   
 ### Next Steps
  * Create animations
