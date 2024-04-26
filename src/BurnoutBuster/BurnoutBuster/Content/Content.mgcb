@@ -207,7 +207,7 @@
 /processorParam:TextureFormat=Color
 /build:Items/GoldSword.png
 
-#begin Items/GoldSwordAnim.png
+#begin Items/GoldSwordHeavyAnim.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -217,7 +217,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Items/GoldSwordAnim.png
+/build:Items/GoldSwordHeavyAnim.png
 
 #begin Items/HealthPickUp.png
 /importer:TextureImporter
@@ -243,7 +243,7 @@
 /processorParam:TextureFormat=Color
 /build:Items/SimpleSword.png
 
-#begin Items/SimpleSwordAnim.png
+#begin Items/SimpleSwordHeavyAnim.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -253,7 +253,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Items/SimpleSwordAnim.png
+/build:Items/SimpleSwordHeavyAnim.png
 
 #begin SpriteSheetTest.png
 /importer:TextureImporter
