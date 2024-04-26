@@ -219,7 +219,8 @@ namespace BurnoutBuster.Character
                 console.GameConsoleWrite("Not Enough enemies in the object pool. Please add more.");
             }
 
-            if (i >= 75)
+            //for setting the location of enemy
+            if (i >= 75) //[TD] hard coded number
                 i = rand.Next(1, 75);
             AllEnemies[i].Activate(spawnLocation * i);
             ActiveEnemies.Add(AllEnemies[i]);

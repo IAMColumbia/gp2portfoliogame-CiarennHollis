@@ -1,5 +1,20 @@
 # Devlog
   
+## 26 April 2024 | 10:58
+### Check In
+ * Added some comments to the enemy manager here and there.
+ * Wanted to look at the values the enemy manager is using to manage the amount of enemies it is spawning per wave
+	* The project is in a good enough spot that I can some more formal methods of balancing the difficulty of the game since there really isn't much more functionality that will be added, just bug fixing
+	* I want to kind of graph out those values for the enemy spawning since right now the amount of enemies per waves increase really fast which makes getting through like the 3rd or 4th wave is more of a feat than I'd like it to be.
+  
+### Next Steps
+ * Plug in the animations 
+ * Health pick up -> finish implementing
+ * HUD color change based on creature state
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
+  
 ## 22 April 2024 | 11:37
 ### Check In
  * So, I added some extra functionality to Jeff's animation 'engine'. Before it could only play animations on a loop and I wanted to be able to play an animation once
@@ -10,7 +25,7 @@
  * The damage flashes kind of broke when I implemented animations so I went into the DrawableAnimatableSprite class to fix it, was just a matter of switching the color call to Colors.White to this.DrawColor.
   
 ### Goals
- * Create animations
+ * Create animations [DONE]
  * Github Issues tasks
   
 ## 22 April 2024 | 10:14
@@ -18,7 +33,7 @@
  * I am waiting for unity to open so I figured I'd implement the animation bits to the rest of the animated things in this in this project
   
 ### Goals
- * Animation code bits for animated things
+ * Animation code bits for animated things [DONE]
   
   
 ## 20 April 2024 | 16:23
