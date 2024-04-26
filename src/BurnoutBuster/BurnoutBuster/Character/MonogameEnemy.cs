@@ -154,6 +154,7 @@ namespace BurnoutBuster.Character
             this.ShowMarkers = false;
 
             this.Animations = new Dictionary<string, SpriteAnimation>();
+            SetUpAnimations();
 
             base.LoadContent();
         }
@@ -220,12 +221,12 @@ namespace BurnoutBuster.Character
 
         // I A N I M A T A B L E
         #region 'Animation Handling'
-        public void SetUpAnimations()
+        public virtual void SetUpAnimations()
         {
-            Animations.Add("Test",
-                new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
-            Animations.Add("Idle",
-                new SpriteAnimation("Idle", "SpriteSheetTest", 2, 5, 1, true));
+            //Animations.Add("Test",
+            //    new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
+            //Animations.Add("Idle",
+            //    new SpriteAnimation("Idle", "SpriteSheetTest", 2, 5, 1, true));
 
             foreach (SpriteAnimation anim in Animations.Values)
             {

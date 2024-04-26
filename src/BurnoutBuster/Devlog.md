@@ -6,9 +6,11 @@
  * Wanted to look at the values the enemy manager is using to manage the amount of enemies it is spawning per wave
 	* The project is in a good enough spot that I can some more formal methods of balancing the difficulty of the game since there really isn't much more functionality that will be added, just bug fixing
 	* I want to kind of graph out those values for the enemy spawning since right now the amount of enemies per waves increase really fast which makes getting through like the 3rd or 4th wave is more of a feat than I'd like it to be.
+	* Plugged in the animation files.
   
 ### Next Steps
- * Plug in the animations 
+ * Import basic attack animations for the swords
+ * Fix bug with enemy animations -> animation is cropped wrong, the larger ones have the same croppins the tiny ones 
  * Health pick up -> finish implementing
  * HUD color change based on creature state
  * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up

@@ -235,10 +235,12 @@ namespace BurnoutBuster.Character
         #region 'Animation Handling'
         public void SetUpAnimations()
         {
-            Animations.Add("Test", 
-                new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
+            //Animations.Add("Test", 
+            //    new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
             Animations.Add("Idle", 
-                new SpriteAnimation("Idle", "SpriteSheetTest", 2, 5, 1, true));
+                new SpriteAnimation("Idle", "CharacterSprites/CreatureIdleAnim", 6, 4, 1));
+            Animations.Add("Walk",
+                new SpriteAnimation("test", "CharacterSprites/CreatureWalkAnim", 6, 5, 1));
 
             foreach (SpriteAnimation anim in Animations.Values)
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Sprite;
 
 namespace BurnoutBuster.Character
 {
@@ -15,8 +16,15 @@ namespace BurnoutBuster.Character
             this.HitPoints = 20;
             this.Damage = 5;
         }
-        
+
         // I N I T
+        public override void SetUpAnimations()
+        {
+            Animations.Add("MainAnim",
+                new SpriteAnimation("MainAnim", "CharacterSprites/HeavyEnemyAnim", 6, 4, 1));
+
+            base.SetUpAnimations();
+        }
         protected override void LoadContent()
         {
             base.LoadContent();

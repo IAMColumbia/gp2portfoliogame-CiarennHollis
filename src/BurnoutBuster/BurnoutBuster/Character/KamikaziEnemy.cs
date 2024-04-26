@@ -2,6 +2,7 @@
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Sprite;
 
 namespace BurnoutBuster.Character
 {
@@ -18,6 +19,13 @@ namespace BurnoutBuster.Character
         }
 
         // I N I T
+        public override void SetUpAnimations()
+        {
+            Animations.Add("MainAnim",
+                new SpriteAnimation("MainAnim", "CharacterSprites/KamikazeEnemyAnim", 6, 4, 1));
+
+            base.SetUpAnimations();
+        }
         protected override void LoadContent()
         {
             base.LoadContent();
