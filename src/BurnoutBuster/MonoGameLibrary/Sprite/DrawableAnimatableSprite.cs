@@ -246,6 +246,10 @@ namespace MonoGameLibrary.Sprite
         {
             this.celAnimationManger.ToggleAnimation(s.AnimationName, true);
         }
+        public void PlayAnimation(SpriteAnimation s)
+        {
+            this.celAnimationManger.ToggleAnimation(s.AnimationName, false);
+        }
 
         public void GotToFrame(SpriteAnimation s, int frame)
         {

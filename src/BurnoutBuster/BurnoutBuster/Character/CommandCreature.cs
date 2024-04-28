@@ -49,8 +49,11 @@ namespace BurnoutBuster.Character
 
         private void UpdateCreatureLocation(GameTime gameTime)
         {
-            if (moveOnNextUpdate == Vector2.Zero) 
+            if (moveOnNextUpdate == Vector2.Zero)
+            {
+                
                 return;
+            }
 
             //move 
             switch (this.CreatureState)
@@ -67,7 +70,9 @@ namespace BurnoutBuster.Character
                     //can't move if shutdown
                     break;
             }
-            
+
+            //play animation
+            this.PlayAnimation(Animations["Walk"]);
 
             //update texture facing direction
             UpdateFacingDirBasedOnDirection(moveOnNextUpdate);

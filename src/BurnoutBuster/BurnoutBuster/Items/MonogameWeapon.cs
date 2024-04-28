@@ -105,8 +105,9 @@ namespace BurnoutBuster.Items
 
         public void PlayAnimation(SpriteAnimation animation)
         {
-            this.spriteAnimationAdapter.ResetAnimation(animation);
+            this.spriteAnimationAdapter.PlayAnimation(animation);
         }
+        
         #endregion
 
         // W E A P O N
@@ -118,11 +119,13 @@ namespace BurnoutBuster.Items
         public virtual void PerformAttack(IDamageable target, bool isReduced)
         {
             this.Weapon.PerformAttack(target, isReduced);
+            PlayAnimation(this.Animations["BasicAttack"]);
         }
 
         public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
         {
-            this.Weapon.PerformHeavyAttack(target, isReduced);  
+            this.Weapon.PerformHeavyAttack(target, isReduced);
+            PlayAnimation(this.Animations["HeavyAttack"]);
         }
         public virtual void PerformDashAttack(IDamageable target, bool isReduced)
         {
@@ -132,10 +135,12 @@ namespace BurnoutBuster.Items
         public virtual void PerformComboAttack(IDamageable target, bool isReduced)
         {
             this.Weapon.PerformComboAttack(target, isReduced);
+            PlayAnimation(this.Animations["HeavyAttack"]);
         }
         public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
         {
             this.Weapon.PerformFinisherAttack(target, isReduced);
+            PlayAnimation(this.Animations["HeavyAttack"]);
         }
         #endregion
 

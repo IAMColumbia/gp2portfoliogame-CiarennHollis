@@ -15,10 +15,16 @@ namespace BurnoutBuster.Items
         // I N I T
         public override void SetUpAnimations()
         {
-            //Animations.Add("BasicAttack",
-            //    new SpriteAnimation("BasicAttackAnim", "Items/SimpleSwordBasicAnim", 8, 6, 1, false));
+            Animations.Add("BasicAttack",
+                new SpriteAnimation("SSBasicAttackAnim", "Items/SimpleSwordBasicAnim", 8, 6, 1, false)
+                {
+                    IsPaused = true
+                });
             Animations.Add("HeavyAttack",
-                new SpriteAnimation("HeavyAttackAnim", "Items/SimpleSwordHeavyAnim", 8, 7, 1, false));
+                new SpriteAnimation("SSHeavyAttackAnim", "Items/SimpleSwordHeavyAnim", 8, 7, 1, false)
+                {
+                    IsPaused = true
+                });
 
             base.SetUpAnimations();
         }

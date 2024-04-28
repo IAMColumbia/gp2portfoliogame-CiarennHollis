@@ -304,7 +304,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
             //    Screens[screenToDraw].DrawScreen(_spriteBatch);
             if (gameState != GameState.Playing || screenToDraw != string.Empty)
             {
-                _spriteBatch.DrawSprite(Screens[screenToDraw].visual);
+                _spriteBatch.Draw(Screens[screenToDraw].visual, Screens[screenToDraw].visualPosition, Color.White);
                 Screens[screenToDraw].DrawScreen(_spriteBatch);
             }
 

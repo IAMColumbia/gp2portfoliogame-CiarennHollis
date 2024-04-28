@@ -15,7 +15,10 @@ namespace BurnoutBuster.UI
         SpriteBatch spriteBatch;
         SpriteFont fontRegular;
         SpriteFont fontBold;
-        Color uiColor;
+        Color uiColorMain;
+        Color uiColorAlt1;
+        Color uiColorAlt2;
+
 
         // C O N S T R U C T O R S 
         public HUD(Game game) : base(game)
@@ -36,8 +39,9 @@ namespace BurnoutBuster.UI
             spriteBatch = new SpriteBatch(this.Game.GraphicsDevice);
             fontBold = this.Game.Content.Load<SpriteFont>("Fonts/ImpactBold");
             fontRegular = this.Game.Content.Load<SpriteFont>("Fonts/Impact");
-            uiColor = Color.Beige;
-
+            uiColorMain = Color.Beige;
+            uiColorAlt1 = Color.PaleVioletRed;
+            uiColorAlt2 = Color.Red;
         }
 
         // U P D A T E 
@@ -72,7 +76,7 @@ namespace BurnoutBuster.UI
             foreach (var item in itemsToDisplay.Keys)
             {
                 slotContents = $"{item}: {itemsToDisplay[item]}";
-                spriteBatch.DrawString(fontRegular, slotContents, position, uiColor);
+                spriteBatch.DrawString(fontRegular, slotContents, position, uiColorMain);
                 position += new Vector2(200, 0);
             }
         }

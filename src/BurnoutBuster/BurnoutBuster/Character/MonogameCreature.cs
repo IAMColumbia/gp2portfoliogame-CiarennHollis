@@ -238,9 +238,9 @@ namespace BurnoutBuster.Character
             //Animations.Add("Test", 
             //    new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
             Animations.Add("Idle", 
-                new SpriteAnimation("Idle", "CharacterSprites/CreatureIdleAnim", 6, 4, 1));
+                new SpriteAnimation("CreatureIdle", "CharacterSprites/CreatureIdleAnim", 6, 4, 1, true));
             Animations.Add("Walk",
-                new SpriteAnimation("test", "CharacterSprites/CreatureWalkAnim", 6, 5, 1));
+                new SpriteAnimation("CreatureWalk", "CharacterSprites/CreatureWalkAnim", 6, 5, 1, true));
 
             foreach (SpriteAnimation anim in Animations.Values)
             {
@@ -251,7 +251,7 @@ namespace BurnoutBuster.Character
 
         public void PlayAnimation(SpriteAnimation animation)
         {
-            this.spriteAnimationAdapter.ResetAnimation(animation);
+            this.spriteAnimationAdapter.PlayAnimation(animation);
         }
         #endregion
 
