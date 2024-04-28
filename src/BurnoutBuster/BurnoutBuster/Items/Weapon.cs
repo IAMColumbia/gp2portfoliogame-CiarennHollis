@@ -13,7 +13,11 @@ namespace BurnoutBuster.Items
         public WeaponType Type;
 
         // M E T H O D S
-        public void Use(IDamageable target)
+        public virtual void Use()
+        {
+
+        }
+        public virtual void Use(IDamageable target)
         {
             target.Hit(Damage);
         }

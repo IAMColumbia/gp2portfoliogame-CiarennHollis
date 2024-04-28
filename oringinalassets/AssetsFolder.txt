@@ -2,9 +2,14 @@
   
 ## Characters
 Creature.png
+CreatureIdleAnim.png
+CreatureWalkAnim.png
 BasicEnemy.png
+BasicEnemyAnim.png
 KamikaziEnemy.png
+KamikaziEnemyAnim.png
 HeavyEnemy.png
+HeavyEnemyAnim.png
   
 ## Environment
 Background.png
@@ -12,5 +17,12 @@ TitleScreen.png
 Instructions.png
   
 ## Items
+HealthPickUp.png
 SimpleSword.png
 GoldSword.png
+SimpleSwordAnim.png
+GoldSword.png
+
+## Animations
+CreatureIdleAnim.png
+

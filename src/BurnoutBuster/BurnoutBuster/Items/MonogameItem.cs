@@ -17,12 +17,12 @@ namespace BurnoutBuster.Items
         protected Item item;
 
         //collision
-        public Rectangle Bounds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool IsCollisionOn { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Rectangle Bounds { get; set; }
+        public bool IsCollisionOn { get; set; }
 
-        public GameComponent GameObject => throw new NotImplementedException();
+        public GameComponent GameObject { get => this; }
 
-        public Tags Tag => throw new NotImplementedException();
+        public Tags Tag{ get; set; }
 
         // C O N S T R U C T O R
         public MonogameItem(Game game) : base(game)
@@ -56,12 +56,12 @@ namespace BurnoutBuster.Items
         // C O L L I S I O N
         public void OnCollisionEnter(Collision collision)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnInteraction(IInteract subject)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

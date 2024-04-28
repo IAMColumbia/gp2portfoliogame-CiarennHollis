@@ -8,14 +8,14 @@ namespace BurnoutBuster.UI
     public class Screen
     {
         // P R O P E R T I E S
-        public Sprite visual;
+        public Texture2D visual;
         SpriteFont fontBold;
         SpriteFont fontRegular;
         public string primaryText;
         public string secondaryText;
         public string tertiaryText;
 
-        Vector2 visualPosition;
+        public Vector2 visualPosition;
         public Vector2 primaryTextPosition;
         public Vector2 secondaryTextPosition;
         public Vector2 tertiaryTextPosition;
@@ -33,9 +33,7 @@ namespace BurnoutBuster.UI
         // M E T H O D S
         public void LoadContent(Game game, string visualFilePath)
         {
-            visual = new Sprite(game);
-            visual.SpriteTexture = game.Content.Load<Texture2D>(visualFilePath);
-            visual.Location = visualPosition;
+            visual = game.Content.Load<Texture2D>(visualFilePath);
 
             fontBold = game.Content.Load<SpriteFont>("Fonts/ImpactBold");
             fontRegular = game.Content.Load<SpriteFont>("Fonts/Impact");
