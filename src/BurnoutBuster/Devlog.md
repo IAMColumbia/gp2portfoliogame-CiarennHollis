@@ -1,5 +1,16 @@
 # Devlog
   
+## 28 April 2024 | 12:49
+### Check In
+ * Going to start working on this for today.
+  
+### Goals
+ * Import basic attack animations for the swords
+ * Fix bug with enemy animations -> animation is cropped wrong, the larger ones have the same croppins the tiny ones 
+ * Health pick up -> finish implementing
+ * HUD color change based on creature state
+  
+  
 ## 26 April 2024 | 10:58
 ### Check In
  * Added some comments to the enemy manager here and there.
