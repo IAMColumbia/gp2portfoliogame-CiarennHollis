@@ -3,10 +3,11 @@ using BurnoutBuster.Physics;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary.Sprite;
+using System.Collections.Generic;
 
 namespace BurnoutBuster.Items
 {
-    public class MonogameWeapon : DrawableSprite, IInteractable, ICreatureObserver 
+    public class MonogameWeapon : DrawableAnimatableSprite, IInteractable, ICreatureObserver, IAnimatable 
     {
         // P R O P E R T I E S 
         protected IWeapon Weapon { get; set; }
@@ -27,6 +28,9 @@ namespace BurnoutBuster.Items
         public GameComponent GameObject { get => this; }
         public Tags Tag { get => Tags.Weapon; }
 
+        //IANIMATABLE
+        public Dictionary<string, SpriteAnimation> Animations { get; set; }
+
 
         // C O N S T R U C T O R
         public MonogameWeapon(Game game) : base(game)
@@ -37,6 +41,9 @@ namespace BurnoutBuster.Items
             //placing on the player
             RenderOffset = new Vector2(48, 0);
             isHeld = false;
+
+            //animation
+            Animations = new Dictionary<string, SpriteAnimation>();
         }
 
         public IWeapon GetWeapon()
@@ -50,6 +57,9 @@ namespace BurnoutBuster.Items
         }
         protected override void LoadContent()
         {
+            this.Animations = new Dictionary<string, SpriteAnimation>();
+            SetUpAnimations();
+
             base.LoadContent();
         }
 
@@ -77,6 +87,29 @@ namespace BurnoutBuster.Items
             base.Draw(gameTime);
         }
 
+        // I A N I M A T A B L E
+        #region 'Animation Handling'
+        public virtual void SetUpAnimations()
+        {
+            //Animations.Add("Test",
+            //    new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
+            //Animations.Add("Idle",
+            //    new SpriteAnimation("Idle", "SpriteSheetTest", 2, 5, 1, true));
+
+            foreach (SpriteAnimation anim in Animations.Values)
+            {
+                this.spriteAnimationAdapter.AddAnimation(anim);
+            }
+
+        }
+
+        public void PlayAnimation(SpriteAnimation animation)
+        {
+            this.spriteAnimationAdapter.PlayAnimation(animation);
+        }
+        
+        #endregion
+
         // W E A P O N
         #region 'Weapon Actions'
         public void Use(IDamageable target)
@@ -86,11 +119,13 @@ namespace BurnoutBuster.Items
         public virtual void PerformAttack(IDamageable target, bool isReduced)
         {
             this.Weapon.PerformAttack(target, isReduced);
+            PlayAnimation(this.Animations["BasicAttack"]);
         }
 
         public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
         {
-            this.Weapon.PerformHeavyAttack(target, isReduced);  
+            this.Weapon.PerformHeavyAttack(target, isReduced);
+            PlayAnimation(this.Animations["HeavyAttack"]);
         }
         public virtual void PerformDashAttack(IDamageable target, bool isReduced)
         {
@@ -100,10 +135,12 @@ namespace BurnoutBuster.Items
         public virtual void PerformComboAttack(IDamageable target, bool isReduced)
         {
             this.Weapon.PerformComboAttack(target, isReduced);
+            PlayAnimation(this.Animations["HeavyAttack"]);
         }
         public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
         {
             this.Weapon.PerformFinisherAttack(target, isReduced);
+            PlayAnimation(this.Animations["HeavyAttack"]);
         }
         #endregion
 
@@ -121,9 +158,9 @@ namespace BurnoutBuster.Items
 
         private void UpdateBounds()
         {
-            Bounds = this.Rectangle;
+            Bounds = new Rectangle(this.Rectangle.X, this.Rectangle.Y,
+                this.Rectangle.Height, this.Rectangle.Height);
 
-            int increaseAmount = this.Weapon.AttackRadius;
         }
     }
 }

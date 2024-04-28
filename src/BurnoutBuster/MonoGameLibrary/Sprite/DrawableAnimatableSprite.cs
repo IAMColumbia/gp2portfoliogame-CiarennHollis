@@ -114,7 +114,7 @@ namespace MonoGameLibrary.Sprite
                 (int)(currentTextureRect.Width * this.scale),
                 (int)(currentTextureRect.Height* this.scale)),
                 currentTextureRect,
-                Color.White,
+                this.DrawColor,
                 MathHelper.ToRadians(Rotate),
                 this.Origin,
                 SpriteEffects,
@@ -221,7 +221,7 @@ namespace MonoGameLibrary.Sprite
         public void AddAnimation(SpriteAnimation s)
         {
             this.spriteAnimations.Add(s);
-            this.celAnimationManger.AddAnimation(s.AnimationName, s.TextureName, s.CellCount, s.FPS);
+            this.celAnimationManger.AddAnimation(s.AnimationName, s.TextureName, s.CellCount, s.FPS, s.IsLooped);
             this.celAnimationManger.ToggleAnimation(s.AnimationName, false);
             if (spriteAnimations.Count == 1)
             {
@@ -245,6 +245,10 @@ namespace MonoGameLibrary.Sprite
         public void PauseAnimation(SpriteAnimation s)
         {
             this.celAnimationManger.ToggleAnimation(s.AnimationName, true);
+        }
+        public void PlayAnimation(SpriteAnimation s)
+        {
+            this.celAnimationManger.ToggleAnimation(s.AnimationName, false);
         }
 
         public void GotToFrame(SpriteAnimation s, int frame)
@@ -290,14 +294,27 @@ namespace MonoGameLibrary.Sprite
 
     public class SpriteAnimation 
     {
-
+        /// <summary>
+        /// the name of the animation
+        /// </summary>
         public string AnimationName;
+        /// <summary>
+        /// framerate to play at 
+        /// </summary>
         public int FPS;
+        /// <summary>
+        /// file name (including the path) of the sprite sheet
+        /// </summary>
         public string TextureName;
+        /// <summary>
+        /// Number of frames in the animation -> calculated based of the columns and rows of the sprite sheet
+        /// </summary>
         public CelCount CellCount;
 
         protected bool isPaused;
         public bool IsPaused { get { return isPaused;} set { isPaused = value;} }
+
+        public bool IsLooped;
 
         public SpriteAnimation(string animationName, string textureName,
             int fps,  int numberOfCols, int numberOfRows  )
@@ -307,7 +324,18 @@ namespace MonoGameLibrary.Sprite
             this.TextureName = textureName;
             this.CellCount = new CelCount(numberOfCols,numberOfRows);
             isPaused = true;
+            IsLooped = true; //animations are looping by default
         }
 
+        public SpriteAnimation(string animationName, string textureName,
+            int fps, int numberOfCols, int numberOfRows, bool isLooped)
+        {
+            this.AnimationName = animationName;
+            this.FPS = fps;
+            this.TextureName = textureName;
+            this.CellCount = new CelCount(numberOfCols, numberOfRows);
+            isPaused = true;
+            this.IsLooped = isLooped;
+        }
     }
 }

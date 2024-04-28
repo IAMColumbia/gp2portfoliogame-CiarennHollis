@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
+using System.Collections.Generic;
 using ICollidable = BurnoutBuster.Physics.ICollidable;
 
 namespace BurnoutBuster.Character
 {
 
     public enum EnemyMovementMode { FollowPlayer, ChargePlayer, SlowApproach }
-    public abstract class MonogameEnemy : DrawableSprite, IDamageable, ICollidable, IPoolable, IFlashableTexture
+    public abstract class MonogameEnemy : DrawableAnimatableSprite, IDamageable, ICollidable, IPoolable, IAnimatable, IFlashableTexture
     {
         // P R O P E R T I E S
         #region 'Properties
@@ -86,6 +87,9 @@ namespace BurnoutBuster.Character
         float attackDelayAmount;
         bool canRestartDelayTimer;
 
+        //IANIMATABLE
+        public Dictionary<string, SpriteAnimation> Animations { get; set; }
+
         //IFLASHABLE
         public Color flashColor { get => Color.Black; }
         public bool canStartFlashing { get; set; }
@@ -147,7 +151,10 @@ namespace BurnoutBuster.Character
             ////texture set up
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("CharacterSprites/BasicEnemy");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
-            this.ShowMarkers = true;
+            this.ShowMarkers = false;
+
+            this.Animations = new Dictionary<string, SpriteAnimation>();
+            SetUpAnimations();
 
             base.LoadContent();
         }
@@ -212,6 +219,26 @@ namespace BurnoutBuster.Character
         }
         #endregion
 
+        // I A N I M A T A B L E
+        #region 'Animation Handling'
+        public virtual void SetUpAnimations()
+        {
+            //Animations.Add("Test",
+            //    new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
+            //Animations.Add("Idle",
+            //    new SpriteAnimation("Idle", "SpriteSheetTest", 2, 5, 1, true));
+
+            foreach (SpriteAnimation anim in Animations.Values)
+            {
+                this.spriteAnimationAdapter.AddAnimation(anim);
+            }
+        }
+        public void PlayAnimation(SpriteAnimation animation)
+        {
+            this.spriteAnimationAdapter.ResetAnimation(animation);
+        }
+        #endregion
+
         // C O L L I S I O N
         #region 'Collision'
         public virtual void OnCollisionEnter(Physics.Collision collision)
@@ -233,9 +260,10 @@ namespace BurnoutBuster.Character
                 }
             }
         }
-        private void UpdateBounds()
+        protected virtual void UpdateBounds()
         {
-            this.Bounds = this.Rectangle;
+            this.Bounds = new Rectangle(this.Rectangle.X, this.Rectangle.Y,
+                this.Rectangle.Height, this.Rectangle.Height);
         }
         #endregion
 
@@ -299,7 +327,10 @@ namespace BurnoutBuster.Character
             this.console.GameConsoleWrite($"Enemy Health: {HitPoints}");
             canStartFlashing = true;
         }
-
+        public virtual void Heal(int healAmount)
+        {
+            this.HitPoints += healAmount;
+        }
         public virtual void Attack(IDamageable target)
         {
             //console.GameConsoleWrite($"attack delay timer state: {attackDelayTimer.State.ToString()}");

@@ -61,6 +61,10 @@ namespace BurnoutBuster.Character
             if (this.State != EnemyState.Dead)
                 this.State = EnemyState.Dead;
         }
+        public void Heal(int healAmount)
+        {
+            this.HitPoints += healAmount;
+        }
 
         //CONSOLE STUFF
         public virtual void Log(string message)

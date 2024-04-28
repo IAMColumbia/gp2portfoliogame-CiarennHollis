@@ -47,7 +47,7 @@ namespace MonoGameLibrary
         /// <param name="celCount">Number of Cells in Animation. CelCount has Number of Rows and Number of Columns</param>
         /// <param name="framesPerSecond">Frame Rate to play back animation in frames per secong</param>
         public void AddAnimation(string animationKey, string textureName,
-            CelCount celCount, int framesPerSecond)
+            CelCount celCount, int framesPerSecond, bool isLooped)
         {
             //Make sure texture is unique
             if (!textures.ContainsKey(textureName))
@@ -68,7 +68,7 @@ namespace MonoGameLibrary
             AddAnimation(animationKey, textureName,
                 new CelRange(1, 1, celCount.NumberOfColumns, celCount.NumberOfRows),
                 celWidth, celHeight, numberOfCels,
-                framesPerSecond);
+                framesPerSecond, isLooped);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace MonoGameLibrary
         /// <param name="texture">Texture 2D to load</param>
         
         public void AddAnimation(string animationKey, string textureName,
-            Texture2D texture, CelCount celCount, int framesPerSecond)
+            Texture2D texture, CelCount celCount, int framesPerSecond, bool isLooped)
         {
             if (texture == null) this.Game.Content.Load<Texture2D>(textureName);
             if (!textures.ContainsKey(textureName))
@@ -102,12 +102,12 @@ namespace MonoGameLibrary
             AddAnimation(animationKey, textureName,
                 new CelRange(1, 1, celCount.NumberOfColumns, celCount.NumberOfRows),
                 celWidth, celHeight, numberOfCels,
-                framesPerSecond);
+                framesPerSecond, isLooped);
         }
 
         public void AddAnimation(string animationKey, string textureName,
             CelRange celRange, int celWidth, int celHeight,
-            int numberOfCels, int framesPerSecond)
+            int numberOfCels, int framesPerSecond, bool isLooped)
         {
             CelAnimation ca = new CelAnimation(textureName, celRange, framesPerSecond);
 
@@ -122,6 +122,8 @@ namespace MonoGameLibrary
             ca.NumberOfCels = numberOfCels;
 
             ca.CelsPerRow = textures[textureName].Width / celWidth;
+
+            ca.IsLooped = isLooped;
 
             if (animations.ContainsKey(animationKey))
                 animations[animationKey] = ca;
@@ -179,7 +181,14 @@ namespace MonoGameLibrary
                    //min: 0, max: total cels
                     if (ca.Frame >= ca.NumberOfCels)
                     {
-                        ca.LoopCount++;
+                        if (ca.IsLooped)
+                        {
+                            ca.LoopCount++;
+                        }
+                        else
+                        {
+                            ca.Paused = true;
+                        }
                     }
                     ca.Frame = ca.Frame % (ca.NumberOfCels);
 
@@ -329,6 +338,7 @@ namespace MonoGameLibrary
         public int StillFrame;
         public bool Paused = false;
 
+        public bool IsLooped;
         private int loopCount;
         public int LoopCount { get { return loopCount; } set { loopCount = value; } }
 
@@ -342,6 +352,18 @@ namespace MonoGameLibrary
             this.Frame = 0;
             this.StillFrame = 0;
             this.loopCount = 0;
+            this.IsLooped = true; //animations loop by default
+        }
+        public CelAnimation(string textureName, CelRange celRange, int framesPerSecond, bool isLooped)
+        {
+            this.textureName = textureName;
+            this.celRange = celRange;
+            this.framesPerSecond = framesPerSecond;
+            this.timePerFrame = 1.0f / (float)framesPerSecond;
+            this.Frame = 0;
+            this.StillFrame = 0;
+            this.loopCount = 0;
+            this.IsLooped = isLooped;
         }
 
         public string TextureName

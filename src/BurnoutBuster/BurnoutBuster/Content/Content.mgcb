@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:CharacterSprites/BasicEnemy.png
 
+#begin CharacterSprites/BasicEnemyAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSprites/BasicEnemyAnim.png
+
 #begin CharacterSprites/Creature.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -36,6 +48,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:CharacterSprites/Creature.png
+
+#begin CharacterSprites/CreatureIdle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSprites/CreatureIdle.png
+
+#begin CharacterSprites/CreatureIdleAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSprites/CreatureIdleAnim.png
+
+#begin CharacterSprites/CreatureWalkAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSprites/CreatureWalkAnim.png
 
 #begin CharacterSprites/HeavyEnemy.png
 /importer:TextureImporter
@@ -49,6 +97,30 @@
 /processorParam:TextureFormat=Color
 /build:CharacterSprites/HeavyEnemy.png
 
+#begin CharacterSprites/HeavyEnemyAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSprites/HeavyEnemyAnim.png
+
+#begin CharacterSprites/KamikazeEnemyAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSprites/KamikazeEnemyAnim.png
+
 #begin CharacterSprites/KamikaziEnemy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -60,18 +132,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:CharacterSprites/KamikaziEnemy.png
-
-#begin Environment/Background.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Environment/Background.png
 
 #begin Environment/Background.png
 /importer:TextureImporter
@@ -147,6 +207,42 @@
 /processorParam:TextureFormat=Color
 /build:Items/GoldSword.png
 
+#begin Items/GoldSwordBasicAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/GoldSwordBasicAnim.png
+
+#begin Items/GoldSwordHeavyAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/GoldSwordHeavyAnim.png
+
+#begin Items/HealthPickUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/HealthPickUp.png
+
 #begin Items/SimpleSword.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -158,4 +254,52 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Items/SimpleSword.png
+
+#begin Items/SimpleSwordBasicAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/SimpleSwordBasicAnim.png
+
+#begin Items/SimpleSwordHeavyAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/SimpleSwordHeavyAnim.png
+
+#begin Items/SimpleSwordHeavyAnim.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Items/SimpleSwordHeavyAnim.png
+
+#begin SpriteSheetTest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SpriteSheetTest.png
 

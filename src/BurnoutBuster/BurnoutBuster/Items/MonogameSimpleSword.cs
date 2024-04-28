@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Sprite;
 
 namespace BurnoutBuster.Items
 {
@@ -12,6 +13,21 @@ namespace BurnoutBuster.Items
         }
 
         // I N I T
+        public override void SetUpAnimations()
+        {
+            Animations.Add("BasicAttack",
+                new SpriteAnimation("SSBasicAttackAnim", "Items/SimpleSwordBasicAnim", 8, 6, 1, false)
+                {
+                    IsPaused = true
+                });
+            Animations.Add("HeavyAttack",
+                new SpriteAnimation("SSHeavyAttackAnim", "Items/SimpleSwordHeavyAnim", 8, 7, 1, false)
+                {
+                    IsPaused = true
+                });
+
+            base.SetUpAnimations();
+        }
         protected override void LoadContent()
         {
             this.spriteTexture = Game.Content.Load<Texture2D>("Items/SimpleSword");

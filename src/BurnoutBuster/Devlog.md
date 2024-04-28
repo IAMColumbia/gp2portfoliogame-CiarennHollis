@@ -1,5 +1,116 @@
 # Devlog
   
+## 28 April 2024 | 12:49
+### Check In
+ * Imported the last of the animations.
+ * Implemented them mostly. I hit a bit of an issue with not having the right animations play on the objects who have and use different animations.
+ * Implementing changing the UI color based on the player's state (normal, overwhelmed, shutdown) for just the player's HitPoints display was more of a chore than I thought it would be an I don't really want to figure that out right now. I could just change the color of the entire HUD dynamically, that would be easier to implement. Idk atm, I'll decide what I'll do with this later.
+ * I am tired and don't really wanna finish implementing the health pick up rn so I'm not going to :P
+  
+### Next Steps
+ * Fix issue with things not playing different animations
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * HUD color change based on creature state [SKIPPING FOR NOW -> not the most necessary]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
+## 28 April 2024 | 12:49
+### Check In
+ * Going to start working on this for today.
+  
+### Goals
+ * Import basic attack animations for the swords [DONE]
+ * Fix bug with enemy animations -> animation is cropped wrong, the larger ones have the same croppins the tiny ones [DONE -> all the animations had the same key in the SpriteAnimationAdapter/CelAnimationManager's dictionary of spriteAnimations and that was cropping the larger animations]
+ * Health pick up -> finish implementing
+ * HUD color change based on creature state [SKIPPING FOR NOW -> not the most necessary]
+  
+  
+## 26 April 2024 | 10:58
+### Check In
+ * Added some comments to the enemy manager here and there.
+ * Wanted to look at the values the enemy manager is using to manage the amount of enemies it is spawning per wave
+	* The project is in a good enough spot that I can some more formal methods of balancing the difficulty of the game since there really isn't much more functionality that will be added, just bug fixing
+	* I want to kind of graph out those values for the enemy spawning since right now the amount of enemies per waves increase really fast which makes getting through like the 3rd or 4th wave is more of a feat than I'd like it to be.
+	* Plugged in the animation files.
+  
+### Next Steps
+ * Import basic attack animations for the swords [DONE]
+ * Fix bug with enemy animations -> animation is cropped wrong, the larger ones have the same croppins the tiny ones [DONE]
+ * Health pick up -> finish implementing [LATER]
+ * HUD color change based on creature state [LATER]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
+  
+## 22 April 2024 | 11:37
+### Check In
+ * So, I added some extra functionality to Jeff's animation 'engine'. Before it could only play animations on a loop and I wanted to be able to play an animation once
+ * So, I added a bool field to both the spriteAnimation and the celAnimations (since I saw that the spriteAnimationAdapter creates celAnimations from SpriteAnimations) that notes whether or not the animaiton is looped. 
+ * By default, animations are looped, but I overloaded the constructors to allow for noting if the animation isn't looped. Doing that also let me keep the original functionality intact. The only other change was updating the celAnimationManager's methods to account for the extra property
+ * Added the code bits to the classes that need animations for playing animations.
+ * I was thinking that I could just create different animations for the weapon for each type of action rather than doing so for the player. Would cut down on the animations I have to make and it might be easier to implement since there kind of is no way to tell whether or not an animation has ended. Thus playing an different animation once one has ended isn't currently possible. I could probably implement playing an new animation once once has ended via state and giving the animations a state, but it's not the most necessary thing at the moment and so I won't :P
+ * The damage flashes kind of broke when I implemented animations so I went into the DrawableAnimatableSprite class to fix it, was just a matter of switching the color call to Colors.White to this.DrawColor.
+  
+### Goals
+ * Create animations [DONE]
+ * Github Issues tasks
+  
+## 22 April 2024 | 10:14
+### Check In
+ * I am waiting for unity to open so I figured I'd implement the animation bits to the rest of the animated things in this in this project
+  
+### Goals
+ * Animation code bits for animated things [DONE]
+  
+  
+## 20 April 2024 | 16:23
+### Check In
+ * Figured out how to implement the drawable animatable sprite
+  
+### On DrawableAnimatableSprite Implementation
+ * I implemented this through the MonogameCreature -> made it inherit from DrawableAnimatableSprite and had it play a test animation
+ * I made an interface with the methods and properties I used (or will use) to implement animations. This will make it easier to implement this even if the notion of a DrawableAnimatableSprite also being IAnimateable is kind of weird and redundent-seeming.
+  
+### Next Steps
+ * Create animations
+ * Implement Animations
+ * Github Issues tasks
+  
+## 21 April 2024 | 19:18
+### Check In
+ * I am going to try to implement animations, am doing so on a separate branch so as to not mess up the other progress
+  
+### Goals
+ * Animations for a character
+  
+  
+## 20 April 2024 | 16:23
+### Check In
+ * Did the small tasks I intended to do
+ * Read through the DrawableAnimatableSprite some
+  
+### On DrawableAnimatableSprite
+ * It seems like this class builds off of the drawable sprite and gives it funcitionality for animating itself
+	* The animator (so to say) or as Jeff called it "spriteAnimationAdapter" seems to be an object that has a list of animations and that uses a "celAnimationManager" for flipping through the frames of the animation
+	* the DrawableAnimatable sprite has a spriteAnimationAdapter and references it to see what texture it should be displaying
+ * What I'll probably do is try to implement this on a dummy class type so that I don't mess up the logic and structure of the classes I've written for this project.
+  
+### Next Steps
+ * Create animations
+ * Implement Animations
+  
+## 20 April 2024 | 15:30
+### Check In
+ * I am going to look into implementing animations into the game
+  
+### Goals
+ * Look at and read Jeff's animatable sprite script 
+ * Check enemy manager spawning [DONE]
+ * Check collision manager debug tool [DONE]
+ * Check for typos [DONE]
+ * Set up structure for health pickup [DONE -> will fill it out later]
+  
+  
 ## 16 April 2024 | 14:47
 ### Check In
  * Fixed some things here and there

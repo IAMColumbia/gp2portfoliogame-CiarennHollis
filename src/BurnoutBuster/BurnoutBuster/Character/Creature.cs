@@ -68,5 +68,9 @@ namespace BurnoutBuster.Character
             Console.WriteLine(message);
         }
 
+        public void Heal(int healAmount)
+        {
+            this.HitPoints += healAmount;
+        }
     }
 }

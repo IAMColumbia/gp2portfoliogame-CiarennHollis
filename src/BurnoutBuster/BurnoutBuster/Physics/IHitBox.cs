@@ -2,7 +2,7 @@
 
 namespace BurnoutBuster.Physics
 {
-    public interface IHasHitBox : ICollidable
+    public interface IHitBox : ICollidable
     {
         Rectangle HitBox { get; set; } 
         void OnHitBoxEnter(Collision collision);
