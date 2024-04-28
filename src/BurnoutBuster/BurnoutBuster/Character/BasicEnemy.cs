@@ -19,8 +19,8 @@ namespace BurnoutBuster.Character
         // I N I T
         public override void SetUpAnimations()
         {
-            Animations.Add("MainAnim",
-                new SpriteAnimation("MainAnim", "CharacterSprites/BasicEnemyAnim", 6, 4, 1));
+            Animations.Add("BasicEnemyAnim",
+                new SpriteAnimation("BasicEnemyAnim", "CharacterSprites/BasicEnemyAnim", 6, 4, 1));
 
             base.SetUpAnimations();
         }

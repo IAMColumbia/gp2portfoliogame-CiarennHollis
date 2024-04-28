@@ -260,7 +260,7 @@ namespace BurnoutBuster.Character
                 }
             }
         }
-        private void UpdateBounds()
+        protected virtual void UpdateBounds()
         {
             this.Bounds = new Rectangle(this.Rectangle.X, this.Rectangle.Y,
                 this.Rectangle.Height, this.Rectangle.Height);

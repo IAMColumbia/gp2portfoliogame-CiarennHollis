@@ -6,7 +6,7 @@
   
 ### Goals
  * Import basic attack animations for the swords
- * Fix bug with enemy animations -> animation is cropped wrong, the larger ones have the same croppins the tiny ones 
+ * Fix bug with enemy animations -> animation is cropped wrong, the larger ones have the same croppins the tiny ones [DONE -> all the animations had the same key in the SpriteAnimationAdapter/CelAnimationManager's dictionary of spriteAnimations and that was cropping the larger animations]
  * Health pick up -> finish implementing
  * HUD color change based on creature state
   

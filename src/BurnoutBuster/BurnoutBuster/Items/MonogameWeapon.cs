@@ -156,7 +156,6 @@ namespace BurnoutBuster.Items
             Bounds = new Rectangle(this.Rectangle.X, this.Rectangle.Y,
                 this.Rectangle.Height, this.Rectangle.Height);
 
-            int increaseAmount = this.Weapon.AttackRadius;
         }
     }
 }
