@@ -43,7 +43,7 @@ namespace BurnoutBuster.Character
             get { return waveCounter; }
             set
             {
-                if ((waveCounter >= 5))
+                if ((waveCounter >= 2))
                     this.Notify();
                 waveCounter = value;
             }

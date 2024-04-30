@@ -73,6 +73,7 @@ namespace BurnoutBuster.Character
 
             //play animation
             this.PlayAnimation(Animations["Walk"]);
+            console.Log("Current Creature Anim", spriteAnimationAdapter.CurrentAnimation.TextureName);
 
             //update texture facing direction
             UpdateFacingDirBasedOnDirection(moveOnNextUpdate);
