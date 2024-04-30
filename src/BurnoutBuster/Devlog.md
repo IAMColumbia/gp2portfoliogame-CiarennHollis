@@ -1,5 +1,14 @@
 # Devlog
   
+## 30 April 2024 | 17:35
+### Check In
+ * Going to look at the animation stuff -> the oneshot animations don't play/display the way I want them to
+  
+### Goals
+ * Fix animations not playing -> ask Jeff in class today if no fix
+ * Previous sword showing up under old sword when the player picks up a new one.
+  
+  
 ## 28 April 2024 | 12:49
 ### Check In
  * Imported the last of the animations.
