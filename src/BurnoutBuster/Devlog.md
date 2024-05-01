@@ -1,5 +1,33 @@
 # Devlog
   
+## 1 May 2024 | 11:20
+### Check In
+ * I can't figured out why the MonogameWeapon will play its "BasicAttack" and not its "HeavyAttack" since the logic for playing both is the same 
+	* I stepped through for both to make sure the isPaused var is false and that it's assigned to the places it needs to be -> and everything is
+	* Even when I swap out the BasicAttack animation for the HeavyAttack one, it still won't. So I don't know. I had wanted to have different animations so it could be clear that the attacks were different but there's other things that need to be work on and I've spent all morning trying to figure this out
+ * I guess one thing I could try is to not pause the weapon animations and just let the celAnimationManager keep animating them but just set the current animation to null so that I don't have to worry about the paused business :P Idk, just a thought.
+  
+### Next Steps
+ * Balance gameplay and progression
+ * Adjust animation so the cooler animation is what get played
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
+## 1 May 2024 | 10:37
+### Check In
+ * Tried to fix the issue with the MonogameWeapon.Animations dictionary getting set to null at some point during the run time. 
+	* I stepped through the initialization code to ensure that the dictionary is indeed being initialized, and it was. But by the time the weapon needs to play it's animation, the dictionary is null
+	* I made a method that gets called before the weapon calls its PlayAnimation() that checks to see if the dictionary is null and if it is, it creates a new one and sets up the animations again.
+		* I know this is kind of an expesinve thing to do, but it's kind of the last resort for this since I can't find why and where the original dictionary that gets created later becomes null.
+	* I then hit the issue of it only playing the slash animation the first time, but then not the second time. I created a RestartAnimation() method in the CelAnimationManager and SpriteAnimationAdapter to "reset" the animation without pausing it and that fixed that issue
+	* I then hit the issue of it not playing it's secondary animation (since there are animations for the basic attack and for the heavy attack)
+		* I'm not entirely sure as to why :P
+  
+### Goals
+ * Fix HeavyAttack animation not playing [TRIED]
+  
+  
 ## 30 April 2024 | 21:31
 ### Check In
  * Fixed the issue with animations not player with help from Jeff
@@ -9,7 +37,7 @@
 	* I think that the dirty delete in the MonogameCreature is wiping that list 
   
 ### Next Steps
- * Fix error with weapons animation dictionary 
+ * Fix error with weapons animation dictionary [FIXED -> added a check to make sure this dictionary isn't null]
  * Health pick up -> finish implementing [IN PROGRESS]
  * HUD color change based on creature state [SKIPPING FOR NOW -> not the most necessary]
  * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up

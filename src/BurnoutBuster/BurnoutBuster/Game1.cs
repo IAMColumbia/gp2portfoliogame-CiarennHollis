@@ -181,7 +181,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                 tertiaryText = "Press [ESC] to quit",
 
             });
-            Screens["Win"].LoadContent(this);
+            Screens["Win"].LoadContent(this, "Environment/InstructionsScreen");
 
             Screens.Add("Lose", new Screen()
             {
@@ -190,7 +190,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                 tertiaryText = "Press [ESC] to quit",
 
             });
-            Screens["Lose"].LoadContent(this);
+            Screens["Lose"].LoadContent(this, "Environment/InstructionsScreen");
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using MonoGameLibrary.Sprite;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace BurnoutBuster.Items
 {
@@ -70,6 +71,8 @@ namespace BurnoutBuster.Items
             if (isHeld)
                 this.Location = HolderPosition - RenderOffset;
 
+            CheckAnimationsDictionary();
+
             base.Update(gameTime);
         }
         public void UpdateObserver()
@@ -91,6 +94,9 @@ namespace BurnoutBuster.Items
         #region 'Animation Handling'
         public virtual void SetUpAnimations()
         {
+            //HACK 
+            if (this.Animations == null)
+                this.Animations = new Dictionary<string, SpriteAnimation>();
             //Animations.Add("Test",
             //    new SpriteAnimation("test", "SpriteSheetTest", 2, 5, 1, true));
             //Animations.Add("Idle",
@@ -105,10 +111,18 @@ namespace BurnoutBuster.Items
 
         public void PlayAnimation(SpriteAnimation animation)
         {
+            this.spriteAnimationAdapter.RestartAnimation(animation);
             this.spriteAnimationAdapter.CurrentAnimation = animation;
             this.spriteAnimationAdapter.CurrentAnimation.IsPaused = false;
         }
-        
+        protected virtual void CheckAnimationsDictionary()
+        {
+            if (this.Animations == null)
+            {
+                this.Animations = new Dictionary<string, SpriteAnimation>();
+                this.SetUpAnimations();
+            }
+        }
         #endregion
 
         // W E A P O N
@@ -120,13 +134,17 @@ namespace BurnoutBuster.Items
         public virtual void PerformAttack(IDamageable target, int modifier)
         {
             this.Weapon.PerformAttack(target, modifier);
+            //HACK 
+            CheckAnimationsDictionary();
             PlayAnimation(Animations["BasicAttack"]);
         }
 
         public virtual void PerformHeavyAttack(IDamageable target, int modifier)
         {
             this.Weapon.PerformHeavyAttack(target, modifier);
-            PlayAnimation(this.Animations["HeavyAttack"]);
+            //HACK 
+            CheckAnimationsDictionary();
+            PlayAnimation(this.Animations["BasicAttack"]);
         }
         public virtual void PerformDashAttack(IDamageable target, int modifier)
         {
@@ -136,12 +154,16 @@ namespace BurnoutBuster.Items
         public virtual void PerformComboAttack(IDamageable target, int modifier)
         {
             this.Weapon.PerformComboAttack(target, modifier);
-            PlayAnimation(this.Animations["HeavyAttack"]);
+            //HACK 
+            CheckAnimationsDictionary();
+            PlayAnimation(this.Animations["BasicAttack"]);
         }
         public virtual void PerformFinisherAttack(IDamageable target, int modifier)
         {
             this.Weapon.PerformFinisherAttack(target, modifier);
-            PlayAnimation(this.Animations["HeavyAttack"]);
+            //HACK 
+            CheckAnimationsDictionary();
+            PlayAnimation(this.Animations["BasicAttack"]);
         }
         #endregion
 

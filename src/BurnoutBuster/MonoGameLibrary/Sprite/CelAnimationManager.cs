@@ -156,6 +156,18 @@ namespace MonoGameLibrary
             }
         }
         /// <summary>
+        /// Rewinds and resets loop count on an animation
+        /// </summary>
+        /// <param name="animationKey">Name of animation to Restart</param>
+        public void RestartAnimation(string animationKey)
+        {
+            if (animations.ContainsKey(animationKey))
+            {
+                animations[animationKey].Frame = animations[animationKey].StillFrame;
+                animations[animationKey].Paused = false;
+            }
+        }
+        /// <summary>
         /// Pauses and starts and animation
         /// </summary>
         /// <param name="animationKey">Name of animation to pause</param>
