@@ -6,6 +6,7 @@
 	* I stepped through for both to make sure the isPaused var is false and that it's assigned to the places it needs to be -> and everything is
 	* Even when I swap out the BasicAttack animation for the HeavyAttack one, it still won't. So I don't know. I had wanted to have different animations so it could be clear that the attacks were different but there's other things that need to be work on and I've spent all morning trying to figure this out
  * I guess one thing I could try is to not pause the weapon animations and just let the celAnimationManager keep animating them but just set the current animation to null so that I don't have to worry about the paused business :P Idk, just a thought.
+	* The issue with implementing this is that there'd have to be a way for the sprite adapter to know the thing has finished playing so that it can set the current animation to null
   
 ### Next Steps
  * Balance gameplay and progression
