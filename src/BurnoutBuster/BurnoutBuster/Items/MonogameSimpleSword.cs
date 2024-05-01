@@ -15,6 +15,8 @@ namespace BurnoutBuster.Items
         // I N I T
         public override void SetUpAnimations()
         {
+            this.IsCollisionOn = false;
+
             Animations.Add("BasicAttack",
                 new SpriteAnimation("SSBasicAttackAnim", "Items/SimpleSwordBasicAnim", 8, 6, 1, false)
                 {

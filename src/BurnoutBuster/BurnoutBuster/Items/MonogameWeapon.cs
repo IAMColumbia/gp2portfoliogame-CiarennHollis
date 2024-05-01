@@ -36,14 +36,14 @@ namespace BurnoutBuster.Items
         public MonogameWeapon(Game game) : base(game)
         {
             //collision
-            IsCollisionOn = true;
+            //IsCollisionOn = true;
             
             //placing on the player
             RenderOffset = new Vector2(48, 0);
             isHeld = false;
 
             //animation
-            Animations = new Dictionary<string, SpriteAnimation>();
+            //Animations = new Dictionary<string, SpriteAnimation>();
         }
 
         public IWeapon GetWeapon()
@@ -105,7 +105,8 @@ namespace BurnoutBuster.Items
 
         public void PlayAnimation(SpriteAnimation animation)
         {
-            this.spriteAnimationAdapter.PlayAnimation(animation);
+            this.spriteAnimationAdapter.CurrentAnimation = animation;
+            this.spriteAnimationAdapter.CurrentAnimation.IsPaused = false;
         }
         
         #endregion
@@ -116,30 +117,30 @@ namespace BurnoutBuster.Items
         {
             this.Weapon.Use(target);
         }
-        public virtual void PerformAttack(IDamageable target, bool isReduced)
+        public virtual void PerformAttack(IDamageable target, int modifier)
         {
-            this.Weapon.PerformAttack(target, isReduced);
-            PlayAnimation(this.Animations["BasicAttack"]);
+            this.Weapon.PerformAttack(target, modifier);
+            PlayAnimation(Animations["BasicAttack"]);
         }
 
-        public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
+        public virtual void PerformHeavyAttack(IDamageable target, int modifier)
         {
-            this.Weapon.PerformHeavyAttack(target, isReduced);
+            this.Weapon.PerformHeavyAttack(target, modifier);
             PlayAnimation(this.Animations["HeavyAttack"]);
         }
-        public virtual void PerformDashAttack(IDamageable target, bool isReduced)
+        public virtual void PerformDashAttack(IDamageable target, int modifier)
         {
-            this.Weapon.PerformDashAttack(target, isReduced);   
+            this.Weapon.PerformDashAttack(target, modifier);   
 
         }
-        public virtual void PerformComboAttack(IDamageable target, bool isReduced)
+        public virtual void PerformComboAttack(IDamageable target, int modifier)
         {
-            this.Weapon.PerformComboAttack(target, isReduced);
+            this.Weapon.PerformComboAttack(target, modifier);
             PlayAnimation(this.Animations["HeavyAttack"]);
         }
-        public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
+        public virtual void PerformFinisherAttack(IDamageable target, int modifier)
         {
-            this.Weapon.PerformFinisherAttack(target, isReduced);
+            this.Weapon.PerformFinisherAttack(target, modifier);
             PlayAnimation(this.Animations["HeavyAttack"]);
         }
         #endregion

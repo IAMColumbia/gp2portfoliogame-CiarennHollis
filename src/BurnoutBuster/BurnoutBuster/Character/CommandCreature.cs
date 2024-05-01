@@ -51,7 +51,7 @@ namespace BurnoutBuster.Character
         {
             if (moveOnNextUpdate == Vector2.Zero)
             {
-                
+                this.PlayAnimation(Animations["Idle"]);
                 return;
             }
 
@@ -131,25 +131,25 @@ namespace BurnoutBuster.Character
                     // do nothing
                     break;
                 case ActionCommands.Attack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformAttack(target, true); }
-                    else { Weapon.PerformAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { MGWeapon.PerformAttack(target, (2 / 3) ); }
+                    else { MGWeapon.PerformAttack(target, 1); }
                     
                     break;
                 case ActionCommands.HeavyAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformHeavyAttack(target, true); }
-                    else { Weapon.PerformHeavyAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { MGWeapon.PerformHeavyAttack(target, (2 / 3)); }
+                    else { MGWeapon.PerformHeavyAttack(target, 1); }
                     break;
                 case ActionCommands.DashAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformDashAttack(target, true); }
-                    else { Weapon.PerformDashAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { MGWeapon.PerformDashAttack(target, (2 / 3) ); }
+                    else { MGWeapon.PerformDashAttack(target, 1); }
                     break;
                 case ActionCommands.ComboAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformComboAttack(target, true); }
-                    else { Weapon.PerformComboAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { MGWeapon.PerformComboAttack(target, (2 / 3) ); }
+                    else { MGWeapon.PerformComboAttack(target, 1); }
                     break;
                 case ActionCommands.FinisherAttack:
-                    if (CheckCreatureState(CreatureState.Overwhelmed)) { Weapon.PerformFinisherAttack(target, true); }
-                    else { Weapon.PerformFinisherAttack(target, false); }
+                    if (CheckCreatureState(CreatureState.Overwhelmed)) { MGWeapon.PerformFinisherAttack(target, (2 / 3) ); }
+                    else { MGWeapon.PerformFinisherAttack(target, 1); }
                     break;
             }
 

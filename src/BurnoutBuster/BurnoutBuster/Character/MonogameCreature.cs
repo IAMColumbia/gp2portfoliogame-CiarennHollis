@@ -251,8 +251,7 @@ namespace BurnoutBuster.Character
 
         public void PlayAnimation(SpriteAnimation animation)
         {
-            //this.spriteAnimationAdapter.ResetAnimation(animation);
-            this.spriteAnimationAdapter.PlayAnimation(animation);
+            this.spriteAnimationAdapter.CurrentAnimation = animation;
         }
         #endregion
 

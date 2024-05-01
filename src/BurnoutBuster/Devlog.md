@@ -1,11 +1,26 @@
 # Devlog
   
+## 30 April 2024 | 21:31
+### Check In
+ * Fixed the issue with animations not player with help from Jeff
+ * Looked at the sword rendering thing in class with Jeff, we didn't fix it but I think I have an idea of how to fix it.
+	* The SimpleSword should be instantiated and added to componenet separately from the MGWeapon obj then assigned to the MGWeapon obj
+ * Hit an issue with the Animations Dictionary on the weapons being null by the time the player attacks
+	* I think that the dirty delete in the MonogameCreature is wiping that list 
+  
+### Next Steps
+ * Fix error with weapons animation dictionary 
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * HUD color change based on creature state [SKIPPING FOR NOW -> not the most necessary]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
 ## 30 April 2024 | 17:35
 ### Check In
  * Going to look at the animation stuff -> the oneshot animations don't play/display the way I want them to
   
 ### Goals
- * Fix animations not playing -> ask Jeff in class today if no fix
+ * Fix animations not playing -> ask Jeff in class today if no fix [FIXED -> with Jeff's help]
  * Previous sword showing up under old sword when the player picks up a new one.
   
   

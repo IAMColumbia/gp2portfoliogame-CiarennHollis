@@ -181,11 +181,8 @@ namespace MonoGameLibrary
                    //min: 0, max: total cels
                     if (ca.Frame >= ca.NumberOfCels)
                     {
-                        if (ca.IsLooped)
-                        {
-                            ca.LoopCount++;
-                        }
-                        else
+                        ca.LoopCount++;
+                        if (!ca.IsLooped)
                         {
                             ca.Paused = true;
                         }
