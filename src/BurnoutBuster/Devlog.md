@@ -1,4 +1,24 @@
 # Devlog
+
+## 2 May 2024 | 13:19
+### Check In
+ * Originally, the rate at which the amount of enemies it takes to clear a wave increases at an ok amount for the first few waves but once you've reached wave #5, there are a lot of enemies and getting throught the waves really isn't fun anymore. The math the EnemyManager does to handle this increase is simple, it just multiplies the the previous amount of enemies it takes to clear a wave by two every time. This ramps really fast.
+ * I liked the idea of the amount of enemies needed to complete a wave being increase exponentially to some degree since it would increasingly get harder while the pattern of the increase wouldn't be as easy for the player to see at first glance. However, I don't want the game to get too hard too quick.
+ * So, I opened a (online) graphing calculator and started playing around with some functions
+ 	* I knew I wanted the first wave to have about 5-6 enemies and have that increase to there being about 100 enemies in wave #10.
+	* I did get the function that would produce the original values the game was using -> [(1, 5), (2,10), (3, 20), (4, 40), (5, 80), etc.], it was a rather complicated function, but it's basic structure was something along the lines of f(x) = 5 + x^(x-1). I had played around some variations of that equation, but it still increased too much too soon.
+	* So, I tried playing around with using a cubic function. When that was still to abrupt of an increase, I tried a quadratic function.
+	* I liked the values the quadratic function gave me so that will be what gets plugged into the EnemyManager instead of what's currently in place. Instead of just multiply the previous wave's amount of enemies by 2 to get the amount for the on coming wave, it was use the equation I settle on and calculate the amount via plugging in the current wave number (which the enemy manager already keeps track of) for x
+ * The equation I settled on: 5 + x^2
+	* C# implementation: NumberOfEnemiesPerWave = 5 + (NumberOfEnemiesPerWave * NumberOfEnemiesPerWave);
+  
+### Next Steps
+ * Paste the new equation into the EnemyManager
+ * Adjust animation so the cooler animation is what get played
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio -> game music
+
   
 ## 1 May 2024 | 11:20
 ### Check In
@@ -9,7 +29,7 @@
 	* The issue with implementing this is that there'd have to be a way for the sprite adapter to know the thing has finished playing so that it can set the current animation to null
   
 ### Next Steps
- * Balance gameplay and progression
+ * Balance gameplay and progression [DONE]
  * Adjust animation so the cooler animation is what get played
  * Health pick up -> finish implementing [IN PROGRESS]
  * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
