@@ -18,15 +18,15 @@ namespace BurnoutBuster.Items
             this.IsCollisionOn = false;
 
             Animations.Add("BasicAttack",
-                new SpriteAnimation("SSBasicAttackAnim", "Items/SimpleSwordBasicAnim", 24, 6, 1, false)
+                new SpriteAnimation("SSBasicAttackAnim", "Items/SimpleSwordHeavyAnim", 24, 7, 1, false)
                 {
                     IsPaused = true
                 });
-            Animations.Add("HeavyAttack",
-                new SpriteAnimation("SSHeavyAttackAnim", "Items/SimpleSwordHeavyAnim", 24, 7, 1, false)
-                {
-                    IsPaused = true
-                });
+            //Animations.Add("HeavyAttack",
+            //    new SpriteAnimation("SSHeavyAttackAnim", "Items/SimpleSwordHeavyAnim", 24, 7, 1, false)
+            //    {
+            //        IsPaused = true
+            //    });
 
             base.SetUpAnimations();
         }

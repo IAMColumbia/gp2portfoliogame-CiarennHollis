@@ -1,5 +1,32 @@
 # Devlog
+  
+## 4 May 2024 | 15:00
+### Check In
+ * Implemented new equation to the EnemyManager
+ * Adjusted animations
+ * Implemented health pick up
+	* Just need to decide and implement how and when the item manager will spawn in healh pickups
+ * Found and implemented game music
+  
+### Next Steps
+ * Health pick up -> finish implementing [MOSTLY DONE -> need to decide and implement how and when the item manager will spawn in healh pickups]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * New screens?
+ * Bug fixing
+ * Documentation
 
+## 4 May 2024 | 13:37
+### Check In
+ * Going to start working on this for today.
+  
+### Goals
+ * Paste the new equation into the EnemyManager [DONE]
+ * Adjust animation so the cooler animation is what get played [DONE]
+ * Health pick up -> finish implementing [MOSTLY DONE -> need to decide and implement how and when the item manager will spawn in healh pickups]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio -> game music [DONE]
+
+  
 ## 2 May 2024 | 13:19
 ### Check In
  * Originally, the rate at which the amount of enemies it takes to clear a wave increases at an ok amount for the first few waves but once you've reached wave #5, there are a lot of enemies and getting throught the waves really isn't fun anymore. The math the EnemyManager does to handle this increase is simple, it just multiplies the the previous amount of enemies it takes to clear a wave by two every time. This ramps really fast.
@@ -10,7 +37,7 @@
 	* So, I tried playing around with using a cubic function. When that was still to abrupt of an increase, I tried a quadratic function.
 	* I liked the values the quadratic function gave me so that will be what gets plugged into the EnemyManager instead of what's currently in place. Instead of just multiply the previous wave's amount of enemies by 2 to get the amount for the on coming wave, it was use the equation I settle on and calculate the amount via plugging in the current wave number (which the enemy manager already keeps track of) for x
  * The equation I settled on: 5 + x^2
-	* C# implementation: NumberOfEnemiesPerWave = 5 + (NumberOfEnemiesPerWave * NumberOfEnemiesPerWave);
+	* C# implementation: NumberOfEnemiesPerWave = 5 + (WaveCounter * WaveCounter);
   
 ### Next Steps
  * Paste the new equation into the EnemyManager

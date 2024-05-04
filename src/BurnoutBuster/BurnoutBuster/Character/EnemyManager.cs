@@ -91,7 +91,7 @@ namespace BurnoutBuster.Character
 
             //waves
             WaveCounter = 1;
-            NumberOfEnemiesPerWave = 5;
+            NumberOfEnemiesPerWave = 5 + (WaveCounter * WaveCounter);
             totalEnemiesSpawnedDuringWave = 0;
             WaveState = WaveState.Stopped;
             waveDelayTimer = new Timer();
@@ -286,7 +286,7 @@ namespace BurnoutBuster.Character
             {
                 ResetForNewWave();
                 WaveCounter++;
-                NumberOfEnemiesPerWave *= 2;
+                NumberOfEnemiesPerWave = 5 + (WaveCounter * WaveCounter);
                 waveDelayTimer.StartTimer(totalTime, waveDelayDuration);
                 this.WaveState = WaveState.Cleared; 
             }

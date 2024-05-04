@@ -13,9 +13,9 @@ namespace BurnoutBuster.Items
         private int healthIncrease;
 
         // C O N S T R U C T O R
-        public HealthPickUp(string name) : base(name)
+        public HealthPickUp(string name, int healthIncrease) : base(name)
         {
-
+            this.healthIncrease = healthIncrease;
         }
 
         // M E T H O D S

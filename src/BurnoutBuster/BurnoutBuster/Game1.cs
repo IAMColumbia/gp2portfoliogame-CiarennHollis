@@ -3,6 +3,7 @@ using BurnoutBuster.CommandPat;
 using BurnoutBuster.Items;
 using BurnoutBuster.Physics;
 using BurnoutBuster.UI;
+using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -51,6 +52,9 @@ namespace BurnoutBuster
         //items
         ItemManager itemManager;
 
+        //sound
+        Radio radio;
+
         // C O N S T R U C T O R
         public Game1()
         {
@@ -91,6 +95,8 @@ namespace BurnoutBuster
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
 
+            radio = new Radio(this);
+            this.Components.Add(radio);
         }
 
         // I N I T 
@@ -133,6 +139,10 @@ namespace BurnoutBuster
             foreach (MonogameWeapon weapon in itemManager.GetAllWeapons())
             {
                 _collisionManager.AddObject(weapon);
+            }
+            foreach (MonogameItem item in itemManager.GetAllItems())
+            {
+                _collisionManager.AddObject(item);
             }
         }
         /// <summary>

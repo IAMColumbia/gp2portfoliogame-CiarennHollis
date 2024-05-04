@@ -1,6 +1,8 @@
-﻿using BurnoutBuster.Physics;
+﻿using BurnoutBuster.Character;
+using BurnoutBuster.Physics;
 using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
+using MonoGameLibrary.Sprite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BurnoutBuster.Items
 {
-    class MonogameItem : DrawableGameComponent, IInteractable
+    class MonogameItem : DrawableSprite, IInteractable, IPoolable
     {
 
         // P R O P E R T I E S
@@ -23,6 +25,8 @@ namespace BurnoutBuster.Items
         public GameComponent GameObject { get => this; }
 
         public Tags Tag{ get; set; }
+
+
 
         // C O N S T R U C T O R
         public MonogameItem(Game game) : base(game)
@@ -54,14 +58,45 @@ namespace BurnoutBuster.Items
         }
 
         // C O L L I S I O N
-        public void OnCollisionEnter(Collision collision)
+        public virtual void OnCollisionEnter(Collision collision)
         {
-            
+            if (collision != null)
+            {
+
+            }
         }
 
-        public void OnInteraction(IInteract subject)
+        public virtual void OnInteraction(IInteract subject)
         {
-            
+            if (subject != null)
+            {
+
+            }
         }
+
+        // I T E M   A C T I O N S
+        public virtual void Use()
+        {
+            this.item.Use();
+        }
+        public virtual void Use(IDamageable target)
+        {
+            this.item.Use(target);
+        }
+
+        // I P O O L A B L E
+        public void Reset()
+        {
+            this.IsCollisionOn = false;
+            this.Enabled = false;
+        }
+
+        public void Activate(Vector2 spawnLocation)
+        {
+            this.IsCollisionOn = true;
+            this.Enabled = true;
+        }
+
+
     }
 }

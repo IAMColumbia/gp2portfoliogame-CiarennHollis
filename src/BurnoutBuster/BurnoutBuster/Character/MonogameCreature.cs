@@ -298,6 +298,7 @@ namespace BurnoutBuster.Character
                     Notify();
                 }
             }
+
         }
         private void UpdateBounds()
         {
