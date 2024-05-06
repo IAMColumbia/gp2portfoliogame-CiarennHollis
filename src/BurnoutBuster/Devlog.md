@@ -1,5 +1,34 @@
 # Devlog
   
+## 6 May 2024 | 16:08
+### Check In
+ * So, in all honesty, I am kind of at the point of just wanting to be done with this project (really with the semester as a whole which includes this project), and so my bandwith for bug fixing this project is very low.
+	* A lot of the things I wanted do this sprint were more so aesthetic things. A lot of those things aren't necessary. I got the big aesthetic thing in, which was the animations, but even that isn't completely implemented the way I wanted it to be
+ * I couldn't figure out how to get rid of the old sword once the player has picked up the new one
+	* I think it keeps getting attached because it keeps colliding with the player and so it persists because of that. 
+	* It could also because the instance of that first sword still exists in the components list the Game has and manages, but I couldn't (didn't have the bandwith) to figured out how to implement that first weapon the player starts with without assigning it to that list.
+		* I could try creating the instance of that first weapon (a SimpleSword) and put that weapon into the components list before assigning it to the MGWeapon variable, but I don't really want to test that out right now.
+	* This isn't the biggest issue, the old sword doesn't hinder the behavior of the new sword so it's fine if this issue doesn't get fixed. Fixing it is more so an aesthetics thing than anything else.
+ * I am too tired to finish implementing the health pick up right now. 
+	* The way I implemented how the new weapon (the GoldSword) spawns in doesn't really allow for other use cases. I need to restructured that system and make it more flexible since because of this, the ItemManager isn't really as built out as it could (and should be if I wanted to add more items and features to this project)
+ * There's an issue with the animation on the sword slash not playing whenever the player attacks and only when the player hits an enemy. 
+	* I know why this is (the PlayAnimations() method gets called from the Weapon's PerformAttack() method, and that method only gets called if the player an enemy is in the player's hitbox and the player attacks it)
+	* I tried to fix it a dirty way (having the CommandCreature class call the animation method for the weapon, which would break separation of concern, since the player still performs actions even if it hasn't hit anything); It didn't fix the issue
+	* I also don't really have the bandwith to bug fix this further
+  
+### Next Steps
+ * Documentation
+
+## 6 May 2024 | 13:51
+### Check In
+ * Going to start working on this for today.
+  
+### Goals
+ * Health pick up -> finish implementing [NOT GOING TO FINISH -> am tired and burnt out and so I'm going to not do this in favor of other things.]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Bug fixing
+
+  
 ## 4 May 2024 | 15:00
 ### Check In
  * Implemented new equation to the EnemyManager

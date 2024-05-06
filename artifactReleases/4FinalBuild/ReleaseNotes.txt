@@ -1,1 +1,20 @@
 Release Notes version 3 Final
+
+Game Name: name
+
+Game Description Short: 80 Character Limit
+
+Game Description Long: 4000 Character Limit
+
+Credits: 4000 Character limit give credit where credit is due
+
+Genre: Action, Platformer, Shooter, Adventure, Role Playing, Simulation, Other, Puzzle, Strategy, Sports
+  
+Find the devlog log here: [src/BurnoutBuster/Devlog.md](https://github.com/IAMColumbia/gp2portfoliogame-CiarennHollis/blob/master/src/BurnoutBuster/Devlog.md)
+  
+## Progress Made
+ * 
+  
+## Sprint/Story Review
+
+

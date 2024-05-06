@@ -287,6 +287,7 @@ namespace BurnoutBuster.Character
                     this.Detach(MGWeapon); // detaching old weapon
                     MGWeapon.isHeld = false;
                     MGWeapon.Enabled = false;
+                    MGWeapon.IsCollisionOn = false;
                     MGWeapon = null; //[TD] DIRTY DELETE!
 
                     tempWeapon.OnInteraction(this);
@@ -294,6 +295,7 @@ namespace BurnoutBuster.Character
                     UpdateWeapon();
                     MGWeapon.isHeld = true;
                     MGWeapon.Enabled = true;
+                    MGWeapon.IsCollisionOn = false;
                     this.Attach(MGWeapon); //reattaching with the new weapon instance
                     Notify();
                 }

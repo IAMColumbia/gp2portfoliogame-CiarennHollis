@@ -54,6 +54,7 @@ namespace BurnoutBuster.Items
         // I N I T
         public override void Initialize()
         {
+            LoadContent();
             base.Initialize();
         }
         protected override void LoadContent()
@@ -123,6 +124,13 @@ namespace BurnoutBuster.Items
                 this.SetUpAnimations();
             }
         }
+
+        //public void PlayAnimation(string animationName)
+        //{
+        //    //HACK 
+        //    CheckAnimationsDictionary();
+        //    PlayAnimation(Animations["animationName"]);
+        //}
         #endregion
 
         // W E A P O N

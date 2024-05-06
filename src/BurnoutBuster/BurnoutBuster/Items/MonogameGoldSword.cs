@@ -10,13 +10,16 @@ namespace BurnoutBuster.Items
         public MonogameGoldSword(Game game) : base(game)
         {
             this.Weapon = new GoldSword();
+
+            //placing on the player
+            RenderOffset = new Vector2(70, 12);
         }
 
         // I N I T
         public override void SetUpAnimations()
         {
             Animations.Add("BasicAttack",
-                new SpriteAnimation("GSBasicAttackAnim", "Items/GoldSwordHeavyAnim", 8, 7, 1, false)
+                new SpriteAnimation("GSBasicAttackAnim", "Items/GoldSwordHeavyAnim", 12, 7, 1, false)
                 {
                     IsPaused = true
                 });

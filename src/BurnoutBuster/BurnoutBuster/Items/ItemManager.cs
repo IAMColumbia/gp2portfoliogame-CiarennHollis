@@ -53,7 +53,7 @@ namespace BurnoutBuster.Items
         // U P D A T E
         public override void Update(GameTime gameTime)
         {
-            UpdateItems(gameTime);
+            //UpdateItems(gameTime);
             base.Update(gameTime);
         }
 
@@ -74,11 +74,11 @@ namespace BurnoutBuster.Items
         // D R A W
         public override void Draw(GameTime gameTime)
         {
-            foreach (MonogameItem item in Items)
-            {
-                if (item.Enabled)
-                    item.Draw(gameTime);
-            }
+            //foreach (MonogameItem item in Items)
+            //{
+            //    if (item.Enabled)
+            //        item.Draw(gameTime);
+            //}
 
             base.Draw(gameTime);
         }

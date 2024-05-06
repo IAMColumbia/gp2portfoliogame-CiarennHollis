@@ -136,10 +136,12 @@ namespace MonoGameLibrary.Util
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+#if DEBUG
             if(input.KeyboardState.HasReleasedKey(ToggleConsoleKey))
             {
                 this.ToggleConsole();   
             }
+#endif
             
             base.Update(gameTime);
         }
@@ -161,6 +163,7 @@ namespace MonoGameLibrary.Util
 
         public override void Draw(GameTime gameTime)
         {
+#if DEBUG
             if (this.gameConsoleState == GameConsoleState.Open)
             {
                 spriteBatch.Begin();
@@ -177,6 +180,7 @@ namespace MonoGameLibrary.Util
 
                 spriteBatch.End();
             }
+#endif
             base.Draw(gameTime);
         }
 
