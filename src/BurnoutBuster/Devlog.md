@@ -1,5 +1,14 @@
 # Devlog
   
+## 7 May 2024 | 12:39
+### Check In
+ * Picked a different font for the instructions page to make it more readable.
+ * Adjusted the layout of the title screen
+  
+### Goals
+ * Documentation
+
+  
 ## 6 May 2024 | 16:08
 ### Check In
  * So, in all honesty, I am kind of at the point of just wanting to be done with this project (really with the semester as a whole which includes this project), and so my bandwith for bug fixing this project is very low.

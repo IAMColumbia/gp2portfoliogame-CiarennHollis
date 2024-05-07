@@ -152,9 +152,9 @@ namespace BurnoutBuster
         {
             Screens.Add("Title", new Screen()
             {
-                primaryText = "BURNOUT BUSTER!",
-                secondaryText = "Press [SPACE] to play",
-                tertiaryText = "Press [SHIFT] for Instructions"
+                primaryText = $"\nPress [SPACE] to play \n\nPress [SHIFT] for Instructions",
+                secondaryText = "",
+                tertiaryText = ""
             });
             Screens["Title"].LoadContent(this, "Environment/TitleScreen");
 

@@ -195,6 +195,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/ImpactBold.spritefont
 
+#begin Fonts/Verdana.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana.spritefont
+
 #begin Items/GoldSword.png
 /importer:TextureImporter
 /processor:TextureProcessor
