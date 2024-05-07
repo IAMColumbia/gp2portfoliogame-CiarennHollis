@@ -36,14 +36,14 @@ namespace BurnoutBuster.UI
             visual = game.Content.Load<Texture2D>(visualFilePath);
 
             fontBold = game.Content.Load<SpriteFont>("Fonts/ImpactBold");
-            fontRegular = game.Content.Load<SpriteFont>("Fonts/Impact");
+            fontRegular = game.Content.Load<SpriteFont>("Fonts/Verdana");
         }
         public void LoadContent(Game game)
         {
             visual = null;
 
             fontBold = game.Content.Load<SpriteFont>("Fonts/ImpactBold");
-            fontRegular = game.Content.Load<SpriteFont>("Fonts/Impact");
+            fontRegular = game.Content.Load<SpriteFont>("Fonts/Verdana");
         }
         public void DrawScreen(SpriteBatch spriteBatch)
         {

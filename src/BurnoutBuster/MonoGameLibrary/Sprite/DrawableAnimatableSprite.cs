@@ -232,8 +232,12 @@ namespace MonoGameLibrary.Sprite
 
         public void ResetAnimation(SpriteAnimation s)
         {
-
             this.celAnimationManger.ResetAnimation(s.AnimationName);
+        }
+
+        public void RestartAnimation(SpriteAnimation s)
+        {
+            this.celAnimationManger.RestartAnimation(s.AnimationName);
         }
 
         public void RemoveAnimation(SpriteAnimation s)

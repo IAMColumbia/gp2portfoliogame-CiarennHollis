@@ -13,7 +13,7 @@ namespace BurnoutBuster.Utility
         // C O N S T R U C T O R
         public Radio(Game game) : base(game)
         {
-            songLength = 193;
+            songLength = 216;
         }
 
         // I N I T
@@ -23,8 +23,7 @@ namespace BurnoutBuster.Utility
             timer = new Timer();
             timer.StartTimer(0, songLength);
 
-            // [TO DO] update this when the background music is added
-            //BackgroundMusic = this.Game.Content.Load<Song>("SweetLove-ByDayFox");
+            BackgroundMusic = this.Game.Content.Load<Song>("urban-rainfall-rhythms");
             MediaPlayer.Volume = 0.5f;
             StartMusic();
 

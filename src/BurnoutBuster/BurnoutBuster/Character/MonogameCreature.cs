@@ -251,7 +251,7 @@ namespace BurnoutBuster.Character
 
         public void PlayAnimation(SpriteAnimation animation)
         {
-            this.spriteAnimationAdapter.PlayAnimation(animation);
+            this.spriteAnimationAdapter.CurrentAnimation = animation;
         }
         #endregion
 
@@ -287,16 +287,20 @@ namespace BurnoutBuster.Character
                     this.Detach(MGWeapon); // detaching old weapon
                     MGWeapon.isHeld = false;
                     MGWeapon.Enabled = false;
+                    MGWeapon.IsCollisionOn = false;
+                    MGWeapon = null; //[TD] DIRTY DELETE!
 
                     tempWeapon.OnInteraction(this);
                     this.MGWeapon = tempWeapon; //assigning the new weapon
                     UpdateWeapon();
                     MGWeapon.isHeld = true;
                     MGWeapon.Enabled = true;
+                    MGWeapon.IsCollisionOn = false;
                     this.Attach(MGWeapon); //reattaching with the new weapon instance
                     Notify();
                 }
             }
+
         }
         private void UpdateBounds()
         {

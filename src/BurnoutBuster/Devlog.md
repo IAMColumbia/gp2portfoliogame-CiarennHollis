@@ -1,5 +1,143 @@
 # Devlog
   
+## 7 May 2024 | 12:39
+### Check In
+ * Picked a different font for the instructions page to make it more readable.
+ * Adjusted the layout of the title screen
+  
+### Goals
+ * Documentation [DONE]
+
+  
+## 6 May 2024 | 16:08
+### Check In
+ * So, in all honesty, I am kind of at the point of just wanting to be done with this project (really with the semester as a whole which includes this project), and so my bandwith for bug fixing this project is very low.
+	* A lot of the things I wanted do this sprint were more so aesthetic things. A lot of those things aren't necessary. I got the big aesthetic thing in, which was the animations, but even that isn't completely implemented the way I wanted it to be
+ * I couldn't figure out how to get rid of the old sword once the player has picked up the new one
+	* I think it keeps getting attached because it keeps colliding with the player and so it persists because of that. 
+	* It could also because the instance of that first sword still exists in the components list the Game has and manages, but I couldn't (didn't have the bandwith) to figured out how to implement that first weapon the player starts with without assigning it to that list.
+		* I could try creating the instance of that first weapon (a SimpleSword) and put that weapon into the components list before assigning it to the MGWeapon variable, but I don't really want to test that out right now.
+	* This isn't the biggest issue, the old sword doesn't hinder the behavior of the new sword so it's fine if this issue doesn't get fixed. Fixing it is more so an aesthetics thing than anything else.
+ * I am too tired to finish implementing the health pick up right now. 
+	* The way I implemented how the new weapon (the GoldSword) spawns in doesn't really allow for other use cases. I need to restructured that system and make it more flexible since because of this, the ItemManager isn't really as built out as it could (and should be if I wanted to add more items and features to this project)
+ * There's an issue with the animation on the sword slash not playing whenever the player attacks and only when the player hits an enemy. 
+	* I know why this is (the PlayAnimations() method gets called from the Weapon's PerformAttack() method, and that method only gets called if the player an enemy is in the player's hitbox and the player attacks it)
+	* I tried to fix it a dirty way (having the CommandCreature class call the animation method for the weapon, which would break separation of concern, since the player still performs actions even if it hasn't hit anything); It didn't fix the issue
+	* I also don't really have the bandwith to bug fix this further
+  
+### Next Steps
+ * Documentation
+
+## 6 May 2024 | 13:51
+### Check In
+ * Going to start working on this for today.
+  
+### Goals
+ * Health pick up -> finish implementing [NOT GOING TO FINISH -> am tired and burnt out and so I'm going to not do this in favor of other things.]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Bug fixing
+
+  
+## 4 May 2024 | 15:00
+### Check In
+ * Implemented new equation to the EnemyManager
+ * Adjusted animations
+ * Implemented health pick up
+	* Just need to decide and implement how and when the item manager will spawn in healh pickups
+ * Found and implemented game music
+  
+### Next Steps
+ * Health pick up -> finish implementing [MOSTLY DONE -> need to decide and implement how and when the item manager will spawn in healh pickups]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * New screens?
+ * Bug fixing
+ * Documentation
+
+## 4 May 2024 | 13:37
+### Check In
+ * Going to start working on this for today.
+  
+### Goals
+ * Paste the new equation into the EnemyManager [DONE]
+ * Adjust animation so the cooler animation is what get played [DONE]
+ * Health pick up -> finish implementing [MOSTLY DONE -> need to decide and implement how and when the item manager will spawn in healh pickups]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio -> game music [DONE]
+
+  
+## 2 May 2024 | 13:19
+### Check In
+ * Originally, the rate at which the amount of enemies it takes to clear a wave increases at an ok amount for the first few waves but once you've reached wave #5, there are a lot of enemies and getting throught the waves really isn't fun anymore. The math the EnemyManager does to handle this increase is simple, it just multiplies the the previous amount of enemies it takes to clear a wave by two every time. This ramps really fast.
+ * I liked the idea of the amount of enemies needed to complete a wave being increase exponentially to some degree since it would increasingly get harder while the pattern of the increase wouldn't be as easy for the player to see at first glance. However, I don't want the game to get too hard too quick.
+ * So, I opened a (online) graphing calculator and started playing around with some functions
+ 	* I knew I wanted the first wave to have about 5-6 enemies and have that increase to there being about 100 enemies in wave #10.
+	* I did get the function that would produce the original values the game was using -> [(1, 5), (2,10), (3, 20), (4, 40), (5, 80), etc.], it was a rather complicated function, but it's basic structure was something along the lines of f(x) = 5 + x^(x-1). I had played around some variations of that equation, but it still increased too much too soon.
+	* So, I tried playing around with using a cubic function. When that was still to abrupt of an increase, I tried a quadratic function.
+	* I liked the values the quadratic function gave me so that will be what gets plugged into the EnemyManager instead of what's currently in place. Instead of just multiply the previous wave's amount of enemies by 2 to get the amount for the on coming wave, it was use the equation I settle on and calculate the amount via plugging in the current wave number (which the enemy manager already keeps track of) for x
+ * The equation I settled on: 5 + x^2
+	* C# implementation: NumberOfEnemiesPerWave = 5 + (WaveCounter * WaveCounter);
+  
+### Next Steps
+ * Paste the new equation into the EnemyManager
+ * Adjust animation so the cooler animation is what get played
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio -> game music
+
+  
+## 1 May 2024 | 11:20
+### Check In
+ * I can't figured out why the MonogameWeapon will play its "BasicAttack" and not its "HeavyAttack" since the logic for playing both is the same 
+	* I stepped through for both to make sure the isPaused var is false and that it's assigned to the places it needs to be -> and everything is
+	* Even when I swap out the BasicAttack animation for the HeavyAttack one, it still won't. So I don't know. I had wanted to have different animations so it could be clear that the attacks were different but there's other things that need to be work on and I've spent all morning trying to figure this out
+ * I guess one thing I could try is to not pause the weapon animations and just let the celAnimationManager keep animating them but just set the current animation to null so that I don't have to worry about the paused business :P Idk, just a thought.
+	* The issue with implementing this is that there'd have to be a way for the sprite adapter to know the thing has finished playing so that it can set the current animation to null
+  
+### Next Steps
+ * Balance gameplay and progression [DONE]
+ * Adjust animation so the cooler animation is what get played
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
+## 1 May 2024 | 10:37
+### Check In
+ * Tried to fix the issue with the MonogameWeapon.Animations dictionary getting set to null at some point during the run time. 
+	* I stepped through the initialization code to ensure that the dictionary is indeed being initialized, and it was. But by the time the weapon needs to play it's animation, the dictionary is null
+	* I made a method that gets called before the weapon calls its PlayAnimation() that checks to see if the dictionary is null and if it is, it creates a new one and sets up the animations again.
+		* I know this is kind of an expesinve thing to do, but it's kind of the last resort for this since I can't find why and where the original dictionary that gets created later becomes null.
+	* I then hit the issue of it only playing the slash animation the first time, but then not the second time. I created a RestartAnimation() method in the CelAnimationManager and SpriteAnimationAdapter to "reset" the animation without pausing it and that fixed that issue
+	* I then hit the issue of it not playing it's secondary animation (since there are animations for the basic attack and for the heavy attack)
+		* I'm not entirely sure as to why :P
+  
+### Goals
+ * Fix HeavyAttack animation not playing [TRIED]
+  
+  
+## 30 April 2024 | 21:31
+### Check In
+ * Fixed the issue with animations not player with help from Jeff
+ * Looked at the sword rendering thing in class with Jeff, we didn't fix it but I think I have an idea of how to fix it.
+	* The SimpleSword should be instantiated and added to componenet separately from the MGWeapon obj then assigned to the MGWeapon obj
+ * Hit an issue with the Animations Dictionary on the weapons being null by the time the player attacks
+	* I think that the dirty delete in the MonogameCreature is wiping that list 
+  
+### Next Steps
+ * Fix error with weapons animation dictionary [FIXED -> added a check to make sure this dictionary isn't null]
+ * Health pick up -> finish implementing [IN PROGRESS]
+ * HUD color change based on creature state [SKIPPING FOR NOW -> not the most necessary]
+ * Fixing the thing with the old sword still showing up underneath the new sword when it's picked up
+ * Structure for implementing audio
+  
+## 30 April 2024 | 17:35
+### Check In
+ * Going to look at the animation stuff -> the oneshot animations don't play/display the way I want them to
+  
+### Goals
+ * Fix animations not playing -> ask Jeff in class today if no fix [FIXED -> with Jeff's help]
+ * Previous sword showing up under old sword when the player picks up a new one.
+  
+  
 ## 28 April 2024 | 12:49
 ### Check In
  * Imported the last of the animations.

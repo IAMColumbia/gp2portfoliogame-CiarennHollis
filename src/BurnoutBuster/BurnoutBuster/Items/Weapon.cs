@@ -7,7 +7,6 @@ namespace BurnoutBuster.Items
         // P R O P E R T I E S 
         public string Name { get; set; }
         public int Damage { get; set; }
-        public int ReducedDamage { get => Damage * (2 / 3); }
         public int AttackRadius { get; set; }
 
         public WeaponType Type;
@@ -21,32 +20,30 @@ namespace BurnoutBuster.Items
         {
             target.Hit(Damage);
         }
-        public virtual void PerformAttack(IDamageable target, bool isReduced)
+        /// </summary>
+        /// <param name="target">IDamageable target being hit</param>
+        /// <param name="modifier">Amount to modify the damage by. Uses multiplication</param>
+        public virtual void PerformAttack(IDamageable target, int modifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage); }
+            target.Hit(Damage * modifier);
         }
 
-        public virtual void PerformHeavyAttack(IDamageable target, bool isReduced)
+        public virtual void PerformHeavyAttack(IDamageable target, int modifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage * 2); }
+            target.Hit((Damage * 2) * modifier);
         }
-        public virtual void PerformDashAttack(IDamageable target, bool isReduced)
+        public virtual void PerformDashAttack(IDamageable target, int modifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage + 3); }
+            target.Hit((Damage + 3) * modifier);
 
         }
-        public virtual void PerformComboAttack(IDamageable target, bool isReduced)
+        public virtual void PerformComboAttack(IDamageable target, int modifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage * 3); }
+            target.Hit((Damage * 3) * modifier);
         }
-        public virtual void PerformFinisherAttack(IDamageable target, bool isReduced)
+        public virtual void PerformFinisherAttack(IDamageable target, int modifier)
         {
-            if (isReduced) { target.Hit(ReducedDamage); }
-            else { target.Hit(Damage + 5); }
+            target.Hit((Damage + 5) * modifier);
         }
     }
 }

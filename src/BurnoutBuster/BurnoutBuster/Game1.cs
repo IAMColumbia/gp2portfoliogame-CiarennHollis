@@ -3,6 +3,7 @@ using BurnoutBuster.CommandPat;
 using BurnoutBuster.Items;
 using BurnoutBuster.Physics;
 using BurnoutBuster.UI;
+using BurnoutBuster.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -51,6 +52,9 @@ namespace BurnoutBuster
         //items
         ItemManager itemManager;
 
+        //sound
+        Radio radio;
+
         // C O N S T R U C T O R
         public Game1()
         {
@@ -91,6 +95,8 @@ namespace BurnoutBuster
             commandProcessor = new CommandProcessor(this, creature);
             this.Components.Add(commandProcessor);
 
+            radio = new Radio(this);
+            this.Components.Add(radio);
         }
 
         // I N I T 
@@ -134,6 +140,10 @@ namespace BurnoutBuster
             {
                 _collisionManager.AddObject(weapon);
             }
+            foreach (MonogameItem item in itemManager.GetAllItems())
+            {
+                _collisionManager.AddObject(item);
+            }
         }
         /// <summary>
         /// Initializes game screens
@@ -142,9 +152,9 @@ namespace BurnoutBuster
         {
             Screens.Add("Title", new Screen()
             {
-                primaryText = "BURNOUT BUSTER!",
-                secondaryText = "Press [SPACE] to play",
-                tertiaryText = "Press [SHIFT] for Instructions"
+                primaryText = $"\nPress [SPACE] to play \n\nPress [SHIFT] for Instructions",
+                secondaryText = "",
+                tertiaryText = ""
             });
             Screens["Title"].LoadContent(this, "Environment/TitleScreen");
 
@@ -181,7 +191,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                 tertiaryText = "Press [ESC] to quit",
 
             });
-            Screens["Win"].LoadContent(this);
+            Screens["Win"].LoadContent(this, "Environment/InstructionsScreen");
 
             Screens.Add("Lose", new Screen()
             {
@@ -190,7 +200,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                 tertiaryText = "Press [ESC] to quit",
 
             });
-            Screens["Lose"].LoadContent(this);
+            Screens["Lose"].LoadContent(this, "Environment/InstructionsScreen");
         }
 
         /// <summary>
@@ -238,7 +248,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                     // WIN/LOSE CONDITION !!
                     if (creature.CheckCreatureState(CreatureState.Shutdown))
                         this.gameState = GameState.Lose;
-                    if (enemyManager.WaveCounter > 9)
+                    if (enemyManager.WaveCounter > 5) //[TD] magic num
                         this.gameState = GameState.Win;
 
                     base.Update(gameTime);
