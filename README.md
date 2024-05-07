@@ -1,15 +1,14 @@
-# GameProgramming2 Final
- Game Programming 2 Final Template   
+# GameProgramming2 Final  
 
 Game Name: Burnout Buster  
-Description Short:  
-Description Long:  
+Description Short:  Oh no! The burnout is setting in! Can you stave off the executive dysfunction demons and get out of the burnout?!
+Description Long:  As burnout sets in and executive dysfunction demons encroach, it's up to you to fight your way through. Use your trusty sword and the combat combos at your disposal to bust out of this burnout episode.
   
-Genre: Rogue-like  
+Genre: Rogue-like, 2D Top-Down
   
-Platform:  
+Platform:  Windows/PC
   
-Folder Structure  
+## Folder Structure  
   
 \src  
   
@@ -47,7 +46,7 @@ Folder Structure
 
 \src\BurnoutBuster\MonoGameLibrary  
   
-\assets  
+\originalassets  
   
 \docs  
   
@@ -59,5 +58,7 @@ Folder Structure
   
 \artifactReleases\2VS  
   
-\artifactReleases\3Final  
+\artifactReleases\3MVP  
+  
+\artifactReleases\4Final  
   
