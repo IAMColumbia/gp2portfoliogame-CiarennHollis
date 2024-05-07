@@ -22,7 +22,17 @@ Folder Structure
 \src\BurnoutBuster\BurnoutBuster\CommandPat
 
 \src\BurnoutBuster\BurnoutBuster\CommandPat\Commands
-
+  
+\src\BurnoutBuster\BurnoutBuster\CommandPat\Content
+  
+\src\BurnoutBuster\BurnoutBuster\CommandPat\Content\CharacterSprites
+  
+\src\BurnoutBuster\BurnoutBuster\CommandPat\Content\Environment
+  
+\src\BurnoutBuster\BurnoutBuster\CommandPat\Content\Fonts
+  
+\src\BurnoutBuster\BurnoutBuster\CommandPat\Content\Items
+  
 \src\BurnoutBuster\BurnoutBuster\Input
 
 \src\BurnoutBuster\BurnoutBuster\Items
