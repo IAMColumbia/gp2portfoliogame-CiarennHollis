@@ -248,7 +248,7 @@ Finisher Attack: Attack + Heavy Attack + Attack
                     // WIN/LOSE CONDITION !!
                     if (creature.CheckCreatureState(CreatureState.Shutdown))
                         this.gameState = GameState.Lose;
-                    if (enemyManager.WaveCounter > 9)
+                    if (enemyManager.WaveCounter > 5) //[TD] magic num
                         this.gameState = GameState.Win;
 
                     base.Update(gameTime);

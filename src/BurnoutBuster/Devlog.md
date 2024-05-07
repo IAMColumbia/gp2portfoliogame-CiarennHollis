@@ -6,7 +6,7 @@
  * Adjusted the layout of the title screen
   
 ### Goals
- * Documentation
+ * Documentation [DONE]
 
   
 ## 6 May 2024 | 16:08

@@ -260,7 +260,6 @@ namespace BurnoutBuster.CommandPat
         private Command ForDashAttackBehavior(string buttonRef, float time)
         {
             this.input.timer.UpdateTimer(time); 
-            //TD implement timer function
             Command command = null;
             switch (buttonRef) // instatiating command
             {
@@ -291,7 +290,6 @@ namespace BurnoutBuster.CommandPat
         private Command ForAttackComboBehavior(string buttonRef, float time)
         {
             this.input.timer.UpdateTimer(time);
-            //TD implement timer function
             Command command = null;
 
             switch (buttonRef) // instatiating command
@@ -326,7 +324,6 @@ namespace BurnoutBuster.CommandPat
         private Command ForFinisherBehavior(string buttonRef, float time)
         {
             this.input.timer.UpdateTimer(time);
-            //TD implement timer function
             Command command = null;
 
             switch (buttonRef) // instatiating command

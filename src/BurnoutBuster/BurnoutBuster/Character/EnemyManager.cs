@@ -43,8 +43,10 @@ namespace BurnoutBuster.Character
             get { return waveCounter; }
             set
             {
-                if ((waveCounter >= 2))
+                //HACK
+                if ((waveCounter >= 3)) //[TD] magic num
                     this.Notify();
+                    
                 waveCounter = value;
             }
         }
@@ -60,7 +62,7 @@ namespace BurnoutBuster.Character
         GameConsole console;
 
         //isubject
-        public List<IObserver> creatureObservers { get; set; }
+        public List<IObserver> observers { get; set; }
         #endregion
 
         // C O N S T R U C T O R
@@ -98,7 +100,7 @@ namespace BurnoutBuster.Character
             waveDelayDuration = 5000;
 
             //isubject
-            creatureObservers = new List<IObserver>();
+            observers = new List<IObserver>();
         }
 
         // I N I T
@@ -331,18 +333,19 @@ namespace BurnoutBuster.Character
         #region 'ISubject'
         public void Attach(IObserver observer)
         {
-            creatureObservers.Add(observer);
+            observers.Add(observer);
         }
         public void Detach(IObserver observer)
         {
-            creatureObservers.Remove(observer);
+            observers.Remove(observer);
         }
         public void Notify()
         {
-            foreach(IObserver observer in  creatureObservers)
+            foreach (IObserver observer in observers)
             {
                 observer.UpdateObserver();
             }
+
         }
         #endregion
 
