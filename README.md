@@ -7,6 +7,11 @@ Description Long:  As burnout sets in and executive dysfunction demons encroach,
 Genre: Rogue-like, 2D Top-Down
   
 Platform:  Windows/PC
+
+## Credits
+ * Music: Urban Rainfall Rhythms by | e s c p | https://www.escp.space
+https://escp-music.bandcamp.com
+ * MonogameLibrary: Jeff Meyers
   
 ## Folder Structure  
   
